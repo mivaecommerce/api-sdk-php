@@ -3,7 +3,7 @@
   "description": "Miva Merchant JSON API SDK for PHP",
   "homepage" : "https://www.miva.com",
   "type": "library",
-  "license": "Miva SDK License Agreement",
+  "license": "proprietary",
   "version" : "1.0.0",
   "minimum-stability": "stable",
   "keywords" : [
