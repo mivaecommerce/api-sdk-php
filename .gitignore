@@ -1,0 +1,10 @@
+composer.phar
+composer.lock
+/vendor/
+/tests/
+/test-data/
+phpunit.xml
+phpunit.xml.dist
+.svn
+.idea
+.DS_Store
