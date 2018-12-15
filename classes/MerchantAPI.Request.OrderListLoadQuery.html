@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>Miva Merchant API SDK for PHP</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">Miva Merchant API SDK for PHP</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-387627976"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-387627976" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1365116762"></a>
+                                <a href="../namespaces/MerchantAPI.html" style="margin-left: 30px; padding-left: 0">MerchantAPI</a>
+            </div>
+            <div id="namespace-1365116762" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1539996192"></a>
+                                <a href="../namespaces/MerchantAPI.Http.html" style="margin-left: 30px; padding-left: 0">Http</a>
+            </div>
+            <div id="namespace-1539996192" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClient.html">HttpClient</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClientException.html">HttpClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpHeaders.html">HttpHeaders</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpMessage.html">HttpMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpQuery.html">HttpQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpRequest.html">HttpRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpResponse.html">HttpResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-383044456"></a>
+                                <a href="../namespaces/MerchantAPI.ListQuery.html" style="margin-left: 30px; padding-left: 0">ListQuery</a>
+            </div>
+            <div id="namespace-383044456" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequestInterface.html">ListQueryRequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponseInterface.html">ListQueryResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">FilterExpression</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpressionEntry.html">FilterExpressionEntry</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html">ListQueryRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponse.html">ListQueryResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1543041116"></a>
+                                <a href="../namespaces/MerchantAPI.Model.html" style="margin-left: 30px; padding-left: 0">Model</a>
+            </div>
+            <div id="namespace-1543041116" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Model.AvailabilityGroup.html">AvailabilityGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Category.html">Category</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CategoryProduct.html">CategoryProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Coupon.html">Coupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CouponPriceGroup.html">CouponPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Customer.html">Customer</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerAddress.html">CustomerAddress</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPaymentCard.html">CustomerPaymentCard</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPriceGroup.html">CustomerPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomFieldValues.html">CustomFieldValues</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Note.html">Note</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Order.html">Order</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCharge.html">OrderCharge</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCoupon.html">OrderCoupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCustomField.html">OrderCustomField</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderDiscountTotal.html">OrderDiscountTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItem.html">OrderItem</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemAttribute.html">OrderItemAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemDiscount.html">OrderItemDiscount</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemOption.html">OrderItemOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemSubscription.html">OrderItemSubscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderNote.html">OrderNote</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPayment.html">OrderPayment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPaymentTotal.html">OrderPaymentTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProduct.html">OrderProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProductAttribute.html">OrderProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipment.html">OrderShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipmentUpdate.html">OrderShipmentUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderTotal.html">OrderTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroup.html">PriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroupProduct.html">PriceGroupProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Product.html">Product</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductAttribute.html">ProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductImageData.html">ProductImageData</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventoryAdjustment.html">ProductInventoryAdjustment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventorySettings.html">ProductInventorySettings</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductOption.html">ProductOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingMethod.html">ProductShippingMethod</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingRules.html">ProductShippingRules</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductSubscriptionTerm.html">ProductSubscriptionTerm</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariant.html">ProductVariant</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantDimension.html">ProductVariantDimension</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantExclusion.html">ProductVariantExclusion</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantLimit.html">ProductVariantLimit</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantPart.html">ProductVariantPart</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProvisionMessage.html">ProvisionMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.RelatedProduct.html">RelatedProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.SubscriptionOption.html">SubscriptionOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Uri.html">Uri</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1186457380"></a>
+                                <a href="../namespaces/MerchantAPI.MultiCall.html" style="margin-left: 30px; padding-left: 0">MultiCall</a>
+            </div>
+            <div id="namespace-1186457380" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallOperation.html">MultiCallOperation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallRequest.html">MultiCallRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallResponse.html">MultiCallResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-973192915"></a>
+                                <a href="../namespaces/MerchantAPI.Request.html" style="margin-left: 30px; padding-left: 0">Request</a>
+            </div>
+            <div id="namespace-973192915" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionStore.html">ProvisionStore</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1015916572"></a>
+                                <a href="../namespaces/MerchantAPI.Response.html" style="margin-left: 30px; padding-left: 0">Response</a>
+            </div>
+            <div id="namespace-1015916572" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionStore.html">ProvisionStore</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ModelInterface.html">ModelInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.RequestInterface.html">RequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ResponseInterface.html">ResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Client.html">Client</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ClientException.html">ClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Collection.html">Collection</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.html">Model</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.html">Request</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.html">Response</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Version.html">Version</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/MerchantAPI.Request.html">\MerchantAPI\Request</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\MerchantAPI\Request</small>OrderListLoadQuery</h1>
+                    <p><em>Handles API Request OrderList_Load_Query.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getSort" class="">getSort()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setSort" class="">setSort()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getAvailableSortFields" class="">getAvailableSortFields()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getOffset" class="">getOffset()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setOffset" class="">setOffset()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getCount" class="">getCount()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setCount" class="">setCount()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getAvailableSearchFields" class="">getAvailableSearchFields()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_addOnDemandColumn" class="">addOnDemandColumn()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_removeOnDemandColumn" class="">removeOnDemandColumn()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setOnDemandColumns" class="">setOnDemandColumns()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getOnDemandColumns" class="">getOnDemandColumns()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getAvailableOnDemandColumns" class="">getAvailableOnDemandColumns()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getCustomFilters" class="">getCustomFilters()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getAvailableCustomFilters" class="">getAvailableCustomFilters()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setFilters" class="">setFilters()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_getFilters" class="">getFilters()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_setCustomFilter" class="">setCustomFilter()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_removeCustomFilter" class="">removeCustomFilter()</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#method_filterExpression" class="">filterExpression()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#method_toArray" class="">toArray()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.html#method_getFunction" class="">getFunction()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.html#method_getStoreCode" class="">getStoreCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#method_getPassphrase" class="">getPassphrase()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#method_setPassphrase" class="">setPassphrase()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#method_createResponse" class="">createResponse()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#constant_PAY_STATUS_FILTER_AUTH_ONLY" class="">PAY_STATUS_FILTER_AUTH_ONLY</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#constant_PAY_STATUS_FILTER_PARTIAL_CAPTURE" class="">PAY_STATUS_FILTER_PARTIAL_CAPTURE</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#constant_PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED" class="">PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#constant_PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED" class="">PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_sort" class="">$sort</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_filters" class="">$filters</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_availableSearchFields" class="">$availableSearchFields</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_availableSortFields" class="">$availableSortFields</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_availableOnDemandColumns" class="">$availableOnDemandColumns</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_onDemandColumns" class="">$onDemandColumns</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_availableCustomFilters" class="">$availableCustomFilters</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_customFilters" class="">$customFilters</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_offset" class="">$offset</a><br />
+                                                                    <a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html#property_count" class="">$count</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.html#property_storeCode" class="">$storeCode</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_function" class="">$function</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html#property_passphrase" class="">$passphrase</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Request.OrderListLoadQuery.html"><div class="path-wrapper">Request/OrderListLoadQuery.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">MerchantAPI\Request</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <div class="namespace-wrapper"><a href="../classes/MerchantAPI.Request.html">\MerchantAPI\Request</a></div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html">\MerchantAPI\ListQuery\ListQueryRequest</a></div>
+                                                                                                    <div class="namespace-wrapper">\MerchantAPI\Request\OrderListLoadQuery</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="https://docs.miva.com/json-api/functions/orderlist_load_query"><span class="namespace-wrapper">https://docs.miva.com/json-api/functions/orderlist_load_query</span></a></dd>
+                                                                            
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PAY_STATUS_FILTER_AUTH_ONLY" name="constant_PAY_STATUS_FILTER_AUTH_ONLY" class="anchor"></a>
+            <article id="constant_PAY_STATUS_FILTER_AUTH_ONLY" class="constant">
+                <h3 class="">PAY_STATUS_FILTER_AUTH_ONLY</h3>
+                <pre class="signature">PAY_STATUS_FILTER_AUTH_ONLY = &#039;auth_0_capt&#039; : string</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PAY_STATUS_FILTER_PARTIAL_CAPTURE" name="constant_PAY_STATUS_FILTER_PARTIAL_CAPTURE" class="anchor"></a>
+            <article id="constant_PAY_STATUS_FILTER_PARTIAL_CAPTURE" class="constant">
+                <h3 class="">PAY_STATUS_FILTER_PARTIAL_CAPTURE</h3>
+                <pre class="signature">PAY_STATUS_FILTER_PARTIAL_CAPTURE = &#039;partial_capt&#039; : string</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED" name="constant_PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED" class="anchor"></a>
+            <article id="constant_PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED" class="constant">
+                <h3 class="">PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED</h3>
+                <pre class="signature">PAY_STATUS_FILTER_CAPTURED_NOT_SHIPPED = &#039;capt_not_ship&#039; : string</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED" name="constant_PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED" class="anchor"></a>
+            <article id="constant_PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED" class="constant">
+                <h3 class="">PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED</h3>
+                <pre class="signature">PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED = &#039;ship_not_capt&#039; : string</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_sort" name="property_sort" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$sort</h3>
+                <pre class="signature">$sort : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_filters" name="property_filters" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$filters</h3>
+                <pre class="signature">$filters : array|\MerchantAPI\ListQuery\FilterExpression</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array|<a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">\MerchantAPI\ListQuery\FilterExpression</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_availableSearchFields" name="property_availableSearchFields" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$availableSearchFields</h3>
+                <pre class="signature">$availableSearchFields : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Requests available search fields                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_availableSortFields" name="property_availableSortFields" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$availableSortFields</h3>
+                <pre class="signature">$availableSortFields : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Requests available sort fields                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_availableOnDemandColumns" name="property_availableOnDemandColumns" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$availableOnDemandColumns</h3>
+                <pre class="signature">$availableOnDemandColumns : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Requests available on demand columns                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_onDemandColumns" name="property_onDemandColumns" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$onDemandColumns</h3>
+                <pre class="signature">$onDemandColumns : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_availableCustomFilters" name="property_availableCustomFilters" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$availableCustomFilters</h3>
+                <pre class="signature">$availableCustomFilters : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Requests available on custom filters                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_customFilters" name="property_customFilters" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$customFilters</h3>
+                <pre class="signature">$customFilters : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_offset" name="property_offset" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$offset</h3>
+                <pre class="signature">$offset : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_count" name="property_count" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$count</h3>
+                <pre class="signature">$count : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_storeCode" name="property_storeCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$storeCode</h3>
+                <pre class="signature">$storeCode : null|string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                null|string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_function" name="property_function" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$function</h3>
+                <pre class="signature">$function : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; The API function name                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_passphrase" name="property_passphrase" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$passphrase</h3>
+                <pre class="signature">$passphrase : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSort" name="method_getSort" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSort()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSort() : mixed</pre>
+                <p><em>Get the sorting field.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setSort" name="method_setSort" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setSort()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setSort(  <span class="argument">$field</span>,   <span class="argument">$direction = self::SORT_ASCENDING</span>) : $this</pre>
+                <p><em>Set the sorting field.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$field </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$direction </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAvailableSortFields" name="method_getAvailableSortFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAvailableSortFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAvailableSortFields() : array</pre>
+                <p><em>Get the available sorting fields for the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOffset" name="method_getOffset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOffset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOffset() : mixed</pre>
+                <p><em>Get the record offset.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOffset" name="method_setOffset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOffset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOffset(mixed  <span class="argument">$offset</span>) : $this</pre>
+                <p><em>Set the record offset.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$offset </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCount" name="method_getCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCount() : mixed</pre>
+                <p><em>Get the maximum records to request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCount" name="method_setCount" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setCount()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCount(mixed  <span class="argument">$count</span>) : $this</pre>
+                <p><em>Set the maximum records to request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$count </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAvailableSearchFields" name="method_getAvailableSearchFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAvailableSearchFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAvailableSearchFields() : array</pre>
+                <p><em>Get the available search fields for the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addOnDemandColumn" name="method_addOnDemandColumn" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addOnDemandColumn()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addOnDemandColumn(  <span class="argument">$column</span>) : $this</pre>
+                <p><em>Add an on demand column to the request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$column </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeOnDemandColumn" name="method_removeOnDemandColumn" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeOnDemandColumn()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeOnDemandColumn(  <span class="argument">$column</span>) : $this</pre>
+                <p><em>Remove an on demand column from the request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$column </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOnDemandColumns" name="method_setOnDemandColumns" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOnDemandColumns()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOnDemandColumns(array  <span class="argument">$columns</span>) : $this</pre>
+                <p><em>Set the on demand columns to fetch.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$columns </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOnDemandColumns" name="method_getOnDemandColumns" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOnDemandColumns()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOnDemandColumns() : array</pre>
+                <p><em>Get the on demand columns to fetch.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAvailableOnDemandColumns" name="method_getAvailableOnDemandColumns" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAvailableOnDemandColumns()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAvailableOnDemandColumns() : array</pre>
+                <p><em>Get the available on demand columns for the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCustomFilters" name="method_getCustomFilters" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCustomFilters()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCustomFilters() : array</pre>
+                <p><em>Get the custom filters to apply.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAvailableCustomFilters" name="method_getAvailableCustomFilters" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAvailableCustomFilters()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAvailableCustomFilters() : array</pre>
+                <p><em>Get the available custom filters for the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setFilters" name="method_setFilters" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setFilters()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setFilters(  <span class="argument">$filters</span>) : $this</pre>
+                <p><em>Set the search filters to apply to the request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$filters </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilters" name="method_getFilters" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFilters()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilters() : array|\MerchantAPI\ListQuery\FilterExpression</pre>
+                <p><em>Get the search filters to apply to the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|<a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">\MerchantAPI\ListQuery\FilterExpression</a>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCustomFilter" name="method_setCustomFilter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setCustomFilter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCustomFilter(  <span class="argument">$name</span>,   <span class="argument">$value</span>) : $this</pre>
+                <p><em>Set a custom filter supported by the request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$value </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeCustomFilter" name="method_removeCustomFilter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeCustomFilter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeCustomFilter(  <span class="argument">$name</span>) : $this</pre>
+                <p><em>Remove a custom filter applied to the request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterExpression" name="method_filterExpression" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterExpression()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterExpression() : \MerchantAPI\ListQuery\FilterExpression</pre>
+                <p><em>Creates a new FilterExpression object in the context the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">\MerchantAPI\ListQuery\FilterExpression</a>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html"><div class="path-wrapper">\MerchantAPI\ListQuery\ListQueryRequest</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_toArray" name="method_toArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">toArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">toArray() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html"><div class="path-wrapper">\MerchantAPI\Request\OrderListLoadQuery</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFunction" name="method_getFunction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFunction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFunction() : string</pre>
+                <p><em>Returns the API function name to be executed.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getStoreCode" name="method_getStoreCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getStoreCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getStoreCode() : mixed</pre>
+                <p><em>Override client level store code from the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPassphrase" name="method_getPassphrase" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPassphrase()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPassphrase() : string</pre>
+                <p><em>Get Passphrase.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html"><div class="path-wrapper">\MerchantAPI\Request\OrderListLoadQuery</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setPassphrase" name="method_setPassphrase" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setPassphrase()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setPassphrase(  <span class="argument">$passphrase</span>) : $this</pre>
+                <p><em>Set Passphrase.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$passphrase </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html"><div class="path-wrapper">\MerchantAPI\Request\OrderListLoadQuery</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createResponse" name="method_createResponse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createResponse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createResponse(\MerchantAPI\Http\HttpResponse  <span class="argument">$httpResponse</span>, array  <span class="argument">$data</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/MerchantAPI.Http.HttpResponse.html">\MerchantAPI\Http\HttpResponse</a></td>
+                                <td>$httpResponse </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html"><div class="path-wrapper">\MerchantAPI\Request\OrderListLoadQuery</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">OrderListLoadQuery.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Request/OrderListLoadQuery.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>               
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on December 12th, 2018 at 00:24.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

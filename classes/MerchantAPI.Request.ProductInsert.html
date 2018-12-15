@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>Miva Merchant API SDK for PHP</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">Miva Merchant API SDK for PHP</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1413968821"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1413968821" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2115930073"></a>
+                                <a href="../namespaces/MerchantAPI.html" style="margin-left: 30px; padding-left: 0">MerchantAPI</a>
+            </div>
+            <div id="namespace-2115930073" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1393248732"></a>
+                                <a href="../namespaces/MerchantAPI.Http.html" style="margin-left: 30px; padding-left: 0">Http</a>
+            </div>
+            <div id="namespace-1393248732" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClient.html">HttpClient</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClientException.html">HttpClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpHeaders.html">HttpHeaders</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpMessage.html">HttpMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpQuery.html">HttpQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpRequest.html">HttpRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpResponse.html">HttpResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-912763902"></a>
+                                <a href="../namespaces/MerchantAPI.ListQuery.html" style="margin-left: 30px; padding-left: 0">ListQuery</a>
+            </div>
+            <div id="namespace-912763902" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequestInterface.html">ListQueryRequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponseInterface.html">ListQueryResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">FilterExpression</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpressionEntry.html">FilterExpressionEntry</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html">ListQueryRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponse.html">ListQueryResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1196769574"></a>
+                                <a href="../namespaces/MerchantAPI.Model.html" style="margin-left: 30px; padding-left: 0">Model</a>
+            </div>
+            <div id="namespace-1196769574" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Model.AvailabilityGroup.html">AvailabilityGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Category.html">Category</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CategoryProduct.html">CategoryProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Coupon.html">Coupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CouponPriceGroup.html">CouponPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Customer.html">Customer</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerAddress.html">CustomerAddress</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPaymentCard.html">CustomerPaymentCard</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPriceGroup.html">CustomerPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomFieldValues.html">CustomFieldValues</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Note.html">Note</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Order.html">Order</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCharge.html">OrderCharge</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCoupon.html">OrderCoupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCustomField.html">OrderCustomField</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderDiscountTotal.html">OrderDiscountTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItem.html">OrderItem</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemAttribute.html">OrderItemAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemDiscount.html">OrderItemDiscount</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemOption.html">OrderItemOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemSubscription.html">OrderItemSubscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderNote.html">OrderNote</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPayment.html">OrderPayment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPaymentTotal.html">OrderPaymentTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProduct.html">OrderProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProductAttribute.html">OrderProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipment.html">OrderShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipmentUpdate.html">OrderShipmentUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderTotal.html">OrderTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroup.html">PriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroupProduct.html">PriceGroupProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Product.html">Product</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductAttribute.html">ProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductImageData.html">ProductImageData</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventoryAdjustment.html">ProductInventoryAdjustment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventorySettings.html">ProductInventorySettings</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductOption.html">ProductOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingMethod.html">ProductShippingMethod</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingRules.html">ProductShippingRules</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductSubscriptionTerm.html">ProductSubscriptionTerm</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariant.html">ProductVariant</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantDimension.html">ProductVariantDimension</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantExclusion.html">ProductVariantExclusion</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantLimit.html">ProductVariantLimit</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantPart.html">ProductVariantPart</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProvisionMessage.html">ProvisionMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.RelatedProduct.html">RelatedProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.SubscriptionOption.html">SubscriptionOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Uri.html">Uri</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1530704693"></a>
+                                <a href="../namespaces/MerchantAPI.MultiCall.html" style="margin-left: 30px; padding-left: 0">MultiCall</a>
+            </div>
+            <div id="namespace-1530704693" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallOperation.html">MultiCallOperation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallRequest.html">MultiCallRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallResponse.html">MultiCallResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-640271528"></a>
+                                <a href="../namespaces/MerchantAPI.Request.html" style="margin-left: 30px; padding-left: 0">Request</a>
+            </div>
+            <div id="namespace-640271528" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionStore.html">ProvisionStore</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-318929108"></a>
+                                <a href="../namespaces/MerchantAPI.Response.html" style="margin-left: 30px; padding-left: 0">Response</a>
+            </div>
+            <div id="namespace-318929108" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionStore.html">ProvisionStore</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ModelInterface.html">ModelInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.RequestInterface.html">RequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ResponseInterface.html">ResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Client.html">Client</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ClientException.html">ClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Collection.html">Collection</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.html">Model</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.html">Request</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.html">Response</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Version.html">Version</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/MerchantAPI.Request.html">\MerchantAPI\Request</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\MerchantAPI\Request</small>ProductInsert</h1>
+                    <p><em>Handles API Request Product_Insert.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/MerchantAPI.Request.html#method_getFunction" class="">getFunction()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.html#method_getStoreCode" class="">getStoreCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductCode" class="">getProductCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductSKU" class="">getProductSKU()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductName" class="">getProductName()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductDescription" class="">getProductDescription()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductCanonicalCategoryCode" class="">getProductCanonicalCategoryCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductAlternateDisplayPage" class="">getProductAlternateDisplayPage()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductPageTitle" class="">getProductPageTitle()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductThumbnail" class="">getProductThumbnail()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductImage" class="">getProductImage()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductPrice" class="">getProductPrice()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductCost" class="">getProductCost()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductWeight" class="">getProductWeight()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductInventory" class="">getProductInventory()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductTaxable" class="">getProductTaxable()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getProductActive" class="">getProductActive()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_getCustomFieldValues" class="">getCustomFieldValues()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductCode" class="">setProductCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductSKU" class="">setProductSKU()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductName" class="">setProductName()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductDescription" class="">setProductDescription()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductCanonicalCategoryCode" class="">setProductCanonicalCategoryCode()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductAlternateDisplayPage" class="">setProductAlternateDisplayPage()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductPageTitle" class="">setProductPageTitle()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductThumbnail" class="">setProductThumbnail()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductImage" class="">setProductImage()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductPrice" class="">setProductPrice()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductCost" class="">setProductCost()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductWeight" class="">setProductWeight()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductInventory" class="">setProductInventory()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductTaxable" class="">setProductTaxable()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setProductActive" class="">setProductActive()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_setCustomFieldValues" class="">setCustomFieldValues()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_toArray" class="">toArray()</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#method_createResponse" class="">createResponse()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/MerchantAPI.Request.html#property_storeCode" class="">$storeCode</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_function" class="">$function</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productCode" class="">$productCode</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productSKU" class="">$productSKU</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productName" class="">$productName</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productDescription" class="">$productDescription</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productCanonicalCategoryCode" class="">$productCanonicalCategoryCode</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productAlternateDisplayPage" class="">$productAlternateDisplayPage</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productPageTitle" class="">$productPageTitle</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productThumbnail" class="">$productThumbnail</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productImage" class="">$productImage</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productPrice" class="">$productPrice</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productCost" class="">$productCost</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productWeight" class="">$productWeight</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productInventory" class="">$productInventory</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productTaxable" class="">$productTaxable</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_productActive" class="">$productActive</a><br />
+                                                                    <a href="../classes/MerchantAPI.Request.ProductInsert.html#property_customFieldValues" class="">$customFieldValues</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Request.ProductInsert.html"><div class="path-wrapper">Request/ProductInsert.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">MerchantAPI\Request</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper"><a href="../classes/MerchantAPI.Request.html">\MerchantAPI\Request</a></div>
+                                                                                                    <div class="namespace-wrapper">\MerchantAPI\Request\ProductInsert</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="https://docs.miva.com/json-api/functions/product_insert"><span class="namespace-wrapper">https://docs.miva.com/json-api/functions/product_insert</span></a></dd>
+                                                                            
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_storeCode" name="property_storeCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$storeCode</h3>
+                <pre class="signature">$storeCode : null|string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                null|string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_function" name="property_function" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$function</h3>
+                <pre class="signature">$function : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; The API function name                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productCode" name="property_productCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productCode</h3>
+                <pre class="signature">$productCode : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productSKU" name="property_productSKU" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productSKU</h3>
+                <pre class="signature">$productSKU : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productName" name="property_productName" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productName</h3>
+                <pre class="signature">$productName : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productDescription" name="property_productDescription" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productDescription</h3>
+                <pre class="signature">$productDescription : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productCanonicalCategoryCode" name="property_productCanonicalCategoryCode" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productCanonicalCategoryCode</h3>
+                <pre class="signature">$productCanonicalCategoryCode : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productAlternateDisplayPage" name="property_productAlternateDisplayPage" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productAlternateDisplayPage</h3>
+                <pre class="signature">$productAlternateDisplayPage : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productPageTitle" name="property_productPageTitle" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productPageTitle</h3>
+                <pre class="signature">$productPageTitle : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productThumbnail" name="property_productThumbnail" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productThumbnail</h3>
+                <pre class="signature">$productThumbnail : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productImage" name="property_productImage" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productImage</h3>
+                <pre class="signature">$productImage : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productPrice" name="property_productPrice" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productPrice</h3>
+                <pre class="signature">$productPrice : float</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                float
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productCost" name="property_productCost" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productCost</h3>
+                <pre class="signature">$productCost : float</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                float
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productWeight" name="property_productWeight" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productWeight</h3>
+                <pre class="signature">$productWeight : float</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                float
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productInventory" name="property_productInventory" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productInventory</h3>
+                <pre class="signature">$productInventory : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productTaxable" name="property_productTaxable" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productTaxable</h3>
+                <pre class="signature">$productTaxable : boolean</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_productActive" name="property_productActive" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$productActive</h3>
+                <pre class="signature">$productActive : boolean</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                boolean
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_customFieldValues" name="property_customFieldValues" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$customFieldValues</h3>
+                <pre class="signature">$customFieldValues : \MerchantAPI\Model\CustomFieldValues|null</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/MerchantAPI.Model.CustomFieldValues.html">\MerchantAPI\Model\CustomFieldValues</a>|null
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFunction" name="method_getFunction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFunction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFunction() : string</pre>
+                <p><em>Returns the API function name to be executed.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getStoreCode" name="method_getStoreCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getStoreCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getStoreCode() : mixed</pre>
+                <p><em>Override client level store code from the request.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.html"><div class="path-wrapper">\MerchantAPI\Request</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\MerchantAPI\Model\Product  <span class="argument">$product = null</span>) </pre>
+                <p><em>Constructor.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/MerchantAPI.Model.Product.html">\MerchantAPI\Model\Product</a></td>
+                                <td>$product </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductCode" name="method_getProductCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductCode() : string</pre>
+                <p><em>Get Product_Code.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductSKU" name="method_getProductSKU" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductSKU()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductSKU() : string</pre>
+                <p><em>Get Product_SKU.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductName" name="method_getProductName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductName() : string</pre>
+                <p><em>Get Product_Name.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductDescription" name="method_getProductDescription" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductDescription()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductDescription() : string</pre>
+                <p><em>Get Product_Description.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductCanonicalCategoryCode" name="method_getProductCanonicalCategoryCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductCanonicalCategoryCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductCanonicalCategoryCode() : string</pre>
+                <p><em>Get Product_Canonical_Category_Code.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductAlternateDisplayPage" name="method_getProductAlternateDisplayPage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductAlternateDisplayPage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductAlternateDisplayPage() : string</pre>
+                <p><em>Get Product_Alternate_Display_Page.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductPageTitle" name="method_getProductPageTitle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductPageTitle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductPageTitle() : string</pre>
+                <p><em>Get Product_Page_Title.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductThumbnail" name="method_getProductThumbnail" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductThumbnail()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductThumbnail() : string</pre>
+                <p><em>Get Product_Thumbnail.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductImage" name="method_getProductImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductImage() : string</pre>
+                <p><em>Get Product_Image.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductPrice" name="method_getProductPrice" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductPrice()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductPrice() : float</pre>
+                <p><em>Get Product_Price.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductCost" name="method_getProductCost" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductCost()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductCost() : float</pre>
+                <p><em>Get Product_Cost.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductWeight" name="method_getProductWeight" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductWeight()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductWeight() : float</pre>
+                <p><em>Get Product_Weight.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductInventory" name="method_getProductInventory" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductInventory()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductInventory() : integer</pre>
+                <p><em>Get Product_Inventory.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductTaxable" name="method_getProductTaxable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductTaxable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductTaxable() : boolean</pre>
+                <p><em>Get Product_Taxable.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getProductActive" name="method_getProductActive" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getProductActive()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getProductActive() : boolean</pre>
+                <p><em>Get Product_Active.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCustomFieldValues" name="method_getCustomFieldValues" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCustomFieldValues()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCustomFieldValues() : \MerchantAPI\Model\CustomFieldValues|null</pre>
+                <p><em>Get CustomField_Values.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/MerchantAPI.Model.CustomFieldValues.html">\MerchantAPI\Model\CustomFieldValues</a>|null
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductCode" name="method_setProductCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductCode(  <span class="argument">$productCode</span>) : $this</pre>
+                <p><em>Set Product_Code.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productCode </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductSKU" name="method_setProductSKU" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductSKU()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductSKU(  <span class="argument">$productSKU</span>) : $this</pre>
+                <p><em>Set Product_SKU.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productSKU </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductName" name="method_setProductName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductName(  <span class="argument">$productName</span>) : $this</pre>
+                <p><em>Set Product_Name.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productName </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductDescription" name="method_setProductDescription" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductDescription()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductDescription(  <span class="argument">$productDescription</span>) : $this</pre>
+                <p><em>Set Product_Description.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productDescription </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductCanonicalCategoryCode" name="method_setProductCanonicalCategoryCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductCanonicalCategoryCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductCanonicalCategoryCode(  <span class="argument">$productCanonicalCategoryCode</span>) : $this</pre>
+                <p><em>Set Product_Canonical_Category_Code.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productCanonicalCategoryCode </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductAlternateDisplayPage" name="method_setProductAlternateDisplayPage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductAlternateDisplayPage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductAlternateDisplayPage(  <span class="argument">$productAlternateDisplayPage</span>) : $this</pre>
+                <p><em>Set Product_Alternate_Display_Page.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productAlternateDisplayPage </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductPageTitle" name="method_setProductPageTitle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductPageTitle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductPageTitle(  <span class="argument">$productPageTitle</span>) : $this</pre>
+                <p><em>Set Product_Page_Title.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productPageTitle </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductThumbnail" name="method_setProductThumbnail" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductThumbnail()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductThumbnail(  <span class="argument">$productThumbnail</span>) : $this</pre>
+                <p><em>Set Product_Thumbnail.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productThumbnail </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductImage" name="method_setProductImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductImage(  <span class="argument">$productImage</span>) : $this</pre>
+                <p><em>Set Product_Image.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productImage </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductPrice" name="method_setProductPrice" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductPrice()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductPrice(  <span class="argument">$productPrice</span>) : $this</pre>
+                <p><em>Set Product_Price.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productPrice </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductCost" name="method_setProductCost" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductCost()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductCost(  <span class="argument">$productCost</span>) : $this</pre>
+                <p><em>Set Product_Cost.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productCost </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductWeight" name="method_setProductWeight" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductWeight()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductWeight(  <span class="argument">$productWeight</span>) : $this</pre>
+                <p><em>Set Product_Weight.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productWeight </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductInventory" name="method_setProductInventory" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductInventory()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductInventory(  <span class="argument">$productInventory</span>) : $this</pre>
+                <p><em>Set Product_Inventory.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productInventory </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductTaxable" name="method_setProductTaxable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductTaxable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductTaxable(  <span class="argument">$productTaxable</span>) : $this</pre>
+                <p><em>Set Product_Taxable.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productTaxable </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setProductActive" name="method_setProductActive" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setProductActive()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setProductActive(  <span class="argument">$productActive</span>) : $this</pre>
+                <p><em>Set Product_Active.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$productActive </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCustomFieldValues" name="method_setCustomFieldValues" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setCustomFieldValues()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCustomFieldValues(  <span class="argument">$customFieldValues</span>) : $this</pre>
+                <p><em>Set CustomField_Values.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$customFieldValues </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_toArray" name="method_toArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">toArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">toArray() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createResponse" name="method_createResponse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createResponse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createResponse(\MerchantAPI\Http\HttpResponse  <span class="argument">$httpResponse</span>, array  <span class="argument">$data</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/MerchantAPI.Http.HttpResponse.html">\MerchantAPI\Http\HttpResponse</a></td>
+                                <td>$httpResponse </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MerchantAPI.Request.ProductInsert.html"><div class="path-wrapper">\MerchantAPI\Request\ProductInsert</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            inheritDoc
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ProductInsert.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Request/ProductInsert.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>               
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on December 12th, 2018 at 00:24.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
