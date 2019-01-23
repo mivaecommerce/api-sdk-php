@@ -15,12 +15,12 @@ namespace MerchantAPI\Response;
 use MerchantAPI\Response;
 
 /**
- * API Response for Coupon_Insert.
+ * API Response for PrintQueueJob_Insert.
  *
  * @package MerchantAPI\Response
- * @see https://docs.miva.com/json-api/functions/coupon_insert
+ * @see https://docs.miva.com/json-api/functions/printqueuejob_insert
  */
-class CouponInsert extends Response
+class PrintQueueJobInsert extends Response
 {
 
     /**

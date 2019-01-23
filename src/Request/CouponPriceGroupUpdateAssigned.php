@@ -19,11 +19,16 @@ use MerchantAPI\Model\Coupon;
 /**
  * Handles API Request CouponPriceGroup_Update_Assigned.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/couponpricegroup_update_assigned
  */
 class CouponPriceGroupUpdateAssigned extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CouponPriceGroup_Update_Assigned';
 
@@ -204,7 +209,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCouponId()) {
             $data['Coupon_ID'] = $this->getCouponId();
@@ -221,10 +226,6 @@ class CouponPriceGroupUpdateAssigned extends Request
         }
 
         $data['Assigned'] = $this->getAssigned();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

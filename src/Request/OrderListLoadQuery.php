@@ -19,6 +19,8 @@ use MerchantAPI\Model\Order;
 /**
  * Handles API Request OrderList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/orderlist_load_query
  */
@@ -35,6 +37,9 @@ class OrderListLoadQuery extends ListQueryRequest
 
     /** @var string PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED */
     const PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED = 'ship_not_capt';
+
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
     protected $function = 'OrderList_Load_Query';

@@ -19,11 +19,16 @@ use MerchantAPI\Model\Coupon;
 /**
  * Handles API Request CouponList_Delete.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/couponlist_delete
  */
 class CouponListDelete extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CouponList_Delete';
 
@@ -73,13 +78,9 @@ class CouponListDelete extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Coupon_IDs'] = $this->getCouponIds();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

@@ -20,11 +20,16 @@ use MerchantAPI\Model\CustomerPaymentCard;
 /**
  * Handles API Request CustomerPaymentCard_Register.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/customerpaymentcard_register
  */
 class CustomerPaymentCardRegister extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CustomerPaymentCard_Register';
 
@@ -439,7 +444,7 @@ class CustomerPaymentCardRegister extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCustomerId()) {
             $data['Customer_ID'] = $this->getCustomerId();
@@ -495,10 +500,6 @@ class CustomerPaymentCardRegister extends Request
 
         if (!is_null($this->getCountry())) {
             $data['Country'] = $this->getCountry();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

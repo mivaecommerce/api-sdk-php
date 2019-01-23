@@ -19,11 +19,16 @@ use MerchantAPI\Model\Product;
 /**
  * Handles API Request ProductImage_Add.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/productimage_add
  */
 class ProductImageAdd extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'ProductImage_Add';
 
@@ -37,7 +42,7 @@ class ProductImageAdd extends Request
     protected $editProduct;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /** @var string */
     protected $filepath;
@@ -58,7 +63,7 @@ class ProductImageAdd extends Request
             } else if ($product->getCode()) {
                 $this->setEditProduct($product->getCode());
             } else if ($product->getSku()) {
-                $this->setProductSKU($product->getSku());
+                $this->setProductSku($product->getSku());
             }
         }
     }
@@ -98,9 +103,9 @@ class ProductImageAdd extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -168,9 +173,9 @@ class ProductImageAdd extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -206,7 +211,7 @@ class ProductImageAdd extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getProductId()) {
             $data['Product_ID'] = $this->getProductId();
@@ -214,17 +219,13 @@ class ProductImageAdd extends Request
             $data['Edit_Product'] = $this->getEditProduct();
         } else if ($this->getProductCode()) {
             $data['Product_Code'] = $this->getProductCode();
-        } else if ($this->getProductSKU()) {
-            $data['Product_SKU'] = $this->getProductSKU();
+        } else if ($this->getProductSku()) {
+            $data['Product_SKU'] = $this->getProductSku();
         }
 
         $data['Filepath'] = $this->getFilepath();
 
         $data['ImageType_ID'] = $this->getImageTypeId();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

@@ -92,20 +92,20 @@ class Module extends \MerchantAPI\Model
     /**
      * Get refcount.
      *
-     * @return string
+     * @return int
      */
     public function getReferenceCount()
     {
-        return $this->getField('refcount');
+        return (int) $this->getField('refcount', 0);
     }
 
     /**
      * Get active.
      *
-     * @return string
+     * @return bool
      */
     public function getActive()
     {
-        return $this->getField('active');
+        return (bool) $this->getField('active', false);
     }
 }

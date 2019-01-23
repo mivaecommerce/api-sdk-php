@@ -21,11 +21,16 @@ use MerchantAPI\Model\OrderTotal;
 /**
  * Handles API Request OrderItem_Add.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/orderitem_add
  */
 class OrderItemAdd extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderItem_Add';
 
@@ -282,7 +287,7 @@ class OrderItemAdd extends Request
             }
         }
 
-        $this->options = $options;
+        $this->options = new \MerchantAPI\Collection($options);
 
         return $this;
     }
@@ -328,7 +333,7 @@ class OrderItemAdd extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Order_ID'] = $this->getOrderId();
 
@@ -362,10 +367,6 @@ class OrderItemAdd extends Request
                     $data['Options'][] = $option->getData();
                 }
             }
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

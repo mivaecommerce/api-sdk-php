@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: FilterExpressionEntry.php 71423 2018-11-03 00:32:27Z gidriss $
+ * $Id: FilterExpressionEntry.php 72352 2019-01-04 00:24:05Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -112,6 +112,28 @@ class FilterExpressionEntry
     public function setRight($right)
     {
         $this->right = $right;
+        return $this;
+    }
+
+    /**
+     * Get the search type.
+     *
+     * @return string
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Set the search type.
+     *
+     * @param string $search
+     * @return FilterExpressionEntry
+     */
+    public function setSearch($search)
+    {
+        $this->search = $search;
         return $this;
     }
 }

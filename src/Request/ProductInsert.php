@@ -20,11 +20,16 @@ use MerchantAPI\Model\Product;
 /**
  * Handles API Request Product_Insert.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/product_insert
  */
 class ProductInsert extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Product_Insert';
 
@@ -32,7 +37,7 @@ class ProductInsert extends Request
     protected $productCode;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /** @var string */
     protected $productName;
@@ -87,7 +92,7 @@ class ProductInsert extends Request
 
         if ($product) {
             $this->setProductCode($product->getCode());
-            $this->setProductSKU($product->getSku());
+            $this->setProductSku($product->getSku());
             $this->setProductName($product->getName());
             $this->setProductDescription($product->getDescription());
             $this->setProductCanonicalCategoryCode($product->getCanonicalCategoryCode());
@@ -123,9 +128,9 @@ class ProductInsert extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -287,9 +292,9 @@ class ProductInsert extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -488,11 +493,11 @@ class ProductInsert extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Product_Code'] = $this->getProductCode();
 
-        $data['Product_SKU'] = $this->getProductSKU();
+        $data['Product_SKU'] = $this->getProductSku();
 
         $data['Product_Name'] = $this->getProductName();
 
@@ -520,7 +525,9 @@ class ProductInsert extends Request
             $data['Product_Image'] = $this->getProductImage();
         }
 
-        $data['Product_Price'] = $this->getProductPrice();
+        if (!is_null($this->getProductPrice())) {
+            $data['Product_Price'] = $this->getProductPrice();
+        }
 
         if (!is_null($this->getProductCost())) {
             $data['Product_Cost'] = $this->getProductCost();
@@ -544,10 +551,6 @@ class ProductInsert extends Request
 
         if ($this->getCustomFieldValues() && $this->getCustomFieldValues()->hasData()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

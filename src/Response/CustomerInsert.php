@@ -13,6 +13,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\Customer;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for Customer_Insert.
@@ -22,4 +25,30 @@ use MerchantAPI\Response;
  */
 class CustomerInsert extends Response
 {
+    /** @var \MerchantAPI\Model\Customer */
+    protected $customer;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->customer = new Customer($this->data['data']);
+    }
+
+    /**
+     * Get customer.
+     *
+     * @return \MerchantAPI\Model\Customer|null
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
 }

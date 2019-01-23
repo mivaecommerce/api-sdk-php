@@ -52,6 +52,18 @@ class PriceGroup extends \MerchantAPI\Model
                         get_class($data['module']) : gettype($data['module'])));
             }
         }
+
+        if (isset($data['capabilities'])) {
+            if ($data['capabilities'] instanceof DiscountModuleCapabilities) {
+                $this->setField('capabilities', $data['capabilities']);
+            } else if (is_array($data['capabilities'])) {
+                $this->setField('capabilities', new DiscountModuleCapabilities($data['capabilities']));
+            } else {
+                throw new \InvalidArgumentException(sprintf('Expected DiscountModuleCapabilities or an array but got %s',
+                    is_object($data['capabilities']) ?
+                        get_class($data['capabilities']) : gettype($data['capabilities'])));
+            }
+        }
     }
 
     /**
@@ -64,6 +76,12 @@ class PriceGroup extends \MerchantAPI\Model
         if (isset($data['module'])) {
             if ($this->data['module'] instanceof Module) {
                 $this->data['module'] = clone $this->data['module'];
+            }
+        }
+
+        if (isset($data['capabilities'])) {
+            if ($this->data['capabilities'] instanceof DiscountModuleCapabilities) {
+                $this->data['capabilities'] = clone $this->data['capabilities'];
             }
         }
     }
@@ -281,11 +299,11 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get capabilities.
      *
-     * @return array
+     * @return \MerchantAPI\Model\DiscountModuleCapabilities|null
      */
     public function getCapabilities()
     {
-        return $this->getField('capabilities', []);
+        return $this->getField('capabilities', null);
     }
 
     /**
@@ -530,17 +548,6 @@ class PriceGroup extends \MerchantAPI\Model
             throw new \InvalidArgumentException(sprintf('Expected array, instance of Module, or null but got %s',
                 is_object($module) ? get_class($module) : gettype($module)));
         }
-    }
-
-    /**
-     * Set capabilities.
-     *
-     * @param array
-     * @return $this
-     */
-    public function setCapabilities(array $capabilities)
-    {
-        return $this->setField('capabilities', $capabilities);
     }
 
     /**

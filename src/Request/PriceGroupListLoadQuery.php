@@ -19,11 +19,16 @@ use MerchantAPI\Model\PriceGroup;
 /**
  * Handles API Request PriceGroupList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/pricegrouplist_load_query
  */
 class PriceGroupListLoadQuery extends ListQueryRequest
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'PriceGroupList_Load_Query';
 

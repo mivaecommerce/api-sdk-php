@@ -19,6 +19,8 @@ use MerchantAPI\Model\Product;
 /**
  * Handles API Request ProductList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/productlist_load_query
  */
@@ -32,6 +34,9 @@ class ProductListLoadQuery extends ListQueryRequest
 
     /** @var string PRODUCT_SHOW_ACTIVE */
     const PRODUCT_SHOW_ACTIVE = 'Active';
+
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
     protected $function = 'ProductList_Load_Query';

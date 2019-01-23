@@ -19,11 +19,16 @@ use MerchantAPI\Model\Customer;
 /**
  * Handles API Request Customer_Delete.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/customer_delete
  */
 class CustomerDelete extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Customer_Delete';
 
@@ -126,7 +131,7 @@ class CustomerDelete extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCustomerId()) {
             $data['Customer_ID'] = $this->getCustomerId();
@@ -134,10 +139,6 @@ class CustomerDelete extends Request
             $data['Customer_Login'] = $this->getCustomerLogin();
         } else if ($this->getEditCustomer()) {
             $data['Edit_Customer'] = $this->getEditCustomer();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

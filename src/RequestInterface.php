@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: RequestInterface.php 71080 2018-10-15 20:36:21Z gidriss $
+ * $Id: RequestInterface.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI;
@@ -21,6 +21,12 @@ use MerchantAPI\Http\HttpResponse;
  */
 interface RequestInterface
 {
+    /** @var string REQUEST_SCOPE_STORE */
+    const REQUEST_SCOPE_STORE   = 'store';
+
+    /** @var string REQUEST_SCOPE_DOMAIN */
+    const REQUEST_SCOPE_DOMAIN  = 'domain';
+
     /**
      * Returns the API function name to be executed.
      *
@@ -29,11 +35,26 @@ interface RequestInterface
     public function getFunction();
 
     /**
-     * Override client level store code from the request.
+     * Get the request level store code, if set.
      *
      * @return mixed
      */
     public function getStoreCode();
+
+    /**
+     * Get the scope of the request. Returns a RequestInterface::REQUEST_SCOPE_* constant.
+     *
+     * @return string
+     */
+    public function getScope();
+
+    /**
+     * Override client level store code from the request. Only applies to store scoped requests.
+     *
+     * @param string
+     * @return ResponseInterface
+     */
+    public function setStoreCode($storeCode);
 
     /**
      * Returns the data for the request as an array.

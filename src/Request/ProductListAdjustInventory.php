@@ -19,11 +19,16 @@ use MerchantAPI\Model\ProductInventoryAdjustment;
 /**
  * Handles API Request ProductList_Adjust_Inventory.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/productlist_adjust_inventory
  */
 class ProductListAdjustInventory extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'ProductList_Adjust_Inventory';
 
@@ -66,7 +71,7 @@ class ProductListAdjustInventory extends Request
             }
         }
 
-        $this->inventoryAdjustments = $inventoryAdjustments;
+        $this->inventoryAdjustments = new \MerchantAPI\Collection($inventoryAdjustments);
 
         return $this;
     }
@@ -112,7 +117,7 @@ class ProductListAdjustInventory extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if (count($this->getInventoryAdjustments())) {
             $data['Inventory_Adjustments'] = [];
@@ -120,10 +125,6 @@ class ProductListAdjustInventory extends Request
             foreach ($this->getInventoryAdjustments() as $i => $inventoryAdjustment) {
                 $data['Inventory_Adjustments'][] = $inventoryAdjustment->getData();
             }
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

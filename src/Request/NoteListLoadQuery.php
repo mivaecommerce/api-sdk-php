@@ -19,11 +19,16 @@ use MerchantAPI\Model\Note;
 /**
  * Handles API Request NoteList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/notelist_load_query
  */
 class NoteListLoadQuery extends ListQueryRequest
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'NoteList_Load_Query';
 

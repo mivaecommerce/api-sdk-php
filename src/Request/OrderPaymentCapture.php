@@ -20,11 +20,16 @@ use MerchantAPI\Model\OrderPaymentTotal;
 /**
  * Handles API Request OrderPayment_Capture.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/orderpayment_capture
  */
 class OrderPaymentCapture extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderPayment_Capture';
 
@@ -97,16 +102,12 @@ class OrderPaymentCapture extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['OrderPayment_ID'] = $this->getOrderPaymentId();
 
         if (!is_null($this->getAmount())) {
             $data['Amount'] = $this->getAmount();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

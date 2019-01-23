@@ -19,11 +19,16 @@ use MerchantAPI\Model\Coupon;
 /**
  * Handles API Request Coupon_Insert.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/coupon_insert
  */
 class CouponInsert extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Coupon_Insert';
 
@@ -293,7 +298,7 @@ class CouponInsert extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Code'] = $this->getCode();
 
@@ -327,10 +332,6 @@ class CouponInsert extends Request
 
         if (!is_null($this->getPriceGroupId())) {
             $data['PriceGroup_ID'] = $this->getPriceGroupId();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

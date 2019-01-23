@@ -88,7 +88,6 @@ class CustomFieldValues extends \MerchantAPI\Model
         return $this;
     }
 
-    
     /**
      * Add a custom field value.
      *

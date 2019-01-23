@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: Version.php 71080 2018-10-15 20:36:21Z gidriss $
+ * $Id: Version.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI;
@@ -23,11 +23,11 @@ class Version
     const MAJOR   = 1;
 
     /** @var int Minor Version */
-    const MINOR   = 0;
+    const MINOR   = 1;
 
     /** @var int Patch Version */
     const PATCH   = 0;
 
     /** @var string Version as string */
-    const STRING = '1.0.0';
+    const STRING = '1.1.0';
 }

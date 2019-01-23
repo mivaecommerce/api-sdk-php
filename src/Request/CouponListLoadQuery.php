@@ -19,11 +19,16 @@ use MerchantAPI\Model\Coupon;
 /**
  * Handles API Request CouponList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/couponlist_load_query
  */
 class CouponListLoadQuery extends ListQueryRequest
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CouponList_Load_Query';
 

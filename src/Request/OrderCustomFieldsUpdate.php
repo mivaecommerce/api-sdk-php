@@ -20,11 +20,16 @@ use MerchantAPI\Model\Order;
 /**
  * Handles API Request OrderCustomFields_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/ordercustomfields_update
  */
 class OrderCustomFieldsUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderCustomFields_Update';
 
@@ -108,7 +113,7 @@ class OrderCustomFieldsUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getOrderId()) {
             $data['Order_ID'] = $this->getOrderId();
@@ -116,10 +121,6 @@ class OrderCustomFieldsUpdate extends Request
 
         if ($this->getCustomFieldValues()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

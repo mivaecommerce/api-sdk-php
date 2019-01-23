@@ -19,11 +19,16 @@ use MerchantAPI\Model\ProvisionMessage;
 /**
  * Handles API Request Provision_Domain.
  *
+ * Scope: Domain
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/provision_domain
  */
 class ProvisionDomain extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_DOMAIN;
+
     /** @var string The API function name */
     protected $function = 'Provision_Domain';
 
@@ -58,13 +63,9 @@ class ProvisionDomain extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['XML'] = $this->getXml();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

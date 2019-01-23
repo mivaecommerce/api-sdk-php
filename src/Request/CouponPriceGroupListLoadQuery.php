@@ -19,11 +19,16 @@ use MerchantAPI\Model\CouponPriceGroup;
 /**
  * Handles API Request CouponPriceGroupList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/couponpricegrouplist_load_query
  */
 class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CouponPriceGroupList_Load_Query';
 

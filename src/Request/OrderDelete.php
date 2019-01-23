@@ -19,11 +19,16 @@ use MerchantAPI\Model\Order;
 /**
  * Handles API Request Order_Delete.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/order_delete
  */
 class OrderDelete extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Order_Delete';
 
@@ -70,13 +75,9 @@ class OrderDelete extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Order_ID'] = $this->getOrderId();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

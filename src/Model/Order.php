@@ -797,7 +797,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return float
      */
-    public function getTotalAuth()
+    public function getTotalAuthorized()
     {
         return (float) $this->getField('total_auth', 0.00);
     }
@@ -807,7 +807,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getFormattedTotalAuth()
+    public function getFormattedTotalAuthorized()
     {
         return $this->getField('formatted_total_auth');
     }
@@ -817,7 +817,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return float
      */
-    public function getTotalCapt()
+    public function getTotalCaptured()
     {
         return (float) $this->getField('total_capt', 0.00);
     }
@@ -827,7 +827,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getFormattedTotalCapt()
+    public function getFormattedTotalCaptured()
     {
         return $this->getField('formatted_total_capt');
     }
@@ -837,7 +837,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return float
      */
-    public function getTotalRfnd()
+    public function getTotalRefunded()
     {
         return (float) $this->getField('total_rfnd', 0.00);
     }
@@ -847,7 +847,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getFormattedTotalRfnd()
+    public function getFormattedTotalRefunded()
     {
         return $this->getField('formatted_total_rfnd');
     }
@@ -857,7 +857,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return float
      */
-    public function getNetCapt()
+    public function getNetCaptured()
     {
         return (float) $this->getField('net_capt', 0.00);
     }
@@ -867,7 +867,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getFormattedNetCapt()
+    public function getFormattedNetCaptured()
     {
         return $this->getField('formatted_net_capt');
     }
@@ -887,7 +887,7 @@ class Order extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getBordCount()
+    public function getBackorderCount()
     {
         return (int) $this->getField('bord_count', 0);
     }

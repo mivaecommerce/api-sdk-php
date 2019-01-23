@@ -19,11 +19,16 @@ use MerchantAPI\Model\PriceGroup;
 /**
  * Handles API Request PriceGroupProduct_Update_Assigned.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/pricegroupproduct_update_assigned
  */
 class PriceGroupProductUpdateAssigned extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'PriceGroupProduct_Update_Assigned';
 
@@ -43,7 +48,7 @@ class PriceGroupProductUpdateAssigned extends Request
     protected $productCode;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /** @var bool */
     protected $assigned;
@@ -121,9 +126,9 @@ class PriceGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -207,9 +212,9 @@ class PriceGroupProductUpdateAssigned extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -232,7 +237,7 @@ class PriceGroupProductUpdateAssigned extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getPriceGroupId()) {
             $data['PriceGroup_ID'] = $this->getPriceGroupId();
@@ -248,8 +253,8 @@ class PriceGroupProductUpdateAssigned extends Request
             $data['Product_ID'] = $this->getProductId();
         } else if ($this->getProductCode()) {
             $data['Product_Code'] = $this->getProductCode();
-        } else if ($this->getProductSKU()) {
-            $data['Product_SKU'] = $this->getProductSKU();
+        } else if ($this->getProductSku()) {
+            $data['Product_SKU'] = $this->getProductSku();
         }
 
         if (!is_null($this->getPriceGroupName())) {
@@ -258,10 +263,6 @@ class PriceGroupProductUpdateAssigned extends Request
 
         if (!is_null($this->getAssigned())) {
             $data['Assigned'] = $this->getAssigned();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

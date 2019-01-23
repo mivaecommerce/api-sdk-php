@@ -19,11 +19,16 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request CategoryProduct_Update_Assigned.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/categoryproduct_update_assigned
  */
 class CategoryProductUpdateAssigned extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CategoryProduct_Update_Assigned';
 
@@ -46,7 +51,7 @@ class CategoryProductUpdateAssigned extends Request
     protected $productCode;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /** @var bool */
     protected $assigned;
@@ -132,9 +137,9 @@ class CategoryProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -231,9 +236,9 @@ class CategoryProductUpdateAssigned extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -256,7 +261,7 @@ class CategoryProductUpdateAssigned extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCategoryId()) {
             $data['Category_ID'] = $this->getCategoryId();
@@ -272,15 +277,11 @@ class CategoryProductUpdateAssigned extends Request
             $data['Edit_Product'] = $this->getEditProduct();
         } else if ($this->getProductCode()) {
             $data['Product_Code'] = $this->getProductCode();
-        } else if ($this->getProductSKU()) {
-            $data['Product_SKU'] = $this->getProductSKU();
+        } else if ($this->getProductSku()) {
+            $data['Product_SKU'] = $this->getProductSku();
         }
 
         $data['Assigned'] = $this->getAssigned();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

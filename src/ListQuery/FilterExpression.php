@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: FilterExpression.php 71697 2018-11-28 19:10:49Z gidriss $
+ * $Id: FilterExpression.php 72352 2019-01-04 00:24:05Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -796,25 +796,23 @@ class FilterExpression
 
         foreach ($this->expressions as $e) {
             if ($e['entry'] instanceof FilterExpression) {
+                $entry = [
+                    'name'  => static::$searchFilters[$e['type']],
+                    'value' => $e['entry']->toArray(),
+                ];            
+            } else {
                 if ($this->isChild()) {
                     $entry = [
                         'field'     => static::$searchFilters[$e['type']],
                         'operator'  => 'SUBWHERE',
-                        'value'     => $e['entry']->toArray()
-                    ];
-                } else {
-                    $entry = [
-                        'name'  => static::$searchFilters[$e['type']],
-                        'value' => $e['entry']->toArray()
-                    ];
-                }
-            } else {
-                if ($this->isChild()) {
-                    $entry = [
-                        'field'     => $e['entry']->getLeft(),
-                        'operator'  => $e['entry']->getOperator(),
-                        'value'     => is_array($e['entry']->getRight()) ?
+                        'value'     => [
+                            [
+                                'field' => $e['entry']->getLeft(),
+                                'operator' => $e['entry']->getOperator(),
+                                'value' => is_array($e['entry']->getRight()) ?
                                             implode(',', $e['entry']->getRight()) : $e['entry']->getRight()
+                            ],
+                        ]
                     ];
                 } else {
                     $entry = [

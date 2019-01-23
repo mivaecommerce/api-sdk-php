@@ -19,11 +19,16 @@ use MerchantAPI\Model\Coupon;
 /**
  * Handles API Request Coupon_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/coupon_update
  */
 class CouponUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Coupon_Update';
 
@@ -352,7 +357,7 @@ class CouponUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCouponId()) {
             $data['Coupon_ID'] = $this->getCouponId();
@@ -394,10 +399,6 @@ class CouponUpdate extends Request
 
         if (!is_null($this->getActive())) {
             $data['Active'] = $this->getActive();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

@@ -19,11 +19,16 @@ use MerchantAPI\Model\AvailabilityGroup;
 /**
  * Handles API Request AvailabilityGroupBusinessAccount_Update_Assigned.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/availabilitygroupbusinessaccount_update_assigned
  */
 class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'AvailabilityGroupBusinessAccount_Update_Assigned';
 
@@ -204,7 +209,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getAvailabilityGroupId()) {
             $data['AvailabilityGroup_ID'] = $this->getAvailabilityGroupId();
@@ -222,10 +227,6 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
 
         if (!is_null($this->getAssigned())) {
             $data['Assigned'] = $this->getAssigned();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

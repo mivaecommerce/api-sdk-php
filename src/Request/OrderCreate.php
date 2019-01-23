@@ -24,11 +24,16 @@ use MerchantAPI\Model\Order;
 /**
  * Handles API Request Order_Create.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/order_create
  */
 class OrderCreate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Order_Create';
 
@@ -878,7 +883,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->items = $items;
+        $this->items = new \MerchantAPI\Collection($items);
 
         return $this;
     }
@@ -901,7 +906,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->products = $products;
+        $this->products = new \MerchantAPI\Collection($products);
 
         return $this;
     }
@@ -924,7 +929,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->charges = $charges;
+        $this->charges = new \MerchantAPI\Collection($charges);
 
         return $this;
     }
@@ -1114,7 +1119,7 @@ class OrderCreate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCustomerId()) {
             $data['Customer_ID'] = $this->getCustomerId();
@@ -1270,10 +1275,6 @@ class OrderCreate extends Request
 
         if (!is_null($this->getTriggerFulfillmentModules())) {
             $data['TriggerFulfillmentModules'] = $this->getTriggerFulfillmentModules();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

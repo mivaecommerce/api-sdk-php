@@ -20,11 +20,16 @@ use MerchantAPI\Model\CustomerAddress;
 /**
  * Handles API Request CustomerAddressList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/customeraddresslist_load_query
  */
 class CustomerAddressListLoadQuery extends ListQueryRequest
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CustomerAddressList_Load_Query';
 

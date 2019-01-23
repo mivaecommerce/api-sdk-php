@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: Client.php 71863 2018-12-06 21:42:32Z gidriss $
+ * $Id: Client.php 72724 2019-01-18 20:02:25Z gidriss $
  */
 
 namespace MerchantAPI;
@@ -15,6 +15,7 @@ namespace MerchantAPI;
 use MerchantAPI\Http\HttpClient;
 use MerchantAPI\Http\HttpClientException;
 use MerchantAPI\MultiCall\MultiCallRequest;
+use MerchantAPI\MultiCall\MultiCallOperation;
 
 /**
  * Handles sending API Requests.
@@ -205,33 +206,41 @@ class Client
      */
     public function send(RequestInterface $request)
     {
+        $defaultStore  = $this->getOption('default_store_code');
+
         if ($request instanceof MultiCallRequest) {
-            $data           = $request->toArray();
-            $defaultStore   = $this->getOption('default_store_code');
-
-            if (isset($data['Operations']) && is_array($data['Operations'])) {
-                foreach ($data['Operations'] as &$operation) {
-                    if (!isset($operation['Store_Code'])) {
-                        $operation['Store_Code'] = $defaultStore;
-                    }
-
-                    if (isset($operation['Iterations']) && is_array($operation['Iterations'])) {
-                        foreach ($operation['Iterations'] as &$iteration) {
-                            if (!isset($iteration['Store_Code']) && $operation['Store_Code'] != $defaultStore) {
-                                $iteration['Store_Code'] = $defaultStore;
-                            }
+            foreach ($request->getRequests() as $mrequest) {
+                if ($mrequest instanceof MultiCallOperation) {
+                    foreach ($mrequest->getRequests() as $orequest) {
+                        if ($orequest->getScope() == RequestInterface::REQUEST_SCOPE_STORE &&
+                           !is_null($orequest->getStoreCode()) &&
+                           !is_null($defaultStore) &&
+                           $orequest->getStoreCode() != $defaultStore) {
+                            $orequest->setStoreCode($defaultStore);
                         }
+                    }
+                } else {
+                    if ($mrequest->getScope() == RequestInterface::REQUEST_SCOPE_STORE &&
+                        is_null($mrequest->getStoreCode()) &&
+                        !is_null($defaultStore)) {                        
+                        $mrequest->setStoreCode($defaultStore);
                     }
                 }
             }
+
+            $data = $request->toArray();
         } else {
+            if ($request->getScope() == RequestInterface::REQUEST_SCOPE_STORE &&
+                is_null($request->getStoreCode()) &&
+                !is_null($defaultStore)) {
+                $request->setStoreCode($defaultStore);
+            }
+
             $data = array_merge($request->toArray(), [
-                'Function'   => $request->getFunction(),
-                'Store_Code' => $request->getStoreCode() ?
-                    $request->getStoreCode() : $this->getOption('default_store_code')
+                'Function'   => $request->getFunction()
             ]);
         }
-
+        
         if ($this->getOption('require_timestamp')) {
             $data['Miva_Request_Timestamp'] = time();
         }

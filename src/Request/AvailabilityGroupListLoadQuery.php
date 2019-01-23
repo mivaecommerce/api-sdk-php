@@ -19,11 +19,16 @@ use MerchantAPI\Model\AvailabilityGroup;
 /**
  * Handles API Request AvailabilityGroupList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/availabilitygrouplist_load_query
  */
 class AvailabilityGroupListLoadQuery extends ListQueryRequest
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'AvailabilityGroupList_Load_Query';
 

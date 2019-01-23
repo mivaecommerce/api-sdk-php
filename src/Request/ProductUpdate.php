@@ -20,11 +20,16 @@ use MerchantAPI\Model\Product;
 /**
  * Handles API Request Product_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/product_update
  */
 class ProductUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Product_Update';
 
@@ -38,7 +43,7 @@ class ProductUpdate extends Request
     protected $editProduct;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /** @var string */
     protected $productName;
@@ -99,7 +104,7 @@ class ProductUpdate extends Request
             }
 
             $this->setProductCode($product->getCode());
-            $this->setProductSKU($product->getSku());
+            $this->setProductSku($product->getSku());
             $this->setProductName($product->getName());
             $this->setProductDescription($product->getDescription());
             $this->setProductCanonicalCategoryCode($product->getCanonicalCategoryCode());
@@ -155,9 +160,9 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -345,9 +350,9 @@ class ProductUpdate extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -546,7 +551,7 @@ class ProductUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getProductId()) {
             $data['Product_ID'] = $this->getProductId();
@@ -558,8 +563,8 @@ class ProductUpdate extends Request
             $data['Product_Code'] = $this->getProductCode();
         }
 
-        if (!is_null($this->getProductSKU())) {
-            $data['Product_SKU'] = $this->getProductSKU();
+        if (!is_null($this->getProductSku())) {
+            $data['Product_SKU'] = $this->getProductSku();
         }
 
         if (!is_null($this->getProductName())) {
@@ -616,10 +621,6 @@ class ProductUpdate extends Request
 
         if ($this->getCustomFieldValues() && $this->getCustomFieldValues()->hasData()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

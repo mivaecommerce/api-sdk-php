@@ -21,11 +21,16 @@ use MerchantAPI\Model\OrderShipment;
 /**
  * Handles API Request OrderItemList_CreateShipment.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/orderitemlist_createshipment
  */
 class OrderItemListCreateShipment extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderItemList_CreateShipment';
 
@@ -113,15 +118,11 @@ class OrderItemListCreateShipment extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Order_ID'] = $this->getOrderId();
 
         $data['Line_IDs'] = $this->getLineIds();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

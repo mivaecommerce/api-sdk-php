@@ -19,11 +19,16 @@ use MerchantAPI\Model\OrderShipmentUpdate;
 /**
  * Handles API Request OrderShipmentList_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/ordershipmentlist_update
  */
 class OrderShipmentListUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderShipmentList_Update';
 
@@ -66,7 +71,7 @@ class OrderShipmentListUpdate extends Request
             }
         }
 
-        $this->shipmentUpdates = $shipmentUpdates;
+        $this->shipmentUpdates = new \MerchantAPI\Collection($shipmentUpdates);
 
         return $this;
     }
@@ -112,7 +117,7 @@ class OrderShipmentListUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if (count($this->getShipmentUpdates())) {
             $data['Shipment_Updates'] = [];
@@ -120,10 +125,6 @@ class OrderShipmentListUpdate extends Request
             foreach ($this->getShipmentUpdates() as $i => $shipmentUpdate) {
                 $data['Shipment_Updates'][] = $shipmentUpdate->getData();
             }
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

@@ -19,11 +19,16 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request CategoryList_Load_Parent.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/categorylist_load_parent
  */
 class CategoryListLoadParent extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CategoryList_Load_Parent';
 
@@ -70,13 +75,9 @@ class CategoryListLoadParent extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Parent_ID'] = $this->getParentId();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

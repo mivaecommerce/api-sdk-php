@@ -19,11 +19,16 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request Category_Delete.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/category_delete
  */
 class CategoryDelete extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Category_Delete';
 
@@ -126,7 +131,7 @@ class CategoryDelete extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCategoryId()) {
             $data['Category_ID'] = $this->getCategoryId();
@@ -134,10 +139,6 @@ class CategoryDelete extends Request
             $data['Edit_Category'] = $this->getEditCategory();
         } else if ($this->getCategoryCode()) {
             $data['Category_Code'] = $this->getCategoryCode();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

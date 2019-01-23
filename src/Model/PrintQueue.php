@@ -10,19 +10,15 @@
  * $Id$
  */
 
-namespace MerchantAPI\Response;
-
-use MerchantAPI\Response;
+namespace MerchantAPI\Model;
 
 /**
- * API Response for Coupon_Insert.
+ * Data model for PrintQueue.
  *
- * @package MerchantAPI\Response
- * @see https://docs.miva.com/json-api/functions/coupon_insert
+ * @package MerchantAPI\Model
  */
-class CouponInsert extends Response
+class PrintQueue extends \MerchantAPI\Model
 {
-
     /**
      * Get id.
      *
@@ -30,10 +26,16 @@ class CouponInsert extends Response
      */
     public function getId()
     {
-        if (isset($this->data['data']['id'])) {
-            return $this->data['data']['id'];
-        }
+        return (int) $this->getField('id', 0);
+    }
 
-        return null;
+    /**
+     * Get descrip.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->getField('descrip');
     }
 }

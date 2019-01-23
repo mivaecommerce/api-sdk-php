@@ -18,11 +18,16 @@ use MerchantAPI\Http\HttpResponse;
 /**
  * Handles API Request Note_Insert.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/note_insert
  */
 class NoteInsert extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Note_Insert';
 
@@ -135,7 +140,7 @@ class NoteInsert extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['NoteText'] = $this->getNoteText();
 
@@ -149,10 +154,6 @@ class NoteInsert extends Request
 
         if (!is_null($this->getOrderId())) {
             $data['Order_ID'] = $this->getOrderId();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

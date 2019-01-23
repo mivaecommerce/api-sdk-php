@@ -19,11 +19,16 @@ use MerchantAPI\Model\Product;
 /**
  * Handles API Request Product_Delete.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/product_delete
  */
 class ProductDelete extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Product_Delete';
 
@@ -37,7 +42,7 @@ class ProductDelete extends Request
     protected $editProduct;
 
     /** @var string */
-    protected $productSKU;
+    protected $productSku;
 
     /**
      * Constructor.
@@ -52,7 +57,7 @@ class ProductDelete extends Request
             } else if ($product->getCode()) {
                 $this->setEditProduct($product->getCode());
             } else if ($product->getSku()) {
-                $this->setProductSKU($product->getSku());
+                $this->setProductSku($product->getSku());
             }
         }
     }
@@ -92,9 +97,9 @@ class ProductDelete extends Request
      *
      * @return string
      */
-    public function getProductSKU()
+    public function getProductSku()
     {
-        return $this->productSKU;
+        return $this->productSku;
     }
 
     /**
@@ -142,9 +147,9 @@ class ProductDelete extends Request
      * @param string
      * @return $this
      */
-    public function setProductSKU($productSKU)
+    public function setProductSku($productSku)
     {
-        $this->productSKU = $productSKU;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -154,7 +159,7 @@ class ProductDelete extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getProductId()) {
             $data['Product_ID'] = $this->getProductId();
@@ -162,12 +167,8 @@ class ProductDelete extends Request
             $data['Edit_Product'] = $this->getEditProduct();
         } else if ($this->getProductCode()) {
             $data['Product_Code'] = $this->getProductCode();
-        } else if ($this->getProductSKU()) {
-            $data['Product_SKU'] = $this->getProductSKU();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
+        } else if ($this->getProductSku()) {
+            $data['Product_SKU'] = $this->getProductSku();
         }
 
         return $data;

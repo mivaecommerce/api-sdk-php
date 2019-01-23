@@ -12,25 +12,35 @@
 
 namespace MerchantAPI\Request;
 
-use MerchantAPI\Request;
+use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
-use MerchantAPI\Model\OrderCustomField;
+use MerchantAPI\Model\PrintQueue;
 
 /**
- * Handles API Request OrderCustomFieldList_Load.
+ * Handles API Request PrintQueueList_Load_Query.
  *
  * Scope: Store
  *
  * @package MerchantAPI\Request
- * @see https://docs.miva.com/json-api/functions/ordercustomfieldlist_load
+ * @see https://docs.miva.com/json-api/functions/printqueuelist_load_query
  */
-class OrderCustomFieldListLoad extends Request
+class PrintQueueListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
     protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderCustomFieldList_Load';
+    protected $function = 'PrintQueueList_Load_Query';
+
+    /** @var array Requests available search fields */
+    protected $availableSearchFields = [
+        'descrip',
+    ];
+
+    /** @var array Requests available sort fields */
+    protected $availableSortFields = [
+        'descrip',
+    ];
 
     /**
      * @inheritDoc
@@ -47,6 +57,6 @@ class OrderCustomFieldListLoad extends Request
      */
     public function createResponse(HttpResponse $httpResponse, array $data)
     {
-        return new \MerchantAPI\Response\OrderCustomFieldListLoad($this, $httpResponse, $data);
+        return new \MerchantAPI\Response\PrintQueueListLoadQuery($this, $httpResponse, $data);
     }
 }

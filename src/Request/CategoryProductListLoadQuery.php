@@ -19,11 +19,16 @@ use MerchantAPI\Model\CategoryProduct;
 /**
  * Handles API Request CategoryProductList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/categoryproductlist_load_query
  */
 class CategoryProductListLoadQuery extends ProductListLoadQuery
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'CategoryProductList_Load_Query';
 

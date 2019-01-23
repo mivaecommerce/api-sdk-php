@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: OrderItemUpdate.php 71876 2018-12-07 01:01:23Z gidriss $
+ * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -21,11 +21,16 @@ use MerchantAPI\Model\OrderTotal;
 /**
  * Handles API Request OrderItem_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/orderitem_update
  */
 class OrderItemUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'OrderItem_Update';
 
@@ -80,7 +85,7 @@ class OrderItemUpdate extends Request
             $this->setTaxable($orderItem->getTaxable());
 
             if ($orderItem->getOptions() && $orderItem->getOptions()->count()) {
-                $this->setOptions(clone $orderItem->getOptions());
+                $this->setOptions($orderItem->getOptions()->toArray());
             }
         }
     }
@@ -320,7 +325,7 @@ class OrderItemUpdate extends Request
             }
         }
 
-        $this->options = $options;
+        $this->options = new \MerchantAPI\Collection($options);
 
         return $this;
     }
@@ -366,7 +371,7 @@ class OrderItemUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Order_ID'] = $this->getOrderId();
 
@@ -408,10 +413,6 @@ class OrderItemUpdate extends Request
                     $data['Options'][] = $option->getData();
                 }
             }
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

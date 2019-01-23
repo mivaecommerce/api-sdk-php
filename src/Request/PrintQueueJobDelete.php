@@ -14,58 +14,60 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
-use MerchantAPI\Model\ProductImageData;
+use MerchantAPI\Model\PrintQueueJob;
 
 /**
- * Handles API Request ProductImage_Delete.
+ * Handles API Request PrintQueueJob_Delete.
  *
  * Scope: Store
  *
  * @package MerchantAPI\Request
- * @see https://docs.miva.com/json-api/functions/productimage_delete
+ * @see https://docs.miva.com/json-api/functions/printqueuejob_delete
  */
-class ProductImageDelete extends Request
+class PrintQueueJobDelete extends Request
 {
     /** @var string The request scope */
     protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductImage_Delete';
+    protected $function = 'PrintQueueJob_Delete';
 
     /** @var int */
-    protected $productImageId;
+    protected $printQueueJobId;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductImageData
+     * @param \MerchantAPI\Model\PrintQueueJob
      */
-    public function __construct(ProductImageData $productImageData = null)
+    public function __construct(PrintQueueJob $printQueueJob = null)
     {
-        if ($productImageData) {
-            $this->setProductImageId($productImageData->getId());
+        if ($printQueueJob) {
+            if ($printQueueJob->getId()) {
+                $this->setPrintQueueJobId($printQueueJob->getId());
+            }
         }
     }
 
     /**
-     * Get ProductImage_ID.
+     * Get PrintQueueJob_ID.
      *
      * @return int
      */
-    public function getProductImageId()
+    public function getPrintQueueJobId()
     {
-        return $this->productImageId;
+        return $this->printQueueJobId;
     }
 
     /**
-     * Set ProductImage_ID.
+     * Set PrintQueueJob_ID.
      *
      * @param int
      * @return $this
      */
-    public function setProductImageId($productImageId)
+    public function setPrintQueueJobId($printQueueJobId)
     {
-        $this->productImageId = $productImageId;
+        $this->printQueueJobId = $printQueueJobId;
 
         return $this;
     }
@@ -77,7 +79,9 @@ class ProductImageDelete extends Request
     {
         $data = parent::toArray();
 
-        $data['ProductImage_ID'] = $this->getProductImageId();
+        if ($this->getPrintQueueJobId()) {
+            $data['PrintQueueJob_ID'] = $this->getPrintQueueJobId();
+        }
 
         return $data;
     }
@@ -87,6 +91,6 @@ class ProductImageDelete extends Request
      */
     public function createResponse(HttpResponse $httpResponse, array $data)
     {
-        return new \MerchantAPI\Response\ProductImageDelete($this, $httpResponse, $data);
+        return new \MerchantAPI\Response\PrintQueueJobDelete($this, $httpResponse, $data);
     }
 }

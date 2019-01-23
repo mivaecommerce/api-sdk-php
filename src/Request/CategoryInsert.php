@@ -20,11 +20,16 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request Category_Insert.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/category_insert
  */
 class CategoryInsert extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Category_Insert';
 
@@ -244,7 +249,7 @@ class CategoryInsert extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Category_Code'] = $this->getCategoryCode();
 
@@ -268,10 +273,6 @@ class CategoryInsert extends Request
 
         if ($this->getCustomFieldValues() && $this->getCustomFieldValues()->hasData()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

@@ -20,11 +20,16 @@ use MerchantAPI\Model\Customer;
 /**
  * Handles API Request Customer_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/customer_update
  */
 class CustomerUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Customer_Update';
 
@@ -949,7 +954,7 @@ class CustomerUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCustomerId()) {
             $data['Customer_ID'] = $this->getCustomerId();
@@ -1079,10 +1084,6 @@ class CustomerUpdate extends Request
 
         if ($this->getCustomFieldValues() && $this->getCustomFieldValues()->hasData()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

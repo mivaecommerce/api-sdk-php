@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: ListQueryRequest.php 71531 2018-11-14 01:18:10Z gidriss $
+ * $Id: ListQueryRequest.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -72,8 +72,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
                 $field, implode(', ', $this->getAvailableSortFields())));
         }
 
-        if ($direction == self::SORT_DESCENDING && $field[0] != '-')
-        {
+        if ($direction == self::SORT_DESCENDING && $field[0] != '-') {
             $field = '-' . $field;
         }
 
@@ -285,12 +284,12 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
      */
     public function toArray()
     {
-        $return = [
+        $return = array_merge(parent::toArray(), [
             'Sort'      => $this->getSort(),
             'Offset'    => $this->getOffset(),
             'Count'     => $this->getCount(),
-            'Filter'   => []
-        ];
+            'Filter'    => []
+        ]);
 
         $filters = $this->getFilters();
 

@@ -19,11 +19,16 @@ use MerchantAPI\Model\Note;
 /**
  * Handles API Request Note_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/note_update
  */
 class NoteUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Note_Update';
 
@@ -97,15 +102,11 @@ class NoteUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Note_ID'] = $this->getNoteId();
 
         $data['NoteText'] = $this->getNoteText();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }

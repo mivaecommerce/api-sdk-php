@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: Request.php 71080 2018-10-15 20:36:21Z gidriss $
+ * $Id: Request.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI;
@@ -21,6 +21,9 @@ abstract class Request implements RequestInterface
 {
     /** @var null|string */
     protected $storeCode = null;
+
+    /** @var string */
+    protected $scope = RequestInterface::REQUEST_SCOPE_STORE;
 
     /**
      * @inheritDoc
@@ -38,8 +41,41 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-	public function getStoreCode()
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStoreCode()
     {
         return $this->storeCode;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStoreCode($storeCode)
+    {
+        $this->storeCode = $storeCode;
+        return $this;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray()
+    {
+        $data = [];
+
+        if ($this->getScope() == static::REQUEST_SCOPE_STORE) {
+            if (!is_null($this->getStoreCode())) {
+                $data['Store_Code'] = $this->getStoreCode();
+            }
+        }
+
+        return $data;
     }
 }

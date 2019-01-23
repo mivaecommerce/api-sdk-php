@@ -18,11 +18,16 @@ use MerchantAPI\Http\HttpResponse;
 /**
  * Handles API Request Module.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/module
  */
 class Module extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Module';
 
@@ -122,15 +127,11 @@ class Module extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         $data['Module_Code'] = $this->getModuleCode();
 
         $data['Module_Function'] = $this->getModuleFunction();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         $data = array_merge($this->getModuleFields(), $data);
 

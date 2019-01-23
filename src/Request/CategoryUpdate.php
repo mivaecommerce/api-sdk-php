@@ -20,11 +20,16 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request Category_Update.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/category_update
  */
 class CategoryUpdate extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'Category_Update';
 
@@ -303,7 +308,7 @@ class CategoryUpdate extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getCategoryId()) {
             $data['Category_ID'] = $this->getCategoryId();
@@ -337,10 +342,6 @@ class CategoryUpdate extends Request
 
         if ($this->getCustomFieldValues() && $this->getCustomFieldValues()->hasData()) {
             $data['CustomField_Values'] = $this->getCustomFieldValues()->getData();
-        }
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
         }
 
         return $data;

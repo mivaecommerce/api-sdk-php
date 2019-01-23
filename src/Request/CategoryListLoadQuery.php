@@ -19,6 +19,8 @@ use MerchantAPI\Model\Category;
 /**
  * Handles API Request CategoryList_Load_Query.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/categorylist_load_query
  */
@@ -29,6 +31,9 @@ class CategoryListLoadQuery extends ListQueryRequest
 
     /** @var string CATEGORY_SHOW_ACTIVE */
     const CATEGORY_SHOW_ACTIVE = 'Active';
+
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
     protected $function = 'CategoryList_Load_Query';

@@ -19,11 +19,16 @@ use MerchantAPI\Model\AvailabilityGroup;
 /**
  * Handles API Request AvailabilityGroupPaymentMethod_Update_Assigned.
  *
+ * Scope: Store
+ *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/availabilitygrouppaymentmethod_update_assigned
  */
 class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
 {
+    /** @var string The request scope */
+    protected $scope = self::REQUEST_SCOPE_STORE;
+
     /** @var string The API function name */
     protected $function = 'AvailabilityGroupPaymentMethod_Update_Assigned';
 
@@ -230,7 +235,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      */
     public function toArray()
     {
-        $data = [];
+        $data = parent::toArray();
 
         if ($this->getAvailabilityGroupId()) {
             $data['AvailabilityGroup_ID'] = $this->getAvailabilityGroupId();
@@ -249,10 +254,6 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
         }
 
         $data['Assigned'] = $this->getAssigned();
-
-        if (!is_null($this->getStoreCode())) {
-            $data['Store_Code'] = $this->getStoreCode();
-        }
 
         return $data;
     }
