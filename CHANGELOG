@@ -1,0 +1,25 @@
+v1.1.0
+	- Bug 29085: Renamed the following fields in Order model class:
+	- Bug 29105: Added class documentation link to readme.
+	- Bug 29367: Fixed FilterExpression not building correct SUBQUERY entries.
+		- totalAuth to totalAuthorized
+		- totalCapt to totalCaptured 
+		- totalRfnd to totalRefunded
+		- netCapt to netCaptured
+		- bordCount to backOrderCount
+	- Bug 29372: Added MerchantAPI\Request\RequestBuilder to allow custom request objects to be constructed.
+	- Bug 29377: RequestInterface now enforces setStoreCode(string) and Request implements it.
+	- Bug 29397: Added the following API functions introduced in Miva Merchant 9.13.00:
+		- PrintQueueList_Load_Query (Scope: Store)
+		- PrintQueueJobList_Load_Query (Scope: Domain)
+		- PrintQueueJob_Insert (Scope: Store)
+		- PrintQueueJob_Delete (Scope: Store)
+	- Added scope requirement to RequestInterface.
+		- Added Constant RequestInterface::REQUEST_SCOPE_STORE
+		- Added Constant RequestInterface::REQUEST_SCOPE_DOMAIN
+	- Added model DiscountModuleCapabilities for model PriceGroup
+	- Customer_Insert response now returns a Customer model.
+	- Coupon_Insert response now returns the created coupon id.
+	
+v1.0.0
+	- Initial Release
