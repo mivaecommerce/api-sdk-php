@@ -5,6 +5,8 @@ Miva Merchant 9.12. It allows you to quickly integrate your PHP
 applications with a Miva Merchant store to fetch, create, and update
 store data.
 
+For class documentation visit `https://mivaecommerce.github.io/api-sdk-php/`.
+
 For additional documentation about the API visit `https://docs.miva.com/json-api`.
 
 # Requirements
@@ -22,7 +24,7 @@ To install the SDK simply add it to your project with composer:
 Or manually add it to your `composer.json` file:
 
     "require": {
-        "mivaecommerce/api-sdk-php" : "1.0.0"
+        "mivaecommerce/api-sdk-php" : "1.1.0"
     }
 
 Then run `composer update`
