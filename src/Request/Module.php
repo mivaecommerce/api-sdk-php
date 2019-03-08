@@ -61,6 +61,28 @@ class Module extends Request
     }
 
     /**
+     * Get Module_Fields.
+     *
+     * @return array
+     */
+    public function getModuleFields()
+    {
+        return $this->moduleFields;
+    }
+
+    /**
+     * Get custom data from the request.
+     * 
+     * @param string
+     * @param mixed
+     */
+    public function getModuleField($field, $defaultValue = null)
+    {
+        return isset($this->moduleFields[$field]) ?
+            $this->moduleFields[$field] : $defaultValue;
+    }
+
+    /**
      * Set Module_Code.
      *
      * @param string
@@ -87,47 +109,37 @@ class Module extends Request
     }
 
     /**
-     * Set a module field in its field array.
+     * Set Module_Fields.
+     *
+     * @param array
+     * @return $this
+     */
+    public function setModuleFields(array $moduleFields)
+    {
+        $this->moduleFields = $moduleFields;
+
+        return $this;
+    }
+
+    /**
+     * Add custom data to the request.
      *
      * @param string
      * @param mixed
      * @return $this
      */
-    public function setModuleField($key, $value)
+    public function setModuleField($field, $value)
     {
-        $this->moduleFields[$key] = $value;
+        $this->moduleFields[$field] = $value;
         return $this;
     }
-
-    /**
-     * Get a module field from its field array.
-     *
-     * @param string
-     * @param mixed
-     * @return mixed
-     */
-    public function getModuleField($key, $defaultValue = null)
-    {
-        return isset($this->moduleFields[$key]) ?
-            $this->moduleFields[$key] : $defaultValue;
-    }
-
-    /**
-     * Get the module field array.
-     *
-     * @return array
-     */
-    public function getModuleFields()
-    {
-        return $this->moduleFields;
-    }
-
+    
     /**
      * @inheritDoc
      */
     public function toArray()
     {
-        $data = parent::toArray();
+        $data = array_merge(parent::toArray(), $this->getModuleFields());
 
         $data['Module_Code'] = $this->getModuleCode();
 

@@ -117,7 +117,7 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getFixedDow()
+    public function getFixedDayOfWeek()
     {
         return (int) $this->getField('fixed_dow', 0);
     }
@@ -127,7 +127,7 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getFixedDom()
+    public function getFixedDayOfMonth()
     {
         return (int) $this->getField('fixed_dom', 0);
     }

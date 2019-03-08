@@ -24,7 +24,7 @@ To install the SDK simply add it to your project with composer:
 Or manually add it to your `composer.json` file:
 
     "require": {
-        "mivaecommerce/api-sdk-php" : "1.1.0"
+        "mivaecommerce/api-sdk-php" : "1.*@stable"
     }
 
 Then run `composer update`

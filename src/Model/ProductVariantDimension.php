@@ -24,7 +24,7 @@ class ProductVariantDimension extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getAttrId()
+    public function getAttributeId()
     {
         return (int) $this->getField('attr_id', 0);
     }
@@ -34,7 +34,7 @@ class ProductVariantDimension extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getAttmpatId()
+    public function getAttributeTemplateAttributeId()
     {
         return (int) $this->getField('attmpat_id', 0);
     }

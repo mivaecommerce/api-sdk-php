@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id$
+ * $Id: PrintQueueListLoadQuery.php 73890 2019-03-06 21:20:12Z gidriss $
  */
 
 namespace MerchantAPI\Request;
@@ -19,7 +19,7 @@ use MerchantAPI\Model\PrintQueue;
 /**
  * Handles API Request PrintQueueList_Load_Query.
  *
- * Scope: Store
+ * Scope: Domain
  *
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/printqueuelist_load_query
@@ -27,7 +27,7 @@ use MerchantAPI\Model\PrintQueue;
 class PrintQueueListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected $scope = self::REQUEST_SCOPE_DOMAIN;
 
     /** @var string The API function name */
     protected $function = 'PrintQueueList_Load_Query';

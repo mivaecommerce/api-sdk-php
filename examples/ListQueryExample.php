@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: ListQueryExample.php 71772 2018-12-04 01:29:59Z gidriss $
+ * $Id: ListQueryExample.php 73558 2019-02-19 18:15:01Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -158,4 +158,13 @@ foreach ($response->getProducts() as $product) {
         $product->getId(),
         $product->getCode(),
         $product->getName());
+
+    /*
+     * Custom Field Values can be accessed via the CustomFieldValues model object 
+     * @see CustomFieldValues
+     */
+
+    $myCustomField       = $product->getCustomFieldValues()->getValue('MyFieldCode');
+
+    $myModuleCustomField = $product->getCustomFieldValues()->getValue('MyModuleFieldCode', 'MyModule');
 }

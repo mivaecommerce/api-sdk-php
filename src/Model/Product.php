@@ -430,7 +430,7 @@ class Product extends \MerchantAPI\Model
      *
      * @return \MerchantAPI\Model\ProductInventorySettings|null
      */
-    public function getProductinventorysettings()
+    public function getProductInventorySettings()
     {
         return $this->getField('productinventorysettings', null);
     }

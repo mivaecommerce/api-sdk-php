@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: LoadAndEditProductExample.php 71516 2018-11-13 21:17:45Z gidriss $
+ * $Id: LoadAndEditProductExample.php 73799 2019-03-05 18:13:11Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -42,6 +42,9 @@ $productListRequest->setFilters(
         ->filterExpression()
         ->equal('code', 'MY_PRODUCT')
 );
+
+/* include all custom fields */
+$productListRequest->addOnDemandColumn('CustomField_Values:*');
 
 /* send the request for the response */
 try
@@ -83,6 +86,17 @@ $updateProductRequest->setProductName('The New Product Name')
     ->setProductPrice(39.99)
     ->setProductCost(29.99)
     ->setProductWeight(2.5);
+
+/*
+ * You can update custom field values using the CustomFieldValues model.
+ */
+
+$updateProductRequest->getCustomFieldValues()->addValue('MyField', 'MyValue');
+
+/*
+ * to update a specific module field, specify the optional 3rd argument with the module code.
+ */
+$updateProductRequest->getCustomFieldValues()->addValue('MyField', 'MyValue', 'MyModule');
 
 
 try {

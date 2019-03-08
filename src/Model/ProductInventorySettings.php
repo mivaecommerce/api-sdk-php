@@ -34,7 +34,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getInShort()
+    public function getInStockMessageShort()
     {
         return $this->getField('in_short');
     }
@@ -44,7 +44,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getInLong()
+    public function getInStockMessageLong()
     {
         return $this->getField('in_long');
     }
@@ -54,7 +54,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getLowTrack()
+    public function getTrackLowStockLevel()
     {
         return $this->getField('low_track');
     }
@@ -64,7 +64,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getLowLevel()
+    public function getLowStockLevel()
     {
         return (int) $this->getField('low_level', 0);
     }
@@ -74,7 +74,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return bool
      */
-    public function getLowLvlD()
+    public function getLowStockLevelDefault()
     {
         return (bool) $this->getField('low_lvl_d', false);
     }
@@ -84,7 +84,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getLowShort()
+    public function getLowStockMessageShort()
     {
         return $this->getField('low_short');
     }
@@ -94,7 +94,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getLowLong()
+    public function getLowStockMessageLong()
     {
         return $this->getField('low_long');
     }
@@ -104,7 +104,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getOutTrack()
+    public function getTrackOutOfStockLevel()
     {
         return $this->getField('out_track');
     }
@@ -114,7 +114,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getOutHide()
+    public function getHideOutOfStock()
     {
         return $this->getField('out_hide');
     }
@@ -124,7 +124,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getOutLevel()
+    public function getOutOfStockLevel()
     {
         return (int) $this->getField('out_level', 0);
     }
@@ -134,7 +134,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return bool
      */
-    public function getOutLvlD()
+    public function getOutOfStockLevelDefault()
     {
         return (bool) $this->getField('out_lvl_d', false);
     }
@@ -144,7 +144,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getOutShort()
+    public function getOutOfStockMessageShort()
     {
         return $this->getField('out_short');
     }
@@ -154,7 +154,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getOutLong()
+    public function getOutOfStockMessageLong()
     {
         return $this->getField('out_long');
     }
@@ -164,7 +164,7 @@ class ProductInventorySettings extends \MerchantAPI\Model
      *
      * @return string
      */
-    public function getLtdLong()
+    public function getLimitedStockMessage()
     {
         return $this->getField('ltd_long');
     }
