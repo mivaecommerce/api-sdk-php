@@ -168,7 +168,7 @@ class ProductShippingRules extends \MerchantAPI\Model
      * @param ProductShippingMethod
      * @return $this
      */
-    public function addMethods(ProductShippingMethod $model)
+    public function addMethod(ProductShippingMethod $model)
     {
         if (!isset($this->data['methods'])) {
             $this->data['methods'] = [];

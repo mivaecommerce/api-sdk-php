@@ -1,3 +1,10 @@
+v1.3.0
+	- Added support for PriceGroupCustomer_ListLoad_Query
+	- Adjustments to Module and OrderAuthorize request classes
+	- Fixed PrintQueueJobStatus response
+	- Scope of PrintQueueListLoadQuery changed to domain
+	- OrderAuthorize::$customData renamed to OrderAuthorize::$moduleFields
+	- Fixed invalid error handling in HttpClient
 v1.2.0
 	- Bug 30353: Renamed most fields in model ProductInventorySettings to be more human readable.
 	- Bug 30077: Added the following API functions introduced in Miva Merchant 9.13.00:

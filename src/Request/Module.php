@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id$
+ * $Id: Module.php 77407 2019-08-16 17:32:08Z gidriss $
  */
 
 namespace MerchantAPI\Request;
@@ -144,8 +144,6 @@ class Module extends Request
         $data['Module_Code'] = $this->getModuleCode();
 
         $data['Module_Function'] = $this->getModuleFunction();
-
-        $data = array_merge($this->getModuleFields(), $data);
 
         return $data;
     }

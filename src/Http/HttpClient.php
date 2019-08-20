@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: HttpClient.php 71771 2018-12-04 01:27:42Z gidriss $
+ * $Id: HttpClient.php 77279 2019-08-07 20:52:11Z gidriss $
  */
 
 namespace MerchantAPI\Http;
@@ -154,17 +154,21 @@ class HttpClient
         $options[CURLOPT_WRITEFUNCTION]  = [ $response, 'receiveContentCallback' ];
 
         if (curl_setopt_array($handle, $options) === false ) {
+            $error   = curl_error($handle);
+            $errorno = curl_errno($handle);
             curl_close($handle);
             throw new HttpClientException(sprintf('Error Setting Curl Options',
-                curl_error($handle), curl_errno($handle)));
+                $error, $errorno));
         }
 
         curl_exec($handle);
 
         if (curl_errno($handle) !== 0) {
+            $error   = curl_error($handle);
+            $errorno = curl_errno($handle);
             curl_close($handle);
             throw new HttpClientException(sprintf('HTTP Error: %s Code %d',
-                curl_error($handle), curl_errno($handle)));
+                $error, $errorno));
         }
 
         curl_close($handle);
