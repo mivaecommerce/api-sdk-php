@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">1243</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-71448903"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-71448903" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1037640497"></a>
+                                <a href="../namespaces/MerchantAPI.html" style="margin-left: 30px; padding-left: 0">MerchantAPI</a>
+            </div>
+            <div id="namespace-1037640497" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1285740944"></a>
+                                <a href="../namespaces/MerchantAPI.Http.html" style="margin-left: 30px; padding-left: 0">Http</a>
+            </div>
+            <div id="namespace-1285740944" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClient.html">HttpClient</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpClientException.html">HttpClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpHeaders.html">HttpHeaders</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpMessage.html">HttpMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpQuery.html">HttpQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpRequest.html">HttpRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Http.HttpResponse.html">HttpResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-247945627"></a>
+                                <a href="../namespaces/MerchantAPI.ListQuery.html" style="margin-left: 30px; padding-left: 0">ListQuery</a>
+            </div>
+            <div id="namespace-247945627" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequestInterface.html">ListQueryRequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponseInterface.html">ListQueryResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpression.html">FilterExpression</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.FilterExpressionEntry.html">FilterExpressionEntry</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryRequest.html">ListQueryRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ListQuery.ListQueryResponse.html">ListQueryResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1126401936"></a>
+                                <a href="../namespaces/MerchantAPI.Model.html" style="margin-left: 30px; padding-left: 0">Model</a>
+            </div>
+            <div id="namespace-1126401936" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Model.AvailabilityGroup.html">AvailabilityGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Category.html">Category</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CategoryProduct.html">CategoryProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Coupon.html">Coupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CouponPriceGroup.html">CouponPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Customer.html">Customer</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerAddress.html">CustomerAddress</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPaymentCard.html">CustomerPaymentCard</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomerPriceGroup.html">CustomerPriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.CustomFieldValues.html">CustomFieldValues</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.DiscountModuleCapabilities.html">DiscountModuleCapabilities</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Note.html">Note</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Order.html">Order</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCharge.html">OrderCharge</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCoupon.html">OrderCoupon</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderCustomField.html">OrderCustomField</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderDiscountTotal.html">OrderDiscountTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItem.html">OrderItem</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemAttribute.html">OrderItemAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemDiscount.html">OrderItemDiscount</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemOption.html">OrderItemOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderItemSubscription.html">OrderItemSubscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderNote.html">OrderNote</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPayment.html">OrderPayment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPaymentAuthorize.html">OrderPaymentAuthorize</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPaymentCard.html">OrderPaymentCard</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderPaymentTotal.html">OrderPaymentTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProduct.html">OrderProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderProductAttribute.html">OrderProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipment.html">OrderShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderShipmentUpdate.html">OrderShipmentUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.OrderTotal.html">OrderTotal</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PaymentCardType.html">PaymentCardType</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PaymentMethod.html">PaymentMethod</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroup.html">PriceGroup</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroupCustomer.html">PriceGroupCustomer</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PriceGroupProduct.html">PriceGroupProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PrintQueue.html">PrintQueue</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.PrintQueueJob.html">PrintQueueJob</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Product.html">Product</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductAttribute.html">ProductAttribute</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductImageData.html">ProductImageData</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventoryAdjustment.html">ProductInventoryAdjustment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductInventorySettings.html">ProductInventorySettings</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductOption.html">ProductOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingMethod.html">ProductShippingMethod</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductShippingRules.html">ProductShippingRules</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductSubscriptionTerm.html">ProductSubscriptionTerm</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariant.html">ProductVariant</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantDimension.html">ProductVariantDimension</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantExclusion.html">ProductVariantExclusion</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantLimit.html">ProductVariantLimit</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProductVariantPart.html">ProductVariantPart</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.ProvisionMessage.html">ProvisionMessage</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.RelatedProduct.html">RelatedProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Subscription.html">Subscription</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.SubscriptionOption.html">SubscriptionOption</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.Uri.html">Uri</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-246266990"></a>
+                                <a href="../namespaces/MerchantAPI.MultiCall.html" style="margin-left: 30px; padding-left: 0">MultiCall</a>
+            </div>
+            <div id="namespace-246266990" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallOperation.html">MultiCallOperation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallRequest.html">MultiCallRequest</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.MultiCall.MultiCallResponse.html">MultiCallResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1858472881"></a>
+                                <a href="../namespaces/MerchantAPI.Request.html" style="margin-left: 30px; padding-left: 0">Request</a>
+            </div>
+            <div id="namespace-1858472881" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPaymentCardListLoadQuery.html">CustomerPaymentCardListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderAuthorize.html">OrderAuthorize</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCreateFromOrder.html">OrderCreateFromOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PaymentMethodListLoad.html">PaymentMethodListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupCustomerListLoadQuery.html">PriceGroupCustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PrintQueueJobDelete.html">PrintQueueJobDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PrintQueueJobInsert.html">PrintQueueJobInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PrintQueueJobListLoadQuery.html">PrintQueueJobListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PrintQueueJobStatus.html">PrintQueueJobStatus</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.PrintQueueListLoadQuery.html">PrintQueueListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.ProvisionStore.html">ProvisionStore</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.RequestBuilder.html">RequestBuilder</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-844349024"></a>
+                                <a href="../namespaces/MerchantAPI.Response.html" style="margin-left: 30px; padding-left: 0">Response</a>
+            </div>
+            <div id="namespace-844349024" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupBusinessAccountUpdateAssigned.html">AvailabilityGroupBusinessAccountUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupCustomerUpdateAssigned.html">AvailabilityGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupListLoadQuery.html">AvailabilityGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupPaymentMethodUpdateAssigned.html">AvailabilityGroupPaymentMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupProductUpdateAssigned.html">AvailabilityGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.AvailabilityGroupShippingMethodUpdateAssigned.html">AvailabilityGroupShippingMethodUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryDelete.html">CategoryDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryInsert.html">CategoryInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadParent.html">CategoryListLoadParent</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryListLoadQuery.html">CategoryListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductListLoadQuery.html">CategoryProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryProductUpdateAssigned.html">CategoryProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CategoryUpdate.html">CategoryUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponInsert.html">CouponInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListDelete.html">CouponListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponListLoadQuery.html">CouponListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupListLoadQuery.html">CouponPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponPriceGroupUpdateAssigned.html">CouponPriceGroupUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CouponUpdate.html">CouponUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerAddressListLoadQuery.html">CustomerAddressListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerDelete.html">CustomerDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerInsert.html">CustomerInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerListLoadQuery.html">CustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPaymentCardListLoadQuery.html">CustomerPaymentCardListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPaymentCardRegister.html">CustomerPaymentCardRegister</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerPriceGroupListLoadQuery.html">CustomerPriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.CustomerUpdate.html">CustomerUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.Module.html">Module</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteDelete.html">NoteDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteInsert.html">NoteInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteListLoadQuery.html">NoteListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.NoteUpdate.html">NoteUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderAuthorize.html">OrderAuthorize</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCreate.html">OrderCreate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCreateFromOrder.html">OrderCreateFromOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldListLoad.html">OrderCustomFieldListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderCustomFieldsUpdate.html">OrderCustomFieldsUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderDelete.html">OrderDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemAdd.html">OrderItemAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListBackOrder.html">OrderItemListBackOrder</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCancel.html">OrderItemListCancel</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListCreateShipment.html">OrderItemListCreateShipment</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemListDelete.html">OrderItemListDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderItemUpdate.html">OrderItemUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderListLoadQuery.html">OrderListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentCapture.html">OrderPaymentCapture</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentRefund.html">OrderPaymentRefund</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderPaymentVoid.html">OrderPaymentVoid</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderShipmentListUpdate.html">OrderShipmentListUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.OrderUpdateCustomerInformation.html">OrderUpdateCustomerInformation</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PaymentMethodListLoad.html">PaymentMethodListLoad</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupCustomerListLoadQuery.html">PriceGroupCustomerListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupCustomerUpdateAssigned.html">PriceGroupCustomerUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupListLoadQuery.html">PriceGroupListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductListLoadQuery.html">PriceGroupProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PriceGroupProductUpdateAssigned.html">PriceGroupProductUpdateAssigned</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PrintQueueJobDelete.html">PrintQueueJobDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PrintQueueJobInsert.html">PrintQueueJobInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PrintQueueJobListLoadQuery.html">PrintQueueJobListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PrintQueueJobStatus.html">PrintQueueJobStatus</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.PrintQueueListLoadQuery.html">PrintQueueListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductDelete.html">ProductDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageAdd.html">ProductImageAdd</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductImageDelete.html">ProductImageDelete</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductInsert.html">ProductInsert</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListAdjustInventory.html">ProductListAdjustInventory</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductListLoadQuery.html">ProductListLoadQuery</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductUpdate.html">ProductUpdate</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProductVariantListLoadProduct.html">ProductVariantListLoadProduct</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionDomain.html">ProvisionDomain</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.ProvisionStore.html">ProvisionStore</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.RequestBuilder.html">RequestBuilder</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ModelInterface.html">ModelInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.RequestInterface.html">RequestInterface</a></li>
+                                                    <li class="interface"><a href="../classes/MerchantAPI.ResponseInterface.html">ResponseInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/MerchantAPI.Client.html">Client</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.ClientException.html">ClientException</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Collection.html">Collection</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Model.html">Model</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Request.html">Request</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Response.html">Response</a></li>
+                                                    <li class="class"><a href="../classes/MerchantAPI.Version.html">Version</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content file">
+                    <nav>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>Response</small>CustomerPaymentCardListLoadQuery.php</h1>
+                    <p><em></em></p>
+                    
+
+                    
+                    
+                                        <h2>Classes</h2>
+                    <table class="table table-hover">
+                                            <tr>
+                            <td><a href="../classes/MerchantAPI.Response.CustomerPaymentCardListLoadQuery.html">CustomerPaymentCardListLoadQuery</a></td>
+                            <td><em>API Response for CustomerPaymentCardList_Load_Query.</em></td>
+                        </tr>
+                                        </table>
+                                    </div>
+
+                <aside class="span4 detailsbar">
+                    <dl>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                            </table>
+
+                </aside>
+            </div>
+
+            
+            
+        </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Response/CustomerPaymentCardListLoadQuery.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/MerchantAPI.html">\MerchantAPI</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on August 30th, 2019 at 19:12.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
