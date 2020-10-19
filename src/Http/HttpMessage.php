@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: HttpMessage.php 71776 2018-12-04 18:48:03Z gidriss $
  */
 
 namespace MerchantAPI\Http;
@@ -441,7 +439,7 @@ abstract class HttpMessage
     {
         $url = sprintf('%s://%s', strtolower($this->getScheme()), $this->getHost());
 
-        if ($this->getPort() && ($this->getPort() != 80 && $this->getScheme() == 'http') || 
+        if ($this->getPort() && ($this->getPort() != 80 && $this->getScheme() == 'http') ||
             ($this->getPort() != 443 && $this->getScheme() == 'https')) {
             $url = sprintf('%s:%d', $url, $this->getPort());
         }

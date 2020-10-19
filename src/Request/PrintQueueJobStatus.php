@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PrintQueueJob;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request PrintQueueJob_Status.
@@ -40,8 +39,9 @@ class PrintQueueJobStatus extends Request
      *
      * @param \MerchantAPI\Model\PrintQueueJob
      */
-    public function __construct(PrintQueueJob $printQueueJob = null)
+    public function __construct(BaseClient $client = null, PrintQueueJob $printQueueJob = null)
     {
+        parent::__construct($client);
         if ($printQueueJob) {
             if ($printQueueJob->getId()) {
                 $this->setPrintQueueJobId($printQueueJob->getId());

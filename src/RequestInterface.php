@@ -6,13 +6,13 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: RequestInterface.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI;
 
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Http\HttpHeaders;
+use MerchantAPI\Client;
 
 /**
  * All Request objects must implement this interface.
@@ -26,6 +26,12 @@ interface RequestInterface
 
     /** @var string REQUEST_SCOPE_DOMAIN */
     const REQUEST_SCOPE_DOMAIN  = 'domain';
+
+    /** @var string BINARY_ENCODING_DEFAULT */
+    const BINARY_ENCODING_DEFAULT   = 'json';
+
+    /** @var string BINARY_ENCODING_BASE64 */
+    const BINARY_ENCODING_BASE64  = 'base64';
 
     /**
      * Returns the API function name to be executed.
@@ -57,6 +63,30 @@ interface RequestInterface
     public function setStoreCode($storeCode);
 
     /**
+     * Get the client used to send the request
+     *
+     * @param string
+     * @return ResponseInterface
+     */
+    public function getClient();
+
+    /**
+     * Send the request using the assigned client.
+     *
+     * @param string
+     * @return ResponseInterface
+     */
+    public function send();
+
+    /**
+     * Set the Client to use to send the request.
+     *
+     * @param string
+     * @return ResponseInterface
+     */
+    public function setClient(Client $client);
+
+    /**
      * Returns the data for the request as an array.
      *
      * @return array
@@ -71,4 +101,27 @@ interface RequestInterface
      * @return ResponseInterface
      */
     public function createResponse(HttpResponse $httpResponse, array $data);
+
+    /**
+     * Allows manipulation of the HTTP Request Headers
+     *
+     * @param HttpHeaders $headers
+     */
+    public function processRequestHeaders(HttpHeaders $headers);
+
+    /**
+     * Get the binary encoding method
+     *
+     * @return HttpHeaders $headers
+     */
+    public function getBinaryEncoding();
+
+
+    /**
+     * Set the binary encoding method
+     *
+     * @param string $encoding
+     * @return ResponseInterface
+     */
+    public function setBinaryEncoding($encoding);
 }

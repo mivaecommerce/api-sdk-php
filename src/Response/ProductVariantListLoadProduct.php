@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Response;
@@ -39,7 +37,7 @@ class ProductVariantListLoadProduct extends Response
         if (!$this->isSuccess()) {
             return;
         }
-        
+
         if (isset($data['data'])) {
             foreach ($data['data'] as $result) {
               $this->productVariants[] = new ProductVariant($result);

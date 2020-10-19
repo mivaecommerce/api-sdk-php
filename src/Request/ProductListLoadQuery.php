@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request ProductList_Load_Query.
@@ -89,6 +88,9 @@ class ProductListLoadQuery extends ListQueryRequest
     protected $availableOnDemandColumns = [
         'descrip',
         'catcount',
+        'cancat_code',
+        'page_code',
+        'product_inventory',
         'productinventorysettings',
         'attributes',
         'productimagedata',

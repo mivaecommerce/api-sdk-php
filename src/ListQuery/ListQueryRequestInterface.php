@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: ListQueryRequestInterface.php 71531 2018-11-14 01:18:10Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -40,7 +38,7 @@ interface ListQueryRequestInterface extends RequestInterface
      * @param string
      * @return $this
      */
-    public function setSort($field, $direction = self::SORT_ASCENDING );
+    public function setSort($field, $direction = self::SORT_ASCENDING);
 
     /**
      * Get the available sorting fields for the request.

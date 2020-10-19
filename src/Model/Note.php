@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -117,49 +115,5 @@ class Note extends \MerchantAPI\Model
     public function getAdminUser()
     {
         return $this->getField('admin_user');
-    }
-
-    /**
-     * Set cust_id.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setCustomerId($customerId)
-    {
-        return $this->setField('cust_id', $customerId);
-    }
-
-    /**
-     * Set account_id.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setAccountId($accountId)
-    {
-        return $this->setField('account_id', $accountId);
-    }
-
-    /**
-     * Set order_id.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        return $this->setField('order_id', $orderId);
-    }
-
-    /**
-     * Set notetext.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setNoteText($noteText)
-    {
-        return $this->setField('notetext', $noteText);
     }
 }

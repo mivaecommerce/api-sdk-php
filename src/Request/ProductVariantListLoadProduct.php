@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -18,6 +16,7 @@ use MerchantAPI\Model\ProductVariantLimit;
 use MerchantAPI\Model\ProductVariantExclusion;
 use MerchantAPI\Model\Product;
 use MerchantAPI\Model\ProductVariant;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request ProductVariantList_Load_Product.
@@ -61,8 +60,9 @@ class ProductVariantListLoadProduct extends Request
      *
      * @param \MerchantAPI\Model\Product
      */
-    public function __construct(Product $product = null)
+    public function __construct(BaseClient $client = null, Product $product = null)
     {
+        parent::__construct($client);
         $this->limits = new \MerchantAPI\Collection();
         $this->exclusions = new \MerchantAPI\Collection();
 

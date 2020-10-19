@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: FilterExpression.php 72352 2019-01-04 00:24:05Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -188,7 +186,7 @@ class FilterExpression
      * Add a search filter.
      *
      * @param string
-     * @param string 
+     * @param string
      * @param string
      * @param string
      * @return $this
@@ -799,7 +797,7 @@ class FilterExpression
                 $entry = [
                     'name'  => static::$searchFilters[$e['type']],
                     'value' => $e['entry']->toArray(),
-                ];            
+                ];
             } else {
                 if ($this->isChild()) {
                     $entry = [

@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: FilterExpressionEntry.php 72352 2019-01-04 00:24:05Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;

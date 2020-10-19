@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: MultiCallResponse.php 71878 2018-12-07 01:04:23Z gidriss $
  */
 
 namespace MerchantAPI\MultiCall;
@@ -28,6 +26,10 @@ class MultiCallResponse extends Response
     /** @var array[ResponseInterface] */
     protected $responses = [];
 
+
+    /** @var bool */
+    public $timeout = false;
+
     /**
      * MultiCallResponse constructor.
      *
@@ -40,25 +42,57 @@ class MultiCallResponse extends Response
     {
         parent::__construct($request, $response, $data);
 
-        foreach ($request->getRequests() as $i => $request) {
-            if (!isset($data[$i])) {
-                throw new \Exception(sprintf('Unexpected Response. Expected response for request %d',
-                    $i+1));
+        if ($response->getStatus() == 206) {
+            $this->timeout = true;
+        }
+
+        $requests = $request->getRequests();
+        $requestStartIndex = 0;
+
+        if ($request->_initialResponse)
+        {
+            $requestStartIndex = count($request->_initialResponse->getResponses());
+        }
+
+        foreach($this->data as $index => $rdata) {
+            $requestIndex = $requestStartIndex + $index;
+
+            if (!isset($requests[$requestIndex])) {
+                throw new MultiCallException('Unable to match response data chunk to request object', $request, $this);
             }
 
-            if ($request instanceof MultiCallOperation) {
-                foreach ($request->getRequests() as $i2 => $iterationRequest) {
-                    if (!isset($data[$i][$i2])) {
-                        throw new \Exception(sprintf('Unexpected Response. Expected response for request %d iteration %d',
-                            $i+1, $i2+1));
-                    }
+            $crequest = $requests[$requestIndex];
 
-                    $this->addResponse($iterationRequest->createResponse($response, $data[$i][$i2]));
+            if ($crequest instanceof MultiCallOperation) {
+                foreach($crequest->getRequests() as $opindex => $oprequest) {
+                    $this->addResponse($oprequest->createResponse($response, $rdata[$opindex]));
                 }
             } else {
-                $this->addResponse($request->createResponse($response, $data[$i]));
+                $this->addResponse($crequest->createResponse($response, $rdata));
             }
         }
+    }
+
+    /**
+     * Read the header range into its parts
+     *
+     * @param $range
+     * @return array
+     */
+    public function readRange()
+    {
+        $range = $this->getHttpResponse()->getHeaders()->get('Content-Range');
+
+        $result  = [ 'completed' => 0, 'total' => 0 ];
+
+        $ranges = explode('/', $range);
+
+        if (count($ranges) == 2) {
+            $result['completed'] = (int)$ranges[0];
+            $result['total']     = (int)$ranges[1];
+        }
+
+        return $result;
     }
 
     /**
@@ -67,6 +101,14 @@ class MultiCallResponse extends Response
     public function isSuccess()
     {
         return !isset($this->data['success']);
+    }
+
+    /**
+     * Check if the request timed out
+     */
+    public function isTimeout()
+    {
+        return $this->timeout;
     }
 
     /**

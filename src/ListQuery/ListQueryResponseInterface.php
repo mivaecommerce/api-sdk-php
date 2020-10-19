@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: ListQueryResponseInterface.php 71531 2018-11-14 01:18:10Z gidriss $
  */
 
 namespace MerchantAPI\ListQuery;
@@ -26,7 +24,6 @@ interface ListQueryResponseInterface
      * @return int
      */
     public function getTotalCount();
-
 
     /**
      * Get the starting offset of the response results.

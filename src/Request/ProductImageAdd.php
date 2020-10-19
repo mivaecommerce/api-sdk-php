@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request ProductImage_Add.
@@ -55,8 +54,9 @@ class ProductImageAdd extends Request
      *
      * @param \MerchantAPI\Model\Product
      */
-    public function __construct(Product $product = null)
+    public function __construct(BaseClient $client = null, Product $product = null)
     {
+        parent::__construct($client);
         if ($product) {
             if ($product->getId()) {
                 $this->setProductId($product->getId());

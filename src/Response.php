@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: Response.php 71080 2018-10-15 20:36:21Z gidriss $
  */
 
 namespace MerchantAPI;

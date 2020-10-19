@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Response;
@@ -22,7 +20,6 @@ use MerchantAPI\Response;
  */
 class CouponListDelete extends Response
 {
-
     /**
      * Get processed.
      *

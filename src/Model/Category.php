@@ -6,11 +6,11 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
+
+use MerchantAPI\Collection;
 
 /**
  * Data model for Category.
@@ -28,6 +28,25 @@ class Category extends \MerchantAPI\Model
     public function __construct(array $data = [])
     {
         parent::__construct($data);
+
+        $this->setField('uris', new Collection());
+
+        if (isset($data['uris']) && is_array($data['uris'])) {
+            $uris = new Collection();
+
+            foreach($data['uris'] as $e) {
+                if ($e instanceof Uri) {
+                    $uris[] = $e;
+                } else if (is_array($e)) {
+                    $uris[] = new Uri($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of Uri or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('uris', $uris);
+        }
 
         if (isset($data['CustomField_Values'])) {
             if ($data['CustomField_Values'] instanceof CustomFieldValues) {
@@ -49,6 +68,18 @@ class Category extends \MerchantAPI\Model
      */
     public function __clone()
     {
+        if (isset($this->data['uris']) && is_array($this->data['uris'])) {
+            if ($this->data['uris'] instanceof Collection) {
+                $this->data['uris'] = clone $this->data['uris'];
+            } else {
+                foreach($this->data['uris'] as $i => $e) {
+                    if ($e instanceof Uri) {
+                        $this->data['uris'][$i] = clone $this->data['uris'][$i];
+                    }
+                }
+            }
+        }
+
         if (isset($data['CustomField_Values'])) {
             if ($this->data['CustomField_Values'] instanceof CustomFieldValues) {
                 $this->data['CustomField_Values'] = clone $this->data['CustomField_Values'];
@@ -197,6 +228,16 @@ class Category extends \MerchantAPI\Model
     }
 
     /**
+     * Get uris.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Uri[]
+     */
+    public function getUris()
+    {
+        return $this->getField('uris', []);
+    }
+
+    /**
      * Get CustomField_Values.
      *
      * @return \MerchantAPI\Model\CustomFieldValues|null
@@ -204,90 +245,5 @@ class Category extends \MerchantAPI\Model
     public function getCustomFieldValues()
     {
         return $this->getField('CustomField_Values', null);
-    }
-
-    /**
-     * Set code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        return $this->setField('code', $code);
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setName($name)
-    {
-        return $this->setField('name', $name);
-    }
-
-    /**
-     * Set page_title.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setPageTitle($pageTitle)
-    {
-        return $this->setField('page_title', $pageTitle);
-    }
-
-    /**
-     * Set active.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        return $this->setField('active', $active);
-    }
-
-    /**
-     * Set page_code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setPageCode($pageCode)
-    {
-        return $this->setField('page_code', $pageCode);
-    }
-
-    /**
-     * Set parent_category.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setParentCategory($parentCategory)
-    {
-        return $this->setField('parent_category', $parentCategory);
-    }
-
-    /**
-     * Set CustomField_Values.
-     *
-     * @param array|CustomFieldValues
-     * @throws \InvalidArgumentException
-     * @return $this
-     */
-    public function setCustomFieldValues($customFieldValues)
-    {
-        if (is_array($customFieldValues)) {
-            return $this->setField('CustomField_Values', new CustomFieldValues($customFieldValues));
-        } else if ($customFieldValues instanceof CustomFieldValues || is_null($customFieldValues)) {
-            return $this->setField('CustomField_Values', $customFieldValues);
-        } else {
-            throw new \InvalidArgumentException(sprintf('Expected array, instance of CustomFieldValues, or null but got %s',
-                is_object($customFieldValues) ? get_class($customFieldValues) : gettype($customFieldValues)));
-        }
     }
 }

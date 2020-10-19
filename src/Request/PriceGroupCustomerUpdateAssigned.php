@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request PriceGroupCustomer_Update_Assigned.
@@ -55,8 +54,9 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @param \MerchantAPI\Model\PriceGroup
      */
-    public function __construct(PriceGroup $priceGroup = null)
+    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
     {
+        parent::__construct($client);
         if ($priceGroup) {
             if ($priceGroup->getId()) {
                 $this->setPriceGroupId($priceGroup->getId());

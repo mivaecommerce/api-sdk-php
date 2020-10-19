@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Note;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request NoteList_Load_Query.

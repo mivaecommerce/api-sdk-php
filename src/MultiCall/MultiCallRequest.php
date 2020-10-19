@@ -6,14 +6,14 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: MultiCallRequest.php 71879 2018-12-07 01:17:17Z gidriss $
  */
 
 namespace MerchantAPI\MultiCall;
 
 use MerchantAPI\Collection;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Http\HttpHeaders;
+use MerchantAPI\Client;
 use MerchantAPI\Request;
 use MerchantAPI\RequestInterface;
 
@@ -28,14 +28,28 @@ class MultiCallRequest extends Request
     /** @var \MerchantAPI\Collection */
     protected $requests = [];
 
+    /** @var bool */
+    protected $autoTimeoutContinue = false;
+
+    /** @var MutliCallResponse */
+    public $_initialResponse = null;
+
+    /** @var int */
+    protected $completed = 0;
+
+    /** @var int */
+    protected $total = 0;
+
     /**
      * Constructor.
      *
      * @param array $requests
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $requests = [])
+    public function __construct(Client $client = null, array $requests = [])
     {
+        parent::__construct($client);
+
         $this->requests = new Collection();
 
         foreach ($requests as $request) {
@@ -164,6 +178,92 @@ class MultiCallRequest extends Request
      */
     public function createResponse(HttpResponse $httpResponse, array $data)
     {
-        return new MultiCallResponse($this, $httpResponse, $data);
+        $response = new MultiCallResponse($this, $httpResponse, $data);
+
+        if ($response->isTimeout() && $this->autoTimeoutContinue) {
+            $this->processContinue($response);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Handles processing the auto continue functionality.
+     * Retries to get the next data set until completed or error
+     */
+    protected function processContinue(MultiCallResponse $initialResponse)
+    {
+        if ($this->_initialResponse)          return;
+        if (!$initialResponse)                return;
+        if (!$initialResponse->isTimeout())   return;
+
+        $this->_initialResponse = $initialResponse;
+
+        $range = $initialResponse->readRange();
+
+        $this->completed = $range['completed'];
+        $this->total = $range['total'];
+
+        if (!$this->total) {
+            throw new MultiCallException('Unexpected format', $this, $initialResponse);
+        } else if ($this->completed > $this->total) {
+            throw new  MultiCallException('Completed exceeds total', $this, $initialResponse);
+        } else if ($this->total != count($this->getRequests())) {
+            throw new  MultiCallException('Total does not match request count', $this, $initialResponse);
+        }
+
+        while ($this->completed != $this->total) {
+            $response = $this->send();
+
+            foreach($response->getResponses() as $chunkResponse) {
+                $initialResponse->addResponse($chunkResponse);
+            }
+
+            $ranges = $response->readRange();
+
+            if ($ranges['completed'] > 0) {
+                $this->completed += $ranges['completed'];
+            }  else {
+                if ($this->total - $this->completed == count($initialResponse->getResponses())) {
+                    $this->compelted = $this->total;
+                }
+                break;
+            }
+        }
+
+        $initialResponse->timeout = false;
+        $this->_initialResponse = null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function processRequestHeaders(HttpHeaders $headers)
+    {
+        if ($this->_initialResponse && $this->_initialResponse->isTimeout())
+        {
+            $headers->add('RANGE', sprintf('Operations=%d-%d',
+                $this->completed+1, $this->total));
+        }
+    }
+
+    /**
+     * Get the auto timeout continue flag.
+     */
+    public function getAutoTimeoutContinue()
+    {
+        return $this->autoTimeoutContinue;
+    }
+
+    /**
+     * Set the auto timeout continue flag. When set, timeouts that are encounted
+     * will continue until all data is completed or an error is encounted.
+     *
+     * @oaram bool
+     */
+    public function setAutoTimeoutContinue($state)
+    {
+        $this->autoTimeoutContinue = $state;
+        return $this;
     }
 }

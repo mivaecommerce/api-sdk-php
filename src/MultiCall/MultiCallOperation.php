@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: MultiCallOperation.php 71880 2018-12-07 01:20:55Z gidriss $
  */
 
 namespace MerchantAPI\MultiCall;

@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -67,5 +65,15 @@ class OrderCoupon extends \MerchantAPI\Model
     public function getTotal()
     {
         return (float) $this->getField('total', 0.00);
+    }
+
+    /**
+     * Get assigned.
+     *
+     * @return bool
+     */
+    public function getAssigned()
+    {
+        return (bool) $this->getField('assigned', false);
     }
 }

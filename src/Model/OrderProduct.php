@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -227,7 +225,7 @@ class OrderProduct extends \MerchantAPI\Model
 
         return $this->setField('attributes', $attributes);
     }
-    
+
     /**
      * Add a OrderProductAttribute.
      *

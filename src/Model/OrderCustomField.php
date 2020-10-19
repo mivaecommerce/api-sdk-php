@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -124,90 +122,5 @@ class OrderCustomField extends \MerchantAPI\Model
     public function getChoices()
     {
         return $this->getField('choices', []);
-    }
-
-    /**
-     * Set code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        return $this->setField('code', $code);
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setName($name)
-    {
-        return $this->setField('name', $name);
-    }
-
-    /**
-     * Set type.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setType($type)
-    {
-        return $this->setField('type', $type);
-    }
-
-    /**
-     * Set searchable.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setSearchable($searchable)
-    {
-        return $this->setField('searchable', $searchable);
-    }
-
-    /**
-     * Set sortable.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setSortable($sortable)
-    {
-        return $this->setField('sortable', $sortable);
-    }
-
-    /**
-     * Set module.
-     *
-     * @param array|Module
-     * @throws \InvalidArgumentException
-     * @return $this
-     */
-    public function setModule($module)
-    {
-        if (is_array($module)) {
-            return $this->setField('module', new Module($module));
-        } else if ($module instanceof Module || is_null($module)) {
-            return $this->setField('module', $module);
-        } else {
-            throw new \InvalidArgumentException(sprintf('Expected array, instance of Module, or null but got %s',
-                is_object($module) ? get_class($module) : gettype($module)));
-        }
-    }
-
-    /**
-     * Set choices.
-     *
-     * @param array
-     * @return $this
-     */
-    public function setChoices(array $choices)
-    {
-        return $this->setField('choices', $choices);
     }
 }

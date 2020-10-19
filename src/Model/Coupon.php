@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -126,101 +124,5 @@ class Coupon extends \MerchantAPI\Model
     public function getUseCount()
     {
         return (int) $this->getField('use_count', 0);
-    }
-
-    /**
-     * Set code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        return $this->setField('code', $code);
-    }
-
-    /**
-     * Set descrip.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        return $this->setField('descrip', $description);
-    }
-
-    /**
-     * Set custscope.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCustomerScope($customerScope)
-    {
-        return $this->setField('custscope', $customerScope);
-    }
-
-    /**
-     * Set dt_start.
-     *
-     * @param int|\DateTime
-     * @return $this
-     */
-    public function setDateTimeStart($dateTimeStart)
-    {
-        if ($dateTimeStart instanceof \DateTime) {
-            return $this->setField('dt_start', $dateTimeStart->getTimestamp());
-        }
-
-        return $this->setField('dt_start', $dateTimeStart);
-    }
-
-    /**
-     * Set dt_end.
-     *
-     * @param int|\DateTime
-     * @return $this
-     */
-    public function setDateTimeEnd($dateTimeEnd)
-    {
-        if ($dateTimeEnd instanceof \DateTime) {
-            return $this->setField('dt_end', $dateTimeEnd->getTimestamp());
-        }
-
-        return $this->setField('dt_end', $dateTimeEnd);
-    }
-
-    /**
-     * Set max_use.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setMaxUse($maxUse)
-    {
-        return $this->setField('max_use', $maxUse);
-    }
-
-    /**
-     * Set max_per.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setMaxPer($maxPer)
-    {
-        return $this->setField('max_per', $maxPer);
-    }
-
-    /**
-     * Set active.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        return $this->setField('active', $active);
     }
 }

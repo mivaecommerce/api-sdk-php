@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderShipmentUpdate;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request OrderShipmentList_Update.
@@ -38,8 +37,9 @@ class OrderShipmentListUpdate extends Request
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(BaseClient $client = null)
     {
+        parent::__construct($client);
         $this->shipmentUpdates = new \MerchantAPI\Collection();
     }
 

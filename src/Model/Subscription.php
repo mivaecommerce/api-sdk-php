@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -287,16 +285,5 @@ class Subscription extends \MerchantAPI\Model
     public function getFormattedTotal()
     {
         return $this->getField('formatted_total');
-    }
-
-    /**
-     * Set cncldate.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCancelDate($cancelDate)
-    {
-        return $this->setField('cncldate', $cancelDate);
     }
 }

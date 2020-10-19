@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Note;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request Note_Delete.
@@ -40,8 +39,9 @@ class NoteDelete extends Request
      *
      * @param \MerchantAPI\Model\Note
      */
-    public function __construct(Note $note = null)
+    public function __construct(BaseClient $client = null, Note $note = null)
     {
+        parent::__construct($client);
         if ($note) {
             $this->setNoteId($note->getId());
         }

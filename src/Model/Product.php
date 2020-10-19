@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -520,7 +518,7 @@ class Product extends \MerchantAPI\Model
      *
      * @return \MerchantAPI\Model\ProductShippingRules|null
      */
-    public function getProductShuppingRules()
+    public function getProductShippingRules()
     {
         return $this->getField('productshippingrules', null);
     }
@@ -543,189 +541,5 @@ class Product extends \MerchantAPI\Model
     public function getAttributes()
     {
         return $this->getField('attributes', []);
-    }
-
-    /**
-     * Set code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCode($code)
-    {
-        return $this->setField('code', $code);
-    }
-
-    /**
-     * Set sku.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setSku($sku)
-    {
-        return $this->setField('sku', $sku);
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setName($name)
-    {
-        return $this->setField('name', $name);
-    }
-
-    /**
-     * Set thumbnail.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setThumbnail($thumbnail)
-    {
-        return $this->setField('thumbnail', $thumbnail);
-    }
-
-    /**
-     * Set image.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setImage($image)
-    {
-        return $this->setField('image', $image);
-    }
-
-    /**
-     * Set price.
-     *
-     * @param float
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        return $this->setField('price', $price);
-    }
-
-    /**
-     * Set cost.
-     *
-     * @param float
-     * @return $this
-     */
-    public function setCost($cost)
-    {
-        return $this->setField('cost', $cost);
-    }
-
-    /**
-     * Set descrip.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        return $this->setField('descrip', $description);
-    }
-
-    /**
-     * Set weight.
-     *
-     * @param float
-     * @return $this
-     */
-    public function setWeight($weight)
-    {
-        return $this->setField('weight', $weight);
-    }
-
-    /**
-     * Set active.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        return $this->setField('active', $active);
-    }
-
-    /**
-     * Set page_title.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setPageTitle($pageTitle)
-    {
-        return $this->setField('page_title', $pageTitle);
-    }
-
-    /**
-     * Set taxable.
-     *
-     * @param bool
-     * @return $this
-     */
-    public function setTaxable($taxable)
-    {
-        return $this->setField('taxable', $taxable);
-    }
-
-    /**
-     * Set product_inventory.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setProductInventory($productInventory)
-    {
-        return $this->setField('product_inventory', $productInventory);
-    }
-
-    /**
-     * Set cancat_code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setCanonicalCategoryCode($canonicalCategoryCode)
-    {
-        return $this->setField('cancat_code', $canonicalCategoryCode);
-    }
-
-    /**
-     * Set page_code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setPageCode($pageCode)
-    {
-        return $this->setField('page_code', $pageCode);
-    }
-
-    /**
-     * Set CustomField_Values.
-     *
-     * @param array|CustomFieldValues
-     * @throws \InvalidArgumentException
-     * @return $this
-     */
-    public function setCustomFieldValues($customFieldValues)
-    {
-        if (is_array($customFieldValues)) {
-            return $this->setField('CustomField_Values', new CustomFieldValues($customFieldValues));
-        } else if ($customFieldValues instanceof CustomFieldValues || is_null($customFieldValues)) {
-            return $this->setField('CustomField_Values', $customFieldValues);
-        } else {
-            throw new \InvalidArgumentException(sprintf('Expected array, instance of CustomFieldValues, or null but got %s',
-                is_object($customFieldValues) ? get_class($customFieldValues) : gettype($customFieldValues)));
-        }
     }
 }

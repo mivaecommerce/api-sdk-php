@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: Model.php 71770 2018-12-04 01:26:17Z gidriss $
  */
 
 namespace MerchantAPI;
@@ -26,7 +24,7 @@ abstract class Model implements ModelInterface
 
     /**
      * Constructor.
-     * 
+     *
      * @param array $data
      */
     public function __construct(array $data = [])

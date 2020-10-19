@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -20,13 +18,83 @@ namespace MerchantAPI\Model;
 class OrderItemOption extends \MerchantAPI\Model
 {
     /**
-     * Get attribute.
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return (int) $this->getField('id', 0);
+    }
+
+    /**
+     * Get order_id.
+     *
+     * @return int
+     */
+    public function getOrderId()
+    {
+        return (int) $this->getField('order_id', 0);
+    }
+
+    /**
+     * Get line_id.
+     *
+     * @return int
+     */
+    public function getLineId()
+    {
+        return (int) $this->getField('line_id', 0);
+    }
+
+    /**
+     * Get option_id.
+     *
+     * @return int
+     */
+    public function getOptionId()
+    {
+        return (int) $this->getField('option_id', 0);
+    }
+
+    /**
+     * Get opt_code.
      *
      * @return string
      */
-    public function getAttribute()
+    public function getOptionCode()
     {
-        return $this->getField('attribute');
+        return $this->getField('opt_code');
+    }
+
+    /**
+     * Get attr_code.
+     *
+     * @return string
+     */
+    public function getAttributeCode()
+    {
+        return $this->getField('attr_code');
+    }
+
+    /**
+     * Get attr_id.
+     *
+     * @return int
+     */
+    public function getAttributeId()
+    {
+        return (int) $this->getField('attr_id', 0);
+    }
+
+    /**
+     * Get attmpat_id.
+     *
+     * @return int
+     */
+    public function getAttributeTemplateAttributeId()
+    {
+        return (int) $this->getField('attmpat_id', 0);
     }
 
     /**
@@ -80,14 +148,76 @@ class OrderItemOption extends \MerchantAPI\Model
     }
 
     /**
-     * Set attribute.
+     * Get data.
+     *
+     * @return string
+     */
+    public function getOptionData()
+    {
+        return $this->getField('data');
+    }
+
+    /**
+     * Get data_long.
+     *
+     * @return string
+     */
+    public function getOptionDataLong()
+    {
+        return $this->getField('data_long');
+    }
+
+    /**
+     * Get attr_prompt.
+     *
+     * @return string
+     */
+    public function getAttributePrompt()
+    {
+        return $this->getField('attr_prompt');
+    }
+
+    /**
+     * Get opt_prompt.
+     *
+     * @return string
+     */
+    public function getOptionPrompt()
+    {
+        return $this->getField('opt_prompt');
+    }
+
+    /**
+     * Set attr_code.
      *
      * @param string
      * @return $this
      */
-    public function setAttribute($attribute)
+    public function setAttributeCode($attributeCode)
     {
-        return $this->setField('attribute', $attribute);
+        return $this->setField('attr_code', $attributeCode);
+    }
+
+    /**
+     * Set attr_id.
+     *
+     * @param int
+     * @return $this
+     */
+    public function setAttributeId($attributeId)
+    {
+        return $this->setField('attr_id', $attributeId);
+    }
+
+    /**
+     * Set attmpat_id.
+     *
+     * @param int
+     * @return $this
+     */
+    public function setAttributeTemplateAttributeId($attributeTemplateAttributeId)
+    {
+        return $this->setField('attmpat_id', $attributeTemplateAttributeId);
     }
 
     /**
@@ -113,6 +243,28 @@ class OrderItemOption extends \MerchantAPI\Model
     }
 
     /**
+     * Set retail.
+     *
+     * @param float
+     * @return $this
+     */
+    public function setRetail($retail)
+    {
+        return $this->setField('retail', $retail);
+    }
+
+    /**
+     * Set base_price.
+     *
+     * @param float
+     * @return $this
+     */
+    public function setBasePrice($basePrice)
+    {
+        return $this->setField('base_price', $basePrice);
+    }
+
+    /**
      * Set price.
      *
      * @param float
@@ -122,7 +274,7 @@ class OrderItemOption extends \MerchantAPI\Model
     {
         return $this->setField('price', $price);
     }
-    
+
     /**
      * @inheritDoc
      */
@@ -130,8 +282,20 @@ class OrderItemOption extends \MerchantAPI\Model
     {
         $data = [];
 
-        if (isset($this->data['attribute'])) {
-            $data['attr_code'] = $this->data['attribute'];
+        if (isset($this->data['attr_code'])) {
+            $data['attr_code'] = $this->data['attr_code'];
+        }
+
+        if (isset($this->data['opt_code_or_data'])) {
+            $data['opt_code_or_data'] = $this->data['opt_code_or_data'];
+        }
+
+        if (isset($this->data['attr_id'])) {
+            $data['attr_id'] = $this->data['attr_id'];
+        }
+
+        if (isset($this->data['attmpat_id'])) {
+            $data['attmpat_id'] = $this->data['attmpat_id'];
         }
 
         if (isset($this->data['value'])) {
@@ -144,6 +308,14 @@ class OrderItemOption extends \MerchantAPI\Model
 
         if (isset($this->data['price'])) {
             $data['price'] = $this->data['price'];
+        }
+
+        if (isset($this->data['base_price'])) {
+            $data['base_price'] = $this->data['base_price'];
+        }
+
+        if (isset($this->data['retail'])) {
+            $data['retail'] = $this->data['retail'];
         }
 
         return $data;

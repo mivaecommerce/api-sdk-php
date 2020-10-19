@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -16,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderPayment;
 use MerchantAPI\Model\OrderPaymentTotal;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request OrderPayment_Capture.
@@ -44,8 +43,9 @@ class OrderPaymentCapture extends Request
      *
      * @param \MerchantAPI\Model\OrderPayment
      */
-    public function __construct(OrderPayment $orderPayment = null)
+    public function __construct(BaseClient $client = null, OrderPayment $orderPayment = null)
     {
+        parent::__construct($client);
         if ($orderPayment) {
             $this->setOrderPaymentId($orderPayment->getId());
         }

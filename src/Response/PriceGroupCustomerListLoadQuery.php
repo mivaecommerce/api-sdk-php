@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Response;
@@ -39,7 +37,7 @@ class PriceGroupCustomerListLoadQuery extends ListQueryResponse
         if (!$this->isSuccess()) {
             return;
         }
-        
+
         if (isset($data['data']['data'])) {
             foreach ($data['data']['data'] as $result) {
               $this->priceGroupCustomers[] = new PriceGroupCustomer($result);

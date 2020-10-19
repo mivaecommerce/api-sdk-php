@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductInventoryAdjustment;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request ProductList_Adjust_Inventory.
@@ -38,8 +37,9 @@ class ProductListAdjustInventory extends Request
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(BaseClient $client = null)
     {
+        parent::__construct($client);
         $this->inventoryAdjustments = new \MerchantAPI\Collection();
     }
 

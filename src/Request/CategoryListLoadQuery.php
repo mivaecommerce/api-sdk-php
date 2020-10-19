@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request CategoryList_Load_Query.
@@ -64,6 +63,11 @@ class CategoryListLoadQuery extends ListQueryRequest
         'dt_created',
         'dt_updated',
         'depth',
+    ];
+
+    /** @var array Requests available on demand columns */
+    protected $availableOnDemandColumns = [
+        'uris',
     ];
 
     /** @var array Requests available on custom filters */

@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: RequestBuilder.php 72386 2019-01-04 20:41:11Z gidriss $
+ * $Id$
  */
 
 namespace MerchantAPI\Response;

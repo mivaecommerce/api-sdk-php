@@ -6,14 +6,13 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: Module.php 77407 2019-08-16 17:32:08Z gidriss $
  */
 
 namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request Module.
@@ -72,7 +71,7 @@ class Module extends Request
 
     /**
      * Get custom data from the request.
-     * 
+     *
      * @param string
      * @param mixed
      */
@@ -133,7 +132,7 @@ class Module extends Request
         $this->moduleFields[$field] = $value;
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */

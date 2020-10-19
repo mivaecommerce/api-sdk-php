@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: HttpClient.php 77279 2019-08-07 20:52:11Z gidriss $
  */
 
 namespace MerchantAPI\Http;

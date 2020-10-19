@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: ModelInterface.php 71351 2018-10-26 18:55:47Z gidriss $
  */
 
 namespace MerchantAPI;

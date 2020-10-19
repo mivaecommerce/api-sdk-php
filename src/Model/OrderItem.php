@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -444,17 +442,6 @@ class OrderItem extends \MerchantAPI\Model
     }
 
     /**
-     * Set status.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        return $this->setField('status', $status);
-    }
-
-    /**
      * Set code.
      *
      * @param string
@@ -584,7 +571,7 @@ class OrderItem extends \MerchantAPI\Model
     {
         return $this->setField('tracknum', $trackingNumber);
     }
-    
+
     /**
      * Add a OrderItemOption.
      *

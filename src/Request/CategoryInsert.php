@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -16,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Category;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request Category_Insert.
@@ -59,8 +58,9 @@ class CategoryInsert extends Request
      *
      * @param \MerchantAPI\Model\Category
      */
-    public function __construct(Category $category = null)
+    public function __construct(BaseClient $client = null, Category $category = null)
     {
+        parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
 
         if ($category) {

@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -16,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\Model\OrderPaymentAuthorize;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request Order_Authorize.
@@ -53,8 +52,9 @@ class OrderAuthorize extends Request
      *
      * @param \MerchantAPI\Model\Order
      */
-    public function __construct(Order $order = null)
+    public function __construct(BaseClient $client = null, Order $order = null)
     {
+        parent::__construct($client);
         if ($order) {
             if ($order->getId()) {
                 $this->setOrderId($order->getId());
@@ -114,7 +114,7 @@ class OrderAuthorize extends Request
 
     /**
      * Get custom data from the request.
-     * 
+     *
      * @param string
      * @param mixed
      */
@@ -201,7 +201,7 @@ class OrderAuthorize extends Request
         $this->moduleFields[$field] = $value;
         return $this;
     }
-    
+
     /**
      * @inheritDoc
      */

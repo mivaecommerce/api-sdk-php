@@ -6,11 +6,12 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: Request.php 72460 2019-01-08 21:12:08Z gidriss $
  */
 
 namespace MerchantAPI;
+
+use MerchantAPI\Http\HttpHeaders;
+use MerchantAPI\BaseClient;
 
 /**
  * Abstract class all Requests inherit from.
@@ -19,11 +20,27 @@ namespace MerchantAPI;
  */
 abstract class Request implements RequestInterface
 {
+    /** @var Client */
+    protected $client = null;
+
     /** @var null|string */
     protected $storeCode = null;
 
     /** @var string */
     protected $scope = RequestInterface::REQUEST_SCOPE_STORE;
+
+    /** @var string */
+    protected $binaryEncoding = RequestInterface::BINARY_ENCODING_DEFAULT;
+
+    /**
+     * Constructor
+     *
+     * @param Client $client
+     */
+    public function __construct(BaseClient $client = null)
+    {
+        $this->client = $client;
+    }
 
     /**
      * @inheritDoc
@@ -62,7 +79,24 @@ abstract class Request implements RequestInterface
         $this->storeCode = $storeCode;
         return $this;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */
@@ -77,5 +111,42 @@ abstract class Request implements RequestInterface
         }
 
         return $data;
+    }
+
+    /**
+     * {inheritDoc}
+     */
+    public function send()
+    {
+        if (!$this->client) {
+            throw new \Exception('No client assigned to request');
+        }
+
+        return $this->client->send($this);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function processRequestHeaders(HttpHeaders $headers)
+    {
+        ;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getBinaryEncoding()
+    {
+        return $this->binaryEncoding;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setBinaryEncoding($encoding)
+    {
+        $this->binaryEncoding = $binaryEncoding;
+        return $this;
     }
 }

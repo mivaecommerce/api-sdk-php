@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request AvailabilityGroupShippingMethod_Update_Assigned.
@@ -55,8 +54,9 @@ class AvailabilityGroupShippingMethodUpdateAssigned extends Request
      *
      * @param \MerchantAPI\Model\AvailabilityGroup
      */
-    public function __construct(AvailabilityGroup $availabilityGroup = null)
+    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
     {
+        parent::__construct($client);
         if ($availabilityGroup) {
             if ($availabilityGroup->getId()) {
                 $this->setAvailabilityGroupId($availabilityGroup->getId());

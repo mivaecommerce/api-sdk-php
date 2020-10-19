@@ -7,18 +7,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * $Id: RequestBuilder.php 72462 2019-01-08 21:18:27Z gidriss $
+ * $Id$
  */
 
 namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
+use MerchantAPI\Client;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 
 /**
  * This class is a utility to create custom requests.
- * 
+ *
  * @package MerchantAPI\Request
  */
 class RequestBuilder extends Request implements \ArrayAccess
@@ -31,13 +32,15 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Constructor.
-     * 
+     *
      * @param string
      * @param array
      * @return RequestBuilder
-     */ 
-    public function __construct($function, array $data = [])
+     */
+    public function __construct(Client $client = null, $function = '', array $data = [])
     {
+        parent::__construct($client);
+
         if (!is_string($function)) {
             throw new \InvalidArgumentException(sprintf('Expected a string but got %s', gettype($function)));
         }
@@ -48,9 +51,9 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Set the API function name.
-     * 
+     *
      * @return RequestBuilder
-     */ 
+     */
     public function setFunction($function)
     {
         $this->function = $function;
@@ -59,7 +62,7 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Set a field int the request.
-     * 
+     *
      * @param string
      * @param mixed
      * @return RequestBuilder
@@ -67,7 +70,7 @@ class RequestBuilder extends Request implements \ArrayAccess
     public function set($field, $value)
     {
         $fieldLower = strtolower($field);
-        
+
         if ($fieldLower == 'function') {
             return $this->setFunction($value);
         } else if ($fieldLower == 'store_code') {
@@ -80,7 +83,7 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Get a defined field from the request, or provided default.
-     * 
+     *
      * @param string
      * @param mixed
      * @return mixed
@@ -104,7 +107,7 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Check if a field is defined in the request.
-     * 
+     *
      * @param string
      * @return bool
      */
@@ -123,14 +126,14 @@ class RequestBuilder extends Request implements \ArrayAccess
 
     /**
      * Remove a defined field from the request.
-     * 
+     *
      * @param string
      * @return RequestBuilder
      */
     public function remove($field)
     {
         $fieldLower = strtolower($field);
-        
+
         if ($fieldLower == 'function') {
             return $this;
         } else if ($fieldLower == 'store_code') {
@@ -148,7 +151,7 @@ class RequestBuilder extends Request implements \ArrayAccess
     public function offsetSet($offset, $value) {
         if (is_string($offset)) {
             $fieldLower = strtolower($offset);
-            
+
             if ($fieldLower == 'function') {
                 $this->setFunction($value);
                 return;
@@ -156,7 +159,7 @@ class RequestBuilder extends Request implements \ArrayAccess
                 $this->setStoreCode($value);
                 return;
             }
-        } 
+        }
 
         if (is_null($offset)) {
             $this->data[] = $value;
@@ -189,7 +192,7 @@ class RequestBuilder extends Request implements \ArrayAccess
                 $this->setStoreCode(null);
                 return;
             }
-        } 
+        }
         unset($this->data[$offset]);
     }
 
@@ -205,18 +208,18 @@ class RequestBuilder extends Request implements \ArrayAccess
             } else if ($fieldLower == 'store_code') {
                 return $this->getStoreCode();
             }
-        } 
+        }
 
         return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 
     /**
-     * Set the scope of the request. 
-     * 
+     * Set the scope of the request.
+     *
      * @param string Either store, or domain. Use RequestInterface::REQUEST_SCOPE_* constants.
      * @return RequestBuilder
      * @throws \InvalidArgumentException
-     */ 
+     */
     public function setScope($scope)
     {
         $scope = strtolower($scope);

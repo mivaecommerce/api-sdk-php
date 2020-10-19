@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\Model\CategoryProduct;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request CategoryProductList_Load_Query.
@@ -52,8 +51,9 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @param \MerchantAPI\Model\Category
      */
-    public function __construct(Category $category = null)
+    public function __construct(BaseClient $client = null, Category $category = null)
     {
+        parent::__construct($client);
         if ($category) {
             if ($category->getId()) {
                 $this->setCategoryId($category->getId());

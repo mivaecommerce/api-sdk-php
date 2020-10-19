@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -139,43 +137,5 @@ class ProductShippingRules extends \MerchantAPI\Model
     public function getMethods()
     {
         return $this->getField('methods', []);
-    }
-
-    /**
-     * Set methods.
-     *
-     * @param array[ProductShippingMethod]
-     * @throws \InvalidArgumentException
-     * @return $this
-     */
-    public function setMethods(array $methods)
-    {
-        foreach ($methods as &$model) {
-            if (is_array($model)) {
-                $model = new ProductShippingMethod($model);
-            } else if (!$model instanceof ProductShippingMethod) {
-                throw new \InvalidArgumentException(sprintf('Expected array of ProductShippingMethod or an array of arrays but got %s',
-                    is_object($model) ? get_class($model) : gettype($model)));
-            }
-        }
-
-        return $this->setField('methods', $methods);
-    }
-    
-    /**
-     * Add a ProductShippingMethod.
-     *
-     * @param ProductShippingMethod
-     * @return $this
-     */
-    public function addMethod(ProductShippingMethod $model)
-    {
-        if (!isset($this->data['methods'])) {
-            $this->data['methods'] = [];
-        }
-
-        $this->data['methods'][] = $model;
-
-        return $this;
     }
 }

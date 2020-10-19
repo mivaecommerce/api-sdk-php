@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Model;
@@ -113,7 +111,7 @@ class ProductAttribute extends \MerchantAPI\Model
         } else if ($this->hasField('disporder')) {
             return (int) $this->getField('disporder', 0);
         }
-        
+
         return 0;
     }
 

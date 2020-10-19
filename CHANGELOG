@@ -1,3 +1,52 @@
+v2.0.0
+	There are possible breaking changes in this release. Please consult the UPGRADING.md file included in this repository
+	for assistance in upgrading your existing code base from 1.x to 2.x
+
+	- Minimum Merchant version required is now 10.x. For 9.x use the 1.x release.
+	- Major Change in Request constructor. All Request objects now accept a Client as its first argument. 
+	- Added new send() method directly inside each Request object, when constructed with or assigned a Client instance, you can now use send() as a shortcut to send Requests
+	- Added the following API functions introduced in 10.00.00:
+		Branch_Copy
+		Branch_Create
+		Branch_Delete
+		BranchCSSResourceVersionList_Load_Query
+		BranchJavaScriptResourceVersionList_Load_Query
+		BranchList_Load_Query
+		BranchPropertyVersionList_Load_Query
+		BranchTemplateVersionList_Load_Query
+		Changeset_Create
+		ChangesetChangeList_Load_Query
+		ChangesetCSSResourceVersionList_Load_Query
+		ChangesetJavaScriptResourceVersionList_Load_Query
+		ChangesetList_Load_Query
+		ChangesetList_Merge
+		ChangesetPropertyVersionList_Load_Query
+		ChangesetTemplateVersionList_Load_Query
+		CustomerCreditHistory_Delete
+		CustomerCreditHistory_Insert
+		CustomerCreditHistoryList_Load_Query
+		MivaMerchantVersion
+		OrderCoupon_Update_Assigned
+		OrderCouponList_Load_Query
+		OrderItemList_CreateReturn
+		OrderPriceGroup_Update_Assigned
+		OrderPriceGroupList_Load_Query
+		OrderReturnList_Received
+		ResourceGroupList_Load_Query
+	- OrderItemOption model no longer has the attribute property. It has been renamed to attribute_code.
+	- Removed fields from OrderItemOption model:
+		- attribute (now use attribute_code)
+	- New fields on OrderItemOption model:
+		- attribute_id (attr_code)
+		- attribute_code (attr_id)
+		- attribute_template_attribute_id (attmpat_id)
+	- New client option `operation_timeout` allows the control of the timeout for multicall operations
+	- New MultiCallRequest option, autoTimeoutContinue
+	- All Request objects can now set header data in the underlying request with `Request::processRequestHeaders`
+	- All Response objects now include the underlying HTTP Response object
+	- Other Bugs Fixed:
+		- Fixed an issue where MultiCallRequest instances were serializing the same function name for all requests
+	- New Request option, binaryEncoding allows specifying the exchange of binary information for supported requests.
 v1.3.0
 	- Added support for PriceGroupCustomer_ListLoad_Query
 	- Adjustments to Module and OrderAuthorize request classes

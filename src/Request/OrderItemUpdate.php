@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -17,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderItemOption;
 use MerchantAPI\Model\OrderItem;
 use MerchantAPI\Model\OrderTotal;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request OrderItem_Update.
@@ -69,8 +68,9 @@ class OrderItemUpdate extends Request
      *
      * @param \MerchantAPI\Model\OrderItem
      */
-    public function __construct(OrderItem $orderItem = null)
+    public function __construct(BaseClient $client = null, OrderItem $orderItem = null)
     {
+        parent::__construct($client);
         $this->options = new \MerchantAPI\Collection();
 
         if ($orderItem) {

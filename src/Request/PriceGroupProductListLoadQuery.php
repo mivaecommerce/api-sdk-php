@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\Model\PriceGroupProduct;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request PriceGroupProductList_Load_Query.
@@ -49,8 +48,9 @@ class PriceGroupProductListLoadQuery extends ProductListLoadQuery
      *
      * @param \MerchantAPI\Model\PriceGroup
      */
-    public function __construct(PriceGroup $priceGroup = null)
+    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
     {
+        parent::__construct($client);
         if ($priceGroup) {
             if ($priceGroup->getId()) {
                 $this->setPriceGroupId($priceGroup->getId());

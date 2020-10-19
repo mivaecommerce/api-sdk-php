@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id$
  */
 
 namespace MerchantAPI\Request;
@@ -15,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\Model\CouponPriceGroup;
+use MerchantAPI\BaseClient;
 
 /**
  * Handles API Request CouponPriceGroupList_Load_Query.
@@ -52,8 +51,9 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @param \MerchantAPI\Model\Coupon
      */
-    public function __construct(Coupon $coupon = null)
+    public function __construct(BaseClient $client = null, Coupon $coupon = null)
     {
+        parent::__construct($client);
         if ($coupon) {
             if ($coupon->getId()) {
                 $this->setCouponId($coupon->getId());
