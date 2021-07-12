@@ -98,6 +98,16 @@ class OrderCharge extends \MerchantAPI\Model
     }
 
     /**
+     * Get tax.
+     *
+     * @return float
+     */
+    public function getTax()
+    {
+        return (float) $this->getField('tax', 0.00);
+    }
+
+    /**
      * Set type.
      *
      * @param string

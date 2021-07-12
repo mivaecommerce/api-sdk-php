@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\Collection;
+
 /**
  * Data model for OrderShipment.
  *
@@ -25,6 +27,74 @@ class OrderShipment extends \MerchantAPI\Model
 
     /** @var int ORDER_SHIPMENT_STATUS_SHIPPED */
     const ORDER_SHIPMENT_STATUS_SHIPPED = 200;
+
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        $this->setField('items', new Collection());
+
+        if (isset($data['order'])) {
+            if ($data['order'] instanceof Order) {
+                $this->setField('order', $data['order']);
+            } else if (is_array($data['order'])) {
+                $this->setField('order', new Order($data['order']));
+            } else {
+                throw new \InvalidArgumentException(sprintf('Expected Order or an array but got %s',
+                    is_object($data['order']) ?
+                        get_class($data['order']) : gettype($data['order'])));
+            }
+        }
+
+        if (isset($data['items']) && is_array($data['items'])) {
+            $items = new Collection();
+
+            foreach($data['items'] as $e) {
+                if ($e instanceof OrderItem) {
+                    $items[] = $e;
+                } else if (is_array($e)) {
+                    $items[] = new OrderItem($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of OrderItem or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('items', $items);
+        }
+    }
+
+    /**
+     * Clone.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        if (isset($data['order'])) {
+            if ($this->data['order'] instanceof Order) {
+                $this->data['order'] = clone $this->data['order'];
+            }
+        }
+
+        if (isset($this->data['items']) && is_array($this->data['items'])) {
+            if ($this->data['items'] instanceof Collection) {
+                $this->data['items'] = clone $this->data['items'];
+            } else {
+                foreach($this->data['items'] as $i => $e) {
+                    if ($e instanceof OrderItem) {
+                        $this->data['items'][$i] = clone $this->data['items'][$i];
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Get id.
@@ -154,5 +224,25 @@ class OrderShipment extends \MerchantAPI\Model
     public function getFormattedCost()
     {
         return $this->getField('formatted_cost');
+    }
+
+    /**
+     * Get order.
+     *
+     * @return \MerchantAPI\Model\Order|null
+     */
+    public function getOrder()
+    {
+        return $this->getField('order', null);
+    }
+
+    /**
+     * Get items.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderItem[]
+     */
+    public function getItems()
+    {
+        return $this->getField('items', []);
     }
 }

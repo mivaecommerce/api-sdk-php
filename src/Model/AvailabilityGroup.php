@@ -36,4 +36,14 @@ class AvailabilityGroup extends \MerchantAPI\Model
     {
         return $this->getField('name');
     }
+
+    /**
+     * Get tax_exempt.
+     *
+     * @return bool
+     */
+    public function getTaxExempt()
+    {
+        return (bool) $this->getField('tax_exempt', false);
+    }
 }

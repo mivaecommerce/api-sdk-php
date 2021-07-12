@@ -318,4 +318,14 @@ class JavaScriptResourceVersion extends \MerchantAPI\Model
     {
         return $this->getField('linkedresources', []);
     }
+
+    /**
+     * Get source_notes.
+     *
+     * @return string
+     */
+    public function getSourceNotes()
+    {
+        return $this->getField('source_notes');
+    }
 }

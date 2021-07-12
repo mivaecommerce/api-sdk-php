@@ -52,7 +52,7 @@ class ProductOption extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getAttempId()
+    public function getAttributeTemplateId()
     {
         return (int) $this->getField('attemp_id', 0);
     }
@@ -62,7 +62,7 @@ class ProductOption extends \MerchantAPI\Model
      *
      * @return int
      */
-    public function getAttmpatId()
+    public function getAttributeTemplateAttributeId()
     {
         return (int) $this->getField('attmpat_id', 0);
     }
@@ -141,5 +141,25 @@ class ProductOption extends \MerchantAPI\Model
     public function getImage()
     {
         return $this->getField('image');
+    }
+
+    /**
+     * Get formatted_price.
+     *
+     * @return string
+     */
+    public function getFormattedPrice()
+    {
+        return $this->getField('formatted_price');
+    }
+
+    /**
+     * Get formatted_cost.
+     *
+     * @return string
+     */
+    public function getFormattedCost()
+    {
+        return $this->getField('formatted_cost');
     }
 }

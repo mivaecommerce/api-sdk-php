@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: MultiCallExample.php 71872 2018-12-07 00:53:35Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -32,7 +30,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
  * Create a MultiCallRequest and add Request objects to it
  */
 
-$request = new MultiCallRequest();
+$request = new MultiCallRequest($client);
 
 $request->addRequest(new ProductListLoadQuery())
     ->addRequest(new CategoryListLoadQuery())
@@ -40,7 +38,8 @@ $request->addRequest(new ProductListLoadQuery())
 
 try
 {
-    $responses = $client->send($request); // MerchantAPI\MultiCall\MultiCallResponse
+    $responses = $request->send(); // MerchantAPI\MultiCall\MultiCallResponse
+    // Alternately: $responses = $client->send($request); // MerchantAPI\MultiCall\MultiCallResponse
 } catch(ClientException $e) {
     printf("Error Executing MultiCallRequest: %s\r\n", $e->getMessage());
     exit;
@@ -60,7 +59,7 @@ foreach ($responses->getResponses() as $response) {
  * @see MerchantAPI\MultiCall\MultiCallOperation
  */
 
-$request = new MultiCallRequest();
+$request = new MultiCallRequest($client);
 
 /* Create a new MultiCallOperation and adds it to the Request. */
 $operation = $request->operation();
@@ -70,6 +69,16 @@ $operation = $request->operation();
         $operation = new \MerchantAPI\MultiCall\MultiCallOperation();
         $request->addOperation($operation);
 */
+
+# If needed, we can adjust the timeout for the multi call operation within the client. The default is 60 seconds.
+
+$client->setOption('operation_timeout', 60);
+
+# If you wish to automatically fetch the remaining data in the event of a timeout, you can specify the auto timeout completion flag within the request. 
+# By default it is not enabled.
+
+$request->setAutoTimeoutContinue(true);
+
 
 /*  Set shared data between the iterations, for example we can set a shared
     value for Product_Price and update many products without specifying the same
@@ -113,7 +122,8 @@ $request->addRequest($checkProducts);
 
 try
 {
-    $responses = $client->send($request); // MerchantAPI\MultiCall\MultiCallResponse
+    $responses = $request->send(); // MerchantAPI\MultiCall\MultiCallResponse
+    // Alternately: $responses = $client->send($request);
 } catch(ClientException $e) {
     printf("Error Executing MultiCallRequest: %s\r\n", $e->getMessage());
     exit;

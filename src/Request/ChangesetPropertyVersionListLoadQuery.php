@@ -70,6 +70,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
         'product',
         'category',
         'source',
+        'source_notes',
     ];
 
     /** @var int */

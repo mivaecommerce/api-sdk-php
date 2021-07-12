@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: CreateProductExample.php 71516 2018-11-13 21:17:45Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -25,7 +23,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
 ]);
 
 /* Create a new ProductInsert object */
-$productInsertRequest = new ProductInsert();
+$productInsertRequest = new ProductInsert($client);
 
 /* or
  * $client->createRequest('ProductInsert');
@@ -39,7 +37,8 @@ $productInsertRequest->setProductCode('NEW_PRODUCT')
 /* send the request for the response */
 try
 {
-    $productInsertResponse = $client->send($productInsertRequest); // MerchantAPI\Response\ProductInsert
+    $productInsertResponse = $productInsertRequest; // MerchantAPI\Response\ProductInsert
+    // Alternately: $productInsertResponse = $client->send($productInsertRequest);
 } catch(ClientException $e) {
     printf("Error Executing ProductInsert Request: %s\r\n", $e->getMessage());
     exit;

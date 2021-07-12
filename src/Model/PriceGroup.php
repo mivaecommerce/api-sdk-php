@@ -29,6 +29,18 @@ class PriceGroup extends \MerchantAPI\Model
     /** @var string ELIGIBILITY_LOGGED_IN */
     const ELIGIBILITY_LOGGED_IN = 'L';
 
+    /** @var string DISCOUNT_TYPE_RETAIL */
+    const DISCOUNT_TYPE_RETAIL = 'R';
+
+    /** @var string DISCOUNT_TYPE_COST */
+    const DISCOUNT_TYPE_COST = 'C';
+
+    /** @var string DISCOUNT_TYPE_DISCOUNT_RETAIL */
+    const DISCOUNT_TYPE_DISCOUNT_RETAIL = 'D';
+
+    /** @var string DISCOUNT_TYPE_MARKUP_COST */
+    const DISCOUNT_TYPE_MARKUP_COST = 'M';
+
     /**
      * Constructor.
      *
@@ -112,6 +124,16 @@ class PriceGroup extends \MerchantAPI\Model
     public function getCustomerScope()
     {
         return $this->getField('custscope');
+    }
+
+    /**
+     * Get rate.
+     *
+     * @return string
+     */
+    public function getRate()
+    {
+        return $this->getField('rate');
     }
 
     /**

@@ -48,6 +48,16 @@ class ProductVariantPart extends \MerchantAPI\Model
     }
 
     /**
+     * Get product_sku.
+     *
+     * @return string
+     */
+    public function getProductSku()
+    {
+        return $this->getField('product_sku');
+    }
+
+    /**
      * Get quantity.
      *
      * @return int
@@ -55,5 +65,15 @@ class ProductVariantPart extends \MerchantAPI\Model
     public function getQuantity()
     {
         return (int) $this->getField('quantity', 0);
+    }
+
+    /**
+     * Get offset.
+     *
+     * @return int
+     */
+    public function getOffset()
+    {
+        return (int) $this->getField('offset', 0);
     }
 }

@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: CallingModuleAPIFunctionsExample.php 71516 2018-11-13 21:17:45Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -29,7 +27,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
  * use the Module request class to call into the module.
  */
 
-$request = new Module();
+$request = new Module($client);
 
 $request->setModuleCode('MyModuleCode')
     ->setModuleFunction('MyModuleFunction');
@@ -49,7 +47,8 @@ $request->setModuleField('MyModuleField', 'Foo')
 /* send the request for the response */
 try
 {
-    $response = $client->send($request); // MerchantAPI\Response\Module
+    $response = $request->send(); // MerchantAPI\Response\Module
+    // Alternately: $response = $client->send($request); // MerchantAPI\Response\Module
 } catch(ClientException $e) {
     printf("Error Executing Module Request: %s\r\n", $e->getMessage());
     exit;

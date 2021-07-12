@@ -41,6 +41,9 @@ class BaseClient
     protected $authenticator;
 
     /** @var array */
+    protected $globalHeaders = [];
+
+    /** @var array */
     protected $options = [
         'require_timestamp'         => true,
         'default_store_code'        => null,
@@ -171,6 +174,50 @@ class BaseClient
     }
 
     /**
+     * Set a global header to be sent with each request
+     * @param string 
+     * @param string
+     * @return Client
+     */
+    public function setGlobalHeader($key, $value)
+    {
+        $this->globalHeaders[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Get a global header if defined or null if not
+     * @param string 
+     * @return string|null
+     */
+    public function getGlobalHeader($key)
+    {
+        return isset($this->globalHeaders[$key]) ?
+            $this->globalHeaders[$key] : null;
+    }
+
+    /**
+     * Check if a global header is defined
+     * @param string 
+     * @return bool
+     */
+    public function hasGlobalHeader($key)
+    {
+        return isset($this->globalHeaders[$key]) ? true : false;
+    }
+
+    /**
+     * Remove a defined global header
+     * @param string 
+     * @return Client
+     */
+    public function removeGlobalHeader($key)
+    {
+        unset($this->globalHeaders[$key]);
+        return $this;
+    }
+
+    /**
      * Send a RequestInterface and get back its assigned ResponseInterface.
      *
      * @param \MerchantAPI\RequestInterface $request
@@ -218,15 +265,13 @@ class BaseClient
             $data['Miva_Request_Timestamp'] = time();
         }
 
-        $headers = new HttpHeaders();
+        $headers = new HttpHeaders($this->globalHeaders);
 
-        if ($this->getOption('operation_timeout') != Client::DEFAULT_OPERATION_TIMEOUT)
-        {
+        if ($this->getOption('operation_timeout') != Client::DEFAULT_OPERATION_TIMEOUT) {
             $headers->add('X-Miva-API-Timeout', $this->getOption('operation_timeout'));
         }
 
-        if ($request->getBinaryEncoding() == Request::BINARY_ENCODING_BASE64)
-        {
+        if ($request->getBinaryEncoding() == Request::BINARY_ENCODING_BASE64) {
             $headers->add('X-Miva-API-Binary-Encoding', $request->getBinaryEncoding());
         }
 
@@ -238,7 +283,9 @@ class BaseClient
 
         $httpResponse = $this->sendRequestLowLevel($data, [], $headers);
 
-        $json = json_decode($httpResponse->getContent(), true);
+        $errorResponse = $httpResponse->getStatus() < 200 || $httpResponse->getStatus() >= 300;
+
+        $json = $errorResponse !== true ? json_decode($httpResponse->getContent(), true) : [];
 
         if (!is_array($json)) {
             throw new ClientException(sprintf('Error Decoding JSON: %s', json_last_error_msg()));
@@ -253,6 +300,14 @@ class BaseClient
 
         if ($this->logger instanceof Logger) {
             $this->logger->logResponse($response);
+        }
+
+        if ($errorResponse) {
+            if ($httpResponse->getStatus() == 401) {
+                throw new ClientException('HTTP Authentication Error');
+            }
+
+            throw new ClientException('HTTP Response Error');
         }
 
         return $response;

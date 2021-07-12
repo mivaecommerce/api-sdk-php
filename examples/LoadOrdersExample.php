@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: LoadOrdersExample.php 71893 2018-12-07 23:26:05Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -25,7 +23,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
 ]);
 
 /* Create a new Request object */
-$orderListRequest = new OrderListLoadQuery();
+$orderListRequest = new OrderListLoadQuery($client);
 
 /* include additional order information by including ondemandcolumns */
 $orderListRequest->setOnDemandColumns([
@@ -55,7 +53,8 @@ $orderListRequest->setPassphrase('MY_ENCRYPTION_KEYS_PASSPHRASE');
 
 /* Send the request for a response */
 try {
-    $orderListResponse = $client->send($orderListRequest);
+    $orderListResponse = $orderListRequest->send();
+    // Alternately: $orderListResponse = $client->send($orderListRequest);
 } catch(ClientException $e) {
     printf("Error Executing OrderListLoadQuery Request: %s\r\n", $e->getMessage());
     exit;

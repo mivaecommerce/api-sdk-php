@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: UpdateProductInventoryExample.php 71528 2018-11-14 01:11:15Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -26,7 +24,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
 ]);
 
 /* Create a new ProductListAdjustInventory model object */
-$productInventoryAdjustRequest = new ProductListAdjustInventory();
+$productInventoryAdjustRequest = new ProductListAdjustInventory($client);
 
 /* or
  * $client->createRequest('ProductListAdjustInventory');
@@ -67,7 +65,8 @@ $productInventoryAdjustRequest->addInventoryAdjustments([
 /* send the request for the response */
 try
 {
-    $productInventoryAdjustResponse= $client->send($productInventoryAdjustRequest); // MerchantAPI\Response\ProductListAdjustInventory
+    $productInventoryAdjustResponse= $productInventoryAdjustRequest->send(); // MerchantAPI\Response\ProductListAdjustInventory
+    // Alternately: $productInventoryAdjustResponse= $client->send($productInventoryAdjustRequest); 
 } catch(ClientException $e) {
     printf("Error Executing ProductListAdjustInventory Request: %s\r\n", $e->getMessage());
     exit;

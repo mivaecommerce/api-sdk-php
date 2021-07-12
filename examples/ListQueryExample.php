@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: ListQueryExample.php 73558 2019-02-19 18:15:01Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -33,7 +31,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
  * @see MerchantAPI\ListQuery\FilterExpression
  */
 
-$request = new ProductListLoadQuery();
+$request = new ProductListLoadQuery($client);
 
 /*
  * Create a FilterExpression object for the request.
@@ -147,7 +145,8 @@ $request->setCustomFilter('Custom_Filter_Name', 'Custom_Filter_Value');
 
 /* Send the request */
 try {
-    $response = $client->send($request); // MerchantAPI\Response\ProductListLoadQuery
+    $response = $request->send(); // MerchantAPI\Response\ProductListLoadQuery
+    // Alternately: $response = $client->send($request);
 } catch(ClientException $e) {
     printf("Error Executing ProductListLoadQuery Request: %s\r\n", $e->getMessage());
     exit;

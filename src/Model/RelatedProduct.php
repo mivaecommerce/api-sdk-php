@@ -176,4 +176,14 @@ class RelatedProduct extends \MerchantAPI\Model
     {
         return (int) $this->getField('dt_updated', 0);
     }
+
+    /**
+     * Get assigned.
+     *
+     * @return bool
+     */
+    public function getAssigned()
+    {
+        return (bool) $this->getField('assigned', false);
+    }
 }

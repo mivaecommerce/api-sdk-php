@@ -69,6 +69,7 @@ class BranchJavaScriptResourceVersionListLoadQuery extends ListQueryRequest
         'source',
         'linkedpages',
         'linkedresources',
+        'source_notes',
     ];
 
     /** @var int */

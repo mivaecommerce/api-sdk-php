@@ -332,6 +332,26 @@ class OrderItem extends \MerchantAPI\Model
     }
 
     /**
+     * Get tax.
+     *
+     * @return float
+     */
+    public function getTax()
+    {
+        return (float) $this->getField('tax', 0.00);
+    }
+
+    /**
+     * Get formatted_tax.
+     *
+     * @return string
+     */
+    public function getFormattedTax()
+    {
+        return $this->getField('formatted_tax');
+    }
+
+    /**
      * Get weight.
      *
      * @return float
@@ -439,6 +459,16 @@ class OrderItem extends \MerchantAPI\Model
     public function getTrackingNumber()
     {
         return $this->getField('tracknum');
+    }
+
+    /**
+     * Get shpmnt_id.
+     *
+     * @return int
+     */
+    public function getShipmentId()
+    {
+        return (int) $this->getField('shpmnt_id', 0);
     }
 
     /**

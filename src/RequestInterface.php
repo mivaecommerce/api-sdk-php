@@ -27,6 +27,9 @@ interface RequestInterface
     /** @var string REQUEST_SCOPE_DOMAIN */
     const REQUEST_SCOPE_DOMAIN  = 'domain';
 
+    /** @var string REQUEST_SCOPE_DOMAIN_OPTIONAL_STORE */
+    const REQUEST_SCOPE_DOMAIN_OPTIONAL_STORE  = 'domain_optional_store';
+
     /** @var string BINARY_ENCODING_DEFAULT */
     const BINARY_ENCODING_DEFAULT   = 'json';
 

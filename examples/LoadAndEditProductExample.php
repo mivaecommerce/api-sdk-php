@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: LoadAndEditProductExample.php 73799 2019-03-05 18:13:11Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -26,7 +24,7 @@ $client = new Client('https://www.mystore.com/mm5/json.mvc', 'TOKEN_CREATED_IN_A
 ]);
 
 /* Create a new ProductListLoadQuery Request object */
-$productListRequest = new ProductListLoadQuery();
+$productListRequest = new ProductListLoadQuery($client);
 
 /* or
  * $client->createRequest('ProductListLoadQuery');
@@ -49,7 +47,8 @@ $productListRequest->addOnDemandColumn('CustomField_Values:*');
 /* send the request for the response */
 try
 {
-    $productListResponse = $client->send($productListRequest); // MerchantAPI\Response\ProductListLoadQuery
+    $productListResponse = $productListRequest; // MerchantAPI\Response\ProductListLoadQuery
+    // Alternately: $productListResponse = $client->send($productListRequest); // MerchantAPI\Response\ProductListLoadQuery
 } catch(ClientException $e) {
     printf("Error Executing ProductListLoadQuery Request: %s\r\n", $e->getMessage());
     exit;
@@ -74,7 +73,7 @@ printf("Loaded Product %s Code %s Name %s\r\n", $product->getId(), $product->get
  * which will allow the Request object to inherit data from.
  * ProductUpdate accepts a Product model.
  */
-$updateProductRequest = new ProductUpdate($product);
+$updateProductRequest = new ProductUpdate($client, $product);
 
 /*
  * or
@@ -100,7 +99,8 @@ $updateProductRequest->getCustomFieldValues()->addValue('MyField', 'MyValue', 'M
 
 
 try {
-    $updateProductResponse = $client->send($updateProductRequest); // MerchantAPI\Response\ProductUpdate
+    $updateProductResponse = $updateProductRequest->send(); // MerchantAPI\Response\ProductUpdate
+    // Alternately: $updateProductResponse = $client->send($updateProductRequest); // MerchantAPI\Response\ProductUpdate
 } catch(ClientException $e) {
     printf("Error Executing ProductUpdate Request: %s\r\n", $e->getMessage());
     exit;

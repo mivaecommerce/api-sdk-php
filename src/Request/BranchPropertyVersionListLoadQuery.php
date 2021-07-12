@@ -70,6 +70,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
         'product',
         'category',
         'source',
+        'source_notes',
     ];
 
     /** @var int */

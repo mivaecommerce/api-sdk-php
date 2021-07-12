@@ -275,4 +275,14 @@ class PropertyVersion extends \MerchantAPI\Model
     {
         return (bool) $this->getField('sync', false);
     }
+
+    /**
+     * Get source_notes.
+     *
+     * @return string
+     */
+    public function getSourceNotes()
+    {
+        return $this->getField('source_notes');
+    }
 }

@@ -67,6 +67,7 @@ class ChangesetCSSResourceVersionListLoadQuery extends ListQueryRequest
     /** @var array Requests available on demand columns */
     protected $availableOnDemandColumns = [
         'source',
+        'source_notes',
     ];
 
     /** @var int */

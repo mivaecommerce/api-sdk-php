@@ -6,8 +6,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * $Id: ClientExample.php 71466 2018-11-09 19:00:34Z gidriss $
  */
 
 require_once( dirname( __FILE__ ).'/../vendor/autoload.php');
@@ -42,6 +40,9 @@ $client_options = [
     */
     'default_store_code'        => 'MYSTORE',
 
+    /* Multi call operation timeout, in seconds. Defaults to 60 */
+    'operation_timeout'         => 60,
+
     /*
         You can specify/override cURL options as an array
         of CURPOT_* constans as key/value pairs.
@@ -57,3 +58,19 @@ $client_options = [
 ];
 
 $client = new Client($api_endpoint, $api_token, $api_signing_key, $client_options);
+
+
+/// Request Logging can be enabled by assigning a Logger instance to the client
+
+/// Currently, we provide two logger types:
+//       FileLogger - logs to a local file
+//       ConsoleLogger - logs to std out/err
+
+// Setting up a FileLogger
+$client->setLogger(new \MerchantAPI\Logger\FileLogger("/path/to/my/logfile.log"));
+
+// Setting up a ConsoleLogger to log to stdout
+$client->setLogger(new \MerchantAPI\Logger\ConsoleLogger(\MerchantAPI\Logger\ConsoleLogger::DESTINATION_STDOUT));
+
+// Setting up a ConsoleLogger to log to stderr
+$client->setLogger(new \MerchantAPI\Logger\ConsoleLogger(\MerchantAPI\Logger\ConsoleLogger::DESTINATION_STDERR));

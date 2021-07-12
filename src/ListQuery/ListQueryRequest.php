@@ -11,6 +11,7 @@
 namespace MerchantAPI\ListQuery;
 
 use MerchantAPI\Request;
+use MerchantAPI\BaseClient;
 
 /**
  * Abstract request class for use with *List_Load_Query functions.
@@ -24,7 +25,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     protected $sort;
 
     /** @var array|\MerchantAPI\ListQuery\FilterExpression */
-    protected $filters = [];
+    protected $filters;
 
     /** @var array */
     protected $availableSearchFields    = [];
@@ -49,6 +50,18 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
 
     /** @var int */
     protected $count = 0;
+
+    /**
+     * Constructor
+     *
+     * @param Client $client
+     */
+    public function __construct(BaseClient $client = null)
+    {
+        parent::__construct($client);
+
+        $this->filters = new FilterExpression($this);
+    }
 
     /**
      * @inheritDoc
