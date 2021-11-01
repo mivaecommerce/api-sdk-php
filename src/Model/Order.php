@@ -80,6 +80,7 @@ class Order extends \MerchantAPI\Model
         $this->setField('discounts', new Collection());
         $this->setField('payments', new Collection());
         $this->setField('notes', new Collection());
+        $this->setField('parts', new Collection());
 
         if (isset($data['customer'])) {
             if ($data['customer'] instanceof Customer) {
@@ -195,6 +196,23 @@ class Order extends \MerchantAPI\Model
             $this->setField('notes', $notes);
         }
 
+        if (isset($data['parts']) && is_array($data['parts'])) {
+            $parts = new Collection();
+
+            foreach($data['parts'] as $e) {
+                if ($e instanceof OrderPart) {
+                    $parts[] = $e;
+                } else if (is_array($e)) {
+                    $parts[] = new OrderPart($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of OrderPart or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('parts', $parts);
+        }
+
         if (isset($data['CustomField_Values'])) {
             if ($data['CustomField_Values'] instanceof CustomFieldValues) {
                 $this->setField('CustomField_Values', $data['CustomField_Values']);
@@ -288,6 +306,18 @@ class Order extends \MerchantAPI\Model
                 foreach($this->data['notes'] as $i => $e) {
                     if ($e instanceof OrderNote) {
                         $this->data['notes'][$i] = clone $this->data['notes'][$i];
+                    }
+                }
+            }
+        }
+
+        if (isset($this->data['parts']) && is_array($this->data['parts'])) {
+            if ($this->data['parts'] instanceof Collection) {
+                $this->data['parts'] = clone $this->data['parts'];
+            } else {
+                foreach($this->data['parts'] as $i => $e) {
+                    if ($e instanceof OrderPart) {
+                        $this->data['parts'][$i] = clone $this->data['parts'][$i];
                     }
                 }
             }
@@ -968,6 +998,16 @@ class Order extends \MerchantAPI\Model
     public function getNotes()
     {
         return $this->getField('notes', []);
+    }
+
+    /**
+     * Get parts.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderPart[]
+     */
+    public function getParts()
+    {
+        return $this->getField('parts', []);
     }
 
     /**

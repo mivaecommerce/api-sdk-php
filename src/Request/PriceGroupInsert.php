@@ -48,6 +48,12 @@ class PriceGroupInsert extends Request
     /** @var int */
     protected $moduleId;
 
+    /** @var string */
+    protected $editModule;
+
+    /** @var string */
+    protected $moduleCode;
+
     /** @var bool */
     protected $exclusion;
 
@@ -163,6 +169,26 @@ class PriceGroupInsert extends Request
     public function getModuleId()
     {
         return $this->moduleId;
+    }
+
+    /**
+     * Get Edit_Module.
+     *
+     * @return string
+     */
+    public function getEditModule()
+    {
+        return $this->editModule;
+    }
+
+    /**
+     * Get Module_Code.
+     *
+     * @return string
+     */
+    public function getModuleCode()
+    {
+        return $this->moduleCode;
     }
 
     /**
@@ -446,6 +472,32 @@ class PriceGroupInsert extends Request
     }
 
     /**
+     * Set Edit_Module.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setEditModule($editModule)
+    {
+        $this->editModule = $editModule;
+
+        return $this;
+    }
+
+    /**
+     * Set Module_Code.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setModuleCode($moduleCode)
+    {
+        $this->moduleCode = $moduleCode;
+
+        return $this;
+    }
+
+    /**
      * Set Exclusion.
      *
      * @param bool
@@ -720,6 +772,14 @@ class PriceGroupInsert extends Request
     {
         $data = array_merge(parent::toArray(), $this->getModuleFields());
 
+        if ($this->getModuleId()) {
+            $data['Module_ID'] = $this->getModuleId();
+        } else if ($this->getEditModule()) {
+            $data['Edit_Module'] = $this->getEditModule();
+        } else if ($this->getModuleCode()) {
+            $data['Module_Code'] = $this->getModuleCode();
+        }
+
         if (!is_null($this->getName())) {
             $data['Name'] = $this->getName();
         }
@@ -738,10 +798,6 @@ class PriceGroupInsert extends Request
 
         if (!is_null($this->getMarkup())) {
             $data['Markup'] = $this->getMarkup();
-        }
-
-        if (!is_null($this->getModuleId())) {
-            $data['Module_ID'] = $this->getModuleId();
         }
 
         if (!is_null($this->getExclusion())) {

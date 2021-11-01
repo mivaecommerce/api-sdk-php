@@ -91,6 +91,16 @@ class TemplateChange extends \MerchantAPI\Model
     }
 
     /**
+     * Get Notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->getField('Notes');
+    }
+
+    /**
      * Set Template_ID.
      *
      * @param int
@@ -140,5 +150,16 @@ class TemplateChange extends \MerchantAPI\Model
             throw new \InvalidArgumentException(sprintf('Expected array, instance of TemplateVersionSettings, or null but got %s',
                 is_object($settings) ? get_class($settings) : gettype($settings)));
         }
+    }
+
+    /**
+     * Set Notes.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setNotes($notes)
+    {
+        return $this->setField('Notes', $notes);
     }
 }

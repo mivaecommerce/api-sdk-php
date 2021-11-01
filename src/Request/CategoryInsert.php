@@ -68,6 +68,7 @@ class CategoryInsert extends Request
             $this->setCategoryName($category->getName());
             $this->setCategoryActive($category->getActive());
             $this->setCategoryPageTitle($category->getPageTitle());
+            $this->setCategoryParentCategory($category->getParentCategory());
             $this->setCategoryAlternateDisplayPage($category->getPageCode());
 
             if ($category->getCustomFieldValues()) {

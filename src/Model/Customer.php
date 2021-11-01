@@ -365,6 +365,66 @@ class Customer extends \MerchantAPI\Model
     }
 
     /**
+     * Get tax_exempt.
+     *
+     * @return bool
+     */
+    public function getTaxExempt()
+    {
+        return (bool) $this->getField('tax_exempt', false);
+    }
+
+    /**
+     * Get order_cnt.
+     *
+     * @return int
+     */
+    public function getOrderCount()
+    {
+        return (int) $this->getField('order_cnt', 0);
+    }
+
+    /**
+     * Get order_avg.
+     *
+     * @return float
+     */
+    public function getOrderAverage()
+    {
+        return (float) $this->getField('order_avg', 0.00);
+    }
+
+    /**
+     * Get formatted_order_avg.
+     *
+     * @return string
+     */
+    public function getFormattedOrderAverage()
+    {
+        return $this->getField('formatted_order_avg');
+    }
+
+    /**
+     * Get order_tot.
+     *
+     * @return float
+     */
+    public function getOrderTotal()
+    {
+        return (float) $this->getField('order_tot', 0.00);
+    }
+
+    /**
+     * Get formatted_order_tot.
+     *
+     * @return string
+     */
+    public function getFormattedOrderTotal()
+    {
+        return $this->getField('formatted_order_tot');
+    }
+
+    /**
      * Get note_count.
      *
      * @return int
@@ -392,6 +452,16 @@ class Customer extends \MerchantAPI\Model
     public function getLastLogin()
     {
         return (int) $this->getField('dt_login', 0);
+    }
+
+    /**
+     * Get dt_pwchg.
+     *
+     * @return int
+     */
+    public function getPasswordChangeDateTime()
+    {
+        return (int) $this->getField('dt_pwchg', 0);
     }
 
     /**

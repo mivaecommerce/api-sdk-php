@@ -17,6 +17,12 @@ namespace MerchantAPI\Model;
  */
 class Store extends \MerchantAPI\Model
 {
+    /** @var string CACHE_TYPE_NONE */
+    const CACHE_TYPE_NONE = '';
+
+    /** @var string CACHE_TYPE_REDIS */
+    const CACHE_TYPE_REDIS = 'redis';
+
     /**
      * Get id.
      *
@@ -375,5 +381,55 @@ class Store extends \MerchantAPI\Model
     public function getItemModuleUninstallable()
     {
         return (bool) $this->getField('item_adel', false);
+    }
+
+    /**
+     * Get cache_type.
+     *
+     * @return string
+     */
+    public function getCacheType()
+    {
+        return $this->getField('cache_type');
+    }
+
+    /**
+     * Get redishost.
+     *
+     * @return string
+     */
+    public function getRedisHost()
+    {
+        return $this->getField('redishost');
+    }
+
+    /**
+     * Get redisport.
+     *
+     * @return int
+     */
+    public function getRedisPort()
+    {
+        return (int) $this->getField('redisport', 0);
+    }
+
+    /**
+     * Get redisto.
+     *
+     * @return int
+     */
+    public function getRedisTimeout()
+    {
+        return (int) $this->getField('redisto', 0);
+    }
+
+    /**
+     * Get redisex.
+     *
+     * @return int
+     */
+    public function getRedisExpiration()
+    {
+        return (int) $this->getField('redisex', 0);
     }
 }

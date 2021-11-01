@@ -122,7 +122,7 @@ class CustomerUpdate extends Request
     /** @var string */
     protected $customerBillCountry;
 
-    /** @var string */
+    /** @var bool */
     protected $customerTaxExempt;
 
     /** @var string */
@@ -175,6 +175,7 @@ class CustomerUpdate extends Request
             $this->setCustomerBillState($customer->getBillState());
             $this->setCustomerBillZip($customer->getBillZip());
             $this->setCustomerBillCountry($customer->getBillCountry());
+            $this->setCustomerTaxExempt($customer->getTaxExempt());
             $this->setCustomerBusinessAccount($customer->getBusinessTitle());
 
             if ($customer->getCustomFieldValues()) {
@@ -486,7 +487,7 @@ class CustomerUpdate extends Request
     /**
      * Get Customer_Tax_Exempt.
      *
-     * @return string
+     * @return bool
      */
     public function getCustomerTaxExempt()
     {
@@ -906,7 +907,7 @@ class CustomerUpdate extends Request
     /**
      * Set Customer_Tax_Exempt.
      *
-     * @param string
+     * @param bool
      * @return $this
      */
     public function setCustomerTaxExempt($customerTaxExempt)

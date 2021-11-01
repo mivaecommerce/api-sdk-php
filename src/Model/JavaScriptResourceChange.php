@@ -180,6 +180,16 @@ class JavaScriptResourceChange extends \MerchantAPI\Model
     }
 
     /**
+     * Get Notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->getField('Notes');
+    }
+
+    /**
      * Set JavaScriptResource_ID.
      *
      * @param int
@@ -308,6 +318,17 @@ class JavaScriptResourceChange extends \MerchantAPI\Model
         }
 
         return $this->setField('Attributes', $attributes);
+    }
+
+    /**
+     * Set Notes.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setNotes($notes)
+    {
+        return $this->setField('Notes', $notes);
     }
 
     /**

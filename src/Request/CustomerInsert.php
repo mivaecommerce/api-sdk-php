@@ -163,6 +163,7 @@ class CustomerInsert extends Request
             $this->setCustomerBillState($customer->getBillState());
             $this->setCustomerBillZip($customer->getBillZip());
             $this->setCustomerBillCountry($customer->getBillCountry());
+            $this->setCustomerTaxExempt($customer->getTaxExempt());
             $this->setCustomerBusinessAccount($customer->getBusinessTitle());
 
             if ($customer->getCustomFieldValues()) {

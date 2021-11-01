@@ -78,6 +78,16 @@ class OrderCharge extends \MerchantAPI\Model
     }
 
     /**
+     * Get formatted_amount.
+     *
+     * @return string
+     */
+    public function getFormattedAmount()
+    {
+        return $this->getField('formatted_amount');
+    }
+
+    /**
      * Get disp_amt.
      *
      * @return float
@@ -85,6 +95,16 @@ class OrderCharge extends \MerchantAPI\Model
     public function getDisplayAmount()
     {
         return (float) $this->getField('disp_amt', 0.00);
+    }
+
+    /**
+     * Get formatted_disp_amt.
+     *
+     * @return string
+     */
+    public function getFormattedDisplayAmount()
+    {
+        return $this->getField('formatted_disp_amt');
     }
 
     /**
@@ -105,6 +125,16 @@ class OrderCharge extends \MerchantAPI\Model
     public function getTax()
     {
         return (float) $this->getField('tax', 0.00);
+    }
+
+    /**
+     * Get formatted_tax.
+     *
+     * @return string
+     */
+    public function getFormattedTax()
+    {
+        return $this->getField('formatted_tax');
     }
 
     /**

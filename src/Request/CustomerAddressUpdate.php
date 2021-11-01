@@ -106,7 +106,8 @@ class CustomerAddressUpdate extends Request
             $this->setFirstName($customerAddress->getFirstName());
             $this->setLastName($customerAddress->getLastName());
             $this->setEmail($customerAddress->getEmail());
-            $this->setFax($customerAddress->getPhone());
+            $this->setPhone($customerAddress->getPhone());
+            $this->setFax($customerAddress->getFax());
             $this->setCompany($customerAddress->getCompany());
             $this->setAddress1($customerAddress->getAddress1());
             $this->setAddress2($customerAddress->getAddress2());

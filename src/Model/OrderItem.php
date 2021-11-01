@@ -516,6 +516,17 @@ class OrderItem extends \MerchantAPI\Model
     }
 
     /**
+     * Set tax.
+     *
+     * @param float
+     * @return $this
+     */
+    public function setTax($tax)
+    {
+        return $this->setField('tax', $tax);
+    }
+
+    /**
      * Set weight.
      *
      * @param float

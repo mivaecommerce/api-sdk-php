@@ -24,8 +24,8 @@ class Version
     const MINOR   = 0;
 
     /** @var int Patch Version */
-    const PATCH   = 1;
+    const PATCH   = 2;
 
     /** @var string Version as string */
-    const STRING = '2.0.1';
+    const STRING = '2.0.2';
 }
