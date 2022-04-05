@@ -28,10 +28,10 @@ class PropertyChange extends \MerchantAPI\Model
         parent::__construct($data);
 
         if (isset($data['Settings'])) {
-            if ($data['Settings'] instanceof TemplateVersionSettings) {
+            if ($data['Settings'] instanceof VersionSettings) {
                 $this->setField('Settings', $data['Settings']);
             } else {
-                $this->setField('Settings', new TemplateVersionSettings($data['Settings']));
+                $this->setField('Settings', new VersionSettings($data['Settings']));
             }
         }
     }
@@ -44,7 +44,7 @@ class PropertyChange extends \MerchantAPI\Model
     public function __clone()
     {
         if (isset($data['Settings'])) {
-            if ($this->data['Settings'] instanceof TemplateVersionSettings) {
+            if ($this->data['Settings'] instanceof VersionSettings) {
                 $this->data['Settings'] = clone $this->data['Settings'];
             }
         }
@@ -153,11 +153,31 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Settings.
      *
-     * @return \MerchantAPI\Model\TemplateVersionSettings|null
+     * @return \MerchantAPI\Model\VersionSettings|null
      */
     public function getSettings()
     {
         return $this->getField('Settings', null);
+    }
+
+    /**
+     * Get Image.
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->getField('Image');
+    }
+
+    /**
+     * Get Image_ID.
+     *
+     * @return int
+     */
+    public function getImageId()
+    {
+        return (int) $this->getField('Image_ID', 0);
     }
 
     /**
@@ -283,20 +303,42 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Settings.
      *
-     * @param array|TemplateVersionSettings
+     * @param array|VersionSettings
      * @throws \InvalidArgumentException
      * @return $this
      */
     public function setSettings($settings)
     {
         if (is_array($settings)) {
-            return $this->setField('Settings', new TemplateVersionSettings($settings));
-        } else if ($settings instanceof TemplateVersionSettings || is_null($settings)) {
+            return $this->setField('Settings', new VersionSettings($settings));
+        } else if ($settings instanceof VersionSettings || is_null($settings)) {
             return $this->setField('Settings', $settings);
         } else {
-            throw new \InvalidArgumentException(sprintf('Expected array, instance of TemplateVersionSettings, or null but got %s',
+            throw new \InvalidArgumentException(sprintf('Expected array, instance of VersionSettings, or null but got %s',
                 is_object($settings) ? get_class($settings) : gettype($settings)));
         }
+    }
+
+    /**
+     * Set Image.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setImage($image)
+    {
+        return $this->setField('Image', $image);
+    }
+
+    /**
+     * Set Image_ID.
+     *
+     * @param int
+     * @return $this
+     */
+    public function setImageId($imageId)
+    {
+        return $this->setField('Image_ID', $imageId);
     }
 
     /**

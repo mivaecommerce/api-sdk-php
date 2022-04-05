@@ -77,7 +77,7 @@ class HttpResponse extends HttpMessage
 
         if (empty($normalized)) {
             return $length;
-        } else if (preg_match('/^HTTP\/\d\.\d/', $header)) {
+        } else if (preg_match('/^HTTP\/\d/', $header)) {
             $parts = explode(' ', $header);
 
             $this->setProtocol($parts[0]);

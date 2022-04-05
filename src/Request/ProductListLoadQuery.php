@@ -98,6 +98,7 @@ class ProductListLoadQuery extends ListQueryRequest
         'productshippingrules',
         'relatedproducts',
         'uris',
+        'url',
     ];
 
     /** @var array Requests available on custom filters */

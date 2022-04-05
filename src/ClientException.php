@@ -10,6 +10,8 @@
 
 namespace MerchantAPI;
 
+use MerchantAPI\Http\HttpResponse;
+
 /**
  * Class ClientException.
  *
@@ -17,5 +19,16 @@ namespace MerchantAPI;
  */
 class ClientException extends \Exception
 {
+    protected $httpResponse = null;
+    
+    public function __construct(string $message = "", int $code = 0, \Throwable $previous = null, HttpResponse $httpResponse = null)
+    {
+        parent::__construct($message, $code, $previous);
+        $this->httpResponse = $httpResponse;
+    }
 
+    public function getHttpResponse()
+    {
+        return $this->httpResponse;
+    }
 }

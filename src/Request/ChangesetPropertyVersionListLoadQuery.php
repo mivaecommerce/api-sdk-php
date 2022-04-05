@@ -71,6 +71,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
         'category',
         'source',
         'source_notes',
+        'image',
     ];
 
     /** @var int */

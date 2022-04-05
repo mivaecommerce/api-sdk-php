@@ -81,6 +81,8 @@ class Order extends \MerchantAPI\Model
         $this->setField('payments', new Collection());
         $this->setField('notes', new Collection());
         $this->setField('parts', new Collection());
+        $this->setField('shipments', new Collection());
+        $this->setField('returns', new Collection());
 
         if (isset($data['customer'])) {
             if ($data['customer'] instanceof Customer) {
@@ -224,6 +226,40 @@ class Order extends \MerchantAPI\Model
                         get_class($data['CustomField_Values']) : gettype($data['CustomField_Values'])));
             }
         }
+
+        if (isset($data['shipments']) && is_array($data['shipments'])) {
+            $shipments = new Collection();
+
+            foreach($data['shipments'] as $e) {
+                if ($e instanceof OrderShipment) {
+                    $shipments[] = $e;
+                } else if (is_array($e)) {
+                    $shipments[] = new OrderShipment($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of OrderShipment or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('shipments', $shipments);
+        }
+
+        if (isset($data['returns']) && is_array($data['returns'])) {
+            $returns = new Collection();
+
+            foreach($data['returns'] as $e) {
+                if ($e instanceof OrderReturn) {
+                    $returns[] = $e;
+                } else if (is_array($e)) {
+                    $returns[] = new OrderReturn($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of OrderReturn or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('returns', $returns);
+        }
     }
 
     /**
@@ -326,6 +362,30 @@ class Order extends \MerchantAPI\Model
         if (isset($data['CustomField_Values'])) {
             if ($this->data['CustomField_Values'] instanceof CustomFieldValues) {
                 $this->data['CustomField_Values'] = clone $this->data['CustomField_Values'];
+            }
+        }
+
+        if (isset($this->data['shipments']) && is_array($this->data['shipments'])) {
+            if ($this->data['shipments'] instanceof Collection) {
+                $this->data['shipments'] = clone $this->data['shipments'];
+            } else {
+                foreach($this->data['shipments'] as $i => $e) {
+                    if ($e instanceof OrderShipment) {
+                        $this->data['shipments'][$i] = clone $this->data['shipments'][$i];
+                    }
+                }
+            }
+        }
+
+        if (isset($this->data['returns']) && is_array($this->data['returns'])) {
+            if ($this->data['returns'] instanceof Collection) {
+                $this->data['returns'] = clone $this->data['returns'];
+            } else {
+                foreach($this->data['returns'] as $i => $e) {
+                    if ($e instanceof OrderReturn) {
+                        $this->data['returns'][$i] = clone $this->data['returns'][$i];
+                    }
+                }
             }
         }
     }
@@ -1018,5 +1078,35 @@ class Order extends \MerchantAPI\Model
     public function getCustomFieldValues()
     {
         return $this->getField('CustomField_Values', null);
+    }
+
+    /**
+     * Get dt_updated.
+     *
+     * @return int
+     */
+    public function getDtUpdated()
+    {
+        return (int) $this->getField('dt_updated', 0);
+    }
+
+    /**
+     * Get shipments.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderShipment[]
+     */
+    public function getShipments()
+    {
+        return $this->getField('shipments', []);
+    }
+
+    /**
+     * Get returns.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderReturn[]
+     */
+    public function getReturns()
+    {
+        return $this->getField('returns', []);
     }
 }

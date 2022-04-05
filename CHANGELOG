@@ -1,3 +1,28 @@
+v2.1.0
+	- MMAPI-39 - Added the following functions introduced in 10.03.00
+				CustomerSubscriptionList_Load_Query
+				ProductAndSubscriptionTermList_Load_Query
+				ProductSubscriptionTermList_Load_Query
+				SubscriptionShippingMethodList_Load_Query
+				Subscription_Update
+				Subscription_Insert
+				SubscriptionList_Delete
+				SubscriptionAndOrderItem_Add
+				SubscriptionAndOrderItem_Update
+	- MMAPI-40 - TemplateVersionSettings renamed to VersionSettings
+	- MMAPI-43 - Add support for the new JSON_DateTime structure format
+	- MMAPI-44 - New fields on Order model - shipment and returns
+			   New ondemand column support for shipment and returns on OrderList_Load_Query
+	- MMAPI-45 -  Added url ondemandcolumn to ProductList_Load_Query
+				Added imagetype ondemandcolumn to ProductList_Load_Query
+	- MMAPI-46 - Added new field on Order model - dt_updated
+	- MMAPI-47 - Added support for image properties when creating managed property changes (MM-11193)
+	- MMAPI-48 - OrderItemSubscription now inherits from Subscription model
+	- MMAPI-49 - Fixed invalid object references in setItem and hasItem methods of VersionSettings
+	- MMAPI-50 - Add example subscription usage
+	- MMAPI-54 - ClientException now contains an HTTPResponse object if an HTTPResponse was received.
+				 Access the HTTP Response from the exception object with method getHttpResponse()
+	- MMAPI-55 - HttpClient now properly parsing out HTTP status header line when http version does not contain a decimal
 v2.0.2
 	MM-10502 - Added the following API Functions introduced in 10.01.00:
 		Attribute_CopyTemplate

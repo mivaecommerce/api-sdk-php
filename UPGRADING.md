@@ -1,3 +1,9 @@
+# Upgrade Guide from 2.0.X to 2.1.0+
+
+The class `TemplateVersionSettings` has been renamed to `VersionSettings`.
+
+If you are utilizing this class within your code then you will need to be renamed in their type declarations. Usage has stayed the same.
+
 # Upgrade Guide from 1.x to 2.x
 
 ## All Request constructor arguments

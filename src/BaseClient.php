@@ -288,14 +288,14 @@ class BaseClient
         $json = $errorResponse !== true ? json_decode($httpResponse->getContent(), true) : [];
 
         if (!is_array($json)) {
-            throw new ClientException(sprintf('Error Decoding JSON: %s', json_last_error_msg()));
+            throw new ClientException(sprintf('Error Decoding JSON: %s', json_last_error_msg()), 0, null, $httpResponse);
         }
 
         $response = $request->createResponse($httpResponse, $json);
 
         if (!$response instanceof ResponseInterface) {
             throw new ClientException(sprintf('Expected instance of ResponseInterface but got %s',
-                is_object($response) ? get_class($response) : gettype($response)));
+                is_object($response) ? get_class($response) : gettype($response)), 0, null, $httpResponse);
         }
 
         if ($this->logger instanceof Logger) {
@@ -304,10 +304,10 @@ class BaseClient
 
         if ($errorResponse) {
             if ($httpResponse->getStatus() == 401) {
-                throw new ClientException('HTTP Authentication Error');
+                throw new ClientException('HTTP Authentication Error', 0, null, $httpResponse);
             }
 
-            throw new ClientException('HTTP Response Error');
+            throw new ClientException('HTTP Response Error', 0, null, $httpResponse);
         }
 
         return $response;
@@ -351,7 +351,7 @@ class BaseClient
         }
 
         if (!strlen($response->getContent())) {
-            throw new ClientException('Received an empty response');
+            throw new ClientException('Received an empty response', 0, null, $response);
         }
 
         return $response;

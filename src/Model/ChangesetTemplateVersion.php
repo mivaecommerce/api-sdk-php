@@ -28,10 +28,10 @@ class ChangesetTemplateVersion extends \MerchantAPI\Model
         parent::__construct($data);
 
         if (isset($data['settings'])) {
-            if ($data['settings'] instanceof TemplateVersionSettings) {
+            if ($data['settings'] instanceof VersionSettings) {
                 $this->setField('settings', $data['settings']);
             } else {
-                $this->setField('settings', new TemplateVersionSettings($data['settings']));
+                $this->setField('settings', new VersionSettings($data['settings']));
             }
         }
     }
@@ -44,7 +44,7 @@ class ChangesetTemplateVersion extends \MerchantAPI\Model
     public function __clone()
     {
         if (isset($data['settings'])) {
-            if ($this->data['settings'] instanceof TemplateVersionSettings) {
+            if ($this->data['settings'] instanceof VersionSettings) {
                 $this->data['settings'] = clone $this->data['settings'];
             }
         }
@@ -183,7 +183,7 @@ class ChangesetTemplateVersion extends \MerchantAPI\Model
     /**
      * Get settings.
      *
-     * @return \MerchantAPI\Model\TemplateVersionSettings|null
+     * @return \MerchantAPI\Model\VersionSettings|null
      */
     public function getSettings()
     {

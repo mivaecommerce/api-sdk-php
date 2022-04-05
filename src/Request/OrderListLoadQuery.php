@@ -162,6 +162,8 @@ class OrderListLoadQuery extends ListQueryRequest
         'payments',
         'notes',
         'parts',
+        'shipments',
+        'returns',
     ];
 
     /** @var array Requests available on custom filters */

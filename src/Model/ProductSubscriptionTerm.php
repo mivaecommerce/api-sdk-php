@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\Collection;
+
 /**
  * Data model for ProductSubscriptionTerm.
  *
@@ -49,6 +51,56 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
 
     /** @var string TERM_FREQUENCY_DATES */
     const TERM_FREQUENCY_DATES = 'dates';
+
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        $this->setField('dates', new Collection());
+
+        if (isset($data['dates']) && is_array($data['dates'])) {
+            $dates = new Collection();
+
+            foreach($data['dates'] as $e) {
+                if ($e instanceof ProductSubscriptionTermDate) {
+                    $dates[] = $e;
+                } else if (is_array($e)) {
+                    $dates[] = new ProductSubscriptionTermDate($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of ProductSubscriptionTermDate or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('dates', $dates);
+        }
+    }
+
+    /**
+     * Clone.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        if (isset($this->data['dates']) && is_array($this->data['dates'])) {
+            if ($this->data['dates'] instanceof Collection) {
+                $this->data['dates'] = clone $this->data['dates'];
+            } else {
+                foreach($this->data['dates'] as $i => $e) {
+                    if ($e instanceof ProductSubscriptionTermDate) {
+                        $this->data['dates'][$i] = clone $this->data['dates'][$i];
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Get id.
@@ -138,5 +190,15 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
     public function getSubscriptionCount()
     {
         return (int) $this->getField('sub_count', 0);
+    }
+
+    /**
+     * Get dates.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductSubscriptionTermDate[]
+     */
+    public function getDates()
+    {
+        return $this->getField('dates', []);
     }
 }

@@ -71,6 +71,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
         'category',
         'source',
         'source_notes',
+        'image',
     ];
 
     /** @var int */

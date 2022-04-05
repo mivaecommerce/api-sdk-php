@@ -11,11 +11,11 @@
 namespace MerchantAPI\Model;
 
 /**
- * Data model for TemplateVersionSettings.
+ * Data model for VersionSettings.
  *
  * @package MerchantAPI\Model
  */
-class TemplateVersionSettings extends \MerchantAPI\Model
+class VersionSettings extends \MerchantAPI\Model
 {
     /**
      * Constructor
@@ -77,7 +77,7 @@ class TemplateVersionSettings extends \MerchantAPI\Model
      * @return bool
      */
     public function hasItem($item) {
-        return $this->isObject() && isset($this->data[$name]);
+        return $this->isObject() && isset($this->data[$item]);
     }
 
     /**
@@ -116,10 +116,10 @@ class TemplateVersionSettings extends \MerchantAPI\Model
     public function setItem($name, $value) {
         if (is_null($this->data)) {
             $this->data = [
-                $item => []
+                $name => []
             ];
-        } else if($this->hasItem($item)) {
-            $this->data[$item] = $value;
+        } else if($this->hasItem($name)) {
+            $this->data[$name] = $value;
         }
 
         return $this;

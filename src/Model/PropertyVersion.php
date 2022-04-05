@@ -28,10 +28,10 @@ class PropertyVersion extends \MerchantAPI\Model
         parent::__construct($data);
 
         if (isset($data['settings'])) {
-            if ($data['settings'] instanceof TemplateVersionSettings) {
+            if ($data['settings'] instanceof VersionSettings) {
                 $this->setField('settings', $data['settings']);
             } else {
-                $this->setField('settings', new TemplateVersionSettings($data['settings']));
+                $this->setField('settings', new VersionSettings($data['settings']));
             }
         }
 
@@ -68,7 +68,7 @@ class PropertyVersion extends \MerchantAPI\Model
     public function __clone()
     {
         if (isset($data['settings'])) {
-            if ($this->data['settings'] instanceof TemplateVersionSettings) {
+            if ($this->data['settings'] instanceof VersionSettings) {
                 $this->data['settings'] = clone $this->data['settings'];
             }
         }
@@ -229,7 +229,7 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get settings.
      *
-     * @return \MerchantAPI\Model\TemplateVersionSettings|null
+     * @return \MerchantAPI\Model\VersionSettings|null
      */
     public function getSettings()
     {
@@ -284,5 +284,45 @@ class PropertyVersion extends \MerchantAPI\Model
     public function getSourceNotes()
     {
         return $this->getField('source_notes');
+    }
+
+    /**
+     * Get image_id.
+     *
+     * @return int
+     */
+    public function getImageId()
+    {
+        return (int) $this->getField('image_id', 0);
+    }
+
+    /**
+     * Get image.
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->getField('image');
+    }
+
+    /**
+     * Get image_refcount.
+     *
+     * @return int
+     */
+    public function getImageRefcount()
+    {
+        return (int) $this->getField('image_refcount', 0);
+    }
+
+    /**
+     * Get image_head_count.
+     *
+     * @return int
+     */
+    public function getImageHeadCount()
+    {
+        return (int) $this->getField('image_head_count', 0);
     }
 }

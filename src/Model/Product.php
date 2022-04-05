@@ -155,6 +155,14 @@ class Product extends \MerchantAPI\Model
 
             $this->setField('attributes', $attributes);
         }
+
+        $imageTypes = [];
+        foreach($data as $k => $v) {
+            if (stripos($k, 'imagetype:') !== false) {
+                $imageTypes[substr($k, stripos($k, ':') + 1)] = $v;
+            }
+        }
+        $this->setField('image_types', $imageTypes);
     }
 
     /**
@@ -541,5 +549,25 @@ class Product extends \MerchantAPI\Model
     public function getAttributes()
     {
         return $this->getField('attributes', []);
+    }
+
+    /**
+     * Get url.
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->getField('url');
+    }
+
+    /**
+     * Get imagetypes.
+     *
+     * @return array
+     */
+    public function getImageTypes()
+    {
+        return $this->getField('image_types');
     }
 }

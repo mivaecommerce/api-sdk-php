@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\Collection;
+
 /**
  * Data model for Subscription.
  *
@@ -17,6 +19,76 @@ namespace MerchantAPI\Model;
  */
 class Subscription extends \MerchantAPI\Model
 {
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        $this->setField('options', new Collection());
+
+        if (isset($data['options']) && is_array($data['options'])) {
+            $options = new Collection();
+
+            foreach($data['options'] as $e) {
+                if ($e instanceof SubscriptionOption) {
+                    $options[] = $e;
+                } else if (is_array($e)) {
+                    $options[] = new SubscriptionOption($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of SubscriptionOption or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('options', $options);
+        }
+
+        if (isset($data['firstdate']) && is_array($data['firstdate']) && isset($data['firstdate']['time_t'])) {
+            $this->setField('firstdate', $data['firstdate']['time_t']);
+        }
+
+        if (isset($data['lastdate']) && is_array($data['lastdate']) && isset($data['lastdate']['time_t'])) {
+            $this->setField('lastdate', $data['lastdate']['time_t']);
+        }
+
+        if (isset($data['nextdate']) && is_array($data['nextdate']) && isset($data['nextdate']['time_t'])) {
+            $this->setField('nextdate', $data['nextdate']['time_t']);
+        }
+
+        if (isset($data['cncldate']) && is_array($data['cncldate']) && isset($data['cncldate']['time_t'])) {
+            $this->setField('cncldate', $data['cncldate']['time_t']);
+        }
+
+        if (isset($data['lastafail']) && is_array($data['lastafail']) && isset($data['lastafail']['time_t'])) {
+            $this->setField('lastafail', $data['lastafail']['time_t']);
+        }
+    }
+
+    /**
+     * Clone.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        if (isset($this->data['options']) && is_array($this->data['options'])) {
+            if ($this->data['options'] instanceof Collection) {
+                $this->data['options'] = clone $this->data['options'];
+            } else {
+                foreach($this->data['options'] as $i => $e) {
+                    if ($e instanceof SubscriptionOption) {
+                        $this->data['options'][$i] = clone $this->data['options'][$i];
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Get id.
      *
@@ -200,11 +272,11 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get cncldate.
      *
-     * @return string
+     * @return int
      */
     public function getCancelDate()
     {
-        return $this->getField('cncldate');
+        return (int) $this->getField('cncldate', 0);
     }
 
     /**
@@ -285,5 +357,35 @@ class Subscription extends \MerchantAPI\Model
     public function getFormattedTotal()
     {
         return $this->getField('formatted_total');
+    }
+
+    /**
+     * Get authfails.
+     *
+     * @return int
+     */
+    public function getAuthorizationFailureCount()
+    {
+        return (int) $this->getField('authfails', 0);
+    }
+
+    /**
+     * Get lastafail.
+     *
+     * @return int
+     */
+    public function getLastAuthorizationFailure()
+    {
+        return (int) $this->getField('lastafail', 0);
+    }
+
+    /**
+     * Get options.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionOption[]
+     */
+    public function getOptions()
+    {
+        return $this->getField('options', []);
     }
 }
