@@ -21,11 +21,11 @@ class Version
     const MAJOR   = 2;
 
     /** @var int Minor Version */
-    const MINOR   = 1;
+    const MINOR   = 2;
 
     /** @var int Patch Version */
     const PATCH   = 0;
 
     /** @var string Version as string */
-    const STRING = '2.1.0';
+    const STRING = '2.2.0';
 }

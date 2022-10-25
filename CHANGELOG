@@ -1,3 +1,44 @@
+v2.2.0
+  MMAPI-60 - Fixed exception due to incorrect field type for expires in OrderPayments mode. Now a Date type.
+  MMAPI-61 - Added missing member discounts in mode OrderItemOption.
+  MMAPI-62 - The following requests now have their associated model object returned in their response objects:
+	AttributeInsert
+	AttributeTemplateAttributeInsert
+	AttributeTemplateInsert
+	AttributeTemplateOptionInsert
+	AvailabilityGroupInsert
+	BusinessAccountInsert
+	CategoryInsert
+	CategoryURIInsert
+	CouponInsert
+	CustomerAddressInsert
+	CustomerCreditHistoryInsert
+	FeedURIInsert
+	NoteInsert
+	OptionInsert
+	OrderItemAdd
+	PageURIInsert
+	PriceGroupInsert
+	PrintQueueJobInsert
+	ProductImageAdd
+	ProductInsert
+	ProductURIInsert
+	ProductVariantInsert
+	SubscriptionAndOrderItemAdd
+	SubscriptionAndOrderItemUpdate
+	URIInsert
+  MMAPI-63 - New request for SubscriptionList_Load_Query requests
+  MMAPI-64 - ProductVariantInsert/Update now support code inputs
+  MMAPI-65 - ProductVariantGenerate, ProductVariantGenerateDelimiter, and ProductKitGenerateVariant now support string values for pricing method
+  MMAPI-66 - Removed unused fields from ProductVariantUpdate response
+  MMAPI-67 - The following model fields have been renamed:
+	CustomerSubscription.addressDescrip 		-> CustomerSubscription.addressDescription
+	CustomerSubscription.addressAdress 			-> CustomerSubscription.addressAddress
+	CustomerSubscription.addressAddress_1		-> CustomerSubscription.addressAddress1
+	CustomerSubscription.addressAddress_2		-> CustomerSubscription.addressAddress2
+	ProductAndSubscriptionTerm.termDescrip		-> ProductAndSubscriptionTerm.termDescription
+  MMAPI-68 - Added new utility class, ListQueryRequestBuilder
+  MMAPI-71 - Removed invalid field in PrintQueueJob model, printqueue_descript
 v2.1.0
 	- MMAPI-39 - Added the following functions introduced in 10.03.00
 				CustomerSubscriptionList_Load_Query

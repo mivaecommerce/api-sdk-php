@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\AttributeTemplate;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for AttributeTemplate_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class AttributeTemplateInsert extends Response
 {
+    /** @var \MerchantAPI\Model\AttributeTemplate */
+    protected $attributeTemplate;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->attributeTemplate = new AttributeTemplate($this->data['data']);
+    }
+
+    /**
+     * Get attributeTemplate.
+     *
+     * @return \MerchantAPI\Model\AttributeTemplate|null
+     */
+    public function getAttributeTemplate()
+    {
+        return $this->attributeTemplate;
+    }
 }

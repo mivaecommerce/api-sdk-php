@@ -20,31 +20,4 @@ use MerchantAPI\Response;
  */
 class ProductVariantUpdate extends Response
 {
-    /**
-     * Get product_id.
-     *
-     * @return int
-     */
-    public function getProductId()
-    {
-        if (isset($this->data['product_id'])) {
-            return $this->data['product_id'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Get variant_id.
-     *
-     * @return int
-     */
-    public function getVariantId()
-    {
-        if (isset($this->data['variant_id'])) {
-            return $this->data['variant_id'];
-        }
-
-        return null;
-    }
 }

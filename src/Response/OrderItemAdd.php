@@ -11,7 +11,7 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
-use MerchantAPI\Model\OrderTotal;
+use MerchantAPI\Model\OrderTotalAndItem;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
 
@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderItemAdd extends Response
 {
-    /** @var \MerchantAPI\Model\OrderTotal */
-    protected $orderTotal;
+    /** @var \MerchantAPI\Model\OrderTotalAndItem */
+    protected $orderTotalAndItem;
 
     /**
      * @inheritDoc
@@ -37,16 +37,16 @@ class OrderItemAdd extends Response
             return;
         }
 
-        $this->orderTotal = new OrderTotal($this->data['data']);
+        $this->orderTotalAndItem = new OrderTotalAndItem($this->data['data']);
     }
 
     /**
-     * Get orderTotal.
+     * Get orderTotalAndItem.
      *
-     * @return \MerchantAPI\Model\OrderTotal|null
+     * @return \MerchantAPI\Model\OrderTotalAndItem|null
      */
-    public function getOrderTotal()
+    public function getOrderTotalAndItem()
     {
-        return $this->orderTotal;
+        return $this->orderTotalAndItem;
     }
 }

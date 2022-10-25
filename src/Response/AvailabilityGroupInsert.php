@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\AvailabilityGroup;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for AvailabilityGroup_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class AvailabilityGroupInsert extends Response
 {
+    /** @var \MerchantAPI\Model\AvailabilityGroup */
+    protected $availabilityGroup;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->availabilityGroup = new AvailabilityGroup($this->data['data']);
+    }
+
+    /**
+     * Get availabilityGroup.
+     *
+     * @return \MerchantAPI\Model\AvailabilityGroup|null
+     */
+    public function getAvailabilityGroup()
+    {
+        return $this->availabilityGroup;
+    }
 }

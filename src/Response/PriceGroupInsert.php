@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\PriceGroup;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for PriceGroup_Insert.
@@ -20,17 +23,30 @@ use MerchantAPI\Response;
  */
 class PriceGroupInsert extends Response
 {
+    /** @var \MerchantAPI\Model\PriceGroup */
+    protected $priceGroup;
+
     /**
-     * Get id.
-     *
-     * @return int
+     * @inheritDoc
      */
-    public function getId()
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
-        if (isset($this->data['id'])) {
-            return $this->data['id'];
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
         }
 
-        return null;
+        $this->priceGroup = new PriceGroup($this->data['data']);
+    }
+
+    /**
+     * Get priceGroup.
+     *
+     * @return \MerchantAPI\Model\PriceGroup|null
+     */
+    public function getPriceGroup()
+    {
+        return $this->priceGroup;
     }
 }

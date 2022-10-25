@@ -25,6 +25,15 @@ use MerchantAPI\BaseClient;
  */
 class ProductKitGenerateVariants extends Request
 {
+    /** @var string VARIANT_PRICING_METHOD_MASTER */
+    const VARIANT_PRICING_METHOD_MASTER = 'master';
+
+    /** @var string VARIANT_PRICING_METHOD_SPECIFIC */
+    const VARIANT_PRICING_METHOD_SPECIFIC = 'specific';
+
+    /** @var string VARIANT_PRICING_METHOD_SUM */
+    const VARIANT_PRICING_METHOD_SUM = 'sum';
+
     /** @var string The request scope */
     protected $scope = self::REQUEST_SCOPE_STORE;
 
@@ -40,7 +49,7 @@ class ProductKitGenerateVariants extends Request
     /** @var string */
     protected $editProduct;
 
-    /** @var int */
+    /** @var string */
     protected $pricingMethod;
 
     /**
@@ -93,7 +102,7 @@ class ProductKitGenerateVariants extends Request
     /**
      * Get Pricing_Method.
      *
-     * @return int
+     * @return string
      */
     public function getPricingMethod()
     {
@@ -142,7 +151,7 @@ class ProductKitGenerateVariants extends Request
     /**
      * Set Pricing_Method.
      *
-     * @param int
+     * @param string
      * @return $this
      */
     public function setPricingMethod($pricingMethod)

@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\Product;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for Product_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class ProductInsert extends Response
 {
+    /** @var \MerchantAPI\Model\Product */
+    protected $product;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->product = new Product($this->data['data']);
+    }
+
+    /**
+     * Get product.
+     *
+     * @return \MerchantAPI\Model\Product|null
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
 }

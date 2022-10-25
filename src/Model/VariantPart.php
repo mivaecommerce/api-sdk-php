@@ -28,6 +28,16 @@ class VariantPart extends \MerchantAPI\Model
     }
 
     /**
+     * Get part_code.
+     *
+     * @return string
+     */
+    public function getPartCode()
+    {
+        return $this->getField('part_code');
+    }
+
+    /**
      * Get quantity.
      *
      * @return int
@@ -46,6 +56,17 @@ class VariantPart extends \MerchantAPI\Model
     public function setPartId($partId)
     {
         return $this->setField('part_id', $partId);
+    }
+
+    /**
+     * Set part_code.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setPartCode($partCode)
+    {
+        return $this->setField('part_code', $partCode);
     }
 
     /**

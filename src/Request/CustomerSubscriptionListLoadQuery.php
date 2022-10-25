@@ -10,7 +10,6 @@
 
 namespace MerchantAPI\Request;
 
-use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Customer;
@@ -25,141 +24,13 @@ use MerchantAPI\BaseClient;
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/customersubscriptionlist_load_query
  */
-class CustomerSubscriptionListLoadQuery extends ListQueryRequest
+class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
 {
     /** @var string The request scope */
     protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
     protected $function = 'CustomerSubscriptionList_Load_Query';
-
-    /** @var array Requests available search fields */
-    protected $availableSearchFields = [
-        'id',
-        'order_id',
-        'quantity',
-        'termrem',
-        'termproc',
-        'firstdate',
-        'lastdate',
-        'nextdate',
-        'status',
-        'message',
-        'cncldate',
-        'tax',
-        'shipping',
-        'subtotal',
-        'total',
-        'authfails',
-        'lastafail',
-        'frequency',
-        'term',
-        'descrip',
-        'n',
-        'fixed_dow',
-        'fixed_dom',
-        'sub_count',
-        'customer_login',
-        'customer_pw_email',
-        'customer_business_title',
-        'product_code',
-        'product_name',
-        'product_sku',
-        'product_price',
-        'product_cost',
-        'product_weight',
-        'product_descrip',
-        'product_taxable',
-        'product_thumbnail',
-        'product_image',
-        'product_active',
-        'product_page_title',
-        'product_cancat_code',
-        'product_page_code',
-        'address_descrip',
-        'address_fname',
-        'address_lname',
-        'address_email',
-        'address_phone',
-        'address_fax',
-        'address_comp',
-        'address_addr1',
-        'address_addr2',
-        'address_city',
-        'address_state',
-        'address_zip',
-        'address_cntry',
-        'product_inventory',
-        'product_inventory_active',
-        'product_inventory',
-    ];
-
-    /** @var array Requests available sort fields */
-    protected $availableSortFields = [
-        'id',
-        'order_id',
-        'custpc_id',
-        'quantity',
-        'termrem',
-        'termproc',
-        'firstdate',
-        'lastdate',
-        'nextdate',
-        'status',
-        'message',
-        'cncldate',
-        'tax',
-        'shipping',
-        'subtotal',
-        'total',
-        'authfails',
-        'lastafail',
-        'frequency',
-        'term',
-        'descrip',
-        'n',
-        'fixed_dow',
-        'fixed_dom',
-        'sub_count',
-        'customer_login',
-        'customer_pw_email',
-        'customer_business_title',
-        'product_code',
-        'product_name',
-        'product_sku',
-        'product_cancat_code',
-        'product_page_code',
-        'product_price',
-        'product_cost',
-        'product_weight',
-        'product_descrip',
-        'product_taxable',
-        'product_thumbnail',
-        'product_image',
-        'product_active',
-        'product_page_title',
-        'address_descrip',
-        'address_fname',
-        'address_lname',
-        'address_email',
-        'address_phone',
-        'address_fax',
-        'address_comp',
-        'address_addr1',
-        'address_addr2',
-        'address_city',
-        'address_state',
-        'address_zip',
-        'address_cntry',
-        'product_inventory',
-    ];
-
-    /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
-        'imagetypes',
-        'imagetype_count',
-        'product_descrip',
-    ];
 
     /** @var int */
     protected $customerId;

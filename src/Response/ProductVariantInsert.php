@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\ProductVariant;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for ProductVariant_Insert.
@@ -20,31 +23,30 @@ use MerchantAPI\Response;
  */
 class ProductVariantInsert extends Response
 {
+    /** @var \MerchantAPI\Model\ProductVariant */
+    protected $productVariant;
+
     /**
-     * Get product_id.
-     *
-     * @return int
+     * @inheritDoc
      */
-    public function getProductId()
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
-        if (isset($this->data['data']['product_id'])) {
-            return $this->data['data']['product_id'];
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
         }
 
-        return null;
+        $this->productVariant = new ProductVariant($this->data['data']);
     }
 
     /**
-     * Get variant_id.
+     * Get productVariant.
      *
-     * @return int
+     * @return \MerchantAPI\Model\ProductVariant|null
      */
-    public function getVariantId()
+    public function getProductVariant()
     {
-        if (isset($this->data['data']['variant_id'])) {
-            return $this->data['data']['variant_id'];
-        }
-
-        return null;
+        return $this->productVariant;
     }
 }

@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\BusinessAccount;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for BusinessAccount_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class BusinessAccountInsert extends Response
 {
+    /** @var \MerchantAPI\Model\BusinessAccount */
+    protected $businessAccount;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->businessAccount = new BusinessAccount($this->data['data']);
+    }
+
+    /**
+     * Get businessAccount.
+     *
+     * @return \MerchantAPI\Model\BusinessAccount|null
+     */
+    public function getBusinessAccount()
+    {
+        return $this->businessAccount;
+    }
 }

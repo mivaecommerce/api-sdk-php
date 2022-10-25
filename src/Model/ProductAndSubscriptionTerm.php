@@ -52,7 +52,7 @@ class ProductAndSubscriptionTerm extends Product
      *
      * @return string
      */
-    public function getTermDescrip()
+    public function getTermDescription()
     {
         return $this->getField('term_descrip');
     }

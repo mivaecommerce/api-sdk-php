@@ -98,16 +98,6 @@ class PrintQueueJob extends \MerchantAPI\Model
     }
 
     /**
-     * Get printqueue_descrip.
-     *
-     * @return string
-     */
-    public function getPrintQueueDescription()
-    {
-        return $this->getField('printqueue_descrip');
-    }
-
-    /**
      * Get user_name.
      *
      * @return string

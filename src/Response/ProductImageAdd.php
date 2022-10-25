@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\ProductImageData;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for ProductImage_Add.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class ProductImageAdd extends Response
 {
+    /** @var \MerchantAPI\Model\ProductImageData */
+    protected $productImageData;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->productImageData = new ProductImageData($this->data['data']);
+    }
+
+    /**
+     * Get productImageData.
+     *
+     * @return \MerchantAPI\Model\ProductImageData|null
+     */
+    public function getProductImageData()
+    {
+        return $this->productImageData;
+    }
 }

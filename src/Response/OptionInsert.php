@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\ProductOption;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for Option_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class OptionInsert extends Response
 {
+    /** @var \MerchantAPI\Model\ProductOption */
+    protected $productOption;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->productOption = new ProductOption($this->data['data']);
+    }
+
+    /**
+     * Get productOption.
+     *
+     * @return \MerchantAPI\Model\ProductOption|null
+     */
+    public function getProductOption()
+    {
+        return $this->productOption;
+    }
 }

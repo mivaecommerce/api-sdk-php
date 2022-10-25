@@ -342,7 +342,7 @@ class CustomerSubscription extends Subscription
      *
      * @return string
      */
-    public function getAddressDescrip()
+    public function getAddressDescription()
     {
         return $this->getField('address_descrip');
     }
@@ -412,7 +412,7 @@ class CustomerSubscription extends Subscription
      *
      * @return string
      */
-    public function getAddressAdress()
+    public function getAddressAddress()
     {
         return $this->getField('address_addr');
     }
@@ -422,7 +422,7 @@ class CustomerSubscription extends Subscription
      *
      * @return string
      */
-    public function getAddressAddress_1()
+    public function getAddressAddress1()
     {
         return $this->getField('address_addr1');
     }
@@ -432,7 +432,7 @@ class CustomerSubscription extends Subscription
      *
      * @return string
      */
-    public function getAddressAddress_2()
+    public function getAddressAddress2()
     {
         return $this->getField('address_addr2');
     }

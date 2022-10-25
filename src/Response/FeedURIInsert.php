@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\Uri;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for FeedURI_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class FeedURIInsert extends Response
 {
+    /** @var \MerchantAPI\Model\Uri */
+    protected $uri;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->uri = new Uri($this->data['data']);
+    }
+
+    /**
+     * Get uri.
+     *
+     * @return \MerchantAPI\Model\Uri|null
+     */
+    public function getUri()
+    {
+        return $this->uri;
+    }
 }

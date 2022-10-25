@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\Coupon;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for Coupon_Insert.
@@ -20,17 +23,30 @@ use MerchantAPI\Response;
  */
 class CouponInsert extends Response
 {
+    /** @var \MerchantAPI\Model\Coupon */
+    protected $coupon;
+
     /**
-     * Get id.
-     *
-     * @return int
+     * @inheritDoc
      */
-    public function getId()
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
-        if (isset($this->data['data']['id'])) {
-            return $this->data['data']['id'];
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
         }
 
-        return null;
+        $this->coupon = new Coupon($this->data['data']);
+    }
+
+    /**
+     * Get coupon.
+     *
+     * @return \MerchantAPI\Model\Coupon|null
+     */
+    public function getCoupon()
+    {
+        return $this->coupon;
     }
 }

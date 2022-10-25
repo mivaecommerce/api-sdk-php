@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\PrintQueueJob;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for PrintQueueJob_Insert.
@@ -20,17 +23,30 @@ use MerchantAPI\Response;
  */
 class PrintQueueJobInsert extends Response
 {
+    /** @var \MerchantAPI\Model\PrintQueueJob */
+    protected $printQueueJob;
+
     /**
-     * Get id.
-     *
-     * @return int
+     * @inheritDoc
      */
-    public function getId()
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
-        if (isset($this->data['data']['id'])) {
-            return $this->data['data']['id'];
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
         }
 
-        return null;
+        $this->printQueueJob = new PrintQueueJob($this->data['data']);
+    }
+
+    /**
+     * Get printQueueJob.
+     *
+     * @return \MerchantAPI\Model\PrintQueueJob|null
+     */
+    public function getPrintQueueJob()
+    {
+        return $this->printQueueJob;
     }
 }

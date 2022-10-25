@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\CustomerAddress;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for CustomerAddress_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class CustomerAddressInsert extends Response
 {
+    /** @var \MerchantAPI\Model\CustomerAddress */
+    protected $customerAddress;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->customerAddress = new CustomerAddress($this->data['data']);
+    }
+
+    /**
+     * Get customerAddress.
+     *
+     * @return \MerchantAPI\Model\CustomerAddress|null
+     */
+    public function getCustomerAddress()
+    {
+        return $this->customerAddress;
+    }
 }

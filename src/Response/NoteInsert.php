@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\Note;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for Note_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class NoteInsert extends Response
 {
+    /** @var \MerchantAPI\Model\Note */
+    protected $note;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->note = new Note($this->data['data']);
+    }
+
+    /**
+     * Get note.
+     *
+     * @return \MerchantAPI\Model\Note|null
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
 }

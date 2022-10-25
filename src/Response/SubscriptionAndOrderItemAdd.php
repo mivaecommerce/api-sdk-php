@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\OrderTotalAndItem;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for SubscriptionAndOrderItem_Add.
@@ -20,31 +23,30 @@ use MerchantAPI\Response;
  */
 class SubscriptionAndOrderItemAdd extends Response
 {
+    /** @var \MerchantAPI\Model\OrderTotalAndItem */
+    protected $orderTotalAndItem;
+
     /**
-     * Get total.
-     *
-     * @return float
+     * @inheritDoc
      */
-    public function getTotal()
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
-        if (isset($this->data['total'])) {
-            return $this->data['total'];
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
         }
 
-        return null;
+        $this->orderTotalAndItem = new OrderTotalAndItem($this->data['data']);
     }
 
     /**
-     * Get formatted_total.
+     * Get orderTotalAndItem.
      *
-     * @return string
+     * @return \MerchantAPI\Model\OrderTotalAndItem|null
      */
-    public function getFormattedTotal()
+    public function getOrderTotalAndItem()
     {
-        if (isset($this->data['formatted_total'])) {
-            return $this->data['formatted_total'];
-        }
-
-        return null;
+        return $this->orderTotalAndItem;
     }
 }

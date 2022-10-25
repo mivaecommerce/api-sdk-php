@@ -48,6 +48,36 @@ class ProductVariantExclusion extends \MerchantAPI\Model
     }
 
     /**
+     * Get attr_code.
+     *
+     * @return string
+     */
+    public function getAttributeCode()
+    {
+        return $this->getField('attr_code');
+    }
+
+    /**
+     * Get attmpat_code.
+     *
+     * @return string
+     */
+    public function getAttributeTemplateCode()
+    {
+        return $this->getField('attmpat_code');
+    }
+
+    /**
+     * Get option_code.
+     *
+     * @return string
+     */
+    public function getOptionCode()
+    {
+        return $this->getField('option_code');
+    }
+
+    /**
      * Set attr_id.
      *
      * @param int
@@ -78,5 +108,38 @@ class ProductVariantExclusion extends \MerchantAPI\Model
     public function setOptionId($optionId)
     {
         return $this->setField('option_id', $optionId);
+    }
+
+    /**
+     * Set attr_code.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setAttributeCode($attributeCode)
+    {
+        return $this->setField('attr_code', $attributeCode);
+    }
+
+    /**
+     * Set attmpat_code.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setAttributeTemplateCode($attributeTemplateCode)
+    {
+        return $this->setField('attmpat_code', $attributeTemplateCode);
+    }
+
+    /**
+     * Set option_code.
+     *
+     * @param string
+     * @return $this
+     */
+    public function setOptionCode($optionCode)
+    {
+        return $this->setField('option_code', $optionCode);
     }
 }

@@ -134,11 +134,11 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get expires.
      *
-     * @return string
+     * @return int
      */
     public function getExpires()
     {
-        return $this->getField('expires');
+        return (int) $this->getField('expires', 0);
     }
 
     /**

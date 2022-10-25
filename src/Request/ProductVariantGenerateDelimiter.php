@@ -10,7 +10,6 @@
 
 namespace MerchantAPI\Request;
 
-use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
@@ -23,25 +22,13 @@ use MerchantAPI\BaseClient;
  * @package MerchantAPI\Request
  * @see https://docs.miva.com/json-api/functions/productvariant_generate_delimiter
  */
-class ProductVariantGenerateDelimiter extends Request
+class ProductVariantGenerateDelimiter extends ProductVariantGenerate
 {
     /** @var string The request scope */
     protected $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
     protected $function = 'ProductVariant_Generate_Delimiter';
-
-    /** @var int */
-    protected $productId;
-
-    /** @var string */
-    protected $productCode;
-
-    /** @var string */
-    protected $editProduct;
-
-    /** @var int */
-    protected $pricingMethod;
 
     /** @var string */
     protected $delimiter;
@@ -55,54 +42,7 @@ class ProductVariantGenerateDelimiter extends Request
     {
         parent::__construct($client);
         if ($product) {
-            if ($product->getId()) {
-                $this->setProductId($product->getId());
-            } else if ($product->getCode()) {
-                $this->setProductCode($product->getCode());
-            } else if ($product->getCode()) {
-                $this->setEditProduct($product->getCode());
-            }
         }
-    }
-
-    /**
-     * Get Product_ID.
-     *
-     * @return int
-     */
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    /**
-     * Get Product_Code.
-     *
-     * @return string
-     */
-    public function getProductCode()
-    {
-        return $this->productCode;
-    }
-
-    /**
-     * Get Edit_Product.
-     *
-     * @return string
-     */
-    public function getEditProduct()
-    {
-        return $this->editProduct;
-    }
-
-    /**
-     * Get Pricing_Method.
-     *
-     * @return int
-     */
-    public function getPricingMethod()
-    {
-        return $this->pricingMethod;
     }
 
     /**
@@ -113,58 +53,6 @@ class ProductVariantGenerateDelimiter extends Request
     public function getDelimiter()
     {
         return $this->delimiter;
-    }
-
-    /**
-     * Set Product_ID.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setProductId($productId)
-    {
-        $this->productId = $productId;
-
-        return $this;
-    }
-
-    /**
-     * Set Product_Code.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setProductCode($productCode)
-    {
-        $this->productCode = $productCode;
-
-        return $this;
-    }
-
-    /**
-     * Set Edit_Product.
-     *
-     * @param string
-     * @return $this
-     */
-    public function setEditProduct($editProduct)
-    {
-        $this->editProduct = $editProduct;
-
-        return $this;
-    }
-
-    /**
-     * Set Pricing_Method.
-     *
-     * @param int
-     * @return $this
-     */
-    public function setPricingMethod($pricingMethod)
-    {
-        $this->pricingMethod = $pricingMethod;
-
-        return $this;
     }
 
     /**
@@ -186,16 +74,6 @@ class ProductVariantGenerateDelimiter extends Request
     public function toArray()
     {
         $data = parent::toArray();
-
-        if ($this->getProductId()) {
-            $data['Product_ID'] = $this->getProductId();
-        } else if ($this->getProductCode()) {
-            $data['Product_Code'] = $this->getProductCode();
-        } else if ($this->getEditProduct()) {
-            $data['Edit_Product'] = $this->getEditProduct();
-        }
-
-        $data['Pricing_Method'] = $this->getPricingMethod();
 
         if (!is_null($this->getDelimiter())) {
             $data['Delimiter'] = $this->getDelimiter();

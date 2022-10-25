@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\Collection;
+
 /**
  * Data model for OrderItemOption.
  *
@@ -17,6 +19,56 @@ namespace MerchantAPI\Model;
  */
 class OrderItemOption extends \MerchantAPI\Model
 {
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        $this->setField('discounts', new Collection());
+
+        if (isset($data['discounts']) && is_array($data['discounts'])) {
+            $discounts = new Collection();
+
+            foreach($data['discounts'] as $e) {
+                if ($e instanceof OrderItemOptionDiscount) {
+                    $discounts[] = $e;
+                } else if (is_array($e)) {
+                    $discounts[] = new OrderItemOptionDiscount($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of OrderItemOptionDiscount or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('discounts', $discounts);
+        }
+    }
+
+    /**
+     * Clone.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        if (isset($this->data['discounts']) && is_array($this->data['discounts'])) {
+            if ($this->data['discounts'] instanceof Collection) {
+                $this->data['discounts'] = clone $this->data['discounts'];
+            } else {
+                foreach($this->data['discounts'] as $i => $e) {
+                    if ($e instanceof OrderItemOptionDiscount) {
+                        $this->data['discounts'][$i] = clone $this->data['discounts'][$i];
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Get id.
      *
@@ -185,6 +237,16 @@ class OrderItemOption extends \MerchantAPI\Model
     public function getOptionPrompt()
     {
         return $this->getField('opt_prompt');
+    }
+
+    /**
+     * Get discounts.
+     *
+     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderItemOptionDiscount[]
+     */
+    public function getDiscounts()
+    {
+        return $this->getField('discounts', []);
     }
 
     /**
