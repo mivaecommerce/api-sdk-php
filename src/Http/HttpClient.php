@@ -135,7 +135,7 @@ class HttpClient
         $content = $request->getContent();
         $handle  = curl_init($url);
 
-        if (!is_resource($handle)) {
+        if ($handle === false) {
             throw new HttpClientException('Curl Error: Unable to initialize');
         }
 
@@ -155,6 +155,7 @@ class HttpClient
             $error   = curl_error($handle);
             $errorno = curl_errno($handle);
             curl_close($handle);
+            unset($handle);
             throw new HttpClientException(sprintf('Error Setting Curl Options',
                 $error, $errorno));
         }
@@ -165,11 +166,13 @@ class HttpClient
             $error   = curl_error($handle);
             $errorno = curl_errno($handle);
             curl_close($handle);
+            unset($handle);
             throw new HttpClientException(sprintf('HTTP Error: %s Code %d',
                 $error, $errorno));
         }
 
         curl_close($handle);
+        unset($handle);
 
         return $response;
     }

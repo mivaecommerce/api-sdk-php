@@ -40,9 +40,7 @@ class ProductVariantGenerateDelimiter extends ProductVariantGenerate
      */
     public function __construct(BaseClient $client = null, Product $product = null)
     {
-        parent::__construct($client);
-        if ($product) {
-        }
+        parent::__construct($client, $product);
     }
 
     /**

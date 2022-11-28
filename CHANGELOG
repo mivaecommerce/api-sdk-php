@@ -1,3 +1,7 @@
+v2.2.1
+	MMAPI-75 - ProductVariantGenerateDelimiter now properly calls the parent constructor
+	MMAPI-76 - HTTPClient now checks for false instead of is_resource() on curl handle to support PHP8 changes.
+						 PHP 5.6 support will be dropped in the next release.
 v2.2.0
   MMAPI-60 - Fixed exception due to incorrect field type for expires in OrderPayments mode. Now a Date type.
   MMAPI-61 - Added missing member discounts in mode OrderItemOption.
