@@ -16,6 +16,8 @@ use MerchantAPI\Model\VariantAttribute;
 use MerchantAPI\Model\VariantPart;
 use MerchantAPI\Model\ProductVariant;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request ProductVariant_Update.
@@ -28,39 +30,40 @@ use MerchantAPI\BaseClient;
 class ProductVariantUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductVariant_Update';
+    protected string $function = 'ProductVariant_Update';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $variantId;
+    /** @var ?int */
+    protected ?int $variantId = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\VariantAttribute[] */
-    protected $attributes = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $attributes;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\VariantPart[] */
-    protected $parts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $parts;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductVariant
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductVariant $productVariant
      */
-    public function __construct(BaseClient $client = null, ProductVariant $productVariant = null)
+    public function __construct(?BaseClient $client = null, ?ProductVariant $productVariant = null)
     {
         parent::__construct($client);
-        $this->attributes = new \MerchantAPI\Collection();
-        $this->parts = new \MerchantAPI\Collection();
+        $this->attributes = new Collection();
+        $this->parts = new Collection();
 
         if ($productVariant) {
             if ($productVariant->getProductId()) {
@@ -78,7 +81,7 @@ class ProductVariantUpdate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -88,7 +91,7 @@ class ProductVariantUpdate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -98,7 +101,7 @@ class ProductVariantUpdate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -108,7 +111,7 @@ class ProductVariantUpdate extends Request
      *
      * @return int
      */
-    public function getVariantId()
+    public function getVariantId() : ?int
     {
         return $this->variantId;
     }
@@ -116,9 +119,9 @@ class ProductVariantUpdate extends Request
     /**
      * Get Attributes.
      *
-     * @return \MerchantAPI\Model\VariantAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
         return $this->attributes;
     }
@@ -126,9 +129,9 @@ class ProductVariantUpdate extends Request
     /**
      * Get Parts.
      *
-     * @return \MerchantAPI\Model\VariantPart[]
+     * @return \MerchantAPI\Collection
      */
-    public function getParts()
+    public function getParts() : ?Collection
     {
         return $this->parts;
     }
@@ -136,10 +139,10 @@ class ProductVariantUpdate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -149,10 +152,10 @@ class ProductVariantUpdate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -162,10 +165,10 @@ class ProductVariantUpdate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -175,10 +178,10 @@ class ProductVariantUpdate extends Request
     /**
      * Set Variant_ID.
      *
-     * @param int
+     * @param ?int $variantId
      * @return $this
      */
-    public function setVariantId($variantId)
+    public function setVariantId(?int $variantId) : self
     {
         $this->variantId = $variantId;
 
@@ -188,12 +191,17 @@ class ProductVariantUpdate extends Request
     /**
      * Set Attributes.
      *
-     * @param (\MerchantAPI\Model\VariantAttribute|array)[]
+     * @param \MerchantAPI\Collection|array $attributes
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes($attributes) : self
     {
+        if (!is_array($attributes) && !$attributes instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($attributes) ? get_class($attributes) : gettype($attributes)));
+        }
+
         foreach ($attributes as &$model) {
             if (is_array($model)) {
                 $model = new VariantAttribute($model);
@@ -203,7 +211,7 @@ class ProductVariantUpdate extends Request
             }
         }
 
-        $this->attributes = new \MerchantAPI\Collection($attributes);
+        $this->attributes = new Collection($attributes);
 
         return $this;
     }
@@ -211,12 +219,17 @@ class ProductVariantUpdate extends Request
     /**
      * Set Parts.
      *
-     * @param (\MerchantAPI\Model\VariantPart|array)[]
+     * @param \MerchantAPI\Collection|array $parts
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setParts(array $parts)
+    public function setParts($parts) : self
     {
+        if (!is_array($parts) && !$parts instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($parts) ? get_class($parts) : gettype($parts)));
+        }
+
         foreach ($parts as &$model) {
             if (is_array($model)) {
                 $model = new VariantPart($model);
@@ -226,7 +239,7 @@ class ProductVariantUpdate extends Request
             }
         }
 
-        $this->parts = new \MerchantAPI\Collection($parts);
+        $this->parts = new Collection($parts);
 
         return $this;
     }
@@ -235,10 +248,9 @@ class ProductVariantUpdate extends Request
      * Add Attributes.
      *
      * @param \MerchantAPI\Model\VariantAttribute
-     *
      * @return $this
      */
-    public function addVariantAttribute(VariantAttribute $model)
+    public function addVariantAttribute(VariantAttribute $model) : self
     {
         $this->attributes[] = $model;
         return $this;
@@ -251,7 +263,7 @@ class ProductVariantUpdate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addAttributes(array $attributes)
+    public function addAttributes(array $attributes) : self
     {
         foreach ($attributes as $e) {
             if (is_array($e)) {
@@ -271,10 +283,9 @@ class ProductVariantUpdate extends Request
      * Add Parts.
      *
      * @param \MerchantAPI\Model\VariantPart
-     *
      * @return $this
      */
-    public function addVariantPart(VariantPart $model)
+    public function addVariantPart(VariantPart $model) : self
     {
         $this->parts[] = $model;
         return $this;
@@ -287,7 +298,7 @@ class ProductVariantUpdate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addParts(array $parts)
+    public function addParts(array $parts) : self
     {
         foreach ($parts as $e) {
             if (is_array($e)) {
@@ -306,7 +317,7 @@ class ProductVariantUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -346,7 +357,7 @@ class ProductVariantUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductVariantUpdate($this, $httpResponse, $data);
     }

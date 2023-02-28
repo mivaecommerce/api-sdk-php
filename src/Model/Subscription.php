@@ -47,26 +47,6 @@ class Subscription extends \MerchantAPI\Model
 
             $this->setField('options', $options);
         }
-
-        if (isset($data['firstdate']) && is_array($data['firstdate']) && isset($data['firstdate']['time_t'])) {
-            $this->setField('firstdate', $data['firstdate']['time_t']);
-        }
-
-        if (isset($data['lastdate']) && is_array($data['lastdate']) && isset($data['lastdate']['time_t'])) {
-            $this->setField('lastdate', $data['lastdate']['time_t']);
-        }
-
-        if (isset($data['nextdate']) && is_array($data['nextdate']) && isset($data['nextdate']['time_t'])) {
-            $this->setField('nextdate', $data['nextdate']['time_t']);
-        }
-
-        if (isset($data['cncldate']) && is_array($data['cncldate']) && isset($data['cncldate']['time_t'])) {
-            $this->setField('cncldate', $data['cncldate']['time_t']);
-        }
-
-        if (isset($data['lastafail']) && is_array($data['lastafail']) && isset($data['lastafail']['time_t'])) {
-            $this->setField('lastafail', $data['lastafail']['time_t']);
-        }
     }
 
     /**
@@ -92,99 +72,99 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get line_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLineId()
+    public function getLineId() : ?int
     {
-        return (int) $this->getField('line_id', 0);
+        return $this->getField('line_id');
     }
 
     /**
      * Get cust_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
-        return (int) $this->getField('cust_id', 0);
+        return $this->getField('cust_id');
     }
 
     /**
      * Get custpc_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerPaymentCardId()
+    public function getCustomerPaymentCardId() : ?int
     {
-        return (int) $this->getField('custpc_id', 0);
+        return $this->getField('custpc_id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get subterm_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionTermId()
+    public function getSubscriptionTermId() : ?int
     {
-        return (int) $this->getField('subterm_id', 0);
+        return $this->getField('subterm_id');
     }
 
     /**
      * Get addr_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
-        return (int) $this->getField('addr_id', 0);
+        return $this->getField('addr_id');
     }
 
     /**
      * Get ship_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipId()
+    public function getShipId() : ?int
     {
-        return (int) $this->getField('ship_id', 0);
+        return $this->getField('ship_id');
     }
 
     /**
      * Get ship_data.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipData()
+    public function getShipData() : ?string
     {
         return $this->getField('ship_data');
     }
@@ -192,69 +172,69 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Get termrem.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermRemaining()
+    public function getTermRemaining() : ?int
     {
-        return (int) $this->getField('termrem', 0);
+        return $this->getField('termrem');
     }
 
     /**
      * Get termproc.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermProcessed()
+    public function getTermProcessed() : ?int
     {
-        return (int) $this->getField('termproc', 0);
+        return $this->getField('termproc');
     }
 
     /**
      * Get firstdate.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFirstDate()
+    public function getFirstDate() : ?int
     {
-        return (int) $this->getField('firstdate', 0);
+        return $this->getTimestampField('firstdate');
     }
 
     /**
      * Get lastdate.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLastDate()
+    public function getLastDate() : ?int
     {
-        return (int) $this->getField('lastdate', 0);
+        return $this->getTimestampField('lastdate');
     }
 
     /**
      * Get nextdate.
      *
-     * @return int
+     * @return ?int
      */
-    public function getNextDate()
+    public function getNextDate() : ?int
     {
-        return (int) $this->getField('nextdate', 0);
+        return $this->getTimestampField('nextdate');
     }
 
     /**
      * Get status.
      *
-     * @return string
+     * @return ?string
      */
-    public function getStatus()
+    public function getStatus() : ?string
     {
         return $this->getField('status');
     }
@@ -262,9 +242,9 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get message.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMessage()
+    public function getMessage() : ?string
     {
         return $this->getField('message');
     }
@@ -272,29 +252,29 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get cncldate.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCancelDate()
+    public function getCancelDate() : ?int
     {
-        return (int) $this->getField('cncldate', 0);
+        return $this->getTimestampField('cncldate');
     }
 
     /**
      * Get tax.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTax()
+    public function getTax() : ?float
     {
-        return (float) $this->getField('tax', 0.00);
+        return $this->getField('tax');
     }
 
     /**
      * Get formatted_tax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTax()
+    public function getFormattedTax() : ?string
     {
         return $this->getField('formatted_tax');
     }
@@ -302,19 +282,19 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get shipping.
      *
-     * @return float
+     * @return ?float
      */
-    public function getShipping()
+    public function getShipping() : ?float
     {
-        return (float) $this->getField('shipping', 0.00);
+        return $this->getField('shipping');
     }
 
     /**
      * Get formatted_shipping.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedShipping()
+    public function getFormattedShipping() : ?string
     {
         return $this->getField('formatted_shipping');
     }
@@ -322,19 +302,19 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get subtotal.
      *
-     * @return float
+     * @return ?float
      */
-    public function getSubtotal()
+    public function getSubtotal() : ?float
     {
-        return (float) $this->getField('subtotal', 0.00);
+        return $this->getField('subtotal');
     }
 
     /**
      * Get formatted_subtotal.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedSubtotal()
+    public function getFormattedSubtotal() : ?string
     {
         return $this->getField('formatted_subtotal');
     }
@@ -342,19 +322,19 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get total.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotal()
+    public function getTotal() : ?float
     {
-        return (float) $this->getField('total', 0.00);
+        return $this->getField('total');
     }
 
     /**
      * Get formatted_total.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTotal()
+    public function getFormattedTotal() : ?string
     {
         return $this->getField('formatted_total');
     }
@@ -362,30 +342,30 @@ class Subscription extends \MerchantAPI\Model
     /**
      * Get authfails.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAuthorizationFailureCount()
+    public function getAuthorizationFailureCount() : ?int
     {
-        return (int) $this->getField('authfails', 0);
+        return $this->getField('authfails');
     }
 
     /**
      * Get lastafail.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLastAuthorizationFailure()
+    public function getLastAuthorizationFailure() : ?int
     {
-        return (int) $this->getField('lastafail', 0);
+        return $this->getTimestampField('lastafail');
     }
 
     /**
      * Get options.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionOption[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOptions()
+    public function getOptions() : ?Collection
     {
-        return $this->getField('options', []);
+        return $this->getField('options');
     }
 }

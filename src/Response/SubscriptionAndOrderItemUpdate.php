@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class SubscriptionAndOrderItemUpdate extends Response
 {
-    /** @var \MerchantAPI\Model\OrderTotal */
-    protected $orderTotal;
+    /** @var ?\MerchantAPI\Model\OrderTotal */
+    protected ?OrderTotal $orderTotal = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class SubscriptionAndOrderItemUpdate extends Response
      *
      * @return \MerchantAPI\Model\OrderTotal|null
      */
-    public function getOrderTotal()
+    public function getOrderTotal() : ?OrderTotal
     {
         return $this->orderTotal;
     }

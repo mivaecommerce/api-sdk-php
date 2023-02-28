@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CouponInsert extends Response
 {
-    /** @var \MerchantAPI\Model\Coupon */
-    protected $coupon;
+    /** @var ?\MerchantAPI\Model\Coupon */
+    protected ?Coupon $coupon = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class CouponInsert extends Response
      *
      * @return \MerchantAPI\Model\Coupon|null
      */
-    public function getCoupon()
+    public function getCoupon() : ?Coupon
     {
         return $this->coupon;
     }

@@ -25,7 +25,7 @@ class PrintQueueJobStatus extends Response
      *
      * @return string
      */
-    public function getStatus()
+    public function getStatus() : ?string
     {
         if (isset($this->data['data']['status'])) {
             return $this->data['data']['status'];

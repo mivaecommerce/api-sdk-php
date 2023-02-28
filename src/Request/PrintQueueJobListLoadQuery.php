@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PrintQueue;
 use MerchantAPI\Model\PrintQueueJob;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PrintQueueJobList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class PrintQueueJobListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_DOMAIN;
+    protected string $scope = self::REQUEST_SCOPE_DOMAIN;
 
     /** @var string The API function name */
-    protected $function = 'PrintQueueJobList_Load_Query';
+    protected string $function = 'PrintQueueJobList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'queue_id',
         'store_id',
@@ -45,7 +46,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'queue_id',
         'store_id',
@@ -57,25 +58,26 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'job_data',
     ];
 
-    /** @var int */
-    protected $printQueueId;
+    /** @var ?int */
+    protected ?int $printQueueId = null;
 
-    /** @var string */
-    protected $editPrintQueue;
+    /** @var ?string */
+    protected ?string $editPrintQueue = null;
 
-    /** @var string */
-    protected $printQueueDescription;
+    /** @var ?string */
+    protected ?string $printQueueDescription = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PrintQueue
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PrintQueue $printQueue
      */
-    public function __construct(BaseClient $client = null, PrintQueue $printQueue = null)
+    public function __construct(?BaseClient $client = null, ?PrintQueue $printQueue = null)
     {
         parent::__construct($client);
         if ($printQueue) {
@@ -92,7 +94,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getPrintQueueId()
+    public function getPrintQueueId() : ?int
     {
         return $this->printQueueId;
     }
@@ -102,7 +104,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditPrintQueue()
+    public function getEditPrintQueue() : ?string
     {
         return $this->editPrintQueue;
     }
@@ -112,7 +114,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getPrintQueueDescription()
+    public function getPrintQueueDescription() : ?string
     {
         return $this->printQueueDescription;
     }
@@ -120,10 +122,10 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     /**
      * Set PrintQueue_ID.
      *
-     * @param int
+     * @param ?int $printQueueId
      * @return $this
      */
-    public function setPrintQueueId($printQueueId)
+    public function setPrintQueueId(?int $printQueueId) : self
     {
         $this->printQueueId = $printQueueId;
 
@@ -133,10 +135,10 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_PrintQueue.
      *
-     * @param string
+     * @param ?string $editPrintQueue
      * @return $this
      */
-    public function setEditPrintQueue($editPrintQueue)
+    public function setEditPrintQueue(?string $editPrintQueue) : self
     {
         $this->editPrintQueue = $editPrintQueue;
 
@@ -146,10 +148,10 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     /**
      * Set PrintQueue_Description.
      *
-     * @param string
+     * @param ?string $printQueueDescription
      * @return $this
      */
-    public function setPrintQueueDescription($printQueueDescription)
+    public function setPrintQueueDescription(?string $printQueueDescription) : self
     {
         $this->printQueueDescription = $printQueueDescription;
 
@@ -159,7 +161,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -177,7 +179,7 @@ class PrintQueueJobListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PrintQueueJobListLoadQuery($this, $httpResponse, $data);
     }

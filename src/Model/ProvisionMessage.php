@@ -20,9 +20,9 @@ class ProvisionMessage extends \MerchantAPI\Model
     /**
      * Get dtstamp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?string
     {
         return $this->getField('dtstamp');
     }
@@ -30,19 +30,19 @@ class ProvisionMessage extends \MerchantAPI\Model
     /**
      * Get lineno.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLineNumber()
+    public function getLineNumber() : ?int
     {
-        return (int) $this->getField('lineno', 0);
+        return $this->getField('lineno');
     }
 
     /**
      * Get tag.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTag()
+    public function getTag() : ?string
     {
         return $this->getField('tag');
     }
@@ -50,9 +50,9 @@ class ProvisionMessage extends \MerchantAPI\Model
     /**
      * Get message.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMessage()
+    public function getMessage() : ?string
     {
         return $this->getField('message');
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\OrderCustomField;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for OrderCustomFieldList_Load.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderCustomFieldListLoad extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderCustomField[] */
-    protected $orderCustomFields = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $orderCustomFields;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class OrderCustomFieldListLoad extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->orderCustomFields = new \MerchantAPI\Collection();
+        $this->orderCustomFields = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class OrderCustomFieldListLoad extends Response
     /**
      * Get orderCustomFields.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderCustomField[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOrderCustomFields()
+    public function getOrderCustomFields() : Collection
     {
         return $this->orderCustomFields;
     }

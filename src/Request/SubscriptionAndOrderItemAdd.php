@@ -13,7 +13,10 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\SubscriptionAttribute;
+use MerchantAPI\Model\OrderTotalAndItem;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request SubscriptionAndOrderItem_Add.
@@ -26,66 +29,68 @@ use MerchantAPI\BaseClient;
 class SubscriptionAndOrderItemAdd extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'SubscriptionAndOrderItem_Add';
+    protected string $function = 'SubscriptionAndOrderItem_Add';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var int */
-    protected $addressId;
+    /** @var ?int */
+    protected ?int $addressId = null;
 
-    /** @var int */
-    protected $customerAddressId;
+    /** @var ?int */
+    protected ?int $customerAddressId = null;
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var int */
-    protected $productSubscriptionTermId;
+    /** @var ?int */
+    protected ?int $productSubscriptionTermId = null;
 
-    /** @var string */
-    protected $productSubscriptionTermDescription;
+    /** @var ?string */
+    protected ?string $productSubscriptionTermDescription = null;
 
-    /** @var int */
-    protected $quantity;
+    /** @var ?int */
+    protected ?int $quantity = null;
 
-    /** @var int */
-    protected $nextDate;
+    /** @var int|\DateTime|null */
+    protected $nextDate = null;
 
-    /** @var int */
-    protected $paymentCardId;
+    /** @var ?int */
+    protected ?int $paymentCardId = null;
 
-    /** @var int */
-    protected $shipId;
+    /** @var ?int */
+    protected ?int $shipId = null;
 
-    /** @var string */
-    protected $shipData;
+    /** @var ?string */
+    protected ?string $shipData = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionAttribute[] */
-    protected $attributes = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $attributes;
 
     /**
      * Constructor.
+     *
+     * @param ?\MerchantAPI\BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         parent::__construct($client);
         $this->attributes = new \MerchantAPI\Collection();
@@ -96,7 +101,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -106,7 +111,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -116,7 +121,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -126,7 +131,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -136,7 +141,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
         return $this->addressId;
     }
@@ -146,7 +151,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getCustomerAddressId()
+    public function getCustomerAddressId() : ?int
     {
         return $this->customerAddressId;
     }
@@ -156,7 +161,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -166,7 +171,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -176,7 +181,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -186,7 +191,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getProductSubscriptionTermId()
+    public function getProductSubscriptionTermId() : ?int
     {
         return $this->productSubscriptionTermId;
     }
@@ -196,7 +201,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getProductSubscriptionTermDescription()
+    public function getProductSubscriptionTermDescription() : ?string
     {
         return $this->productSubscriptionTermDescription;
     }
@@ -206,7 +211,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
         return $this->quantity;
     }
@@ -216,7 +221,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getNextDate()
+    public function getNextDate() : ?int
     {
         return $this->nextDate;
     }
@@ -226,7 +231,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getPaymentCardId()
+    public function getPaymentCardId() : ?int
     {
         return $this->paymentCardId;
     }
@@ -236,7 +241,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return int
      */
-    public function getShipId()
+    public function getShipId() : ?int
     {
         return $this->shipId;
     }
@@ -246,7 +251,7 @@ class SubscriptionAndOrderItemAdd extends Request
      *
      * @return string
      */
-    public function getShipData()
+    public function getShipData() : ?string
     {
         return $this->shipData;
     }
@@ -254,9 +259,9 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Get Attributes.
      *
-     * @return \MerchantAPI\Model\SubscriptionAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
         return $this->attributes;
     }
@@ -264,10 +269,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -277,10 +282,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -290,10 +295,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -303,10 +308,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -316,10 +321,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Address_ID.
      *
-     * @param int
+     * @param ?int $addressId
      * @return $this
      */
-    public function setAddressId($addressId)
+    public function setAddressId(?int $addressId) : self
     {
         $this->addressId = $addressId;
 
@@ -329,10 +334,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set CustomerAddress_ID.
      *
-     * @param int
+     * @param ?int $customerAddressId
      * @return $this
      */
-    public function setCustomerAddressId($customerAddressId)
+    public function setCustomerAddressId(?int $customerAddressId) : self
     {
         $this->customerAddressId = $customerAddressId;
 
@@ -342,10 +347,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -355,10 +360,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -368,10 +373,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -381,10 +386,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set ProductSubscriptionTerm_ID.
      *
-     * @param int
+     * @param ?int $productSubscriptionTermId
      * @return $this
      */
-    public function setProductSubscriptionTermId($productSubscriptionTermId)
+    public function setProductSubscriptionTermId(?int $productSubscriptionTermId) : self
     {
         $this->productSubscriptionTermId = $productSubscriptionTermId;
 
@@ -394,10 +399,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set ProductSubscriptionTerm_Description.
      *
-     * @param string
+     * @param ?string $productSubscriptionTermDescription
      * @return $this
      */
-    public function setProductSubscriptionTermDescription($productSubscriptionTermDescription)
+    public function setProductSubscriptionTermDescription(?string $productSubscriptionTermDescription) : self
     {
         $this->productSubscriptionTermDescription = $productSubscriptionTermDescription;
 
@@ -407,10 +412,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         $this->quantity = $quantity;
 
@@ -420,10 +425,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set NextDate.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $nextDate
      * @return $this
      */
-    public function setNextDate($nextDate)
+    public function setNextDate($nextDate) : self
     {
         if ($nextDate instanceof \DateTime) {
             $this->nextDate = $nextDate->getTimestamp();
@@ -437,10 +442,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set PaymentCard_ID.
      *
-     * @param int
+     * @param ?int $paymentCardId
      * @return $this
      */
-    public function setPaymentCardId($paymentCardId)
+    public function setPaymentCardId(?int $paymentCardId) : self
     {
         $this->paymentCardId = $paymentCardId;
 
@@ -450,10 +455,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Ship_ID.
      *
-     * @param int
+     * @param ?int $shipId
      * @return $this
      */
-    public function setShipId($shipId)
+    public function setShipId(?int $shipId) : self
     {
         $this->shipId = $shipId;
 
@@ -463,10 +468,10 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Ship_Data.
      *
-     * @param string
+     * @param ?string $shipData
      * @return $this
      */
-    public function setShipData($shipData)
+    public function setShipData(?string $shipData) : self
     {
         $this->shipData = $shipData;
 
@@ -476,12 +481,17 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * Set Attributes.
      *
-     * @param (\MerchantAPI\Model\SubscriptionAttribute|array)[]
+     * @param \MerchantAPI\Collection|array $attributes
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes($attributes) : self
     {
+        if (!is_array($attributes) && !$attributes instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($attributes) ? get_class($attributes) : gettype($attributes)));
+        }
+
         foreach ($attributes as &$model) {
             if (is_array($model)) {
                 $model = new SubscriptionAttribute($model);
@@ -491,7 +501,7 @@ class SubscriptionAndOrderItemAdd extends Request
             }
         }
 
-        $this->attributes = new \MerchantAPI\Collection($attributes);
+        $this->attributes = new Collection($attributes);
 
         return $this;
     }
@@ -500,10 +510,9 @@ class SubscriptionAndOrderItemAdd extends Request
      * Add Attributes.
      *
      * @param \MerchantAPI\Model\SubscriptionAttribute
-     *
      * @return $this
      */
-    public function addAttribute(SubscriptionAttribute $model)
+    public function addAttribute(SubscriptionAttribute $model) : self
     {
         $this->attributes[] = $model;
         return $this;
@@ -516,7 +525,7 @@ class SubscriptionAndOrderItemAdd extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addAttributes(array $attributes)
+    public function addAttributes(array $attributes) : self
     {
         foreach ($attributes as $e) {
             if (is_array($e)) {
@@ -535,7 +544,7 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -603,7 +612,7 @@ class SubscriptionAndOrderItemAdd extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\SubscriptionAndOrderItemAdd($this, $httpResponse, $data);
     }

@@ -10,8 +10,8 @@
 
 namespace MerchantAPI\Logger;
 
-use MerchantAPI\Request;
-use MerchantAPI\Response;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\ResponseInterface;
 use MerchantAPI\Http\HttpHeaders;
 
 /**
@@ -22,11 +22,11 @@ abstract class Logger
 	/**
 	 * logRequest
 	 *
-	 * @param Request
-	 * @param HttpHeaders
-	 * @param array
+	 * @param RequestInterface $request
+	 * @param HttpHeaders $headers
+	 * @param array $data
 	 */
-	public function logRequest(Request $request, HttpHeaders $headers, array $data)
+	public function logRequest(RequestInterface $request, HttpHeaders $headers, array $data) : void
 	{
 		if ($headers->count()) {
 			$this->writeLine(sprintf("\r\n============= Request: %s [HEADERS] =============\r\n", $request->getFunction()));
@@ -43,9 +43,9 @@ abstract class Logger
 	/**
 	 * logResponse
 	 *
-	 * @param Response
+	 * @param ResponseInterface $response
 	 */
-	public function logResponse(Response $response)
+	public function logResponse(ResponseInterface $response) : void
 	{
 		if ($response->getHttpResponse()->getHeaders()->count()) {
 			$this->writeLine(sprintf("\r\n============= Response: %s [HEADERS] =============\r\n", $response->getRequest()->getFunction()));
@@ -62,14 +62,14 @@ abstract class Logger
 	/**
 	 * Writes the data to the log
 	 *
-	 * @param Response
+	 * @param string $data
 	 */
-	abstract public function write($data);
+	abstract public function write(string $data) : void;
 
 	/**
 	 * Writes the data to the log, terminated by EOL
 	 *
-	 * @param Response
+     * @param string $data
 	 */
-	abstract public function writeLine($data);
+	abstract public function writeLine(string $data) : void;
 }

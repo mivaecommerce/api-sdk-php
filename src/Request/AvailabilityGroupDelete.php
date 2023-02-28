@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroup_Delete.
@@ -26,26 +27,27 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroup_Delete';
+    protected string $function = 'AvailabilityGroup_Delete';
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -60,7 +62,7 @@ class AvailabilityGroupDelete extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -70,7 +72,7 @@ class AvailabilityGroupDelete extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -80,7 +82,7 @@ class AvailabilityGroupDelete extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -88,10 +90,10 @@ class AvailabilityGroupDelete extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -101,10 +103,10 @@ class AvailabilityGroupDelete extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -114,10 +116,10 @@ class AvailabilityGroupDelete extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -127,7 +129,7 @@ class AvailabilityGroupDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -145,7 +147,7 @@ class AvailabilityGroupDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupDelete($this, $httpResponse, $data);
     }

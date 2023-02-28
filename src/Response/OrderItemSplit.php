@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\SplitOrderItem;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for OrderItem_Split.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class OrderItemSplit extends Response
 {
+    /** @var ?\MerchantAPI\Model\SplitOrderItem */
+    protected ?SplitOrderItem $splitOrderItem = null;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->splitOrderItem = new SplitOrderItem($this->data['data']);
+    }
+
+    /**
+     * Get splitOrderItem.
+     *
+     * @return \MerchantAPI\Model\SplitOrderItem|null
+     */
+    public function getSplitOrderItem() : ?SplitOrderItem
+    {
+        return $this->splitOrderItem;
+    }
 }

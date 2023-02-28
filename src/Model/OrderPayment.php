@@ -44,39 +44,39 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get type.
      *
-     * @return int
+     * @return ?int
      */
-    public function getType()
+    public function getType() : ?int
     {
-        return (int) $this->getField('type', 0);
+        return $this->getField('type');
     }
 
     /**
      * Get refnum.
      *
-     * @return string
+     * @return ?string
      */
-    public function getReferenceNumber()
+    public function getReferenceNumber() : ?string
     {
         return $this->getField('refnum');
     }
@@ -84,19 +84,19 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get amount.
      *
-     * @return float
+     * @return ?float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
-        return (float) $this->getField('amount', 0.00);
+        return $this->getField('amount');
     }
 
     /**
      * Get formatted_amount.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedAmount()
+    public function getFormattedAmount() : ?string
     {
         return $this->getField('formatted_amount');
     }
@@ -104,19 +104,19 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get available.
      *
-     * @return float
+     * @return ?float
      */
-    public function getAvailable()
+    public function getAvailable() : ?float
     {
-        return (float) $this->getField('available', 0.00);
+        return $this->getField('available');
     }
 
     /**
      * Get formatted_available.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedAvailable()
+    public function getFormattedAvailable() : ?string
     {
         return $this->getField('formatted_available');
     }
@@ -124,49 +124,49 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get dtstamp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?int
     {
-        return (int) $this->getField('dtstamp', 0);
+        return $this->getTimestampField('dtstamp');
     }
 
     /**
      * Get expires.
      *
-     * @return int
+     * @return ?int
      */
-    public function getExpires()
+    public function getExpires() : ?int
     {
-        return (int) $this->getField('expires', 0);
+        return $this->getTimestampField('expires');
     }
 
     /**
      * Get pay_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPaymentId()
+    public function getPaymentId() : ?int
     {
-        return (int) $this->getField('pay_id', 0);
+        return $this->getField('pay_id');
     }
 
     /**
      * Get pay_secid.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPaymentSecId()
+    public function getPaymentSecId() : ?int
     {
-        return (int) $this->getField('pay_secid', 0);
+        return $this->getField('pay_secid');
     }
 
     /**
      * Get decrypt_status.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDecryptStatus()
+    public function getDecryptStatus() : ?string
     {
         return $this->getField('decrypt_status');
     }
@@ -174,9 +174,9 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get decrypt_error.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDecryptError()
+    public function getDecryptError() : ?string
     {
         return $this->getField('decrypt_error');
     }
@@ -184,9 +184,9 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get description.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('description');
     }
@@ -194,10 +194,20 @@ class OrderPayment extends \MerchantAPI\Model
     /**
      * Get data.
      *
-     * @return array
+     * @return ?array
      */
-    public function getPaymentData()
+    public function getPaymentData() : ?array
     {
-        return $this->getField('data', []);
+        return $this->getField('data');
+    }
+
+    /**
+     * Get ip.
+     *
+     * @return ?string
+     */
+    public function getIp() : ?string
+    {
+        return $this->getField('ip');
     }
 }

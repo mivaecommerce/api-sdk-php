@@ -10,10 +10,11 @@ For api documentation visit [https://docs.miva.com/json-api](https://docs.miva.c
 # Requirements
 
 - Miva Merchant 10.+
-- PHP 5.6+
+- PHP 7.4+, Suggested 8.x
 - Composer
 
 **For Miva Merchant 9.x, use the 1.x release**
+**For older PHP support use any release prior to 2.3.0**
 
 # Installation
 

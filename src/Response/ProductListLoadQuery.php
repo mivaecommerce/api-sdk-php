@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ProductList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Product[] */
-    protected $products = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $products;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ProductListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->products = new \MerchantAPI\Collection();
+        $this->products = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ProductListLoadQuery extends ListQueryResponse
     /**
      * Get products.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Product[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProducts()
+    public function getProducts() : Collection
     {
         return $this->products;
     }

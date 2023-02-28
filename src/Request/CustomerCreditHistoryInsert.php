@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Customer;
+use MerchantAPI\Model\CustomerCreditHistory;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerCreditHistory_Insert.
@@ -26,35 +28,36 @@ use MerchantAPI\BaseClient;
 class CustomerCreditHistoryInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerCreditHistory_Insert';
+    protected string $function = 'CustomerCreditHistory_Insert';
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var float */
-    protected $amount;
+    /** @var ?float */
+    protected ?float $amount = null;
 
-    /** @var string */
-    protected $description;
+    /** @var ?string */
+    protected ?string $description = null;
 
-    /** @var string */
-    protected $transactionReference;
+    /** @var ?string */
+    protected ?string $transactionReference = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         if ($customer) {
@@ -71,7 +74,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -81,7 +84,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -91,7 +94,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -101,7 +104,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
         return $this->amount;
     }
@@ -111,7 +114,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->description;
     }
@@ -121,7 +124,7 @@ class CustomerCreditHistoryInsert extends Request
      *
      * @return string
      */
-    public function getTransactionReference()
+    public function getTransactionReference() : ?string
     {
         return $this->transactionReference;
     }
@@ -129,10 +132,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -142,10 +145,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -155,10 +158,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -168,10 +171,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set Amount.
      *
-     * @param float
+     * @param ?float $amount
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount(?float $amount) : self
     {
         $this->amount = $amount;
 
@@ -181,10 +184,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set Description.
      *
-     * @param string
+     * @param ?string $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(?string $description) : self
     {
         $this->description = $description;
 
@@ -194,10 +197,10 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * Set TransactionReference.
      *
-     * @param string
+     * @param ?string $transactionReference
      * @return $this
      */
-    public function setTransactionReference($transactionReference)
+    public function setTransactionReference(?string $transactionReference) : self
     {
         $this->transactionReference = $transactionReference;
 
@@ -207,7 +210,7 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -233,7 +236,7 @@ class CustomerCreditHistoryInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerCreditHistoryInsert($this, $httpResponse, $data);
     }

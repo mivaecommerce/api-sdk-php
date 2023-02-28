@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AttributeTemplate;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AttributeTemplate_Delete.
@@ -26,26 +27,27 @@ use MerchantAPI\BaseClient;
 class AttributeTemplateDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AttributeTemplate_Delete';
+    protected string $function = 'AttributeTemplate_Delete';
 
-    /** @var int */
-    protected $attributeTemplateId;
+    /** @var ?int */
+    protected ?int $attributeTemplateId = null;
 
-    /** @var string */
-    protected $attributeTemplateCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplate;
+    /** @var ?string */
+    protected ?string $editAttributeTemplate = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AttributeTemplate
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AttributeTemplate $attributeTemplate
      */
-    public function __construct(BaseClient $client = null, AttributeTemplate $attributeTemplate = null)
+    public function __construct(?BaseClient $client = null, ?AttributeTemplate $attributeTemplate = null)
     {
         parent::__construct($client);
         if ($attributeTemplate) {
@@ -64,7 +66,7 @@ class AttributeTemplateDelete extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
         return $this->attributeTemplateId;
     }
@@ -74,7 +76,7 @@ class AttributeTemplateDelete extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateCode()
+    public function getAttributeTemplateCode() : ?string
     {
         return $this->attributeTemplateCode;
     }
@@ -84,7 +86,7 @@ class AttributeTemplateDelete extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplate()
+    public function getEditAttributeTemplate() : ?string
     {
         return $this->editAttributeTemplate;
     }
@@ -92,10 +94,10 @@ class AttributeTemplateDelete extends Request
     /**
      * Set AttributeTemplate_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateId
      * @return $this
      */
-    public function setAttributeTemplateId($attributeTemplateId)
+    public function setAttributeTemplateId(?int $attributeTemplateId) : self
     {
         $this->attributeTemplateId = $attributeTemplateId;
 
@@ -105,10 +107,10 @@ class AttributeTemplateDelete extends Request
     /**
      * Set AttributeTemplate_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateCode
      * @return $this
      */
-    public function setAttributeTemplateCode($attributeTemplateCode)
+    public function setAttributeTemplateCode(?string $attributeTemplateCode) : self
     {
         $this->attributeTemplateCode = $attributeTemplateCode;
 
@@ -118,10 +120,10 @@ class AttributeTemplateDelete extends Request
     /**
      * Set Edit_AttributeTemplate.
      *
-     * @param string
+     * @param ?string $editAttributeTemplate
      * @return $this
      */
-    public function setEditAttributeTemplate($editAttributeTemplate)
+    public function setEditAttributeTemplate(?string $editAttributeTemplate) : self
     {
         $this->editAttributeTemplate = $editAttributeTemplate;
 
@@ -131,7 +133,7 @@ class AttributeTemplateDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -149,7 +151,7 @@ class AttributeTemplateDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeTemplateDelete($this, $httpResponse, $data);
     }

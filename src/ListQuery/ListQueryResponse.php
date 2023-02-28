@@ -21,20 +21,18 @@ use MerchantAPI\Response;
 abstract class ListQueryResponse extends Response implements ListQueryResponseInterface
 {
     /**
-     * @return mixed
+     * @return int
      */
-    public function getTotalCount()
+    public function getTotalCount() : int
     {
-        return isset($this->data['data']['total_count']) ?
-            $this->data['data']['total_count'] : 0;
+        return $this->data['data']['total_count'] ?? 0;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getStartOffset()
+    public function getStartOffset() : int
     {
-        return isset($this->data['data']['start_offset']) ?
-            $this->data['data']['start_offset'] : 0;
+        return $this->data['data']['start_offset'] ?? 0;
     }
 }

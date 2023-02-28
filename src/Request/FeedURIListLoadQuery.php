@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request FeedURIList_Load_Query.
@@ -26,13 +27,13 @@ use MerchantAPI\BaseClient;
 class FeedURIListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'FeedURIList_Load_Query';
+    protected string $function = 'FeedURIList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'canonical',
         'status',
@@ -40,22 +41,22 @@ class FeedURIListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'uri',
     ];
 
-    /** @var int */
-    protected $feedId;
+    /** @var ?int */
+    protected ?int $feedId = null;
 
-    /** @var string */
-    protected $feedCode;
+    /** @var ?string */
+    protected ?string $feedCode = null;
 
     /**
      * Get Feed_ID.
      *
      * @return int
      */
-    public function getFeedId()
+    public function getFeedId() : ?int
     {
         return $this->feedId;
     }
@@ -65,7 +66,7 @@ class FeedURIListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getFeedCode()
+    public function getFeedCode() : ?string
     {
         return $this->feedCode;
     }
@@ -73,10 +74,10 @@ class FeedURIListLoadQuery extends ListQueryRequest
     /**
      * Set Feed_ID.
      *
-     * @param int
+     * @param ?int $feedId
      * @return $this
      */
-    public function setFeedId($feedId)
+    public function setFeedId(?int $feedId) : self
     {
         $this->feedId = $feedId;
 
@@ -86,10 +87,10 @@ class FeedURIListLoadQuery extends ListQueryRequest
     /**
      * Set Feed_Code.
      *
-     * @param string
+     * @param ?string $feedCode
      * @return $this
      */
-    public function setFeedCode($feedCode)
+    public function setFeedCode(?string $feedCode) : self
     {
         $this->feedCode = $feedCode;
 
@@ -99,7 +100,7 @@ class FeedURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -115,7 +116,7 @@ class FeedURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\FeedURIListLoadQuery($this, $httpResponse, $data);
     }

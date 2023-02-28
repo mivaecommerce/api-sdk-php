@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class NoteInsert extends Response
 {
-    /** @var \MerchantAPI\Model\Note */
-    protected $note;
+    /** @var ?\MerchantAPI\Model\Note */
+    protected ?Note $note = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class NoteInsert extends Response
      *
      * @return \MerchantAPI\Model\Note|null
      */
-    public function getNote()
+    public function getNote() : ?Note
     {
         return $this->note;
     }

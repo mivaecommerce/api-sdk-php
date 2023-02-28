@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\Model\BranchCSSResourceVersion;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BranchCSSResourceVersionList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BranchCSSResourceVersionList_Load_Query';
+    protected string $function = 'BranchCSSResourceVersionList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'res_id',
         'code',
@@ -49,7 +50,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'res_id',
         'code',
@@ -65,31 +66,32 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'source',
         'linkedpages',
         'linkedresources',
         'source_notes',
     ];
 
-    /** @var int */
-    protected $branchId;
+    /** @var ?int */
+    protected ?int $branchId = null;
 
-    /** @var string */
-    protected $branchName;
+    /** @var ?string */
+    protected ?string $branchName = null;
 
-    /** @var string */
-    protected $editBranch;
+    /** @var ?string */
+    protected ?string $editBranch = null;
 
-    /** @var int */
-    protected $changesetId;
+    /** @var ?int */
+    protected ?int $changesetId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -106,7 +108,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
         return $this->branchId;
     }
@@ -116,7 +118,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getBranchName()
+    public function getBranchName() : ?string
     {
         return $this->branchName;
     }
@@ -126,7 +128,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditBranch()
+    public function getEditBranch() : ?string
     {
         return $this->editBranch;
     }
@@ -136,7 +138,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getChangesetId()
+    public function getChangesetId() : ?int
     {
         return $this->changesetId;
     }
@@ -144,10 +146,10 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Branch_ID.
      *
-     * @param int
+     * @param ?int $branchId
      * @return $this
      */
-    public function setBranchId($branchId)
+    public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
 
@@ -157,10 +159,10 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Branch_Name.
      *
-     * @param string
+     * @param ?string $branchName
      * @return $this
      */
-    public function setBranchName($branchName)
+    public function setBranchName(?string $branchName) : self
     {
         $this->branchName = $branchName;
 
@@ -170,10 +172,10 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Branch.
      *
-     * @param string
+     * @param ?string $editBranch
      * @return $this
      */
-    public function setEditBranch($editBranch)
+    public function setEditBranch(?string $editBranch) : self
     {
         $this->editBranch = $editBranch;
 
@@ -183,10 +185,10 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Changeset_ID.
      *
-     * @param int
+     * @param ?int $changesetId
      * @return $this
      */
-    public function setChangesetId($changesetId)
+    public function setChangesetId(?int $changesetId) : self
     {
         $this->changesetId = $changesetId;
 
@@ -196,7 +198,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -222,7 +224,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchCSSResourceVersionListLoadQuery($this, $httpResponse, $data);
     }

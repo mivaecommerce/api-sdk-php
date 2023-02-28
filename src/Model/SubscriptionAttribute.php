@@ -20,9 +20,9 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -30,9 +30,9 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Get template_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTemplateCode()
+    public function getTemplateCode() : ?string
     {
         return $this->getField('template_code');
     }
@@ -40,9 +40,9 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Get value.
      *
-     * @return string
+     * @return ?string
      */
-    public function getValue()
+    public function getValue() : ?string
     {
         return $this->getField('value');
     }
@@ -50,10 +50,10 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Set code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         return $this->setField('code', $code);
     }
@@ -61,10 +61,10 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Set template_code.
      *
-     * @param string
+     * @param ?string $templateCode
      * @return $this
      */
-    public function setTemplateCode($templateCode)
+    public function setTemplateCode(?string $templateCode) : self
     {
         return $this->setField('template_code', $templateCode);
     }
@@ -72,10 +72,10 @@ class SubscriptionAttribute extends \MerchantAPI\Model
     /**
      * Set value.
      *
-     * @param string
+     * @param ?string $value
      * @return $this
      */
-    public function setValue($value)
+    public function setValue(?string $value) : self
     {
         return $this->setField('value', $value);
     }

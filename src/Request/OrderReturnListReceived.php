@@ -14,6 +14,8 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ReceivedReturn;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request OrderReturnList_Received.
@@ -26,18 +28,20 @@ use MerchantAPI\BaseClient;
 class OrderReturnListReceived extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderReturnList_Received';
+    protected string $function = 'OrderReturnList_Received';
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ReceivedReturn[] */
-    protected $returns = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $returns;
 
     /**
      * Constructor.
+     *
+     * @param ?\MerchantAPI\BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         parent::__construct($client);
         $this->returns = new \MerchantAPI\Collection();
@@ -46,9 +50,9 @@ class OrderReturnListReceived extends Request
     /**
      * Get Returns.
      *
-     * @return \MerchantAPI\Model\ReceivedReturn[]
+     * @return \MerchantAPI\Collection
      */
-    public function getReturns()
+    public function getReturns() : ?Collection
     {
         return $this->returns;
     }
@@ -56,12 +60,17 @@ class OrderReturnListReceived extends Request
     /**
      * Set Returns.
      *
-     * @param (\MerchantAPI\Model\ReceivedReturn|array)[]
+     * @param \MerchantAPI\Collection|array $returns
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setReturns(array $returns)
+    public function setReturns($returns) : self
     {
+        if (!is_array($returns) && !$returns instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($returns) ? get_class($returns) : gettype($returns)));
+        }
+
         foreach ($returns as &$model) {
             if (is_array($model)) {
                 $model = new ReceivedReturn($model);
@@ -71,7 +80,7 @@ class OrderReturnListReceived extends Request
             }
         }
 
-        $this->returns = new \MerchantAPI\Collection($returns);
+        $this->returns = new Collection($returns);
 
         return $this;
     }
@@ -80,10 +89,9 @@ class OrderReturnListReceived extends Request
      * Add Returns.
      *
      * @param \MerchantAPI\Model\ReceivedReturn
-     *
      * @return $this
      */
-    public function addReceivedReturn(ReceivedReturn $model)
+    public function addReceivedReturn(ReceivedReturn $model) : self
     {
         $this->returns[] = $model;
         return $this;
@@ -96,7 +104,7 @@ class OrderReturnListReceived extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addReturns(array $returns)
+    public function addReturns(array $returns) : self
     {
         foreach ($returns as $e) {
             if (is_array($e)) {
@@ -115,7 +123,7 @@ class OrderReturnListReceived extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -133,7 +141,7 @@ class OrderReturnListReceived extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderReturnListReceived($this, $httpResponse, $data);
     }

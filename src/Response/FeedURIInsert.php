@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class FeedURIInsert extends Response
 {
-    /** @var \MerchantAPI\Model\Uri */
-    protected $uri;
+    /** @var ?\MerchantAPI\Model\Uri */
+    protected ?Uri $uri = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class FeedURIInsert extends Response
      *
      * @return \MerchantAPI\Model\Uri|null
      */
-    public function getUri()
+    public function getUri() : ?Uri
     {
         return $this->uri;
     }

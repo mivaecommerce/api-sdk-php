@@ -57,9 +57,9 @@ class OrderCustomField extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -67,9 +67,9 @@ class OrderCustomField extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -77,9 +77,9 @@ class OrderCustomField extends \MerchantAPI\Model
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -87,40 +87,40 @@ class OrderCustomField extends \MerchantAPI\Model
     /**
      * Get searchable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getSearchable()
+    public function getSearchable() : ?bool
     {
-        return (bool) $this->getField('searchable', false);
+        return $this->getField('searchable');
     }
 
     /**
      * Get sortable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getSortable()
+    public function getSortable() : ?bool
     {
-        return (bool) $this->getField('sortable', false);
+        return $this->getField('sortable');
     }
 
     /**
      * Get module.
      *
-     * @return \MerchantAPI\Model\Module|null
+     * @return ?\MerchantAPI\Model\Module
      */
-    public function getModule()
+    public function getModule() : ?Module
     {
-        return $this->getField('module', null);
+        return $this->getField('module');
     }
 
     /**
      * Get choices.
      *
-     * @return array
+     * @return ?array
      */
-    public function getChoices()
+    public function getChoices() : ?array
     {
-        return $this->getField('choices', []);
+        return $this->getField('choices');
     }
 }

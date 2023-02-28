@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductList_Load_Query.
@@ -35,13 +36,13 @@ class ProductListLoadQuery extends ListQueryRequest
     const PRODUCT_SHOW_ACTIVE = 'Active';
 
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductList_Load_Query';
+    protected string $function = 'ProductList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'code',
         'sku',
@@ -64,7 +65,7 @@ class ProductListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'code',
         'sku',
@@ -85,7 +86,7 @@ class ProductListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'descrip',
         'catcount',
         'cancat_code',
@@ -102,7 +103,7 @@ class ProductListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on custom filters */
-    protected $availableCustomFilters = [
+    protected array $availableCustomFilters = [
         'Product_Show' => [
             self::PRODUCT_SHOW_ALL,
             self::PRODUCT_SHOW_UNCATEGORIZED,
@@ -113,7 +114,7 @@ class ProductListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -123,7 +124,7 @@ class ProductListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductListLoadQuery($this, $httpResponse, $data);
     }

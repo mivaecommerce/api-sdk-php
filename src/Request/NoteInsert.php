@@ -12,7 +12,9 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\Note;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Note_Insert.
@@ -25,29 +27,29 @@ use MerchantAPI\BaseClient;
 class NoteInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Note_Insert';
+    protected string $function = 'Note_Insert';
 
-    /** @var string */
-    protected $noteText;
+    /** @var ?string */
+    protected ?string $noteText = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var int */
-    protected $accountId;
+    /** @var ?int */
+    protected ?int $accountId = null;
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
     /**
      * Get NoteText.
      *
      * @return string
      */
-    public function getNoteText()
+    public function getNoteText() : ?string
     {
         return $this->noteText;
     }
@@ -57,7 +59,7 @@ class NoteInsert extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -67,7 +69,7 @@ class NoteInsert extends Request
      *
      * @return int
      */
-    public function getAccountId()
+    public function getAccountId() : ?int
     {
         return $this->accountId;
     }
@@ -77,7 +79,7 @@ class NoteInsert extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -85,10 +87,10 @@ class NoteInsert extends Request
     /**
      * Set NoteText.
      *
-     * @param string
+     * @param ?string $noteText
      * @return $this
      */
-    public function setNoteText($noteText)
+    public function setNoteText(?string $noteText) : self
     {
         $this->noteText = $noteText;
 
@@ -98,10 +100,10 @@ class NoteInsert extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -111,10 +113,10 @@ class NoteInsert extends Request
     /**
      * Set Account_ID.
      *
-     * @param int
+     * @param ?int $accountId
      * @return $this
      */
-    public function setAccountId($accountId)
+    public function setAccountId(?int $accountId) : self
     {
         $this->accountId = $accountId;
 
@@ -124,10 +126,10 @@ class NoteInsert extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -137,7 +139,7 @@ class NoteInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -161,7 +163,7 @@ class NoteInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\NoteInsert($this, $httpResponse, $data);
     }

@@ -20,19 +20,19 @@ class PaymentCardType extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -40,9 +40,9 @@ class PaymentCardType extends \MerchantAPI\Model
     /**
      * Get prefixes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPrefixes()
+    public function getPrefixes() : ?string
     {
         return $this->getField('prefixes');
     }
@@ -50,9 +50,9 @@ class PaymentCardType extends \MerchantAPI\Model
     /**
      * Get lengths.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLengths()
+    public function getLengths() : ?string
     {
         return $this->getField('lengths');
     }
@@ -60,10 +60,10 @@ class PaymentCardType extends \MerchantAPI\Model
     /**
      * Get cvv.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getCvv()
+    public function getCvv() : ?bool
     {
-        return (bool) $this->getField('cvv', false);
+        return $this->getField('cvv');
     }
 }

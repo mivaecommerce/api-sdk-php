@@ -52,6 +52,9 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
     /** @var string TERM_FREQUENCY_DATES */
     const TERM_FREQUENCY_DATES = 'dates';
 
+    /** @var string TERM_FREQUENCY_MONTHLY */
+    const TERM_FREQUENCY_MONTHLY = 'monthly';
+
     /**
      * Constructor.
      *
@@ -105,29 +108,29 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get frequency.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFrequency()
+    public function getFrequency() : ?string
     {
         return $this->getField('frequency');
     }
@@ -135,19 +138,19 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
     /**
      * Get term.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTerm()
+    public function getTerm() : ?int
     {
-        return (int) $this->getField('term', 0);
+        return $this->getField('term');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -155,50 +158,60 @@ class ProductSubscriptionTerm extends \MerchantAPI\Model
     /**
      * Get n.
      *
-     * @return int
+     * @return ?int
      */
-    public function getN()
+    public function getN() : ?int
     {
-        return (int) $this->getField('n', 0);
+        return $this->getField('n');
     }
 
     /**
      * Get fixed_dow.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFixedDayOfWeek()
+    public function getFixedDayOfWeek() : ?int
     {
-        return (int) $this->getField('fixed_dow', 0);
+        return $this->getField('fixed_dow');
     }
 
     /**
      * Get fixed_dom.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFixedDayOfMonth()
+    public function getFixedDayOfMonth() : ?int
     {
-        return (int) $this->getField('fixed_dom', 0);
+        return $this->getField('fixed_dom');
     }
 
     /**
      * Get sub_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionCount()
+    public function getSubscriptionCount() : ?int
     {
-        return (int) $this->getField('sub_count', 0);
+        return $this->getField('sub_count');
     }
 
     /**
      * Get dates.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductSubscriptionTermDate[]
+     * @return \MerchantAPI\Collection
      */
-    public function getDates()
+    public function getDates() : ?Collection
     {
-        return $this->getField('dates', []);
+        return $this->getField('dates');
+    }
+
+    /**
+     * Get disp_order.
+     *
+     * @return ?int
+     */
+    public function getDisplayOrder() : ?int
+    {
+        return $this->getField('disp_order');
     }
 }

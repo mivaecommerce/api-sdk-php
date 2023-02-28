@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\AvailabilityGroupShippingMethod;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for AvailabilityGroupShippingMethodList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupShippingMethod[] */
-    protected $availabilityGroupShippingMethods = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $availabilityGroupShippingMethods;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->availabilityGroupShippingMethods = new \MerchantAPI\Collection();
+        $this->availabilityGroupShippingMethods = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryResponse
     /**
      * Get availabilityGroupShippingMethods.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupShippingMethod[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAvailabilityGroupShippingMethods()
+    public function getAvailabilityGroupShippingMethods() : Collection
     {
         return $this->availabilityGroupShippingMethods;
     }

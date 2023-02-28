@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomerAddress;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerAddress_Update_Residential.
@@ -26,26 +27,27 @@ use MerchantAPI\BaseClient;
 class CustomerAddressUpdateResidential extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerAddress_Update_Residential';
+    protected string $function = 'CustomerAddress_Update_Residential';
 
-    /** @var int */
-    protected $addressId;
+    /** @var ?int */
+    protected ?int $addressId = null;
 
-    /** @var int */
-    protected $customerAddressId;
+    /** @var ?int */
+    protected ?int $customerAddressId = null;
 
-    /** @var bool */
-    protected $residential;
+    /** @var ?bool */
+    protected ?bool $residential = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\CustomerAddress
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\CustomerAddress $customerAddress
      */
-    public function __construct(BaseClient $client = null, CustomerAddress $customerAddress = null)
+    public function __construct(?BaseClient $client = null, ?CustomerAddress $customerAddress = null)
     {
         parent::__construct($client);
         if ($customerAddress) {
@@ -60,7 +62,7 @@ class CustomerAddressUpdateResidential extends Request
      *
      * @return int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
         return $this->addressId;
     }
@@ -70,7 +72,7 @@ class CustomerAddressUpdateResidential extends Request
      *
      * @return int
      */
-    public function getCustomerAddressId()
+    public function getCustomerAddressId() : ?int
     {
         return $this->customerAddressId;
     }
@@ -80,7 +82,7 @@ class CustomerAddressUpdateResidential extends Request
      *
      * @return bool
      */
-    public function getResidential()
+    public function getResidential() : ?bool
     {
         return $this->residential;
     }
@@ -88,10 +90,10 @@ class CustomerAddressUpdateResidential extends Request
     /**
      * Set Address_ID.
      *
-     * @param int
+     * @param ?int $addressId
      * @return $this
      */
-    public function setAddressId($addressId)
+    public function setAddressId(?int $addressId) : self
     {
         $this->addressId = $addressId;
 
@@ -101,10 +103,10 @@ class CustomerAddressUpdateResidential extends Request
     /**
      * Set CustomerAddress_ID.
      *
-     * @param int
+     * @param ?int $customerAddressId
      * @return $this
      */
-    public function setCustomerAddressId($customerAddressId)
+    public function setCustomerAddressId(?int $customerAddressId) : self
     {
         $this->customerAddressId = $customerAddressId;
 
@@ -114,10 +116,10 @@ class CustomerAddressUpdateResidential extends Request
     /**
      * Set Residential.
      *
-     * @param bool
+     * @param ?bool $residential
      * @return $this
      */
-    public function setResidential($residential)
+    public function setResidential(?bool $residential) : self
     {
         $this->residential = $residential;
 
@@ -127,7 +129,7 @@ class CustomerAddressUpdateResidential extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -147,7 +149,7 @@ class CustomerAddressUpdateResidential extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerAddressUpdateResidential($this, $httpResponse, $data);
     }

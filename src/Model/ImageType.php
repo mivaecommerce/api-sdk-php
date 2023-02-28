@@ -20,19 +20,19 @@ class ImageType extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -40,9 +40,9 @@ class ImageType extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }

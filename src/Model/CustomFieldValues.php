@@ -22,7 +22,7 @@ class CustomFieldValues extends \MerchantAPI\Model
      *
      * @return array
      */
-    public function getValues()
+    public function getValues() : ?array
     {
         return $this->data;
     }
@@ -30,11 +30,11 @@ class CustomFieldValues extends \MerchantAPI\Model
     /**
      * Get a value for a module by its code.
      *
-     * @param string
-     * @param string
-     * @return string
+     * @param string $code
+     * @param string $module
+     * @return mixed
      */
-    public function getValue($code, $module = 'customfields')
+    public function getValue(string $code, string $module = 'customfields')
     {
         return $this->hasValue($code, $module) ?
             $this->data[$module][$code] : null;
@@ -43,11 +43,11 @@ class CustomFieldValues extends \MerchantAPI\Model
     /**
      * Check if a value for code and module exists.
      *
-     * @param string
-     * @param string
+     * @param string $code
+     * @param string $module
      * @return bool
      */
-    public function hasValue($code, $module = 'customfields')
+    public function hasValue(string $code, string $module = 'customfields') : bool
     {
         return isset($this->data[$module][$code]);
     }
@@ -58,7 +58,7 @@ class CustomFieldValues extends \MerchantAPI\Model
      * @param string
      * @return bool
      */
-    public function hasModule($module)
+    public function hasModule(string $module) : bool
     {
         return isset($this->data[$module]);
     }
@@ -66,10 +66,10 @@ class CustomFieldValues extends \MerchantAPI\Model
     /**
      * Get a specific modules custom field values.
      *
-     * @param string
+     * @param string $module
      * @return array
      */
-    public function getModule($module)
+    public function getModule(string $module) : array
     {
         return $this->hasModule($module) ? $this->data[$module] : [];
     }
@@ -77,10 +77,10 @@ class CustomFieldValues extends \MerchantAPI\Model
     /**
      * Set custom field values.
      *
-     * @param array
+     * @param array $values
      * @return $this
      */
-    public function setValues(array $values)
+    public function setValues(array $values) : self
     {
         $this->data = $values;
         return $this;
@@ -89,12 +89,12 @@ class CustomFieldValues extends \MerchantAPI\Model
     /**
      * Add a custom field value.
      *
-     * @param string
-     * @param mixed
-     * @param string
+     * @param string $field
+     * @param mixed $value
+     * @param string $module
      * @return $this
      */
-    public function addValue($field, $value, $module = 'customfields')
+    public function addValue(string $field, $value, string $module = 'customfields') : self
     {
         $this->data[$module][$field] = $value;
         return $this;

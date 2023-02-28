@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroupProduct_Update_Assigned.
@@ -26,41 +27,42 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupProductUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroupProduct_Update_Assigned';
+    protected string $function = 'AvailabilityGroupProduct_Update_Assigned';
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $productSku;
+    /** @var ?string */
+    protected ?string $productSku = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -77,7 +79,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -87,7 +89,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -97,7 +99,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -107,7 +109,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -117,7 +119,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -127,7 +129,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->productSku;
     }
@@ -137,7 +139,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -147,7 +149,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -155,10 +157,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -168,10 +170,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -181,10 +183,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -194,10 +196,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -207,10 +209,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -220,10 +222,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Product_SKU.
      *
-     * @param string
+     * @param ?string $productSku
      * @return $this
      */
-    public function setProductSku($productSku)
+    public function setProductSku(?string $productSku) : self
     {
         $this->productSku = $productSku;
 
@@ -233,10 +235,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -246,10 +248,10 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -259,7 +261,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -289,7 +291,7 @@ class AvailabilityGroupProductUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupProductUpdateAssigned($this, $httpResponse, $data);
     }

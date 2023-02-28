@@ -17,28 +17,28 @@ namespace MerchantAPI\SSHAgent;
  */
 class SSHAgentSignRequest extends SSHAgentMessage
 {
-    /** @var null buffer */
-	protected $publicKey;
+    /** @var ?string */
+	protected ?string $publicKey;
 
-	/** @var null string */
-	protected $signData;
+	/** @var ?string */
+	protected ?string $signData;
 
 	/** @var int */
-	protected $digestType;
+	protected int $digestType;
 
-	/** @var string */
-	protected $signatureType;
+	/** @var ?string */
+	protected ?string $signatureType;
 
-	/** @var buffer */
-	protected $signature;
+	/** @var ?string */
+	protected ?string $signature;
 
     /**
      * SSHAgentSignRequest constructor.
-     * @param null $publicKey
-     * @param null $signData
+     * @param ?string $publicKey
+     * @param ?string $signData
      * @param int $digestType
      */
-	public function __construct($publicKey = null, $signData = null, $digestType = SSHAgentSignClient::SSH_AGENT_RSA_SHA2_256)
+	public function __construct(?string $publicKey = null, ?string $signData = null, int $digestType = SSHAgentSignClient::SSH_AGENT_RSA_SHA2_256)
 	{
 		$this->publicKey = $publicKey;
 		$this->signData = $signData;
@@ -46,26 +46,29 @@ class SSHAgentSignRequest extends SSHAgentMessage
 	}
 
     /**
-     * @param $key
+     * @param ?string $key
      * @return $this
      */
-	public function setPublicKey($key) {
+	public function setPublicKey(?string $key) : self
+    {
 		$this->publicKey = $key;
 		return $this;
 	}
 
     /**
-     * @return |null
+     * @return ?string
      */
-	public function getPublicKey() {
+	public function getPublicKey() : ?string
+    {
 		return $this->publicKey;
 	}
 
     /**
-     * @param $data
+     * @param ?string $data
      * @return $this
      */
-	public function setSignData($data) {
+	public function setSignData(?string $data) : self
+    {
 		$this->signData = $data;
 		return $this;
 	}
@@ -73,17 +76,19 @@ class SSHAgentSignRequest extends SSHAgentMessage
     /**
      * @return string
      */
-	public function getSignData() {
+	public function getSignData() : ?string
+    {
 		return $this->signData;
 	}
 
     /**
-     * @param $type
+     * @param int $type
      * @return $this
      * @throws \Exception
      */
-	public function setDigestType($type) {
-		if (!in_array((int)$type, [ SSHAgentSignClient::SSH_AGENT_RSA_SHA2_256, SSHAgentSignClient::SSH_AGENT_RSA_SHA2_512 ]))
+	public function setDigestType(int $type) : self
+    {
+		if (!in_array($type, [ SSHAgentSignClient::SSH_AGENT_RSA_SHA2_256, SSHAgentSignClient::SSH_AGENT_RSA_SHA2_512 ]))
 		{
 			throw new \Exception('Invalid digest type');
 		}
@@ -94,28 +99,31 @@ class SSHAgentSignRequest extends SSHAgentMessage
     /**
      * @return int
      */
-	public function getDigestType() {
+	public function getDigestType() : int
+    {
 		return $this->digestType;
 	}
 
     /**
-     * @return string
+     * @return ?string
      */
-	public function getSignatureType() {
+	public function getSignatureType() : ?string
+    {
 		return $this->signatureType;
 	}
 
     /**
-     * @return buffer
+     * @return ?string
      */
-	public function getSignature() {
+	public function getSignature() : ?string
+    {
 		return $this->signature;
 	}
 
     /**
      * @return string
      */
-	public function Pack()
+	public function Pack() : string
 	{
 		$keyLen = strlen($this->publicKey);
 		$signDataLen = strlen($this->signData);
@@ -133,15 +141,15 @@ class SSHAgentSignRequest extends SSHAgentMessage
 	}
 
     /**
-     * @param $data
+     * @param string $data
+     * @return void
      * @throws \Exception
      */
-	public function Unpack($data)
+	public function Unpack(string $data) : void
 	{
 		$header = unpack('C', $data, 0);
 
 		if (!isset($header[1]) || $header[1] != SSHAgentSignClient::SSH_AGENT_SIGN_RESPONSE) {
-			var_dump($header);
 			throw new \Exception('Invalid Response');
 		}
 

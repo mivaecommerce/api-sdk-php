@@ -14,6 +14,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\Model\OrderCoupon;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderCouponList_Load_Query.
@@ -26,26 +27,27 @@ use MerchantAPI\BaseClient;
 class OrderCouponListLoadQuery extends CouponListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderCouponList_Load_Query';
+    protected string $function = 'OrderCouponList_Load_Query';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -58,7 +60,7 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -68,7 +70,7 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -78,7 +80,7 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -86,10 +88,10 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -99,10 +101,10 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -112,10 +114,10 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -125,7 +127,7 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -145,7 +147,7 @@ class OrderCouponListLoadQuery extends CouponListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderCouponListLoadQuery($this, $httpResponse, $data);
     }

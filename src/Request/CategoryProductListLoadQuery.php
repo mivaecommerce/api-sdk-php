@@ -14,6 +14,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\Model\CategoryProduct;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryProductList_Load_Query.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class CategoryProductListLoadQuery extends ProductListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryProductList_Load_Query';
+    protected string $function = 'CategoryProductList_Load_Query';
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -68,7 +70,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -78,7 +80,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -88,7 +90,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -98,7 +100,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -108,7 +110,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -116,10 +118,10 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -129,10 +131,10 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -142,10 +144,10 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -155,10 +157,10 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -168,10 +170,10 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -181,7 +183,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -207,7 +209,7 @@ class CategoryProductListLoadQuery extends ProductListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryProductListLoadQuery($this, $httpResponse, $data);
     }

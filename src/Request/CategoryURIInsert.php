@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
+use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryURI_Insert.
@@ -26,35 +28,36 @@ use MerchantAPI\BaseClient;
 class CategoryURIInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryURI_Insert';
+    protected string $function = 'CategoryURI_Insert';
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -71,7 +74,7 @@ class CategoryURIInsert extends Request
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -81,7 +84,7 @@ class CategoryURIInsert extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -91,7 +94,7 @@ class CategoryURIInsert extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -101,7 +104,7 @@ class CategoryURIInsert extends Request
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -111,7 +114,7 @@ class CategoryURIInsert extends Request
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -121,7 +124,7 @@ class CategoryURIInsert extends Request
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -129,10 +132,10 @@ class CategoryURIInsert extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -142,10 +145,10 @@ class CategoryURIInsert extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -155,10 +158,10 @@ class CategoryURIInsert extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -168,10 +171,10 @@ class CategoryURIInsert extends Request
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -181,10 +184,10 @@ class CategoryURIInsert extends Request
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -194,10 +197,10 @@ class CategoryURIInsert extends Request
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -207,7 +210,7 @@ class CategoryURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -237,7 +240,7 @@ class CategoryURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryURIInsert($this, $httpResponse, $data);
     }

@@ -16,18 +16,18 @@ namespace MerchantAPI\MultiCall;
 class MultiCallException extends \Exception
 {
     /** @var MultiCallRequest */
-	protected $request;
+	protected MultiCallRequest $request;
 
 	/** @var MultiCallResponse */
-	protected $response;
+	protected MultiCallResponse $response;
 
     /**
      * MultiCallException constructor.
-     * @param $message
+     * @param string $message
      * @param MultiCallRequest $request
      * @param MultiCallResponse $response
      */
-	public function __construct($message, MultiCallRequest $request, MultiCallResponse $response)
+	public function __construct(string $message, MultiCallRequest $request, MultiCallResponse $response)
 	{
 		parent::__construct($message);
 
@@ -38,7 +38,7 @@ class MultiCallException extends \Exception
     /**
      * @return MultiCallRequest
      */
-	public function getRequest()
+	public function getRequest() : MultiCallRequest
 	{
 		return $this->request;
 	}
@@ -46,7 +46,7 @@ class MultiCallException extends \Exception
     /**
      * @return MultiCallResponse
      */
-	public function getResponse()
+	public function getResponse() : MultiCallResponse
 	{
 		return $this->response;
 	}

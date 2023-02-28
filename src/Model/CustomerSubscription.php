@@ -20,9 +20,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get frequency.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFrequency()
+    public function getFrequency() : ?string
     {
         return $this->getField('frequency');
     }
@@ -30,19 +30,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get term.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTerm()
+    public function getTerm() : ?int
     {
-        return (int) $this->getField('term', 0);
+        return $this->getField('term');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -50,49 +50,49 @@ class CustomerSubscription extends Subscription
     /**
      * Get n.
      *
-     * @return int
+     * @return ?int
      */
-    public function getN()
+    public function getN() : ?int
     {
-        return (int) $this->getField('n', 0);
+        return $this->getField('n');
     }
 
     /**
      * Get fixed_dow.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFixedDayOfWeek()
+    public function getFixedDayOfWeek() : ?int
     {
-        return (int) $this->getField('fixed_dow', 0);
+        return $this->getField('fixed_dow');
     }
 
     /**
      * Get fixed_dom.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFixedDayOfMonth()
+    public function getFixedDayOfMonth() : ?int
     {
-        return (int) $this->getField('fixed_dom', 0);
+        return $this->getField('fixed_dom');
     }
 
     /**
      * Get sub_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionCount()
+    public function getSubscriptionCount() : ?int
     {
-        return (int) $this->getField('sub_count', 0);
+        return $this->getField('sub_count');
     }
 
     /**
      * Get method.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethod()
+    public function getMethod() : ?string
     {
         return $this->getField('method');
     }
@@ -100,9 +100,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->getField('product_code');
     }
@@ -110,9 +110,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductName()
+    public function getProductName() : ?string
     {
         return $this->getField('product_name');
     }
@@ -120,9 +120,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->getField('product_sku');
     }
@@ -130,19 +130,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getProductPrice()
+    public function getProductPrice() : ?float
     {
-        return (float) $this->getField('product_price', 0.00);
+        return $this->getField('product_price');
     }
 
     /**
      * Get product_formatted_price.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductFormattedPrice()
+    public function getProductFormattedPrice() : ?string
     {
         return $this->getField('product_formatted_price');
     }
@@ -150,19 +150,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getProductCost()
+    public function getProductCost() : ?float
     {
-        return (float) $this->getField('product_cost', 0.00);
+        return $this->getField('product_cost');
     }
 
     /**
      * Get product_formatted_cost.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductFormattedCost()
+    public function getProductFormattedCost() : ?string
     {
         return $this->getField('product_formatted_cost');
     }
@@ -170,29 +170,29 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getProductWeight()
+    public function getProductWeight() : ?float
     {
-        return (float) $this->getField('product_weight', 0.00);
+        return $this->getField('product_weight');
     }
 
     /**
      * Get product_taxable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getProductTaxable()
+    public function getProductTaxable() : ?bool
     {
-        return (bool) $this->getField('product_taxable', false);
+        return $this->getField('product_taxable');
     }
 
     /**
      * Get product_thumbnail.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductThumbnail()
+    public function getProductThumbnail() : ?string
     {
         return $this->getField('product_thumbnail');
     }
@@ -200,9 +200,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductImage()
+    public function getProductImage() : ?string
     {
         return $this->getField('product_image');
     }
@@ -210,39 +210,39 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getProductActive()
+    public function getProductActive() : ?bool
     {
-        return (bool) $this->getField('product_active', false);
+        return $this->getField('product_active');
     }
 
     /**
      * Get product_dt_created.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductDateTimeCreated()
+    public function getProductDateTimeCreated() : ?int
     {
-        return (int) $this->getField('product_dt_created', 0);
+        return $this->getTimestampField('product_dt_created');
     }
 
     /**
      * Get product_dt_updated.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductDateTimeUpdated()
+    public function getProductDateTimeUpdated() : ?int
     {
-        return (int) $this->getField('product_dt_updated', 0);
+        return $this->getTimestampField('product_dt_updated');
     }
 
     /**
      * Get product_page_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductPageTitle()
+    public function getProductPageTitle() : ?string
     {
         return $this->getField('product_page_title');
     }
@@ -250,19 +250,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_page_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductPageId()
+    public function getProductPageId() : ?int
     {
-        return (int) $this->getField('product_page_id', 0);
+        return $this->getField('product_page_id');
     }
 
     /**
      * Get product_page_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductPageCode()
+    public function getProductPageCode() : ?string
     {
         return $this->getField('product_page_code');
     }
@@ -270,19 +270,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_cancat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductCanonicalCategoryId()
+    public function getProductCanonicalCategoryId() : ?int
     {
-        return (int) $this->getField('product_cancat_id', 0);
+        return $this->getField('product_cancat_id');
     }
 
     /**
      * Get product_cancat_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductCanonicalCategoryCode()
+    public function getProductCanonicalCategoryCode() : ?string
     {
         return $this->getField('product_cancat_code');
     }
@@ -290,21 +290,21 @@ class CustomerSubscription extends Subscription
     /**
      * Get product_inventory_active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getProductInventoryActive()
+    public function getProductInventoryActive() : ?bool
     {
-        return (bool) $this->getField('product_inventory_active', false);
+        return $this->getField('product_inventory_active');
     }
 
     /**
      * Get product_inventory.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductInventory()
+    public function getProductInventory() : ?int
     {
-        return (int) $this->getField('product_inventory', 0);
+        return $this->getField('product_inventory');
     }
 
     /**
@@ -312,7 +312,7 @@ class CustomerSubscription extends Subscription
      *
      * @return array
      */
-    public function getImageTypes()
+    public function getImageTypes() : ?array
     {
         return $this->getField('image_types');
     }
@@ -320,9 +320,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get paymentcard_lastfour.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPaymentCardLastFour()
+    public function getPaymentCardLastFour() : ?string
     {
         return $this->getField('paymentcard_lastfour');
     }
@@ -330,9 +330,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get paymentcard_type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPaymentCardType()
+    public function getPaymentCardType() : ?string
     {
         return $this->getField('paymentcard_type');
     }
@@ -340,9 +340,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressDescription()
+    public function getAddressDescription() : ?string
     {
         return $this->getField('address_descrip');
     }
@@ -350,9 +350,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_fname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressFirstName()
+    public function getAddressFirstName() : ?string
     {
         return $this->getField('address_fname');
     }
@@ -360,9 +360,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_lname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressLastName()
+    public function getAddressLastName() : ?string
     {
         return $this->getField('address_lname');
     }
@@ -370,9 +370,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressEmail()
+    public function getAddressEmail() : ?string
     {
         return $this->getField('address_email');
     }
@@ -380,9 +380,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_comp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressCompany()
+    public function getAddressCompany() : ?string
     {
         return $this->getField('address_comp');
     }
@@ -390,9 +390,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_phone.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressPhone()
+    public function getAddressPhone() : ?string
     {
         return $this->getField('address_phone');
     }
@@ -400,9 +400,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_fax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressFax()
+    public function getAddressFax() : ?string
     {
         return $this->getField('address_fax');
     }
@@ -410,9 +410,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_addr.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressAddress()
+    public function getAddressAddress() : ?string
     {
         return $this->getField('address_addr');
     }
@@ -420,9 +420,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_addr1.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressAddress1()
+    public function getAddressAddress1() : ?string
     {
         return $this->getField('address_addr1');
     }
@@ -430,9 +430,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_addr2.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressAddress2()
+    public function getAddressAddress2() : ?string
     {
         return $this->getField('address_addr2');
     }
@@ -440,9 +440,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressCity()
+    public function getAddressCity() : ?string
     {
         return $this->getField('address_city');
     }
@@ -450,9 +450,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressState()
+    public function getAddressState() : ?string
     {
         return $this->getField('address_state');
     }
@@ -460,9 +460,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressZip()
+    public function getAddressZip() : ?string
     {
         return $this->getField('address_zip');
     }
@@ -470,9 +470,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_cntry.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddressCountry()
+    public function getAddressCountry() : ?string
     {
         return $this->getField('address_cntry');
     }
@@ -480,19 +480,19 @@ class CustomerSubscription extends Subscription
     /**
      * Get address_resdntl.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getAddressResidential()
+    public function getAddressResidential() : ?bool
     {
-        return (bool) $this->getField('address_resdntl', false);
+        return $this->getField('address_resdntl');
     }
 
     /**
      * Get customer_login.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->getField('customer_login');
     }
@@ -500,9 +500,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get customer_pw_email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerPasswordEmail()
+    public function getCustomerPasswordEmail() : ?string
     {
         return $this->getField('customer_pw_email');
     }
@@ -510,9 +510,9 @@ class CustomerSubscription extends Subscription
     /**
      * Get customer_business_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerBusinessTitle()
+    public function getCustomerBusinessTitle() : ?string
     {
         return $this->getField('customer_business_title');
     }

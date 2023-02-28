@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Note;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Note_Delete.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class NoteDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Note_Delete';
+    protected string $function = 'Note_Delete';
 
-    /** @var int */
-    protected $noteId;
+    /** @var ?int */
+    protected ?int $noteId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Note
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Note $note
      */
-    public function __construct(BaseClient $client = null, Note $note = null)
+    public function __construct(?BaseClient $client = null, ?Note $note = null)
     {
         parent::__construct($client);
         if ($note) {
@@ -52,7 +54,7 @@ class NoteDelete extends Request
      *
      * @return int
      */
-    public function getNoteId()
+    public function getNoteId() : ?int
     {
         return $this->noteId;
     }
@@ -60,10 +62,10 @@ class NoteDelete extends Request
     /**
      * Set Note_ID.
      *
-     * @param int
+     * @param ?int $noteId
      * @return $this
      */
-    public function setNoteId($noteId)
+    public function setNoteId(?int $noteId) : self
     {
         $this->noteId = $noteId;
 
@@ -73,7 +75,7 @@ class NoteDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -85,7 +87,7 @@ class NoteDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\NoteDelete($this, $httpResponse, $data);
     }

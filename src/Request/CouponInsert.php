@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Coupon_Insert.
@@ -26,44 +27,45 @@ use MerchantAPI\BaseClient;
 class CouponInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Coupon_Insert';
+    protected string $function = 'Coupon_Insert';
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $description;
+    /** @var ?string */
+    protected ?string $description = null;
 
-    /** @var string */
-    protected $customerScope;
+    /** @var ?string */
+    protected ?string $customerScope = null;
 
-    /** @var int */
-    protected $dateTimeStart;
+    /** @var int|\DateTime|null */
+    protected $dateTimeStart = null;
 
-    /** @var int */
-    protected $dateTimeEnd;
+    /** @var int|\DateTime|null */
+    protected $dateTimeEnd = null;
 
-    /** @var int */
-    protected $maxUse;
+    /** @var ?int */
+    protected ?int $maxUse = null;
 
-    /** @var int */
-    protected $maxPer;
+    /** @var ?int */
+    protected ?int $maxPer = null;
 
-    /** @var bool */
-    protected $active;
+    /** @var ?bool */
+    protected ?bool $active = null;
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Coupon
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Coupon $coupon
      */
-    public function __construct(BaseClient $client = null, Coupon $coupon = null)
+    public function __construct(?BaseClient $client = null, ?Coupon $coupon = null)
     {
         parent::__construct($client);
         if ($coupon) {
@@ -83,7 +85,7 @@ class CouponInsert extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -93,7 +95,7 @@ class CouponInsert extends Request
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->description;
     }
@@ -103,7 +105,7 @@ class CouponInsert extends Request
      *
      * @return string
      */
-    public function getCustomerScope()
+    public function getCustomerScope() : ?string
     {
         return $this->customerScope;
     }
@@ -113,7 +115,7 @@ class CouponInsert extends Request
      *
      * @return int
      */
-    public function getDateTimeStart()
+    public function getDateTimeStart() : ?int
     {
         return $this->dateTimeStart;
     }
@@ -123,7 +125,7 @@ class CouponInsert extends Request
      *
      * @return int
      */
-    public function getDateTimeEnd()
+    public function getDateTimeEnd() : ?int
     {
         return $this->dateTimeEnd;
     }
@@ -133,7 +135,7 @@ class CouponInsert extends Request
      *
      * @return int
      */
-    public function getMaxUse()
+    public function getMaxUse() : ?int
     {
         return $this->maxUse;
     }
@@ -143,7 +145,7 @@ class CouponInsert extends Request
      *
      * @return int
      */
-    public function getMaxPer()
+    public function getMaxPer() : ?int
     {
         return $this->maxPer;
     }
@@ -153,7 +155,7 @@ class CouponInsert extends Request
      *
      * @return bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
         return $this->active;
     }
@@ -163,7 +165,7 @@ class CouponInsert extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -171,10 +173,10 @@ class CouponInsert extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -184,10 +186,10 @@ class CouponInsert extends Request
     /**
      * Set Description.
      *
-     * @param string
+     * @param ?string $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(?string $description) : self
     {
         $this->description = $description;
 
@@ -197,10 +199,10 @@ class CouponInsert extends Request
     /**
      * Set CustomerScope.
      *
-     * @param string
+     * @param ?string $customerScope
      * @return $this
      */
-    public function setCustomerScope($customerScope)
+    public function setCustomerScope(?string $customerScope) : self
     {
         $this->customerScope = $customerScope;
 
@@ -210,10 +212,10 @@ class CouponInsert extends Request
     /**
      * Set DateTime_Start.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $dateTimeStart
      * @return $this
      */
-    public function setDateTimeStart($dateTimeStart)
+    public function setDateTimeStart($dateTimeStart) : self
     {
         if ($dateTimeStart instanceof \DateTime) {
             $this->dateTimeStart = $dateTimeStart->getTimestamp();
@@ -227,10 +229,10 @@ class CouponInsert extends Request
     /**
      * Set DateTime_End.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $dateTimeEnd
      * @return $this
      */
-    public function setDateTimeEnd($dateTimeEnd)
+    public function setDateTimeEnd($dateTimeEnd) : self
     {
         if ($dateTimeEnd instanceof \DateTime) {
             $this->dateTimeEnd = $dateTimeEnd->getTimestamp();
@@ -244,10 +246,10 @@ class CouponInsert extends Request
     /**
      * Set Max_Use.
      *
-     * @param int
+     * @param ?int $maxUse
      * @return $this
      */
-    public function setMaxUse($maxUse)
+    public function setMaxUse(?int $maxUse) : self
     {
         $this->maxUse = $maxUse;
 
@@ -257,10 +259,10 @@ class CouponInsert extends Request
     /**
      * Set Max_Per.
      *
-     * @param int
+     * @param ?int $maxPer
      * @return $this
      */
-    public function setMaxPer($maxPer)
+    public function setMaxPer(?int $maxPer) : self
     {
         $this->maxPer = $maxPer;
 
@@ -270,10 +272,10 @@ class CouponInsert extends Request
     /**
      * Set Active.
      *
-     * @param bool
+     * @param ?bool $active
      * @return $this
      */
-    public function setActive($active)
+    public function setActive(?bool $active) : self
     {
         $this->active = $active;
 
@@ -283,10 +285,10 @@ class CouponInsert extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -296,7 +298,7 @@ class CouponInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -340,7 +342,7 @@ class CouponInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CouponInsert($this, $httpResponse, $data);
     }

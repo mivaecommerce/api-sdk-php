@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PriceGroupBusinessAccount_Update_Assigned.
@@ -26,38 +27,39 @@ use MerchantAPI\BaseClient;
 class PriceGroupBusinessAccountUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PriceGroupBusinessAccount_Update_Assigned';
+    protected string $function = 'PriceGroupBusinessAccount_Update_Assigned';
 
-    /** @var int */
-    protected $businessAccountId;
+    /** @var ?int */
+    protected ?int $businessAccountId = null;
 
-    /** @var string */
-    protected $editBusinessAccount;
+    /** @var ?string */
+    protected ?string $editBusinessAccount = null;
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $editPriceGroup;
+    /** @var ?string */
+    protected ?string $editPriceGroup = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PriceGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PriceGroup $priceGroup
      */
-    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
+    public function __construct(?BaseClient $client = null, ?PriceGroup $priceGroup = null)
     {
         parent::__construct($client);
         if ($priceGroup) {
@@ -72,7 +74,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getBusinessAccountId()
+    public function getBusinessAccountId() : ?int
     {
         return $this->businessAccountId;
     }
@@ -82,7 +84,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditBusinessAccount()
+    public function getEditBusinessAccount() : ?string
     {
         return $this->editBusinessAccount;
     }
@@ -92,7 +94,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -102,7 +104,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -112,7 +114,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditPriceGroup()
+    public function getEditPriceGroup() : ?string
     {
         return $this->editPriceGroup;
     }
@@ -122,7 +124,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -132,7 +134,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -140,10 +142,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set BusinessAccount_ID.
      *
-     * @param int
+     * @param ?int $businessAccountId
      * @return $this
      */
-    public function setBusinessAccountId($businessAccountId)
+    public function setBusinessAccountId(?int $businessAccountId) : self
     {
         $this->businessAccountId = $businessAccountId;
 
@@ -153,10 +155,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set Edit_BusinessAccount.
      *
-     * @param string
+     * @param ?string $editBusinessAccount
      * @return $this
      */
-    public function setEditBusinessAccount($editBusinessAccount)
+    public function setEditBusinessAccount(?string $editBusinessAccount) : self
     {
         $this->editBusinessAccount = $editBusinessAccount;
 
@@ -166,10 +168,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -179,10 +181,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -192,10 +194,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set Edit_PriceGroup.
      *
-     * @param string
+     * @param ?string $editPriceGroup
      * @return $this
      */
-    public function setEditPriceGroup($editPriceGroup)
+    public function setEditPriceGroup(?string $editPriceGroup) : self
     {
         $this->editPriceGroup = $editPriceGroup;
 
@@ -205,10 +207,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -218,10 +220,10 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -231,7 +233,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -261,7 +263,7 @@ class PriceGroupBusinessAccountUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PriceGroupBusinessAccountUpdateAssigned($this, $httpResponse, $data);
     }

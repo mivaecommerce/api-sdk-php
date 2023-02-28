@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AttributeTemplateInsert extends Response
 {
-    /** @var \MerchantAPI\Model\AttributeTemplate */
-    protected $attributeTemplate;
+    /** @var ?\MerchantAPI\Model\AttributeTemplate */
+    protected ?AttributeTemplate $attributeTemplate = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class AttributeTemplateInsert extends Response
      *
      * @return \MerchantAPI\Model\AttributeTemplate|null
      */
-    public function getAttributeTemplate()
+    public function getAttributeTemplate() : ?AttributeTemplate
     {
         return $this->attributeTemplate;
     }

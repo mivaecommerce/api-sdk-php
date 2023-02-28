@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchCreate extends Response
 {
-    /** @var \MerchantAPI\Model\Branch */
-    protected $branch;
+    /** @var ?\MerchantAPI\Model\Branch */
+    protected ?Branch $branch = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class BranchCreate extends Response
      *
      * @return \MerchantAPI\Model\Branch|null
      */
-    public function getBranch()
+    public function getBranch() : ?Branch
     {
         return $this->branch;
     }

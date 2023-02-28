@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PageURIList_Load_Query.
@@ -26,13 +27,13 @@ use MerchantAPI\BaseClient;
 class PageURIListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PageURIList_Load_Query';
+    protected string $function = 'PageURIList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'canonical',
         'status',
@@ -40,25 +41,25 @@ class PageURIListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'uri',
     ];
 
-    /** @var int */
-    protected $pageId;
+    /** @var ?int */
+    protected ?int $pageId = null;
 
-    /** @var string */
-    protected $editPage;
+    /** @var ?string */
+    protected ?string $editPage = null;
 
-    /** @var string */
-    protected $pageCode;
+    /** @var ?string */
+    protected ?string $pageCode = null;
 
     /**
      * Get Page_ID.
      *
      * @return int
      */
-    public function getPageId()
+    public function getPageId() : ?int
     {
         return $this->pageId;
     }
@@ -68,7 +69,7 @@ class PageURIListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditPage()
+    public function getEditPage() : ?string
     {
         return $this->editPage;
     }
@@ -78,7 +79,7 @@ class PageURIListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getPageCode()
+    public function getPageCode() : ?string
     {
         return $this->pageCode;
     }
@@ -86,10 +87,10 @@ class PageURIListLoadQuery extends ListQueryRequest
     /**
      * Set Page_ID.
      *
-     * @param int
+     * @param ?int $pageId
      * @return $this
      */
-    public function setPageId($pageId)
+    public function setPageId(?int $pageId) : self
     {
         $this->pageId = $pageId;
 
@@ -99,10 +100,10 @@ class PageURIListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Page.
      *
-     * @param string
+     * @param ?string $editPage
      * @return $this
      */
-    public function setEditPage($editPage)
+    public function setEditPage(?string $editPage) : self
     {
         $this->editPage = $editPage;
 
@@ -112,10 +113,10 @@ class PageURIListLoadQuery extends ListQueryRequest
     /**
      * Set Page_Code.
      *
-     * @param string
+     * @param ?string $pageCode
      * @return $this
      */
-    public function setPageCode($pageCode)
+    public function setPageCode(?string $pageCode) : self
     {
         $this->pageCode = $pageCode;
 
@@ -125,7 +126,7 @@ class PageURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -145,7 +146,7 @@ class PageURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PageURIListLoadQuery($this, $httpResponse, $data);
     }

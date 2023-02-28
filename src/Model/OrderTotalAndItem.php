@@ -57,10 +57,10 @@ class OrderTotalAndItem extends OrderTotal
     /**
      * Get orderitem.
      *
-     * @return \MerchantAPI\Model\OrderItem|null
+     * @return ?\MerchantAPI\Model\OrderItem
      */
-    public function getOrderItem()
+    public function getOrderItem() : ?OrderItem
     {
-        return $this->getField('orderitem', null);
+        return $this->getField('orderitem');
     }
 }

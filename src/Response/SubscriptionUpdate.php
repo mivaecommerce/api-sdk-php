@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class SubscriptionUpdate extends Response
 {
-    /** @var \MerchantAPI\Model\Subscription */
-    protected $subscription;
+    /** @var ?\MerchantAPI\Model\Subscription */
+    protected ?Subscription $subscription = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class SubscriptionUpdate extends Response
      *
      * @return \MerchantAPI\Model\Subscription|null
      */
-    public function getSubscription()
+    public function getSubscription() : ?Subscription
     {
         return $this->subscription;
     }

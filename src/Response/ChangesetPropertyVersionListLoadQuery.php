@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ChangesetPropertyVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ChangesetPropertyVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ChangesetPropertyVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetPropertyVersion[] */
-    protected $changesetPropertyVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $changesetPropertyVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->changesetPropertyVersions = new \MerchantAPI\Collection();
+        $this->changesetPropertyVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryResponse
     /**
      * Get changesetPropertyVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetPropertyVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getChangesetPropertyVersions()
+    public function getChangesetPropertyVersions() : Collection
     {
         return $this->changesetPropertyVersions;
     }

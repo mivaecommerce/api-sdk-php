@@ -28,15 +28,20 @@ class SSHAgentSignClient
 	const SSH_AGENT_RSA_SHA2_256 = 2;
 	const SSH_AGENT_RSA_SHA2_512 = 4;
 
-	protected $socket;
+    /** @var ?string */
+    protected ?string $agentPath;
 
-	protected $connection;
+    /** @var resource|\Socket */
+    protected $socket;
+
+    /** @var ?bool */
+	protected ?bool $connection = null;
 
 	/**
 	 * Constructor
-	 * @param sting
+	 * @param ?string $agentPath
 	 */
-	public function __construct($agentPath = null)
+	public function __construct(?string $agentPath = null)
 	{
 		$this->agentPath = $agentPath ? 
 			$agentPath : getenv('SSH_AUTH_SOCK');
@@ -56,14 +61,15 @@ class SSHAgentSignClient
 
     /**
      * Connects to the socket
+     * @return void
      * @throws \Exception
      */
-	public function connect()
+	public function connect() : void
 	{
-		if (!is_resource($this->socket)) {
+		if (!$this->isSocketValid()) {
 			$this->socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
 
-			if (!is_resource($this->socket)) {
+			if (!$this->isSocketValid()) {
 				throw new \Exception(sprintf('Socket Error: [%d] %s', socket_last_error(), socket_strerror(socket_last_error())));
 			}
 			
@@ -79,15 +85,33 @@ class SSHAgentSignClient
      * Check if the connection is active
      * @return bool
      */
-	public function isConnected() {
-		return is_resource($this->socket) && $this->connection;
+	public function isConnected() : bool
+    {
+		return $this->isSocketValid() && $this->connection;
 	}
 
     /**
-     * Disconnect the socket if its connected
+     * Check the validity of the socket
+     *
+     * @return bool
      */
-	public function disconnect() {
-		if (is_resource($this->socket)) {
+    public function isSocketValid() : bool
+    {
+        if (PHP_MAJOR_VERSION >= 8) {
+            return $this->socket instanceof \Socket;
+        }
+
+        return is_resource($this->socket);
+    }
+
+    /**
+     * Disconnect the socket if its connected
+     *
+     * @return void
+     */
+	public function disconnect() : void
+    {
+		if ($this->isSocketValid()) {
 			socket_shutdown($this->socket);
 			socket_close($this->socket);
 
@@ -99,9 +123,10 @@ class SSHAgentSignClient
     /**
      * Sends a SSHAgentMessage object
      * @param SSHAgentMessage $message
+     * @return void
      * @throws \Exception
      */
-	public function sendMessage(SSHAgentMessage $message)
+	public function sendMessage(SSHAgentMessage $message) : void
 	{
 		$result = $this->send($message->pack());
 		$header = unpack('N', $this->receive(4));
@@ -113,20 +138,20 @@ class SSHAgentSignClient
 
     /**
      * Writes to the socket
-     * @param $data
+     * @param string $data
      * @return int
      */
-	public function send($data)
+	public function send(string $data) : int
 	{		
 		return socket_send($this->socket, $data, strlen($data), 0);
 	}
 
     /**
      * Reads from the socket
-     * @param $amount
-     * @return null
+     * @param int $amount
+     * @return ?string
      */
-	public function receive($amount)
+	public function receive(int $amount) : ?string
 	{
 		$buffer = null;
 		socket_recv($this->socket, $buffer, $amount, 0);

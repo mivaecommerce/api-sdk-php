@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Attribute_Update.
@@ -26,65 +27,66 @@ use MerchantAPI\BaseClient;
 class AttributeUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Attribute_Update';
+    protected string $function = 'Attribute_Update';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var string */
-    protected $editAttribute;
+    /** @var ?string */
+    protected ?string $editAttribute = null;
 
-    /** @var string */
-    protected $attributeCode;
+    /** @var ?string */
+    protected ?string $attributeCode = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $type;
+    /** @var ?string */
+    protected ?string $type = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $copy;
+    /** @var ?bool */
+    protected ?bool $copy = null;
 
-    /** @var bool */
-    protected $required;
+    /** @var ?bool */
+    protected ?bool $required = null;
 
-    /** @var bool */
-    protected $inventory;
+    /** @var ?bool */
+    protected ?bool $inventory = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductAttribute
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductAttribute $productAttribute
      */
-    public function __construct(BaseClient $client = null, ProductAttribute $productAttribute = null)
+    public function __construct(?BaseClient $client = null, ?ProductAttribute $productAttribute = null)
     {
         parent::__construct($client);
         if ($productAttribute) {
@@ -118,7 +120,7 @@ class AttributeUpdate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -128,7 +130,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -138,7 +140,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -148,7 +150,7 @@ class AttributeUpdate extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -158,7 +160,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getEditAttribute()
+    public function getEditAttribute() : ?string
     {
         return $this->editAttribute;
     }
@@ -168,7 +170,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->attributeCode;
     }
@@ -178,7 +180,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -188,7 +190,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -198,7 +200,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->type;
     }
@@ -208,7 +210,7 @@ class AttributeUpdate extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -218,7 +220,7 @@ class AttributeUpdate extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -228,7 +230,7 @@ class AttributeUpdate extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -238,7 +240,7 @@ class AttributeUpdate extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -248,7 +250,7 @@ class AttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getCopy()
+    public function getCopy() : ?bool
     {
         return $this->copy;
     }
@@ -258,7 +260,7 @@ class AttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getRequired()
+    public function getRequired() : ?bool
     {
         return $this->required;
     }
@@ -268,7 +270,7 @@ class AttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getInventory()
+    public function getInventory() : ?bool
     {
         return $this->inventory;
     }
@@ -276,10 +278,10 @@ class AttributeUpdate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -289,10 +291,10 @@ class AttributeUpdate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -302,10 +304,10 @@ class AttributeUpdate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -315,10 +317,10 @@ class AttributeUpdate extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -328,10 +330,10 @@ class AttributeUpdate extends Request
     /**
      * Set Edit_Attribute.
      *
-     * @param string
+     * @param ?string $editAttribute
      * @return $this
      */
-    public function setEditAttribute($editAttribute)
+    public function setEditAttribute(?string $editAttribute) : self
     {
         $this->editAttribute = $editAttribute;
 
@@ -341,10 +343,10 @@ class AttributeUpdate extends Request
     /**
      * Set Attribute_Code.
      *
-     * @param string
+     * @param ?string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(?string $attributeCode) : self
     {
         $this->attributeCode = $attributeCode;
 
@@ -354,10 +356,10 @@ class AttributeUpdate extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -367,10 +369,10 @@ class AttributeUpdate extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -380,10 +382,10 @@ class AttributeUpdate extends Request
     /**
      * Set Type.
      *
-     * @param string
+     * @param ?string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(?string $type) : self
     {
         $this->type = $type;
 
@@ -393,10 +395,10 @@ class AttributeUpdate extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -406,10 +408,10 @@ class AttributeUpdate extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -419,10 +421,10 @@ class AttributeUpdate extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -432,10 +434,10 @@ class AttributeUpdate extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -445,10 +447,10 @@ class AttributeUpdate extends Request
     /**
      * Set Copy.
      *
-     * @param bool
+     * @param ?bool $copy
      * @return $this
      */
-    public function setCopy($copy)
+    public function setCopy(?bool $copy) : self
     {
         $this->copy = $copy;
 
@@ -458,10 +460,10 @@ class AttributeUpdate extends Request
     /**
      * Set Required.
      *
-     * @param bool
+     * @param ?bool $required
      * @return $this
      */
-    public function setRequired($required)
+    public function setRequired(?bool $required) : self
     {
         $this->required = $required;
 
@@ -471,10 +473,10 @@ class AttributeUpdate extends Request
     /**
      * Set Inventory.
      *
-     * @param bool
+     * @param ?bool $inventory
      * @return $this
      */
-    public function setInventory($inventory)
+    public function setInventory(?bool $inventory) : self
     {
         $this->inventory = $inventory;
 
@@ -484,7 +486,7 @@ class AttributeUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -554,7 +556,7 @@ class AttributeUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeUpdate($this, $httpResponse, $data);
     }

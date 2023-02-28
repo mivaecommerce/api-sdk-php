@@ -99,19 +99,19 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -119,9 +119,9 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get custscope.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerScope()
+    public function getCustomerScope() : ?string
     {
         return $this->getField('custscope');
     }
@@ -129,9 +129,9 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get rate.
      *
-     * @return string
+     * @return ?string
      */
-    public function getRate()
+    public function getRate() : ?string
     {
         return $this->getField('rate');
     }
@@ -139,209 +139,209 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get discount.
      *
-     * @return float
+     * @return ?float
      */
-    public function getDiscount()
+    public function getDiscount() : ?float
     {
-        return (float) $this->getField('discount', 0.00);
+        return $this->getField('discount');
     }
 
     /**
      * Get markup.
      *
-     * @return float
+     * @return ?float
      */
-    public function getMarkup()
+    public function getMarkup() : ?float
     {
-        return (float) $this->getField('markup', 0.00);
+        return $this->getField('markup');
     }
 
     /**
      * Get dt_start.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStart()
+    public function getDateTimeStart() : ?int
     {
-        return (int) $this->getField('dt_start', 0);
+        return $this->getTimestampField('dt_start');
     }
 
     /**
      * Get dt_end.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeEnd()
+    public function getDateTimeEnd() : ?int
     {
-        return (int) $this->getField('dt_end', 0);
+        return $this->getTimestampField('dt_end');
     }
 
     /**
      * Get qmn_subtot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getMinimumSubtotal()
+    public function getMinimumSubtotal() : ?float
     {
-        return (float) $this->getField('qmn_subtot', 0.00);
+        return $this->getField('qmn_subtot');
     }
 
     /**
      * Get qmx_subtot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getMaximumSubtotal()
+    public function getMaximumSubtotal() : ?float
     {
-        return (float) $this->getField('qmx_subtot', 0.00);
+        return $this->getField('qmx_subtot');
     }
 
     /**
      * Get qmn_quan.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMinimumQuantity()
+    public function getMinimumQuantity() : ?int
     {
-        return (int) $this->getField('qmn_quan', 0);
+        return $this->getField('qmn_quan');
     }
 
     /**
      * Get qmx_quan.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMaximumQuantity()
+    public function getMaximumQuantity() : ?int
     {
-        return (int) $this->getField('qmx_quan', 0);
+        return $this->getField('qmx_quan');
     }
 
     /**
      * Get qmn_weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getMinimumWeight()
+    public function getMinimumWeight() : ?float
     {
-        return (float) $this->getField('qmn_weight', 0.00);
+        return $this->getField('qmn_weight');
     }
 
     /**
      * Get qmx_weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getMaximumWeight()
+    public function getMaximumWeight() : ?float
     {
-        return (float) $this->getField('qmx_weight', 0.00);
+        return $this->getField('qmx_weight');
     }
 
     /**
      * Get bmn_subtot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getBasketMinimumSubtotal()
+    public function getBasketMinimumSubtotal() : ?float
     {
-        return (float) $this->getField('bmn_subtot', 0.00);
+        return $this->getField('bmn_subtot');
     }
 
     /**
      * Get bmx_subtot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getBasketMaximumSubtotal()
+    public function getBasketMaximumSubtotal() : ?float
     {
-        return (float) $this->getField('bmx_subtot', 0.00);
+        return $this->getField('bmx_subtot');
     }
 
     /**
      * Get bmn_quan.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBasketMinimumQuantity()
+    public function getBasketMinimumQuantity() : ?int
     {
-        return (int) $this->getField('bmn_quan', 0);
+        return $this->getField('bmn_quan');
     }
 
     /**
      * Get bmx_quan.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBasketMaximumQuantity()
+    public function getBasketMaximumQuantity() : ?int
     {
-        return (int) $this->getField('bmx_quan', 0);
+        return $this->getField('bmx_quan');
     }
 
     /**
      * Get bmn_weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getBasketMinimumWeight()
+    public function getBasketMinimumWeight() : ?float
     {
-        return (float) $this->getField('bmn_weight', 0.00);
+        return $this->getField('bmn_weight');
     }
 
     /**
      * Get bmx_weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getBasketMaximumWeight()
+    public function getBasketMaximumWeight() : ?float
     {
-        return (float) $this->getField('bmx_weight', 0.00);
+        return $this->getField('bmx_weight');
     }
 
     /**
      * Get priority.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPriority()
+    public function getPriority() : ?int
     {
-        return (int) $this->getField('priority', 0);
+        return $this->getField('priority');
     }
 
     /**
      * Get module.
      *
-     * @return \MerchantAPI\Model\Module|null
+     * @return ?\MerchantAPI\Model\Module
      */
-    public function getModule()
+    public function getModule() : ?Module
     {
-        return $this->getField('module', null);
+        return $this->getField('module');
     }
 
     /**
      * Get capabilities.
      *
-     * @return \MerchantAPI\Model\DiscountModuleCapabilities|null
+     * @return ?\MerchantAPI\Model\DiscountModuleCapabilities
      */
-    public function getCapabilities()
+    public function getCapabilities() : ?DiscountModuleCapabilities
     {
-        return $this->getField('capabilities', null);
+        return $this->getField('capabilities');
     }
 
     /**
      * Get exclusion.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getExclusion()
+    public function getExclusion() : ?bool
     {
-        return (bool) $this->getField('exclusion', false);
+        return $this->getField('exclusion');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -349,10 +349,10 @@ class PriceGroup extends \MerchantAPI\Model
     /**
      * Get display.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getDisplay()
+    public function getDisplay() : ?bool
     {
-        return (bool) $this->getField('display', false);
+        return $this->getField('display');
     }
 }

@@ -20,64 +20,64 @@ class ProductAttributeListOption extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get attr_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
-        return (int) $this->getField('attr_id', 0);
+        return $this->getField('attr_id');
     }
 
     /**
      * Get attemp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
-        return (int) $this->getField('attemp_id', 0);
+        return $this->getField('attemp_id');
     }
 
     /**
      * Get attmpat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
-        return (int) $this->getField('attmpat_id', 0);
+        return $this->getField('attmpat_id');
     }
 
     /**
      * Get disp_order.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDisplayOrder()
+    public function getDisplayOrder() : ?int
     {
         if ($this->hasField('disp_order')) {
             return (int) $this->getField('disp_order', 0);
         } else if ($this->hasField('disporder')) {
-            return (int) $this->getField('disporder', 0);
+            return (int) $this->getField('disporder');
         }
 
         return 0;
@@ -86,9 +86,9 @@ class ProductAttributeListOption extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -96,9 +96,9 @@ class ProductAttributeListOption extends \MerchantAPI\Model
     /**
      * Get prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->getField('prompt');
     }
@@ -106,39 +106,39 @@ class ProductAttributeListOption extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -146,10 +146,20 @@ class ProductAttributeListOption extends \MerchantAPI\Model
     /**
      * Get default_opt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getDefaultOption()
+    public function getDefaultOption() : ?bool
     {
-        return (bool) $this->getField('default_opt', false);
+        return $this->getField('default_opt');
+    }
+
+    /**
+     * Get has_variant_parts.
+     *
+     * @return ?bool
+     */
+    public function getHasVariantParts() : ?bool
+    {
+        return $this->getField('has_variant_parts');
     }
 }

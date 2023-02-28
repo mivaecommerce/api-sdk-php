@@ -11,23 +11,29 @@
 namespace MerchantAPI;
 
 /**
- * Wraps a array of items in an object. Ideal for collections of objects.
+ * Wraps an array of items in an object. Ideal for collections of objects.
  *
  * @package MerchantAPI
  */
 class Collection implements \ArrayAccess, \Iterator, \Countable
 {
     /** @var array */
-    protected $container;
+    protected array $container;
 
     /**
      * Collection constructor.
      *
-     * @param array $container
+     * @param \MerchantAPI\Collection|array $container
      */
-    public function __construct(array $container = [])
+    public function __construct($container = [])
     {
-        $this->container = $container;
+        if (is_array($container)) {
+            $this->container = $container;
+        } else if ($container instanceof Collection) {
+            $this->container = clone $container;
+        } else {
+            throw new \InvalidArgumentException('Expected an array or Collection');
+        }
     }
 
     /**
@@ -45,11 +51,11 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Set or update an entry.
      *
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      * @return $this
      */
-    public function set($key, $value)
+    public function set(string $key, $value) : self
     {
         $this->container[$key] = $value;
         return $this;
@@ -58,10 +64,10 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Insert an entry at the end.
      *
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
-    public function insert($value)
+    public function insert($value) : self
     {
         $this->container[] = $value;
         return $this;
@@ -70,10 +76,10 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Remove an entry by key.
      *
-     * @param $key
+     * @param mixed $key
      * @return $this
      */
-    public function remove($key)
+    public function remove($key) : self
     {
         unset($this->container[$key]);
         return $this;
@@ -84,7 +90,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray() : array
     {
         return $this->container;
     }
@@ -94,7 +100,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->container);
     }
@@ -122,7 +128,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Get the key of the current container.
      *
-     * @return mixed
+     * @return int|null|string
      */
     public function key()
     {
@@ -144,7 +150,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return bool
      */
-    public function hasNext()
+    public function hasNext() : bool
     {
         if ($this->next() !== false) {
             $this->previous();
@@ -170,7 +176,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return bool
      */
-    public function hasPrevious()
+    public function hasPrevious() : bool
     {
         $prev   = $this->previous();
 
@@ -198,7 +204,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         return !is_null(key($this->container));
     }
@@ -216,18 +222,18 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Check if an offset exists in the container.
      *
-     * @param mixed
+     * @param mixed $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset) : bool
     {
-        return is_null($offset) ? false : isset($this->container[$offset]);
+        return !is_null($offset) && isset($this->container[$offset]);
     }
 
     /**
      * Get the value in the container at specified offset.
      *
-     * @param mixed
+     * @param mixed $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -242,11 +248,11 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Set the value in the container at specified. offset.
      *
-     * @param mixed
-     * @param mixed
+     * @param mixed $offset
+     * @param mixed $value
      * @return $this
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value) : self
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -260,10 +266,10 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
     /**
      * Unset container at offset.
      *
-     * @param mixed
+     * @param mixed $offset
      * @return $this
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset) : self
     {
         unset($this->container[$offset]);
         return $this;

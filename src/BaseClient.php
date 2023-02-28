@@ -13,6 +13,7 @@ namespace MerchantAPI;
 use MerchantAPI\Http\HttpClient;
 use MerchantAPI\Http\HttpHeaders;
 use MerchantAPI\Http\HttpClientException;
+use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\MultiCall\MultiCallRequest;
 use MerchantAPI\MultiCall\MultiCallOperation;
 use MerchantAPI\Logger\Logger;
@@ -29,25 +30,26 @@ class BaseClient
     const DEFAULT_OPERATION_TIMEOUT = 60;
 
     /** @var string API URL Endpoint */
-    protected $endpoint;
+    protected string $endpoint;
 
     /** @var \MerchantAPI\Http\HttpClient */
-    protected $httpClient;
+    protected HttpClient $httpClient;
 
     /** @var \MerchantAPI\Logger\Logger */
-    protected $logger;
+    protected ?Logger $logger = null;
 
     /** @var \MerchantAPI\Authenticator\Authenticator */
-    protected $authenticator;
+    protected ?Authenticator $authenticator = null;
 
     /** @var array */
-    protected $globalHeaders = [];
+    protected array $globalHeaders = [];
 
     /** @var array */
-    protected $options = [
+    protected array $options = [
         'require_timestamp'         => true,
         'default_store_code'        => null,
         'operation_timeout'         => self::DEFAULT_OPERATION_TIMEOUT,
+        'json_decode_flags'         => JSON_THROW_ON_ERROR,
         'curl_options'              => [
                 CURLOPT_USERAGENT       => 'MerchantAPI-' . Version::STRING . '/php',
                 CURLOPT_SSL_VERIFYPEER  => true,
@@ -56,14 +58,13 @@ class BaseClient
     ];
 
     /**
-     * Client constructor.
+     * Constructor.
      *
-     * @param $endpoint
-     * @param $apiToken
-     * @param string|null
-     * @param array
+     * @param string $endpoint
+     * @param Authenticator $authenticator
+     * @param array $options
      */
-    public function __construct($endpoint, Authenticator $authenticator, array $options = [])
+    public function __construct(string $endpoint, Authenticator $authenticator, array $options = [])
     {
         $this->endpoint         = $endpoint;
         $this->authenticator    = $authenticator;
@@ -81,15 +82,15 @@ class BaseClient
     /**
      * @return HttpClient
      */
-    public function getHttpClient()
+    public function getHttpClient() : HttpClient
     {
         return $this->httpClient;
     }
 
     /**
-     * @return Authenticator
+     * @return ?Authenticator
      */
-    public function getAuthenticator()
+    public function getAuthenticator() : ?Authenticator
     {
         return $this->authenticator;
     }
@@ -99,7 +100,7 @@ class BaseClient
      *
      * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint() : string
     {
         return $this->endpoint;
     }
@@ -108,9 +109,9 @@ class BaseClient
      * Set the endpoint URL.
      *
      * @param string $endpoint
-     * @return Client
+     * @return $this
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint(string $endpoint) : self
     {
         $this->endpoint = $endpoint;
         return $this;
@@ -119,12 +120,12 @@ class BaseClient
     /**
      * Set a client option.
      *
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      * @return $this
      * @throws \MerchantAPI\ClientException
      */
-    public function setOption($key, $value)
+    public function setOption(string $key, $value) : self
     {
         if (!array_key_exists($key, $this->options)) {
             throw new ClientException(sprintf('Unknown option %s', $key));
@@ -138,11 +139,11 @@ class BaseClient
     /**
      * Get a client option.
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      * @throws \MerchantAPI\ClientException
      */
-    public function getOption($key)
+    public function getOption(string $key)
     {
         if (!array_key_exists($key, $this->options)) {
             throw new ClientException(sprintf('Unknown option `%s`', $key));
@@ -155,9 +156,9 @@ class BaseClient
      * Set the Logger instance
      *
      * @param Logger $logger
-     * @return Client
+     * @return $this
      */
-    public function setLogger(Logger $logger)
+    public function setLogger(Logger $logger) : self
     {
         $this->logger = $logger;
         return $this;
@@ -168,18 +169,18 @@ class BaseClient
      *
      * @return Logger
      */
-    public function getLogger()
+    public function getLogger() : ?Logger
     {
         return $this->logger;
     }
 
     /**
      * Set a global header to be sent with each request
-     * @param string 
-     * @param string
-     * @return Client
+     * @param string  $key
+     * @param string $value
+     * @return $this
      */
-    public function setGlobalHeader($key, $value)
+    public function setGlobalHeader(string $key, string $value) : self
     {
         $this->globalHeaders[$key] = $value;
         return $this;
@@ -187,31 +188,30 @@ class BaseClient
 
     /**
      * Get a global header if defined or null if not
-     * @param string 
-     * @return string|null
+     * @param string $key
+     * @return ?string
      */
-    public function getGlobalHeader($key)
+    public function getGlobalHeader(string $key) : ?string
     {
-        return isset($this->globalHeaders[$key]) ?
-            $this->globalHeaders[$key] : null;
+        return $this->globalHeaders[$key] ?? null;
     }
 
     /**
      * Check if a global header is defined
-     * @param string 
+     * @param string $key
      * @return bool
      */
-    public function hasGlobalHeader($key)
+    public function hasGlobalHeader(string $key) : bool
     {
-        return isset($this->globalHeaders[$key]) ? true : false;
+        return isset($this->globalHeaders[$key]);
     }
 
     /**
      * Remove a defined global header
-     * @param string 
-     * @return Client
+     * @param string $key
+     * @return $this
      */
-    public function removeGlobalHeader($key)
+    public function removeGlobalHeader(string $key) : self
     {
         unset($this->globalHeaders[$key]);
         return $this;
@@ -224,7 +224,7 @@ class BaseClient
      * @return \MerchantAPI\ResponseInterface
      * @throws \MerchantAPI\ClientException
      */
-    public function send(RequestInterface $request)
+    public function send(RequestInterface $request) : ResponseInterface
     {
         $defaultStore  = $this->getOption('default_store_code');
 
@@ -267,11 +267,11 @@ class BaseClient
 
         $headers = new HttpHeaders($this->globalHeaders);
 
-        if ($this->getOption('operation_timeout') != Client::DEFAULT_OPERATION_TIMEOUT) {
+        if ($this->getOption('operation_timeout') != static::DEFAULT_OPERATION_TIMEOUT) {
             $headers->add('X-Miva-API-Timeout', $this->getOption('operation_timeout'));
         }
 
-        if ($request->getBinaryEncoding() == Request::BINARY_ENCODING_BASE64) {
+        if ($request->getBinaryEncoding() == RequestInterface::BINARY_ENCODING_BASE64) {
             $headers->add('X-Miva-API-Binary-Encoding', $request->getBinaryEncoding());
         }
 
@@ -285,19 +285,24 @@ class BaseClient
 
         $errorResponse = $httpResponse->getStatus() < 200 || $httpResponse->getStatus() >= 300;
 
-        $json = $errorResponse !== true ? json_decode($httpResponse->getContent(), true) : [];
+        if ($errorResponse) {
+            $json = [];
+        } else {
+            $encodeFlags = (int)$this->getOption('json_decode_flags');
 
-        if (!is_array($json)) {
-            throw new ClientException(sprintf('Error Decoding JSON: %s', json_last_error_msg()), 0, null, $httpResponse);
+            if (($encodeFlags & JSON_THROW_ON_ERROR) == 0) {
+                $encodeFlags |= JSON_THROW_ON_ERROR;
+            }
+
+            try {
+                $json = json_decode($httpResponse->getContent(), true, 512, $encodeFlags);
+            } catch(\Exception $e) {
+                throw new ClientException(sprintf('Error Decoding JSON: %s', $e->getMessage()), 0, $e, $httpResponse);
+            }
         }
 
         $response = $request->createResponse($httpResponse, $json);
-
-        if (!$response instanceof ResponseInterface) {
-            throw new ClientException(sprintf('Expected instance of ResponseInterface but got %s',
-                is_object($response) ? get_class($response) : gettype($response)), 0, null, $httpResponse);
-        }
-
+        
         if ($this->logger instanceof Logger) {
             $this->logger->logResponse($response);
         }
@@ -316,13 +321,13 @@ class BaseClient
     /**
      * Low level API Request function.
      *
-     * @param array
-     * @param array
-     * @param array
+     * @param array $data
+     * @param array $query
+     * @param array|HttpHeaders $headers
      * @return \MerchantAPI\Http\HttpResponse
      * @throws \MerchantAPI\ClientException
      */
-    public function sendRequestLowLevel(array $data, array $query = [], $headers = [])
+    public function sendRequestLowLevel(array $data, array $query = [], $headers = []) : HttpResponse
     {
         if (!is_array($headers) && !$headers instanceof HttpHeaders) {
             throw new ClientException('Expected an array or an instance of HttpHeaders');
@@ -360,11 +365,11 @@ class BaseClient
     /**
      * Generates an authentication header for API request, including signature if required.
      *
-     * @param $data
+     * @param string $data
      * @return string
      * @throws \MerchantAPI\ClientException
      */
-    public function generateAuthHeader($data)
+    public function generateAuthHeader(string $data) : string
     {
         if (!$this->authenticator instanceof Authenticator) {
             throw new ClientException('Expected an Authenticator instance');
@@ -376,12 +381,12 @@ class BaseClient
     /**
      * Create as new instance of request by name.
      *
-     * @param $name
+     * @param string $name
      * @param array $args
      * @return RequestInterface
      * @throws \InvalidArgumentException
      */
-    public function createRequest($name, array $args = [])
+    public function createRequest(string $name, array $args = []) : RequestInterface
     {
         $class = sprintf('%s\\Request\\%s', __NAMESPACE__, str_replace('_', '', $name));
 

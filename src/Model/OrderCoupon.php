@@ -20,29 +20,29 @@ class OrderCoupon extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get coupon_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCouponId()
+    public function getCouponId() : ?int
     {
-        return (int) $this->getField('coupon_id', 0);
+        return $this->getField('coupon_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -50,9 +50,9 @@ class OrderCoupon extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -60,20 +60,20 @@ class OrderCoupon extends \MerchantAPI\Model
     /**
      * Get total.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotal()
+    public function getTotal() : ?float
     {
-        return (float) $this->getField('total', 0.00);
+        return $this->getField('total');
     }
 
     /**
      * Get assigned.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
-        return (bool) $this->getField('assigned', false);
+        return $this->getField('assigned');
     }
 }

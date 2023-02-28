@@ -20,29 +20,29 @@ class DiscountModuleCapabilities extends \MerchantAPI\Model
     /**
      * Get preitems.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getPreitems()
+    public function getPreitems() : ?bool
     {
-        return (bool) $this->getField('preitems', false);
+        return $this->getField('preitems');
     }
 
     /**
      * Get items.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getItems()
+    public function getItems() : ?bool
     {
-        return (bool) $this->getField('items', false);
+        return $this->getField('items');
     }
 
     /**
      * Get eligibility.
      *
-     * @return string
+     * @return ?string
      */
-    public function getEligibility()
+    public function getEligibility() : ?string
     {
         return $this->getField('eligibility');
     }
@@ -50,30 +50,30 @@ class DiscountModuleCapabilities extends \MerchantAPI\Model
     /**
      * Get basket.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getBasket()
+    public function getBasket() : ?bool
     {
-        return (bool) $this->getField('basket', false);
+        return $this->getField('basket');
     }
 
     /**
      * Get shipping.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getShipping()
+    public function getShipping() : ?bool
     {
-        return (bool) $this->getField('shipping', false);
+        return $this->getField('shipping');
     }
 
     /**
      * Get qualifying.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getQualifying()
+    public function getQualifying() : ?bool
     {
-        return (bool) $this->getField('qualifying', false);
+        return $this->getField('qualifying');
     }
 }

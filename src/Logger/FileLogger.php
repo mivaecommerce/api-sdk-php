@@ -15,15 +15,22 @@ namespace MerchantAPI\Logger;
  */
 class FileLogger extends Logger
 {
-	/**
+    /** @var string */
+    protected string $filePath;
+
+    /** @var resource */
+    protected $handle;
+
+    /**
 	 * Constructor
 	 *
-	 * @param string
+	 * @param string $filePath
+     * @throws
 	 */
-	public function __construct($filePath)
+	public function __construct(string $filePath)
 	{
 		$this->filePath = $filePath;
-		$this->handle = fopen($filePath, 'a+');
+		$this->handle   = fopen($filePath, 'a+');
 
 		if ($this->handle === false) {
 			throw new \Exception(sprintf('Unable to open %s for writing', $filePath));
@@ -43,7 +50,7 @@ class FileLogger extends Logger
 	/**
 	 * {@inheritDoc}
 	 */
-	public function write($data)
+	public function write(string $data) : void
 	{
 		fwrite($this->handle, $data);
 	}
@@ -51,7 +58,7 @@ class FileLogger extends Logger
 	/**
 	 * {@inheritDoc}
 	 */
-	public function writeLine($data)
+	public function writeLine(string $data) : void
 	{
 		$this->write($data . PHP_EOL);
 	}

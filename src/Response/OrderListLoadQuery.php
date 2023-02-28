@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for OrderList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Order[] */
-    protected $orders = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $orders;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class OrderListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->orders = new \MerchantAPI\Collection();
+        $this->orders = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class OrderListLoadQuery extends ListQueryResponse
     /**
      * Get orders.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Order[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOrders()
+    public function getOrders() : Collection
     {
         return $this->orders;
     }

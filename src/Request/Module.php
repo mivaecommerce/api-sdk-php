@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Module.
@@ -25,26 +26,26 @@ use MerchantAPI\BaseClient;
 class Module extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Module';
+    protected string $function = 'Module';
 
-    /** @var string */
-    protected $moduleCode;
+    /** @var ?string */
+    protected ?string $moduleCode = null;
 
-    /** @var string */
-    protected $moduleFunction;
+    /** @var ?string */
+    protected ?string $moduleFunction = null;
 
     /** @var array */
-    protected $moduleFields = [];
+    protected array $moduleFields = [];
 
     /**
      * Get Module_Code.
      *
      * @return string
      */
-    public function getModuleCode()
+    public function getModuleCode() : ?string
     {
         return $this->moduleCode;
     }
@@ -54,7 +55,7 @@ class Module extends Request
      *
      * @return string
      */
-    public function getModuleFunction()
+    public function getModuleFunction() : ?string
     {
         return $this->moduleFunction;
     }
@@ -64,7 +65,7 @@ class Module extends Request
      *
      * @return array
      */
-    public function getModuleFields()
+    public function getModuleFields() : ?array
     {
         return $this->moduleFields;
     }
@@ -75,7 +76,7 @@ class Module extends Request
      * @param string
      * @param mixed
      */
-    public function getModuleField($field, $defaultValue = null)
+    public function getModuleField(string $field, $defaultValue = null)
     {
         return isset($this->moduleFields[$field]) ?
             $this->moduleFields[$field] : $defaultValue;
@@ -84,10 +85,10 @@ class Module extends Request
     /**
      * Set Module_Code.
      *
-     * @param string
+     * @param ?string $moduleCode
      * @return $this
      */
-    public function setModuleCode($moduleCode)
+    public function setModuleCode(?string $moduleCode) : self
     {
         $this->moduleCode = $moduleCode;
 
@@ -97,10 +98,10 @@ class Module extends Request
     /**
      * Set Module_Function.
      *
-     * @param string
+     * @param ?string $moduleFunction
      * @return $this
      */
-    public function setModuleFunction($moduleFunction)
+    public function setModuleFunction(?string $moduleFunction) : self
     {
         $this->moduleFunction = $moduleFunction;
 
@@ -110,10 +111,10 @@ class Module extends Request
     /**
      * Set Module_Fields.
      *
-     * @param array
+     * @param array $moduleFields
      * @return $this
      */
-    public function setModuleFields(array $moduleFields)
+    public function setModuleFields(array $moduleFields) : self
     {
         $this->moduleFields = $moduleFields;
 
@@ -127,7 +128,7 @@ class Module extends Request
      * @param mixed
      * @return $this
      */
-    public function setModuleField($field, $value)
+    public function setModuleField(string $field, $value) : self
     {
         $this->moduleFields[$field] = $value;
         return $this;
@@ -136,7 +137,7 @@ class Module extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = array_merge(parent::toArray(), $this->getModuleFields());
 
@@ -150,7 +151,7 @@ class Module extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\Module($this, $httpResponse, $data);
     }

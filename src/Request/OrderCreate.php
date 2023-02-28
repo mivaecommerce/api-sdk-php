@@ -19,6 +19,8 @@ use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request Order_Create.
@@ -31,129 +33,130 @@ use MerchantAPI\BaseClient;
 class OrderCreate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Order_Create';
+    protected string $function = 'Order_Create';
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $shipFirstName;
+    /** @var ?string */
+    protected ?string $shipFirstName = null;
 
-    /** @var string */
-    protected $shipLastName;
+    /** @var ?string */
+    protected ?string $shipLastName = null;
 
-    /** @var string */
-    protected $shipEmail;
+    /** @var ?string */
+    protected ?string $shipEmail = null;
 
-    /** @var string */
-    protected $shipPhone;
+    /** @var ?string */
+    protected ?string $shipPhone = null;
 
-    /** @var string */
-    protected $shipFax;
+    /** @var ?string */
+    protected ?string $shipFax = null;
 
-    /** @var string */
-    protected $shipCompany;
+    /** @var ?string */
+    protected ?string $shipCompany = null;
 
-    /** @var string */
-    protected $shipAddress1;
+    /** @var ?string */
+    protected ?string $shipAddress1 = null;
 
-    /** @var string */
-    protected $shipAddress2;
+    /** @var ?string */
+    protected ?string $shipAddress2 = null;
 
-    /** @var string */
-    protected $shipCity;
+    /** @var ?string */
+    protected ?string $shipCity = null;
 
-    /** @var string */
-    protected $shipState;
+    /** @var ?string */
+    protected ?string $shipState = null;
 
-    /** @var string */
-    protected $shipZip;
+    /** @var ?string */
+    protected ?string $shipZip = null;
 
-    /** @var string */
-    protected $shipCountry;
+    /** @var ?string */
+    protected ?string $shipCountry = null;
 
-    /** @var bool */
-    protected $shipResidential;
+    /** @var ?bool */
+    protected ?bool $shipResidential = null;
 
-    /** @var string */
-    protected $billFirstName;
+    /** @var ?string */
+    protected ?string $billFirstName = null;
 
-    /** @var string */
-    protected $billLastName;
+    /** @var ?string */
+    protected ?string $billLastName = null;
 
-    /** @var string */
-    protected $billEmail;
+    /** @var ?string */
+    protected ?string $billEmail = null;
 
-    /** @var string */
-    protected $billPhone;
+    /** @var ?string */
+    protected ?string $billPhone = null;
 
-    /** @var string */
-    protected $billFax;
+    /** @var ?string */
+    protected ?string $billFax = null;
 
-    /** @var string */
-    protected $billCompany;
+    /** @var ?string */
+    protected ?string $billCompany = null;
 
-    /** @var string */
-    protected $billAddress1;
+    /** @var ?string */
+    protected ?string $billAddress1 = null;
 
-    /** @var string */
-    protected $billAddress2;
+    /** @var ?string */
+    protected ?string $billAddress2 = null;
 
-    /** @var string */
-    protected $billCity;
+    /** @var ?string */
+    protected ?string $billCity = null;
 
-    /** @var string */
-    protected $billState;
+    /** @var ?string */
+    protected ?string $billState = null;
 
-    /** @var string */
-    protected $billZip;
+    /** @var ?string */
+    protected ?string $billZip = null;
 
-    /** @var string */
-    protected $billCountry;
+    /** @var ?string */
+    protected ?string $billCountry = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderItem[] */
-    protected $items = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $items;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderProduct[] */
-    protected $products = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $products;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderCharge[] */
-    protected $charges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $charges;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
-    /** @var string */
-    protected $shippingModuleCode;
+    /** @var ?string */
+    protected ?string $shippingModuleCode = null;
 
-    /** @var string */
-    protected $shippingModuleData;
+    /** @var ?string */
+    protected ?string $shippingModuleData = null;
 
-    /** @var bool */
-    protected $calculateCharges;
+    /** @var ?bool */
+    protected ?bool $calculateCharges = null;
 
-    /** @var bool */
-    protected $triggerFulfillmentModules;
+    /** @var ?bool */
+    protected ?bool $triggerFulfillmentModules = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
 
-        $this->items = new \MerchantAPI\Collection();
-        $this->products = new \MerchantAPI\Collection();
-        $this->charges = new \MerchantAPI\Collection();
+        $this->items = new Collection();
+        $this->products = new Collection();
+        $this->charges = new Collection();
 
         if ($customer) {
             if ($customer->getId()) {
@@ -169,7 +172,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -179,7 +182,7 @@ class OrderCreate extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -189,7 +192,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipFirstName()
+    public function getShipFirstName() : ?string
     {
         return $this->shipFirstName;
     }
@@ -199,7 +202,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipLastName()
+    public function getShipLastName() : ?string
     {
         return $this->shipLastName;
     }
@@ -209,7 +212,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipEmail()
+    public function getShipEmail() : ?string
     {
         return $this->shipEmail;
     }
@@ -219,7 +222,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipPhone()
+    public function getShipPhone() : ?string
     {
         return $this->shipPhone;
     }
@@ -229,7 +232,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipFax()
+    public function getShipFax() : ?string
     {
         return $this->shipFax;
     }
@@ -239,7 +242,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipCompany()
+    public function getShipCompany() : ?string
     {
         return $this->shipCompany;
     }
@@ -249,7 +252,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipAddress1()
+    public function getShipAddress1() : ?string
     {
         return $this->shipAddress1;
     }
@@ -259,7 +262,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipAddress2()
+    public function getShipAddress2() : ?string
     {
         return $this->shipAddress2;
     }
@@ -269,7 +272,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipCity()
+    public function getShipCity() : ?string
     {
         return $this->shipCity;
     }
@@ -279,7 +282,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipState()
+    public function getShipState() : ?string
     {
         return $this->shipState;
     }
@@ -289,7 +292,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipZip()
+    public function getShipZip() : ?string
     {
         return $this->shipZip;
     }
@@ -299,7 +302,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShipCountry()
+    public function getShipCountry() : ?string
     {
         return $this->shipCountry;
     }
@@ -309,7 +312,7 @@ class OrderCreate extends Request
      *
      * @return bool
      */
-    public function getShipResidential()
+    public function getShipResidential() : ?bool
     {
         return $this->shipResidential;
     }
@@ -319,7 +322,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillFirstName()
+    public function getBillFirstName() : ?string
     {
         return $this->billFirstName;
     }
@@ -329,7 +332,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillLastName()
+    public function getBillLastName() : ?string
     {
         return $this->billLastName;
     }
@@ -339,7 +342,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillEmail()
+    public function getBillEmail() : ?string
     {
         return $this->billEmail;
     }
@@ -349,7 +352,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillPhone()
+    public function getBillPhone() : ?string
     {
         return $this->billPhone;
     }
@@ -359,7 +362,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillFax()
+    public function getBillFax() : ?string
     {
         return $this->billFax;
     }
@@ -369,7 +372,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillCompany()
+    public function getBillCompany() : ?string
     {
         return $this->billCompany;
     }
@@ -379,7 +382,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillAddress1()
+    public function getBillAddress1() : ?string
     {
         return $this->billAddress1;
     }
@@ -389,7 +392,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillAddress2()
+    public function getBillAddress2() : ?string
     {
         return $this->billAddress2;
     }
@@ -399,7 +402,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillCity()
+    public function getBillCity() : ?string
     {
         return $this->billCity;
     }
@@ -409,7 +412,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillState()
+    public function getBillState() : ?string
     {
         return $this->billState;
     }
@@ -419,7 +422,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillZip()
+    public function getBillZip() : ?string
     {
         return $this->billZip;
     }
@@ -429,7 +432,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getBillCountry()
+    public function getBillCountry() : ?string
     {
         return $this->billCountry;
     }
@@ -437,9 +440,9 @@ class OrderCreate extends Request
     /**
      * Get Items.
      *
-     * @return \MerchantAPI\Model\OrderItem[]
+     * @return \MerchantAPI\Collection
      */
-    public function getItems()
+    public function getItems() : ?Collection
     {
         return $this->items;
     }
@@ -447,9 +450,9 @@ class OrderCreate extends Request
     /**
      * Get Products.
      *
-     * @return \MerchantAPI\Model\OrderProduct[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProducts()
+    public function getProducts() : ?Collection
     {
         return $this->products;
     }
@@ -457,9 +460,9 @@ class OrderCreate extends Request
     /**
      * Get Charges.
      *
-     * @return \MerchantAPI\Model\OrderCharge[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCharges()
+    public function getCharges() : ?Collection
     {
         return $this->charges;
     }
@@ -467,9 +470,9 @@ class OrderCreate extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -479,7 +482,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShippingModuleCode()
+    public function getShippingModuleCode() : ?string
     {
         return $this->shippingModuleCode;
     }
@@ -489,7 +492,7 @@ class OrderCreate extends Request
      *
      * @return string
      */
-    public function getShippingModuleData()
+    public function getShippingModuleData() : ?string
     {
         return $this->shippingModuleData;
     }
@@ -499,7 +502,7 @@ class OrderCreate extends Request
      *
      * @return bool
      */
-    public function getCalculateCharges()
+    public function getCalculateCharges() : ?bool
     {
         return $this->calculateCharges;
     }
@@ -509,7 +512,7 @@ class OrderCreate extends Request
      *
      * @return bool
      */
-    public function getTriggerFulfillmentModules()
+    public function getTriggerFulfillmentModules() : ?bool
     {
         return $this->triggerFulfillmentModules;
     }
@@ -517,10 +520,10 @@ class OrderCreate extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -530,10 +533,10 @@ class OrderCreate extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -543,10 +546,10 @@ class OrderCreate extends Request
     /**
      * Set ShipFirstName.
      *
-     * @param string
+     * @param ?string $shipFirstName
      * @return $this
      */
-    public function setShipFirstName($shipFirstName)
+    public function setShipFirstName(?string $shipFirstName) : self
     {
         $this->shipFirstName = $shipFirstName;
 
@@ -556,10 +559,10 @@ class OrderCreate extends Request
     /**
      * Set ShipLastName.
      *
-     * @param string
+     * @param ?string $shipLastName
      * @return $this
      */
-    public function setShipLastName($shipLastName)
+    public function setShipLastName(?string $shipLastName) : self
     {
         $this->shipLastName = $shipLastName;
 
@@ -569,10 +572,10 @@ class OrderCreate extends Request
     /**
      * Set ShipEmail.
      *
-     * @param string
+     * @param ?string $shipEmail
      * @return $this
      */
-    public function setShipEmail($shipEmail)
+    public function setShipEmail(?string $shipEmail) : self
     {
         $this->shipEmail = $shipEmail;
 
@@ -582,10 +585,10 @@ class OrderCreate extends Request
     /**
      * Set ShipPhone.
      *
-     * @param string
+     * @param ?string $shipPhone
      * @return $this
      */
-    public function setShipPhone($shipPhone)
+    public function setShipPhone(?string $shipPhone) : self
     {
         $this->shipPhone = $shipPhone;
 
@@ -595,10 +598,10 @@ class OrderCreate extends Request
     /**
      * Set ShipFax.
      *
-     * @param string
+     * @param ?string $shipFax
      * @return $this
      */
-    public function setShipFax($shipFax)
+    public function setShipFax(?string $shipFax) : self
     {
         $this->shipFax = $shipFax;
 
@@ -608,10 +611,10 @@ class OrderCreate extends Request
     /**
      * Set ShipCompany.
      *
-     * @param string
+     * @param ?string $shipCompany
      * @return $this
      */
-    public function setShipCompany($shipCompany)
+    public function setShipCompany(?string $shipCompany) : self
     {
         $this->shipCompany = $shipCompany;
 
@@ -621,10 +624,10 @@ class OrderCreate extends Request
     /**
      * Set ShipAddress1.
      *
-     * @param string
+     * @param ?string $shipAddress1
      * @return $this
      */
-    public function setShipAddress1($shipAddress1)
+    public function setShipAddress1(?string $shipAddress1) : self
     {
         $this->shipAddress1 = $shipAddress1;
 
@@ -634,10 +637,10 @@ class OrderCreate extends Request
     /**
      * Set ShipAddress2.
      *
-     * @param string
+     * @param ?string $shipAddress2
      * @return $this
      */
-    public function setShipAddress2($shipAddress2)
+    public function setShipAddress2(?string $shipAddress2) : self
     {
         $this->shipAddress2 = $shipAddress2;
 
@@ -647,10 +650,10 @@ class OrderCreate extends Request
     /**
      * Set ShipCity.
      *
-     * @param string
+     * @param ?string $shipCity
      * @return $this
      */
-    public function setShipCity($shipCity)
+    public function setShipCity(?string $shipCity) : self
     {
         $this->shipCity = $shipCity;
 
@@ -660,10 +663,10 @@ class OrderCreate extends Request
     /**
      * Set ShipState.
      *
-     * @param string
+     * @param ?string $shipState
      * @return $this
      */
-    public function setShipState($shipState)
+    public function setShipState(?string $shipState) : self
     {
         $this->shipState = $shipState;
 
@@ -673,10 +676,10 @@ class OrderCreate extends Request
     /**
      * Set ShipZip.
      *
-     * @param string
+     * @param ?string $shipZip
      * @return $this
      */
-    public function setShipZip($shipZip)
+    public function setShipZip(?string $shipZip) : self
     {
         $this->shipZip = $shipZip;
 
@@ -686,10 +689,10 @@ class OrderCreate extends Request
     /**
      * Set ShipCountry.
      *
-     * @param string
+     * @param ?string $shipCountry
      * @return $this
      */
-    public function setShipCountry($shipCountry)
+    public function setShipCountry(?string $shipCountry) : self
     {
         $this->shipCountry = $shipCountry;
 
@@ -699,10 +702,10 @@ class OrderCreate extends Request
     /**
      * Set ShipResidential.
      *
-     * @param bool
+     * @param ?bool $shipResidential
      * @return $this
      */
-    public function setShipResidential($shipResidential)
+    public function setShipResidential(?bool $shipResidential) : self
     {
         $this->shipResidential = $shipResidential;
 
@@ -712,10 +715,10 @@ class OrderCreate extends Request
     /**
      * Set BillFirstName.
      *
-     * @param string
+     * @param ?string $billFirstName
      * @return $this
      */
-    public function setBillFirstName($billFirstName)
+    public function setBillFirstName(?string $billFirstName) : self
     {
         $this->billFirstName = $billFirstName;
 
@@ -725,10 +728,10 @@ class OrderCreate extends Request
     /**
      * Set BillLastName.
      *
-     * @param string
+     * @param ?string $billLastName
      * @return $this
      */
-    public function setBillLastName($billLastName)
+    public function setBillLastName(?string $billLastName) : self
     {
         $this->billLastName = $billLastName;
 
@@ -738,10 +741,10 @@ class OrderCreate extends Request
     /**
      * Set BillEmail.
      *
-     * @param string
+     * @param ?string $billEmail
      * @return $this
      */
-    public function setBillEmail($billEmail)
+    public function setBillEmail(?string $billEmail) : self
     {
         $this->billEmail = $billEmail;
 
@@ -751,10 +754,10 @@ class OrderCreate extends Request
     /**
      * Set BillPhone.
      *
-     * @param string
+     * @param ?string $billPhone
      * @return $this
      */
-    public function setBillPhone($billPhone)
+    public function setBillPhone(?string $billPhone) : self
     {
         $this->billPhone = $billPhone;
 
@@ -764,10 +767,10 @@ class OrderCreate extends Request
     /**
      * Set BillFax.
      *
-     * @param string
+     * @param ?string $billFax
      * @return $this
      */
-    public function setBillFax($billFax)
+    public function setBillFax(?string $billFax) : self
     {
         $this->billFax = $billFax;
 
@@ -777,10 +780,10 @@ class OrderCreate extends Request
     /**
      * Set BillCompany.
      *
-     * @param string
+     * @param ?string $billCompany
      * @return $this
      */
-    public function setBillCompany($billCompany)
+    public function setBillCompany(?string $billCompany) : self
     {
         $this->billCompany = $billCompany;
 
@@ -790,10 +793,10 @@ class OrderCreate extends Request
     /**
      * Set BillAddress1.
      *
-     * @param string
+     * @param ?string $billAddress1
      * @return $this
      */
-    public function setBillAddress1($billAddress1)
+    public function setBillAddress1(?string $billAddress1) : self
     {
         $this->billAddress1 = $billAddress1;
 
@@ -803,10 +806,10 @@ class OrderCreate extends Request
     /**
      * Set BillAddress2.
      *
-     * @param string
+     * @param ?string $billAddress2
      * @return $this
      */
-    public function setBillAddress2($billAddress2)
+    public function setBillAddress2(?string $billAddress2) : self
     {
         $this->billAddress2 = $billAddress2;
 
@@ -816,10 +819,10 @@ class OrderCreate extends Request
     /**
      * Set BillCity.
      *
-     * @param string
+     * @param ?string $billCity
      * @return $this
      */
-    public function setBillCity($billCity)
+    public function setBillCity(?string $billCity) : self
     {
         $this->billCity = $billCity;
 
@@ -829,10 +832,10 @@ class OrderCreate extends Request
     /**
      * Set BillState.
      *
-     * @param string
+     * @param ?string $billState
      * @return $this
      */
-    public function setBillState($billState)
+    public function setBillState(?string $billState) : self
     {
         $this->billState = $billState;
 
@@ -842,10 +845,10 @@ class OrderCreate extends Request
     /**
      * Set BillZip.
      *
-     * @param string
+     * @param ?string $billZip
      * @return $this
      */
-    public function setBillZip($billZip)
+    public function setBillZip(?string $billZip) : self
     {
         $this->billZip = $billZip;
 
@@ -855,10 +858,10 @@ class OrderCreate extends Request
     /**
      * Set BillCountry.
      *
-     * @param string
+     * @param ?string $billCountry
      * @return $this
      */
-    public function setBillCountry($billCountry)
+    public function setBillCountry(?string $billCountry) : self
     {
         $this->billCountry = $billCountry;
 
@@ -868,12 +871,17 @@ class OrderCreate extends Request
     /**
      * Set Items.
      *
-     * @param (\MerchantAPI\Model\OrderItem|array)[]
+     * @param \MerchantAPI\Collection|array $items
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setItems(array $items)
+    public function setItems($items) : self
     {
+        if (!is_array($items) && !$items instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($items) ? get_class($items) : gettype($items)));
+        }
+
         foreach ($items as &$model) {
             if (is_array($model)) {
                 $model = new OrderItem($model);
@@ -883,7 +891,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->items = new \MerchantAPI\Collection($items);
+        $this->items = new Collection($items);
 
         return $this;
     }
@@ -891,12 +899,17 @@ class OrderCreate extends Request
     /**
      * Set Products.
      *
-     * @param (\MerchantAPI\Model\OrderProduct|array)[]
+     * @param \MerchantAPI\Collection|array $products
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setProducts(array $products)
+    public function setProducts($products) : self
     {
+        if (!is_array($products) && !$products instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($products) ? get_class($products) : gettype($products)));
+        }
+
         foreach ($products as &$model) {
             if (is_array($model)) {
                 $model = new OrderProduct($model);
@@ -906,7 +919,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->products = new \MerchantAPI\Collection($products);
+        $this->products = new Collection($products);
 
         return $this;
     }
@@ -914,12 +927,17 @@ class OrderCreate extends Request
     /**
      * Set Charges.
      *
-     * @param (\MerchantAPI\Model\OrderCharge|array)[]
+     * @param \MerchantAPI\Collection|array $charges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setCharges(array $charges)
+    public function setCharges($charges) : self
     {
+        if (!is_array($charges) && !$charges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($charges) ? get_class($charges) : gettype($charges)));
+        }
+
         foreach ($charges as &$model) {
             if (is_array($model)) {
                 $model = new OrderCharge($model);
@@ -929,7 +947,7 @@ class OrderCreate extends Request
             }
         }
 
-        $this->charges = new \MerchantAPI\Collection($charges);
+        $this->charges = new Collection($charges);
 
         return $this;
     }
@@ -937,10 +955,10 @@ class OrderCreate extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -957,10 +975,10 @@ class OrderCreate extends Request
     /**
      * Set Shipping_Module_Code.
      *
-     * @param string
+     * @param ?string $shippingModuleCode
      * @return $this
      */
-    public function setShippingModuleCode($shippingModuleCode)
+    public function setShippingModuleCode(?string $shippingModuleCode) : self
     {
         $this->shippingModuleCode = $shippingModuleCode;
 
@@ -970,10 +988,10 @@ class OrderCreate extends Request
     /**
      * Set Shipping_Module_Data.
      *
-     * @param string
+     * @param ?string $shippingModuleData
      * @return $this
      */
-    public function setShippingModuleData($shippingModuleData)
+    public function setShippingModuleData(?string $shippingModuleData) : self
     {
         $this->shippingModuleData = $shippingModuleData;
 
@@ -983,10 +1001,10 @@ class OrderCreate extends Request
     /**
      * Set CalculateCharges.
      *
-     * @param bool
+     * @param ?bool $calculateCharges
      * @return $this
      */
-    public function setCalculateCharges($calculateCharges)
+    public function setCalculateCharges(?bool $calculateCharges) : self
     {
         $this->calculateCharges = $calculateCharges;
 
@@ -996,10 +1014,10 @@ class OrderCreate extends Request
     /**
      * Set TriggerFulfillmentModules.
      *
-     * @param bool
+     * @param ?bool $triggerFulfillmentModules
      * @return $this
      */
-    public function setTriggerFulfillmentModules($triggerFulfillmentModules)
+    public function setTriggerFulfillmentModules(?bool $triggerFulfillmentModules) : self
     {
         $this->triggerFulfillmentModules = $triggerFulfillmentModules;
 
@@ -1010,10 +1028,9 @@ class OrderCreate extends Request
      * Add Items.
      *
      * @param \MerchantAPI\Model\OrderItem
-     *
      * @return $this
      */
-    public function addItem(OrderItem $model)
+    public function addItem(OrderItem $model) : self
     {
         $this->items[] = $model;
         return $this;
@@ -1026,7 +1043,7 @@ class OrderCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addItems(array $items)
+    public function addItems(array $items) : self
     {
         foreach ($items as $e) {
             if (is_array($e)) {
@@ -1046,10 +1063,9 @@ class OrderCreate extends Request
      * Add Products.
      *
      * @param \MerchantAPI\Model\OrderProduct
-     *
      * @return $this
      */
-    public function addProduct(OrderProduct $model)
+    public function addProduct(OrderProduct $model) : self
     {
         $this->products[] = $model;
         return $this;
@@ -1062,7 +1078,7 @@ class OrderCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addProducts(array $products)
+    public function addProducts(array $products) : self
     {
         foreach ($products as $e) {
             if (is_array($e)) {
@@ -1082,10 +1098,9 @@ class OrderCreate extends Request
      * Add Charges.
      *
      * @param \MerchantAPI\Model\OrderCharge
-     *
      * @return $this
      */
-    public function addCharge(OrderCharge $model)
+    public function addCharge(OrderCharge $model) : self
     {
         $this->charges[] = $model;
         return $this;
@@ -1098,7 +1113,7 @@ class OrderCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addCharges(array $charges)
+    public function addCharges(array $charges) : self
     {
         foreach ($charges as $e) {
             if (is_array($e)) {
@@ -1117,7 +1132,7 @@ class OrderCreate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -1283,7 +1298,7 @@ class OrderCreate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderCreate($this, $httpResponse, $data);
     }

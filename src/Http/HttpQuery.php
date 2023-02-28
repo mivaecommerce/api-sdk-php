@@ -18,7 +18,7 @@ namespace MerchantAPI\Http;
 class HttpQuery
 {
     /** @var array  */
-    protected $entries = [];
+    protected array $entries = [];
 
     /**
      * HttpQuery constructor.
@@ -38,7 +38,7 @@ class HttpQuery
      * @see HttpQuery::toQueryString
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->toQueryString();
     }
@@ -48,7 +48,7 @@ class HttpQuery
      *
      * @return string
      */
-    public function toQueryString()
+    public function toQueryString() : string
     {
         return http_build_query($this->all());
     }
@@ -56,11 +56,11 @@ class HttpQuery
     /**
      * Add a query parameter.
      *
-     * @param string
-     * @param mixed
+     * @param string $key
+     * @param mixed $value
      * @return $this
      */
-    public function add($key, $value)
+    public function add(string $key, $value) : self
     {
         $this->entries[$key] = $value;
         return $this;
@@ -69,11 +69,11 @@ class HttpQuery
     /**
      * Get a defined parameter.
      *
-     * @param string
-     * @param mixed
-     * @return string
+     * @param string $key
+     * @param mixed $defaultValue
+     * @return ?mixed
      */
-    public function get($key, $defaultValue = null)
+    public function get(string $key, $defaultValue = null)
     {
         if (isset($this->entries[$key])) {
             return $this->entries[$key];
@@ -85,10 +85,10 @@ class HttpQuery
     /**
      * Check if a parameter is defined.
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function has($key)
+    public function has(string $key) : bool
     {
         return isset($this->entries[$key]);
     }
@@ -96,10 +96,10 @@ class HttpQuery
     /**
      * Remove a parameter by key.
      *
-     * @param $key
+     * @param string $key
      * @return $this
      */
-    public function remove($key)
+    public function remove(string $key) : self
     {
         unset($this->entries[$key]);
         return $this;
@@ -110,7 +110,7 @@ class HttpQuery
      *
      * @return array
      */
-    public function all()
+    public function all() : array
     {
         return $this->entries;
     }

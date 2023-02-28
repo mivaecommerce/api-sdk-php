@@ -72,19 +72,19 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Get status.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
-        return (int) $this->getField('status', 0);
+        return $this->getField('status');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -92,9 +92,9 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Get sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->getField('sku');
     }
@@ -102,9 +102,9 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Get tracknum.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingNumber()
+    public function getTrackingNumber() : ?string
     {
         return $this->getField('tracknum');
     }
@@ -112,9 +112,9 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Get tracktype.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingType()
+    public function getTrackingType() : ?string
     {
         return $this->getField('tracktype');
     }
@@ -122,30 +122,30 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Get attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderProductAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
-        return $this->getField('attributes', []);
+        return $this->getField('attributes');
     }
 
     /**
      * Set status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         return $this->setField('status', $status);
     }
@@ -153,10 +153,10 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         return $this->setField('code', $code);
     }
@@ -164,10 +164,10 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set sku.
      *
-     * @param string
+     * @param ?string $sku
      * @return $this
      */
-    public function setSku($sku)
+    public function setSku(?string $sku) : self
     {
         return $this->setField('sku', $sku);
     }
@@ -175,10 +175,10 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set tracknum.
      *
-     * @param string
+     * @param ?string $trackingNumber
      * @return $this
      */
-    public function setTrackingNumber($trackingNumber)
+    public function setTrackingNumber(?string $trackingNumber) : self
     {
         return $this->setField('tracknum', $trackingNumber);
     }
@@ -186,10 +186,10 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set tracktype.
      *
-     * @param string
+     * @param ?string $trackingType
      * @return $this
      */
-    public function setTrackingType($trackingType)
+    public function setTrackingType(?string $trackingType) : self
     {
         return $this->setField('tracktype', $trackingType);
     }
@@ -197,10 +197,10 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         return $this->setField('quantity', $quantity);
     }
@@ -208,11 +208,11 @@ class OrderProduct extends \MerchantAPI\Model
     /**
      * Set attributes.
      *
-     * @param array[OrderProductAttribute]
+     * @param array $attributes
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes) : self
     {
         foreach ($attributes as &$model) {
             if (is_array($model)) {
@@ -232,7 +232,7 @@ class OrderProduct extends \MerchantAPI\Model
      * @param OrderProductAttribute
      * @return $this
      */
-    public function addAttribute(OrderProductAttribute $model)
+    public function addAttribute(OrderProductAttribute $model) : self
     {
         if (!isset($this->data['attributes'])) {
             $this->data['attributes'] = [];

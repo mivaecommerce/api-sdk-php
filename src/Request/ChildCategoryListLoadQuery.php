@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ChildCategoryList_Load_Query.
@@ -25,32 +26,33 @@ use MerchantAPI\BaseClient;
 class ChildCategoryListLoadQuery extends CategoryListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ChildCategoryList_Load_Query';
+    protected string $function = 'ChildCategoryList_Load_Query';
 
-    /** @var int */
-    protected $parentCategoryId;
+    /** @var ?int */
+    protected ?int $parentCategoryId = null;
 
-    /** @var string */
-    protected $parentCategoryCode;
+    /** @var ?string */
+    protected ?string $parentCategoryCode = null;
 
-    /** @var string */
-    protected $editParentCategory;
+    /** @var ?string */
+    protected ?string $editParentCategory = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -69,7 +71,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
      *
      * @return int
      */
-    public function getParentCategoryId()
+    public function getParentCategoryId() : ?int
     {
         return $this->parentCategoryId;
     }
@@ -79,7 +81,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
      *
      * @return string
      */
-    public function getParentCategoryCode()
+    public function getParentCategoryCode() : ?string
     {
         return $this->parentCategoryCode;
     }
@@ -89,7 +91,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
      *
      * @return string
      */
-    public function getEditParentCategory()
+    public function getEditParentCategory() : ?string
     {
         return $this->editParentCategory;
     }
@@ -99,7 +101,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -109,7 +111,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -117,10 +119,10 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * Set ParentCategory_ID.
      *
-     * @param int
+     * @param ?int $parentCategoryId
      * @return $this
      */
-    public function setParentCategoryId($parentCategoryId)
+    public function setParentCategoryId(?int $parentCategoryId) : self
     {
         $this->parentCategoryId = $parentCategoryId;
 
@@ -130,10 +132,10 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * Set ParentCategory_Code.
      *
-     * @param string
+     * @param ?string $parentCategoryCode
      * @return $this
      */
-    public function setParentCategoryCode($parentCategoryCode)
+    public function setParentCategoryCode(?string $parentCategoryCode) : self
     {
         $this->parentCategoryCode = $parentCategoryCode;
 
@@ -143,10 +145,10 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * Set Edit_ParentCategory.
      *
-     * @param string
+     * @param ?string $editParentCategory
      * @return $this
      */
-    public function setEditParentCategory($editParentCategory)
+    public function setEditParentCategory(?string $editParentCategory) : self
     {
         $this->editParentCategory = $editParentCategory;
 
@@ -156,10 +158,10 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -169,10 +171,10 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -182,7 +184,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -208,7 +210,7 @@ class ChildCategoryListLoadQuery extends CategoryListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ChildCategoryListLoadQuery($this, $httpResponse, $data);
     }

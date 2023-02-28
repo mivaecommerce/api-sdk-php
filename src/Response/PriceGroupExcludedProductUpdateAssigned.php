@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\PriceGroupProduct;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for PriceGroupExcludedProduct_Update_Assigned.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PriceGroupExcludedProductUpdateAssigned extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PriceGroupProduct[] */
-    protected $priceGroupProducts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $priceGroupProducts;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class PriceGroupExcludedProductUpdateAssigned extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->priceGroupProducts = new \MerchantAPI\Collection();
+        $this->priceGroupProducts = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class PriceGroupExcludedProductUpdateAssigned extends Response
     /**
      * Get priceGroupProducts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\PriceGroupProduct[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPriceGroupProducts()
+    public function getPriceGroupProducts() : Collection
     {
         return $this->priceGroupProducts;
     }

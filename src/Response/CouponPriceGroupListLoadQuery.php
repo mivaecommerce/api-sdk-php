@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\CouponPriceGroup;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for CouponPriceGroupList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CouponPriceGroupListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\CouponPriceGroup[] */
-    protected $couponPriceGroups = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $couponPriceGroups;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class CouponPriceGroupListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->couponPriceGroups = new \MerchantAPI\Collection();
+        $this->couponPriceGroups = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class CouponPriceGroupListLoadQuery extends ListQueryResponse
     /**
      * Get couponPriceGroups.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CouponPriceGroup[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCouponPriceGroups()
+    public function getCouponPriceGroups() : Collection
     {
         return $this->couponPriceGroups;
     }

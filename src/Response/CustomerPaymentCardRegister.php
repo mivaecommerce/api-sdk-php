@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerPaymentCardRegister extends Response
 {
-    /** @var \MerchantAPI\Model\CustomerPaymentCard */
-    protected $customerPaymentCard;
+    /** @var ?\MerchantAPI\Model\CustomerPaymentCard */
+    protected ?CustomerPaymentCard $customerPaymentCard = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class CustomerPaymentCardRegister extends Response
      *
      * @return \MerchantAPI\Model\CustomerPaymentCard|null
      */
-    public function getCustomerPaymentCard()
+    public function getCustomerPaymentCard() : ?CustomerPaymentCard
     {
         return $this->customerPaymentCard;
     }

@@ -89,39 +89,39 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get prop_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPropertyId()
+    public function getPropertyId() : ?int
     {
-        return (int) $this->getField('prop_id', 0);
+        return $this->getField('prop_id');
     }
 
     /**
      * Get version_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getVersionId()
+    public function getVersionId() : ?int
     {
-        return (int) $this->getField('version_id', 0);
+        return $this->getField('version_id');
     }
 
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -129,9 +129,9 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -139,39 +139,39 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get cat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
-        return (int) $this->getField('cat_id', 0);
+        return $this->getField('cat_id');
     }
 
     /**
      * Get version_user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getVersionUserId()
+    public function getVersionUserId() : ?int
     {
-        return (int) $this->getField('version_user_id', 0);
+        return $this->getField('version_user_id');
     }
 
     /**
      * Get version_user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getVersionUserName()
+    public function getVersionUserName() : ?string
     {
         return $this->getField('version_user_name');
     }
@@ -179,9 +179,9 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get version_user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getVersionUserIcon()
+    public function getVersionUserIcon() : ?string
     {
         return $this->getField('version_user_icon');
     }
@@ -189,19 +189,19 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get source_user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSourceUserId()
+    public function getSourceUserId() : ?int
     {
-        return (int) $this->getField('source_user_id', 0);
+        return $this->getField('source_user_id');
     }
 
     /**
      * Get source_user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceUserName()
+    public function getSourceUserName() : ?string
     {
         return $this->getField('source_user_name');
     }
@@ -209,9 +209,9 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get source_user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceUserIcon()
+    public function getSourceUserIcon() : ?string
     {
         return $this->getField('source_user_icon');
     }
@@ -219,49 +219,49 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get templ_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTemplateId()
+    public function getTemplateId() : ?int
     {
-        return (int) $this->getField('templ_id', 0);
+        return $this->getField('templ_id');
     }
 
     /**
      * Get settings.
      *
-     * @return \MerchantAPI\Model\VersionSettings|null
+     * @return ?\MerchantAPI\Model\VersionSettings
      */
-    public function getSettings()
+    public function getSettings() : ?VersionSettings
     {
-        return $this->getField('settings', null);
+        return $this->getField('settings');
     }
 
     /**
      * Get product.
      *
-     * @return \MerchantAPI\Model\Product|null
+     * @return ?\MerchantAPI\Model\Product
      */
-    public function getProduct()
+    public function getProduct() : ?Product
     {
-        return $this->getField('product', null);
+        return $this->getField('product');
     }
 
     /**
      * Get category.
      *
-     * @return \MerchantAPI\Model\Category|null
+     * @return ?\MerchantAPI\Model\Category
      */
-    public function getCategory()
+    public function getCategory() : ?Category
     {
-        return $this->getField('category', null);
+        return $this->getField('category');
     }
 
     /**
      * Get source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('source');
     }
@@ -269,19 +269,19 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get sync.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getSync()
+    public function getSync() : ?bool
     {
-        return (bool) $this->getField('sync', false);
+        return $this->getField('sync');
     }
 
     /**
      * Get source_notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceNotes()
+    public function getSourceNotes() : ?string
     {
         return $this->getField('source_notes');
     }
@@ -289,19 +289,19 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get image_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getImageId()
+    public function getImageId() : ?int
     {
-        return (int) $this->getField('image_id', 0);
+        return $this->getField('image_id');
     }
 
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -309,20 +309,20 @@ class PropertyVersion extends \MerchantAPI\Model
     /**
      * Get image_refcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getImageRefcount()
+    public function getImageRefcount() : ?int
     {
-        return (int) $this->getField('image_refcount', 0);
+        return $this->getField('image_refcount');
     }
 
     /**
      * Get image_head_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getImageHeadCount()
+    public function getImageHeadCount() : ?int
     {
-        return (int) $this->getField('image_head_count', 0);
+        return $this->getField('image_head_count');
     }
 }

@@ -20,26 +20,26 @@ namespace MerchantAPI\ListQuery;
 class FilterExpressionEntry
 {
     /** @var string left side search field */
-    protected $left;
+    protected string $left;
 
     /** @var string one of self::OPERATOR_ constants */
-    protected $operator;
+    protected string $operator;
 
     /** @var string right side search value */
-    protected $right;
+    protected string $right;
 
-    /** @var string search type */
-    protected $search;
+    /** @var int search type */
+    protected int $search;
 
     /**
      * FilterExpressionEntry constructor.
      *
-     * @param string
-     * @param string
-     * @param mixed
-     * @param int
+     * @param string $left
+     * @param string $operator
+     * @param string $right
+     * @param int $search
      */
-    public function __construct($left, $operator, $right, $search = FilterExpression::FILTER_SEARCH)
+    public function __construct(string $left, string $operator, string $right, int $search = FilterExpression::FILTER_SEARCH)
     {
         $this->left     = $left;
         $this->operator = $operator;
@@ -52,7 +52,7 @@ class FilterExpressionEntry
      *
      * @return string
      */
-    public function getLeft()
+    public function getLeft() : string
     {
         return $this->left;
     }
@@ -63,7 +63,7 @@ class FilterExpressionEntry
      * @param string $left
      * @return FilterExpressionEntry
      */
-    public function setLeft($left)
+    public function setLeft(string $left) : self
     {
         $this->left = $left;
         return $this;
@@ -74,7 +74,7 @@ class FilterExpressionEntry
      *
      * @return string
      */
-    public function getOperator()
+    public function getOperator() : string
     {
         return $this->operator;
     }
@@ -85,7 +85,7 @@ class FilterExpressionEntry
      * @param string $operator
      * @return FilterExpressionEntry
      */
-    public function setOperator($operator)
+    public function setOperator(string $operator) : self
     {
         $this->operator = $operator;
         return $this;
@@ -96,7 +96,7 @@ class FilterExpressionEntry
      *
      * @return string
      */
-    public function getRight()
+    public function getRight() : string
     {
         return $this->right;
     }
@@ -107,7 +107,7 @@ class FilterExpressionEntry
      * @param string $right
      * @return FilterExpressionEntry
      */
-    public function setRight($right)
+    public function setRight(string $right) : self
     {
         $this->right = $right;
         return $this;
@@ -116,9 +116,9 @@ class FilterExpressionEntry
     /**
      * Get the search type.
      *
-     * @return string
+     * @return int
      */
-    public function getSearch()
+    public function getSearch() : int
     {
         return $this->search;
     }
@@ -126,10 +126,10 @@ class FilterExpressionEntry
     /**
      * Set the search type.
      *
-     * @param string $search
+     * @param int $search
      * @return FilterExpressionEntry
      */
-    public function setSearch($search)
+    public function setSearch(int $search) : self
     {
         $this->search = $search;
         return $this;

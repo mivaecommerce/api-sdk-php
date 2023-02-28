@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderPriceGroup_Update_Assigned.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class OrderPriceGroupUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderPriceGroup_Update_Assigned';
+    protected string $function = 'OrderPriceGroup_Update_Assigned';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -63,7 +65,7 @@ class OrderPriceGroupUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -73,7 +75,7 @@ class OrderPriceGroupUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -83,7 +85,7 @@ class OrderPriceGroupUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -93,7 +95,7 @@ class OrderPriceGroupUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -101,10 +103,10 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -114,10 +116,10 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -127,10 +129,10 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -140,10 +142,10 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -153,7 +155,7 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -177,7 +179,7 @@ class OrderPriceGroupUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderPriceGroupUpdateAssigned($this, $httpResponse, $data);
     }

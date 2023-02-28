@@ -12,7 +12,9 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroup_Insert.
@@ -25,23 +27,23 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroup_Insert';
+    protected string $function = 'AvailabilityGroup_Insert';
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var bool */
-    protected $availabilityGroupTaxExempt;
+    /** @var ?bool */
+    protected ?bool $availabilityGroupTaxExempt = null;
 
     /**
      * Get AvailabilityGroup_Name.
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -51,7 +53,7 @@ class AvailabilityGroupInsert extends Request
      *
      * @return bool
      */
-    public function getAvailabilityGroupTaxExempt()
+    public function getAvailabilityGroupTaxExempt() : ?bool
     {
         return $this->availabilityGroupTaxExempt;
     }
@@ -59,10 +61,10 @@ class AvailabilityGroupInsert extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -72,10 +74,10 @@ class AvailabilityGroupInsert extends Request
     /**
      * Set AvailabilityGroup_Tax_Exempt.
      *
-     * @param bool
+     * @param ?bool $availabilityGroupTaxExempt
      * @return $this
      */
-    public function setAvailabilityGroupTaxExempt($availabilityGroupTaxExempt)
+    public function setAvailabilityGroupTaxExempt(?bool $availabilityGroupTaxExempt) : self
     {
         $this->availabilityGroupTaxExempt = $availabilityGroupTaxExempt;
 
@@ -85,7 +87,7 @@ class AvailabilityGroupInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -101,7 +103,7 @@ class AvailabilityGroupInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupInsert($this, $httpResponse, $data);
     }

@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ChangesetTemplateVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ChangesetTemplateVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ChangesetTemplateVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetTemplateVersion[] */
-    protected $changesetTemplateVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $changesetTemplateVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ChangesetTemplateVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->changesetTemplateVersions = new \MerchantAPI\Collection();
+        $this->changesetTemplateVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ChangesetTemplateVersionListLoadQuery extends ListQueryResponse
     /**
      * Get changesetTemplateVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetTemplateVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getChangesetTemplateVersions()
+    public function getChangesetTemplateVersions() : Collection
     {
         return $this->changesetTemplateVersions;
     }

@@ -25,7 +25,7 @@ class BranchListDelete extends Response
      *
      * @return int
      */
-    public function getProcessed()
+    public function getProcessed() : ?int
     {
         if (isset($this->data['processed'])) {
             return $this->data['processed'];

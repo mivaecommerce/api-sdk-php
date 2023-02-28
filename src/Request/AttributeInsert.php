@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
+use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Attribute_Insert.
@@ -26,56 +28,57 @@ use MerchantAPI\BaseClient;
 class AttributeInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Attribute_Insert';
+    protected string $function = 'Attribute_Insert';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $type;
+    /** @var ?string */
+    protected ?string $type = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $copy;
+    /** @var ?bool */
+    protected ?bool $copy = null;
 
-    /** @var bool */
-    protected $required;
+    /** @var ?bool */
+    protected ?bool $required = null;
 
-    /** @var bool */
-    protected $inventory;
+    /** @var ?bool */
+    protected ?bool $inventory = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -94,7 +97,7 @@ class AttributeInsert extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -104,7 +107,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -114,7 +117,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -124,7 +127,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -134,7 +137,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -144,7 +147,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->type;
     }
@@ -154,7 +157,7 @@ class AttributeInsert extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -164,7 +167,7 @@ class AttributeInsert extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -174,7 +177,7 @@ class AttributeInsert extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -184,7 +187,7 @@ class AttributeInsert extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -194,7 +197,7 @@ class AttributeInsert extends Request
      *
      * @return bool
      */
-    public function getCopy()
+    public function getCopy() : ?bool
     {
         return $this->copy;
     }
@@ -204,7 +207,7 @@ class AttributeInsert extends Request
      *
      * @return bool
      */
-    public function getRequired()
+    public function getRequired() : ?bool
     {
         return $this->required;
     }
@@ -214,7 +217,7 @@ class AttributeInsert extends Request
      *
      * @return bool
      */
-    public function getInventory()
+    public function getInventory() : ?bool
     {
         return $this->inventory;
     }
@@ -222,10 +225,10 @@ class AttributeInsert extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -235,10 +238,10 @@ class AttributeInsert extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -248,10 +251,10 @@ class AttributeInsert extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -261,10 +264,10 @@ class AttributeInsert extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -274,10 +277,10 @@ class AttributeInsert extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -287,10 +290,10 @@ class AttributeInsert extends Request
     /**
      * Set Type.
      *
-     * @param string
+     * @param ?string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(?string $type) : self
     {
         $this->type = $type;
 
@@ -300,10 +303,10 @@ class AttributeInsert extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -313,10 +316,10 @@ class AttributeInsert extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -326,10 +329,10 @@ class AttributeInsert extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -339,10 +342,10 @@ class AttributeInsert extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -352,10 +355,10 @@ class AttributeInsert extends Request
     /**
      * Set Copy.
      *
-     * @param bool
+     * @param ?bool $copy
      * @return $this
      */
-    public function setCopy($copy)
+    public function setCopy(?bool $copy) : self
     {
         $this->copy = $copy;
 
@@ -365,10 +368,10 @@ class AttributeInsert extends Request
     /**
      * Set Required.
      *
-     * @param bool
+     * @param ?bool $required
      * @return $this
      */
-    public function setRequired($required)
+    public function setRequired(?bool $required) : self
     {
         $this->required = $required;
 
@@ -378,10 +381,10 @@ class AttributeInsert extends Request
     /**
      * Set Inventory.
      *
-     * @param bool
+     * @param ?bool $inventory
      * @return $this
      */
-    public function setInventory($inventory)
+    public function setInventory(?bool $inventory) : self
     {
         $this->inventory = $inventory;
 
@@ -391,7 +394,7 @@ class AttributeInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -447,7 +450,7 @@ class AttributeInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeInsert($this, $httpResponse, $data);
     }

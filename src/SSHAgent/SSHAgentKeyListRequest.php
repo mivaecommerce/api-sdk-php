@@ -18,26 +18,26 @@ namespace MerchantAPI\SSHAgent;
 class SSHAgentKeyListRequest extends SSHAgentMessage
 {
     /** @var array */
-	protected $keys = [];
+	protected array $keys = [];
 
     /**
-     * @return string|void
+     * @return ?string
      */
-	public function Pack()
+	public function Pack() : ?string
 	{
 		return pack('NC', 1, SSHAgentSignClient::SSH_AGENTC_REQUEST_IDENTITIES);
 	}
 
     /**
-     * @param $data
+     * @param string $data
+     * @return void
      * @throws \Exception
      */
-	public function Unpack($data)
+	public function Unpack(string $data) : void
 	{
 		$header = unpack('C1response/N1key_count', $data, 1);
 
 		if (!isset($header['response']) || $header['response'] != SSHAgentSignClient::SSH_AGENT_IDENTITIES_ANSWER) {
-			var_dump($header);
 			throw new \Exception('Invalid Response');
 		}
 

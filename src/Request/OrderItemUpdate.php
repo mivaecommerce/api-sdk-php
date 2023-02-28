@@ -16,6 +16,8 @@ use MerchantAPI\Model\OrderItemOption;
 use MerchantAPI\Model\OrderItem;
 use MerchantAPI\Model\OrderTotal;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request OrderItem_Update.
@@ -28,50 +30,51 @@ use MerchantAPI\BaseClient;
 class OrderItemUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderItem_Update';
+    protected string $function = 'OrderItem_Update';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $lineId;
+    /** @var ?int */
+    protected ?int $lineId = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $name;
+    /** @var ?string */
+    protected ?string $name = null;
 
-    /** @var string */
-    protected $sku;
+    /** @var ?string */
+    protected ?string $sku = null;
 
-    /** @var int */
-    protected $quantity;
+    /** @var ?int */
+    protected ?int $quantity = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $taxable;
+    /** @var ?bool */
+    protected ?bool $taxable = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderItemOption[] */
-    protected $options = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $options;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\OrderItem
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\OrderItem $orderItem
      */
-    public function __construct(BaseClient $client = null, OrderItem $orderItem = null)
+    public function __construct(?BaseClient $client = null, ?OrderItem $orderItem = null)
     {
         parent::__construct($client);
-        $this->options = new \MerchantAPI\Collection();
+        $this->options = new Collection();
 
         if ($orderItem) {
             $this->setOrderId($orderItem->getOrderId());
@@ -95,7 +98,7 @@ class OrderItemUpdate extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -105,7 +108,7 @@ class OrderItemUpdate extends Request
      *
      * @return int
      */
-    public function getLineId()
+    public function getLineId() : ?int
     {
         return $this->lineId;
     }
@@ -115,7 +118,7 @@ class OrderItemUpdate extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -125,7 +128,7 @@ class OrderItemUpdate extends Request
      *
      * @return string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->name;
     }
@@ -135,7 +138,7 @@ class OrderItemUpdate extends Request
      *
      * @return string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->sku;
     }
@@ -145,7 +148,7 @@ class OrderItemUpdate extends Request
      *
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
         return $this->quantity;
     }
@@ -155,7 +158,7 @@ class OrderItemUpdate extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -165,7 +168,7 @@ class OrderItemUpdate extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -175,7 +178,7 @@ class OrderItemUpdate extends Request
      *
      * @return bool
      */
-    public function getTaxable()
+    public function getTaxable() : ?bool
     {
         return $this->taxable;
     }
@@ -183,9 +186,9 @@ class OrderItemUpdate extends Request
     /**
      * Get Options.
      *
-     * @return \MerchantAPI\Model\OrderItemOption[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOptions()
+    public function getOptions() : ?Collection
     {
         return $this->options;
     }
@@ -193,10 +196,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -206,10 +209,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Line_ID.
      *
-     * @param int
+     * @param ?int $lineId
      * @return $this
      */
-    public function setLineId($lineId)
+    public function setLineId(?int $lineId) : self
     {
         $this->lineId = $lineId;
 
@@ -219,10 +222,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -232,10 +235,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Name.
      *
-     * @param string
+     * @param ?string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name) : self
     {
         $this->name = $name;
 
@@ -245,10 +248,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Sku.
      *
-     * @param string
+     * @param ?string $sku
      * @return $this
      */
-    public function setSku($sku)
+    public function setSku(?string $sku) : self
     {
         $this->sku = $sku;
 
@@ -258,10 +261,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         $this->quantity = $quantity;
 
@@ -271,10 +274,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -284,10 +287,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -297,10 +300,10 @@ class OrderItemUpdate extends Request
     /**
      * Set Taxable.
      *
-     * @param bool
+     * @param ?bool $taxable
      * @return $this
      */
-    public function setTaxable($taxable)
+    public function setTaxable(?bool $taxable) : self
     {
         $this->taxable = $taxable;
 
@@ -310,12 +313,17 @@ class OrderItemUpdate extends Request
     /**
      * Set Options.
      *
-     * @param (\MerchantAPI\Model\OrderItemOption|array)[]
+     * @param \MerchantAPI\Collection|array $options
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions($options) : self
     {
+        if (!is_array($options) && !$options instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($options) ? get_class($options) : gettype($options)));
+        }
+
         foreach ($options as &$model) {
             if (is_array($model)) {
                 $model = new OrderItemOption($model);
@@ -325,7 +333,7 @@ class OrderItemUpdate extends Request
             }
         }
 
-        $this->options = new \MerchantAPI\Collection($options);
+        $this->options = new Collection($options);
 
         return $this;
     }
@@ -334,10 +342,9 @@ class OrderItemUpdate extends Request
      * Add Options.
      *
      * @param \MerchantAPI\Model\OrderItemOption
-     *
      * @return $this
      */
-    public function addOption(OrderItemOption $model)
+    public function addOption(OrderItemOption $model) : self
     {
         $this->options[] = $model;
         return $this;
@@ -350,7 +357,7 @@ class OrderItemUpdate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addOptions(array $options)
+    public function addOptions(array $options) : self
     {
         foreach ($options as $e) {
             if (is_array($e)) {
@@ -369,7 +376,7 @@ class OrderItemUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -421,7 +428,7 @@ class OrderItemUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderItemUpdate($this, $httpResponse, $data);
     }

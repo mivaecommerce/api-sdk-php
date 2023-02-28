@@ -144,19 +144,19 @@ class Uri extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get uri.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUri()
+    public function getUri() : ?string
     {
         return $this->getField('uri');
     }
@@ -164,19 +164,19 @@ class Uri extends \MerchantAPI\Model
     /**
      * Get store_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStoreId()
+    public function getStoreId() : ?int
     {
-        return (int) $this->getField('store_id', 0);
+        return $this->getField('store_id');
     }
 
     /**
      * Get screen.
      *
-     * @return string
+     * @return ?string
      */
-    public function getScreen()
+    public function getScreen() : ?string
     {
         return $this->getField('screen');
     }
@@ -184,110 +184,110 @@ class Uri extends \MerchantAPI\Model
     /**
      * Get page_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPageId()
+    public function getPageId() : ?int
     {
-        return (int) $this->getField('page_id', 0);
+        return $this->getField('page_id');
     }
 
     /**
      * Get cat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
-        return (int) $this->getField('cat_id', 0);
+        return $this->getField('cat_id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get feed_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getFeedId()
+    public function getFeedId() : ?int
     {
-        return (int) $this->getField('feed_id', 0);
+        return $this->getField('feed_id');
     }
 
     /**
      * Get canonical.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
-        return (bool) $this->getField('canonical', false);
+        return $this->getField('canonical');
     }
 
     /**
      * Get status.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
-        return (int) $this->getField('status', 0);
+        return $this->getField('status');
     }
 
     /**
      * Get store.
      *
-     * @return \MerchantAPI\Model\UriDetail|null
+     * @return ?\MerchantAPI\Model\UriDetail
      */
-    public function getStore()
+    public function getStore() : ?UriDetail
     {
-        return $this->getField('store', null);
+        return $this->getField('store');
     }
 
     /**
      * Get product.
      *
-     * @return \MerchantAPI\Model\UriDetail|null
+     * @return ?\MerchantAPI\Model\UriDetail
      */
-    public function getProduct()
+    public function getProduct() : ?UriDetail
     {
-        return $this->getField('product', null);
+        return $this->getField('product');
     }
 
     /**
      * Get category.
      *
-     * @return \MerchantAPI\Model\UriDetail|null
+     * @return ?\MerchantAPI\Model\UriDetail
      */
-    public function getCategory()
+    public function getCategory() : ?UriDetail
     {
-        return $this->getField('category', null);
+        return $this->getField('category');
     }
 
     /**
      * Get page.
      *
-     * @return \MerchantAPI\Model\UriDetail|null
+     * @return ?\MerchantAPI\Model\UriDetail
      */
-    public function getPage()
+    public function getPage() : ?UriDetail
     {
-        return $this->getField('page', null);
+        return $this->getField('page');
     }
 
     /**
      * Get feed.
      *
-     * @return \MerchantAPI\Model\UriDetail|null
+     * @return ?\MerchantAPI\Model\UriDetail
      */
-    public function getFeed()
+    public function getFeed() : ?UriDetail
     {
-        return $this->getField('feed', null);
+        return $this->getField('feed');
     }
 }

@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Page;
+use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PageURI_Insert.
@@ -26,35 +28,36 @@ use MerchantAPI\BaseClient;
 class PageURIInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PageURI_Insert';
+    protected string $function = 'PageURI_Insert';
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
-    /** @var int */
-    protected $pageId;
+    /** @var ?int */
+    protected ?int $pageId = null;
 
-    /** @var string */
-    protected $pageCode;
+    /** @var ?string */
+    protected ?string $pageCode = null;
 
-    /** @var string */
-    protected $editPage;
+    /** @var ?string */
+    protected ?string $editPage = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Page
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Page $page
      */
-    public function __construct(BaseClient $client = null, Page $page = null)
+    public function __construct(?BaseClient $client = null, ?Page $page = null)
     {
         parent::__construct($client);
         if ($page) {
@@ -71,7 +74,7 @@ class PageURIInsert extends Request
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -81,7 +84,7 @@ class PageURIInsert extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -91,7 +94,7 @@ class PageURIInsert extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -101,7 +104,7 @@ class PageURIInsert extends Request
      *
      * @return int
      */
-    public function getPageId()
+    public function getPageId() : ?int
     {
         return $this->pageId;
     }
@@ -111,7 +114,7 @@ class PageURIInsert extends Request
      *
      * @return string
      */
-    public function getPageCode()
+    public function getPageCode() : ?string
     {
         return $this->pageCode;
     }
@@ -121,7 +124,7 @@ class PageURIInsert extends Request
      *
      * @return string
      */
-    public function getEditPage()
+    public function getEditPage() : ?string
     {
         return $this->editPage;
     }
@@ -129,10 +132,10 @@ class PageURIInsert extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -142,10 +145,10 @@ class PageURIInsert extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -155,10 +158,10 @@ class PageURIInsert extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -168,10 +171,10 @@ class PageURIInsert extends Request
     /**
      * Set Page_ID.
      *
-     * @param int
+     * @param ?int $pageId
      * @return $this
      */
-    public function setPageId($pageId)
+    public function setPageId(?int $pageId) : self
     {
         $this->pageId = $pageId;
 
@@ -181,10 +184,10 @@ class PageURIInsert extends Request
     /**
      * Set Page_Code.
      *
-     * @param string
+     * @param ?string $pageCode
      * @return $this
      */
-    public function setPageCode($pageCode)
+    public function setPageCode(?string $pageCode) : self
     {
         $this->pageCode = $pageCode;
 
@@ -194,10 +197,10 @@ class PageURIInsert extends Request
     /**
      * Set Edit_Page.
      *
-     * @param string
+     * @param ?string $editPage
      * @return $this
      */
-    public function setEditPage($editPage)
+    public function setEditPage(?string $editPage) : self
     {
         $this->editPage = $editPage;
 
@@ -207,7 +210,7 @@ class PageURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -237,7 +240,7 @@ class PageURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PageURIInsert($this, $httpResponse, $data);
     }

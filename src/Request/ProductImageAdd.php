@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
+use MerchantAPI\Model\ProductImageData;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductImage_Add.
@@ -26,35 +28,36 @@ use MerchantAPI\BaseClient;
 class ProductImageAdd extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductImage_Add';
+    protected string $function = 'ProductImage_Add';
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $productSku;
+    /** @var ?string */
+    protected ?string $productSku = null;
 
-    /** @var string */
-    protected $filepath;
+    /** @var ?string */
+    protected ?string $filepath = null;
 
-    /** @var int */
-    protected $imageTypeId;
+    /** @var ?int */
+    protected ?int $imageTypeId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -73,7 +76,7 @@ class ProductImageAdd extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -83,7 +86,7 @@ class ProductImageAdd extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -93,7 +96,7 @@ class ProductImageAdd extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -103,7 +106,7 @@ class ProductImageAdd extends Request
      *
      * @return string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->productSku;
     }
@@ -113,7 +116,7 @@ class ProductImageAdd extends Request
      *
      * @return string
      */
-    public function getFilepath()
+    public function getFilepath() : ?string
     {
         return $this->filepath;
     }
@@ -123,7 +126,7 @@ class ProductImageAdd extends Request
      *
      * @return int
      */
-    public function getImageTypeId()
+    public function getImageTypeId() : ?int
     {
         return $this->imageTypeId;
     }
@@ -131,10 +134,10 @@ class ProductImageAdd extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -144,10 +147,10 @@ class ProductImageAdd extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -157,10 +160,10 @@ class ProductImageAdd extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -170,10 +173,10 @@ class ProductImageAdd extends Request
     /**
      * Set Product_SKU.
      *
-     * @param string
+     * @param ?string $productSku
      * @return $this
      */
-    public function setProductSku($productSku)
+    public function setProductSku(?string $productSku) : self
     {
         $this->productSku = $productSku;
 
@@ -183,10 +186,10 @@ class ProductImageAdd extends Request
     /**
      * Set Filepath.
      *
-     * @param string
+     * @param ?string $filepath
      * @return $this
      */
-    public function setFilepath($filepath)
+    public function setFilepath(?string $filepath) : self
     {
         $this->filepath = $filepath;
 
@@ -196,10 +199,10 @@ class ProductImageAdd extends Request
     /**
      * Set ImageType_ID.
      *
-     * @param int
+     * @param ?int $imageTypeId
      * @return $this
      */
-    public function setImageTypeId($imageTypeId)
+    public function setImageTypeId(?int $imageTypeId) : self
     {
         $this->imageTypeId = $imageTypeId;
 
@@ -209,7 +212,7 @@ class ProductImageAdd extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -233,7 +236,7 @@ class ProductImageAdd extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductImageAdd($this, $httpResponse, $data);
     }

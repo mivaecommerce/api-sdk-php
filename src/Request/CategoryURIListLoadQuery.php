@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryURIList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class CategoryURIListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryURIList_Load_Query';
+    protected string $function = 'CategoryURIList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'canonical',
         'status',
@@ -41,25 +42,26 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'uri',
     ];
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -80,7 +82,7 @@ class CategoryURIListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -90,7 +92,7 @@ class CategoryURIListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -100,7 +102,7 @@ class CategoryURIListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -108,10 +110,10 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -121,10 +123,10 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -134,10 +136,10 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -147,7 +149,7 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -167,7 +169,7 @@ class CategoryURIListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryURIListLoadQuery($this, $httpResponse, $data);
     }

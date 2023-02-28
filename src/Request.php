@@ -11,7 +11,6 @@
 namespace MerchantAPI;
 
 use MerchantAPI\Http\HttpHeaders;
-use MerchantAPI\BaseClient;
 
 /**
  * Abstract class all Requests inherit from.
@@ -20,24 +19,24 @@ use MerchantAPI\BaseClient;
  */
 abstract class Request implements RequestInterface
 {
-    /** @var Client */
-    protected $client = null;
+    /** @var ?BaseClient */
+    protected ?BaseClient $client = null;
 
-    /** @var null|string */
-    protected $storeCode = null;
-
-    /** @var string */
-    protected $scope = RequestInterface::REQUEST_SCOPE_STORE;
+    /** @var ?string */
+    protected ?string $storeCode = null;
 
     /** @var string */
-    protected $binaryEncoding = RequestInterface::BINARY_ENCODING_DEFAULT;
+    protected string $scope = RequestInterface::REQUEST_SCOPE_STORE;
+
+    /** @var ?string */
+    protected ?string $binaryEncoding = RequestInterface::BINARY_ENCODING_DEFAULT;
 
     /**
      * Constructor
      *
-     * @param Client $client
+     * @param ?BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         $this->client = $client;
     }
@@ -45,7 +44,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function getFunction()
+    public function getFunction() : string
     {
         if (isset($this->function)) {
             return $this->function;
@@ -58,7 +57,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function getScope()
+    public function getScope() : string
     {
         return $this->scope;
     }
@@ -66,7 +65,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function getStoreCode()
+    public function getStoreCode() : ?string
     {
         return $this->storeCode;
     }
@@ -74,7 +73,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function setStoreCode($storeCode)
+    public function setStoreCode(?string $storeCode) : self
     {
         $this->storeCode = $storeCode;
         return $this;
@@ -83,7 +82,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function getClient()
+    public function getClient() : BaseClient
     {
         return $this->client;
     }
@@ -91,7 +90,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function setClient(Client $client)
+    public function setClient(?BaseClient $client) : self
     {
         $this->client = $client;
         return $this;
@@ -100,7 +99,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = [];
 
@@ -116,7 +115,7 @@ abstract class Request implements RequestInterface
     /**
      * {inheritDoc}
      */
-    public function send()
+    public function send() : ResponseInterface
     {
         if (!$this->client) {
             throw new \Exception('No client assigned to request');
@@ -128,7 +127,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function processRequestHeaders(HttpHeaders $headers)
+    public function processRequestHeaders(HttpHeaders $headers) : void
     {
         ;
     }
@@ -136,7 +135,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function getBinaryEncoding()
+    public function getBinaryEncoding() : ?string
     {
         return $this->binaryEncoding;
     }
@@ -144,9 +143,17 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
-    public function setBinaryEncoding($encoding)
+    public function setBinaryEncoding(?string $binaryEncoding) : self
     {
         $this->binaryEncoding = $binaryEncoding;
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }

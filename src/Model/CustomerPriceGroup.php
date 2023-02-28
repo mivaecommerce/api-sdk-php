@@ -20,10 +20,10 @@ class CustomerPriceGroup extends PriceGroup
     /**
      * Get assigned.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
-        return (bool) $this->getField('assigned', false);
+        return $this->getField('assigned');
     }
 }

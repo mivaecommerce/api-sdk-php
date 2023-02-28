@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Subscription;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request SubscriptionList_Delete.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class SubscriptionListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'SubscriptionList_Delete';
+    protected string $function = 'SubscriptionList_Delete';
 
     /** @var int[] */
-    protected $subscriptionIds = [];
+    protected array $subscriptionIds = [];
 
     /**
      * Get Subscription_IDs.
      *
      * @return array
      */
-    public function getSubscriptionIds()
+    public function getSubscriptionIds() : array
     {
         return $this->subscriptionIds;
     }
@@ -47,11 +48,10 @@ class SubscriptionListDelete extends Request
     /**
      * Add Subscription_IDs.
      *
-     * @param int
-     *
+     * @param int $subscriptionId
      * @return $this
      */
-    public function addSubscriptionId($subscriptionId)
+    public function addSubscriptionId(int $subscriptionId) : self
     {
         $this->subscriptionIds[] = $subscriptionId;
         return $this;
@@ -60,10 +60,10 @@ class SubscriptionListDelete extends Request
     /**
      * Add Subscription model.
      *
-     * @param \MerchantAPI\Model\Subscription
+     * @param \MerchantAPI\Model\Subscription $subscription
      * @return $this
      */
-    public function addSubscription(Subscription $subscription)
+    public function addSubscription(Subscription $subscription) : self
     {
         if ($subscription->getId()) {
             $this->subscriptionIds[] = $subscription->getId();
@@ -75,7 +75,7 @@ class SubscriptionListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -87,7 +87,7 @@ class SubscriptionListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\SubscriptionListDelete($this, $httpResponse, $data);
     }

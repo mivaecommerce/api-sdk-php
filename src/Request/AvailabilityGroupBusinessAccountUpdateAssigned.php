@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroupBusinessAccount_Update_Assigned.
@@ -26,35 +27,36 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroupBusinessAccount_Update_Assigned';
+    protected string $function = 'AvailabilityGroupBusinessAccount_Update_Assigned';
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var int */
-    protected $businessAccountId;
+    /** @var ?int */
+    protected ?int $businessAccountId = null;
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -71,7 +73,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -81,7 +83,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -91,7 +93,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -101,7 +103,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getBusinessAccountId()
+    public function getBusinessAccountId() : ?int
     {
         return $this->businessAccountId;
     }
@@ -111,7 +113,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -121,7 +123,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -129,10 +131,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -142,10 +144,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -155,10 +157,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -168,10 +170,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set BusinessAccount_ID.
      *
-     * @param int
+     * @param ?int $businessAccountId
      * @return $this
      */
-    public function setBusinessAccountId($businessAccountId)
+    public function setBusinessAccountId(?int $businessAccountId) : self
     {
         $this->businessAccountId = $businessAccountId;
 
@@ -181,10 +183,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -194,10 +196,10 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -207,7 +209,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -235,7 +237,7 @@ class AvailabilityGroupBusinessAccountUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupBusinessAccountUpdateAssigned($this, $httpResponse, $data);
     }

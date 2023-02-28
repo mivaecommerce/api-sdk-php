@@ -20,9 +20,9 @@ class ChangesetChange extends \MerchantAPI\Model
     /**
      * Get item_type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getItemType()
+    public function getItemType() : ?string
     {
         return $this->getField('item_type');
     }
@@ -30,29 +30,29 @@ class ChangesetChange extends \MerchantAPI\Model
     /**
      * Get item_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getItemId()
+    public function getItemId() : ?int
     {
-        return (int) $this->getField('item_id', 0);
+        return $this->getField('item_id');
     }
 
     /**
      * Get item_version_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getItemVersionId()
+    public function getItemVersionId() : ?int
     {
-        return (int) $this->getField('item_version_id', 0);
+        return $this->getField('item_version_id');
     }
 
     /**
      * Get item_identifier.
      *
-     * @return string
+     * @return ?string
      */
-    public function getItemIdentifier()
+    public function getItemIdentifier() : ?string
     {
         return $this->getField('item_identifier');
     }

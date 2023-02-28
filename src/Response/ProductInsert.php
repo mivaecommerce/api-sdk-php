@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductInsert extends Response
 {
-    /** @var \MerchantAPI\Model\Product */
-    protected $product;
+    /** @var ?\MerchantAPI\Model\Product */
+    protected ?Product $product = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class ProductInsert extends Response
      *
      * @return \MerchantAPI\Model\Product|null
      */
-    public function getProduct()
+    public function getProduct() : ?Product
     {
         return $this->product;
     }

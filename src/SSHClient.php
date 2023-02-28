@@ -22,15 +22,15 @@ class SSHClient extends BaseClient
 {
     /**
      * SSHClient constructor.
-     * @param $endpoint
-     * @param $username
-     * @param $privateKeyFilePath
-     * @param null $privateKeyPassword
+     * @param string $endpoint
+     * @param string $username
+     * @param string $privateKeyFilePath
+     * @param ?string $privateKeyPassword
      * @param string $digestType
      * @param array $options
      * @throws \Exception
      */
-    public function __construct($endpoint, $username, $privateKeyFilePath, $privateKeyPassword = null, $digestType = SSHPrivateKeyAuthenticator::DIGEST_TYPE_SSH_RSA_SHA256, array $options = [])
+    public function __construct(string $endpoint, string $username, string $privateKeyFilePath, ?string $privateKeyPassword = null, string $digestType = SSHPrivateKeyAuthenticator::DIGEST_TYPE_SSH_RSA_SHA256, array $options = [])
     {
         parent::__construct($endpoint, new SSHPrivateKeyAuthenticator($username, $privateKeyFilePath, $privateKeyPassword, $digestType), $options);
     }
@@ -44,11 +44,11 @@ class SSHClient extends BaseClient
     }
 
     /**
-     * @param $privateKeyPath
-     * @param $password
+     * @param string $privateKeyPath
+     * @param ?string $password
      * @return $this
      */
-    public function setPrivateKey($privateKeyPath, $password)
+    public function setPrivateKey(string $privateKeyPath, ?string $password) : self
     {
         $this->authenticator->setPrivateKey($privateKeyPath, $password);
         return $this;
@@ -57,16 +57,16 @@ class SSHClient extends BaseClient
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername() : string
     {
         return $this->authenticator->getUsername();
     }
 
     /**
-     * @param $username
+     * @param string $username
      * @return $this
      */
-    public function setUsername($username)
+    public function setUsername(string $username) : self
     {
         $this->authenticator->setUsername($username);
         return $this;
@@ -75,16 +75,16 @@ class SSHClient extends BaseClient
     /**
      * @return string
      */
-    public function getDigestType()
+    public function getDigestType() : string
     {
         return $this->authenticator->getDigestType();
     }
 
     /**
-     * @param $digestType
+     * @param string $digestType
      * @return $this
      */
-    public function setDigestType($digestType)
+    public function setDigestType(string $digestType) : self
     {
         $this->authenticator->setDigestType($digestType);
         return $this;

@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderPaymentCapture extends Response
 {
-    /** @var \MerchantAPI\Model\OrderPaymentTotal */
-    protected $orderPaymentTotal;
+    /** @var ?\MerchantAPI\Model\OrderPaymentTotal */
+    protected ?OrderPaymentTotal $orderPaymentTotal = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OrderPaymentCapture extends Response
      *
      * @return \MerchantAPI\Model\OrderPaymentTotal|null
      */
-    public function getOrderPaymentTotal()
+    public function getOrderPaymentTotal() : ?OrderPaymentTotal
     {
         return $this->orderPaymentTotal;
     }

@@ -20,69 +20,69 @@ class OrderItemOptionDiscount extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get line_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLineId()
+    public function getLineId() : ?int
     {
-        return (int) $this->getField('line_id', 0);
+        return $this->getField('line_id');
     }
 
     /**
      * Get attr_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
-        return (int) $this->getField('attr_id', 0);
+        return $this->getField('attr_id');
     }
 
     /**
      * Get attmpat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
-        return (int) $this->getField('attmpat_id', 0);
+        return $this->getField('attmpat_id');
     }
 
     /**
      * Get pgrp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
-        return (int) $this->getField('pgrp_id', 0);
+        return $this->getField('pgrp_id');
     }
 
     /**
      * Get display.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getDisplay()
+    public function getDisplay() : ?bool
     {
-        return (bool) $this->getField('display', false);
+        return $this->getField('display');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -90,10 +90,10 @@ class OrderItemOptionDiscount extends \MerchantAPI\Model
     /**
      * Get discount.
      *
-     * @return float
+     * @return ?float
      */
-    public function getDiscount()
+    public function getDiscount() : ?float
     {
-        return (float) $this->getField('discount', 0.00);
+        return $this->getField('discount');
     }
 }

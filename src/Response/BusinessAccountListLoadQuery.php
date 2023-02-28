@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\BusinessAccount;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BusinessAccountList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BusinessAccountListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\BusinessAccount[] */
-    protected $businessAccounts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $businessAccounts;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BusinessAccountListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->businessAccounts = new \MerchantAPI\Collection();
+        $this->businessAccounts = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BusinessAccountListLoadQuery extends ListQueryResponse
     /**
      * Get businessAccounts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\BusinessAccount[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBusinessAccounts()
+    public function getBusinessAccounts() : Collection
     {
         return $this->businessAccounts;
     }

@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Branch_Copy.
@@ -27,26 +28,27 @@ use MerchantAPI\BaseClient;
 class BranchCopy extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Branch_Copy';
+    protected string $function = 'Branch_Copy';
 
-    /** @var int */
-    protected $sourceBranchId;
+    /** @var ?int */
+    protected ?int $sourceBranchId = null;
 
-    /** @var int */
-    protected $destinationBranchId;
+    /** @var ?int */
+    protected ?int $destinationBranchId = null;
 
-    /** @var string */
-    protected $notes;
+    /** @var ?string */
+    protected ?string $notes = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -61,7 +63,7 @@ class BranchCopy extends Request
      *
      * @return int
      */
-    public function getSourceBranchId()
+    public function getSourceBranchId() : ?int
     {
         return $this->sourceBranchId;
     }
@@ -71,7 +73,7 @@ class BranchCopy extends Request
      *
      * @return int
      */
-    public function getDestinationBranchId()
+    public function getDestinationBranchId() : ?int
     {
         return $this->destinationBranchId;
     }
@@ -81,7 +83,7 @@ class BranchCopy extends Request
      *
      * @return string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->notes;
     }
@@ -89,10 +91,10 @@ class BranchCopy extends Request
     /**
      * Set Source_Branch_ID.
      *
-     * @param int
+     * @param ?int $sourceBranchId
      * @return $this
      */
-    public function setSourceBranchId($sourceBranchId)
+    public function setSourceBranchId(?int $sourceBranchId) : self
     {
         $this->sourceBranchId = $sourceBranchId;
 
@@ -102,10 +104,10 @@ class BranchCopy extends Request
     /**
      * Set Destination_Branch_ID.
      *
-     * @param int
+     * @param ?int $destinationBranchId
      * @return $this
      */
-    public function setDestinationBranchId($destinationBranchId)
+    public function setDestinationBranchId(?int $destinationBranchId) : self
     {
         $this->destinationBranchId = $destinationBranchId;
 
@@ -115,10 +117,10 @@ class BranchCopy extends Request
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         $this->notes = $notes;
 
@@ -128,7 +130,7 @@ class BranchCopy extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -150,7 +152,7 @@ class BranchCopy extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchCopy($this, $httpResponse, $data);
     }

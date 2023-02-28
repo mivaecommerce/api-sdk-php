@@ -15,6 +15,8 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\KitPart;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request ProductKit_Update_Parts.
@@ -27,41 +29,42 @@ use MerchantAPI\BaseClient;
 class ProductKitUpdateParts extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductKit_Update_Parts';
+    protected string $function = 'ProductKit_Update_Parts';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var int */
-    protected $attributeTemplateAttributeId;
+    /** @var ?int */
+    protected ?int $attributeTemplateAttributeId = null;
 
-    /** @var int */
-    protected $optionId;
+    /** @var ?int */
+    protected ?int $optionId = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\KitPart[] */
-    protected $parts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $parts;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
-        $this->parts = new \MerchantAPI\Collection();
+        $this->parts = new Collection();
 
         if ($product) {
             if ($product->getId()) {
@@ -77,7 +80,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -87,7 +90,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -97,7 +100,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -107,7 +110,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -117,7 +120,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
         return $this->attributeTemplateAttributeId;
     }
@@ -127,7 +130,7 @@ class ProductKitUpdateParts extends Request
      *
      * @return int
      */
-    public function getOptionId()
+    public function getOptionId() : ?int
     {
         return $this->optionId;
     }
@@ -135,9 +138,9 @@ class ProductKitUpdateParts extends Request
     /**
      * Get Parts.
      *
-     * @return \MerchantAPI\Model\KitPart[]
+     * @return \MerchantAPI\Collection
      */
-    public function getParts()
+    public function getParts() : ?Collection
     {
         return $this->parts;
     }
@@ -145,10 +148,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -158,10 +161,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -171,10 +174,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -184,10 +187,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -197,10 +200,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set AttributeTemplateAttribute_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateAttributeId
      * @return $this
      */
-    public function setAttributeTemplateAttributeId($attributeTemplateAttributeId)
+    public function setAttributeTemplateAttributeId(?int $attributeTemplateAttributeId) : self
     {
         $this->attributeTemplateAttributeId = $attributeTemplateAttributeId;
 
@@ -210,10 +213,10 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Option_ID.
      *
-     * @param int
+     * @param ?int $optionId
      * @return $this
      */
-    public function setOptionId($optionId)
+    public function setOptionId(?int $optionId) : self
     {
         $this->optionId = $optionId;
 
@@ -223,12 +226,17 @@ class ProductKitUpdateParts extends Request
     /**
      * Set Parts.
      *
-     * @param (\MerchantAPI\Model\KitPart|array)[]
+     * @param \MerchantAPI\Collection|array $parts
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setParts(array $parts)
+    public function setParts($parts) : self
     {
+        if (!is_array($parts) && !$parts instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($parts) ? get_class($parts) : gettype($parts)));
+        }
+
         foreach ($parts as &$model) {
             if (is_array($model)) {
                 $model = new KitPart($model);
@@ -238,7 +246,7 @@ class ProductKitUpdateParts extends Request
             }
         }
 
-        $this->parts = new \MerchantAPI\Collection($parts);
+        $this->parts = new Collection($parts);
 
         return $this;
     }
@@ -247,10 +255,9 @@ class ProductKitUpdateParts extends Request
      * Add Parts.
      *
      * @param \MerchantAPI\Model\KitPart
-     *
      * @return $this
      */
-    public function addKitPart(KitPart $model)
+    public function addKitPart(KitPart $model) : self
     {
         $this->parts[] = $model;
         return $this;
@@ -263,7 +270,7 @@ class ProductKitUpdateParts extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addParts(array $parts)
+    public function addParts(array $parts) : self
     {
         foreach ($parts as $e) {
             if (is_array($e)) {
@@ -282,7 +289,7 @@ class ProductKitUpdateParts extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -320,7 +327,7 @@ class ProductKitUpdateParts extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductKitUpdateParts($this, $httpResponse, $data);
     }

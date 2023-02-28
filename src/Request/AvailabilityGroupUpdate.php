@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroup_Update.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroup_Update';
+    protected string $function = 'AvailabilityGroup_Update';
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var bool */
-    protected $availabilityGroupTaxExempt;
+    /** @var ?bool */
+    protected ?bool $availabilityGroupTaxExempt = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -65,7 +67,7 @@ class AvailabilityGroupUpdate extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -75,7 +77,7 @@ class AvailabilityGroupUpdate extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -85,7 +87,7 @@ class AvailabilityGroupUpdate extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -95,7 +97,7 @@ class AvailabilityGroupUpdate extends Request
      *
      * @return bool
      */
-    public function getAvailabilityGroupTaxExempt()
+    public function getAvailabilityGroupTaxExempt() : ?bool
     {
         return $this->availabilityGroupTaxExempt;
     }
@@ -103,10 +105,10 @@ class AvailabilityGroupUpdate extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -116,10 +118,10 @@ class AvailabilityGroupUpdate extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -129,10 +131,10 @@ class AvailabilityGroupUpdate extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -142,10 +144,10 @@ class AvailabilityGroupUpdate extends Request
     /**
      * Set AvailabilityGroup_Tax_Exempt.
      *
-     * @param bool
+     * @param ?bool $availabilityGroupTaxExempt
      * @return $this
      */
-    public function setAvailabilityGroupTaxExempt($availabilityGroupTaxExempt)
+    public function setAvailabilityGroupTaxExempt(?bool $availabilityGroupTaxExempt) : self
     {
         $this->availabilityGroupTaxExempt = $availabilityGroupTaxExempt;
 
@@ -155,7 +157,7 @@ class AvailabilityGroupUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -177,7 +179,7 @@ class AvailabilityGroupUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupUpdate($this, $httpResponse, $data);
     }

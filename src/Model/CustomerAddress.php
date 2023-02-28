@@ -20,29 +20,29 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get cust_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
-        return (int) $this->getField('cust_id', 0);
+        return $this->getField('cust_id');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -50,9 +50,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get fname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFirstName()
+    public function getFirstName() : ?string
     {
         return $this->getField('fname');
     }
@@ -60,9 +60,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get lname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLastName()
+    public function getLastName() : ?string
     {
         return $this->getField('lname');
     }
@@ -70,9 +70,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getEmail()
+    public function getEmail() : ?string
     {
         return $this->getField('email');
     }
@@ -80,9 +80,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get comp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCompany()
+    public function getCompany() : ?string
     {
         return $this->getField('comp');
     }
@@ -90,9 +90,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get phone.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPhone()
+    public function getPhone() : ?string
     {
         return $this->getField('phone');
     }
@@ -100,9 +100,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get fax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFax()
+    public function getFax() : ?string
     {
         return $this->getField('fax');
     }
@@ -110,9 +110,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get addr1.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress1()
+    public function getAddress1() : ?string
     {
         return $this->getField('addr1');
     }
@@ -120,9 +120,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get addr2.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress2()
+    public function getAddress2() : ?string
     {
         return $this->getField('addr2');
     }
@@ -130,9 +130,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCity()
+    public function getCity() : ?string
     {
         return $this->getField('city');
     }
@@ -140,9 +140,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getState()
+    public function getState() : ?string
     {
         return $this->getField('state');
     }
@@ -150,9 +150,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getZip()
+    public function getZip() : ?string
     {
         return $this->getField('zip');
     }
@@ -160,9 +160,9 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get cntry.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCountry()
+    public function getCountry() : ?string
     {
         return $this->getField('cntry');
     }
@@ -170,10 +170,10 @@ class CustomerAddress extends \MerchantAPI\Model
     /**
      * Get resdntl.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getResidential()
+    public function getResidential() : ?bool
     {
-        return (bool) $this->getField('resdntl', false);
+        return $this->getField('resdntl');
     }
 }

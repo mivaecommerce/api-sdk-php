@@ -20,9 +20,9 @@ class OrderPart extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -30,9 +30,9 @@ class OrderPart extends \MerchantAPI\Model
     /**
      * Get sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->getField('sku');
     }
@@ -40,9 +40,9 @@ class OrderPart extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -50,30 +50,30 @@ class OrderPart extends \MerchantAPI\Model
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Get total_quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTotalQuantity()
+    public function getTotalQuantity() : ?int
     {
-        return (int) $this->getField('total_quantity', 0);
+        return $this->getField('total_quantity');
     }
 
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 }

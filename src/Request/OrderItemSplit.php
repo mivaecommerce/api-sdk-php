@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderItem;
+use MerchantAPI\Model\SplitOrderItem;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderItem_Split.
@@ -26,26 +28,27 @@ use MerchantAPI\BaseClient;
 class OrderItemSplit extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderItem_Split';
+    protected string $function = 'OrderItem_Split';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $lineId;
+    /** @var ?int */
+    protected ?int $lineId = null;
 
-    /** @var int */
-    protected $quantity;
+    /** @var ?int */
+    protected ?int $quantity = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\OrderItem
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\OrderItem $orderItem
      */
-    public function __construct(BaseClient $client = null, OrderItem $orderItem = null)
+    public function __construct(?BaseClient $client = null, ?OrderItem $orderItem = null)
     {
         parent::__construct($client);
         if ($orderItem) {
@@ -64,7 +67,7 @@ class OrderItemSplit extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -74,7 +77,7 @@ class OrderItemSplit extends Request
      *
      * @return int
      */
-    public function getLineId()
+    public function getLineId() : ?int
     {
         return $this->lineId;
     }
@@ -84,7 +87,7 @@ class OrderItemSplit extends Request
      *
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
         return $this->quantity;
     }
@@ -92,10 +95,10 @@ class OrderItemSplit extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -105,10 +108,10 @@ class OrderItemSplit extends Request
     /**
      * Set Line_ID.
      *
-     * @param int
+     * @param ?int $lineId
      * @return $this
      */
-    public function setLineId($lineId)
+    public function setLineId(?int $lineId) : self
     {
         $this->lineId = $lineId;
 
@@ -118,10 +121,10 @@ class OrderItemSplit extends Request
     /**
      * Set Quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         $this->quantity = $quantity;
 
@@ -131,7 +134,7 @@ class OrderItemSplit extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -151,7 +154,7 @@ class OrderItemSplit extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderItemSplit($this, $httpResponse, $data);
     }

@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\Model\ChangesetChange;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ChangesetChangeList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class ChangesetChangeListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ChangesetChangeList_Load_Query';
+    protected string $function = 'ChangesetChangeList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'item_type',
         'item_id',
         'item_version_id',
@@ -41,22 +42,23 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'item_type',
         'item_id',
         'item_version_id',
         'item_identifier',
     ];
 
-    /** @var int */
-    protected $changesetId;
+    /** @var ?int */
+    protected ?int $changesetId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Changeset
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Changeset $changeset
      */
-    public function __construct(BaseClient $client = null, Changeset $changeset = null)
+    public function __construct(?BaseClient $client = null, ?Changeset $changeset = null)
     {
         parent::__construct($client);
         if ($changeset) {
@@ -69,7 +71,7 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getChangesetId()
+    public function getChangesetId() : ?int
     {
         return $this->changesetId;
     }
@@ -77,10 +79,10 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
     /**
      * Set Changeset_ID.
      *
-     * @param int
+     * @param ?int $changesetId
      * @return $this
      */
-    public function setChangesetId($changesetId)
+    public function setChangesetId(?int $changesetId) : self
     {
         $this->changesetId = $changesetId;
 
@@ -90,7 +92,7 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -102,7 +104,7 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ChangesetChangeListLoadQuery($this, $httpResponse, $data);
     }

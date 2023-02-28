@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryList_Load_Parent.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class CategoryListLoadParent extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryList_Load_Parent';
+    protected string $function = 'CategoryList_Load_Parent';
 
-    /** @var int */
-    protected $parentId;
+    /** @var ?int */
+    protected ?int $parentId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -52,7 +54,7 @@ class CategoryListLoadParent extends Request
      *
      * @return int
      */
-    public function getParentId()
+    public function getParentId() : ?int
     {
         return $this->parentId;
     }
@@ -60,10 +62,10 @@ class CategoryListLoadParent extends Request
     /**
      * Set Parent_ID.
      *
-     * @param int
+     * @param ?int $parentId
      * @return $this
      */
-    public function setParentId($parentId)
+    public function setParentId(?int $parentId) : self
     {
         $this->parentId = $parentId;
 
@@ -73,7 +75,7 @@ class CategoryListLoadParent extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -85,7 +87,7 @@ class CategoryListLoadParent extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryListLoadParent($this, $httpResponse, $data);
     }

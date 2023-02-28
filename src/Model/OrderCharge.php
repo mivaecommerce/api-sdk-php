@@ -20,39 +20,39 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get charge_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getChargeId()
+    public function getChargeId() : ?int
     {
-        return (int) $this->getField('charge_id', 0);
+        return $this->getField('charge_id');
     }
 
     /**
      * Get module_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getModuleId()
+    public function getModuleId() : ?int
     {
-        return (int) $this->getField('module_id', 0);
+        return $this->getField('module_id');
     }
 
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -60,9 +60,9 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -70,19 +70,19 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Get amount.
      *
-     * @return float
+     * @return ?float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
-        return (float) $this->getField('amount', 0.00);
+        return $this->getField('amount');
     }
 
     /**
      * Get formatted_amount.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedAmount()
+    public function getFormattedAmount() : ?string
     {
         return $this->getField('formatted_amount');
     }
@@ -90,19 +90,19 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Get disp_amt.
      *
-     * @return float
+     * @return ?float
      */
-    public function getDisplayAmount()
+    public function getDisplayAmount() : ?float
     {
-        return (float) $this->getField('disp_amt', 0.00);
+        return $this->getField('disp_amt');
     }
 
     /**
      * Get formatted_disp_amt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedDisplayAmount()
+    public function getFormattedDisplayAmount() : ?string
     {
         return $this->getField('formatted_disp_amt');
     }
@@ -110,29 +110,29 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Get tax_exempt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxExempt()
+    public function getTaxExempt() : ?bool
     {
-        return (bool) $this->getField('tax_exempt', false);
+        return $this->getField('tax_exempt');
     }
 
     /**
      * Get tax.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTax()
+    public function getTax() : ?float
     {
-        return (float) $this->getField('tax', 0.00);
+        return $this->getField('tax');
     }
 
     /**
      * Get formatted_tax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTax()
+    public function getFormattedTax() : ?string
     {
         return $this->getField('formatted_tax');
     }
@@ -140,10 +140,10 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Set type.
      *
-     * @param string
+     * @param ?string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(?string $type) : self
     {
         return $this->setField('type', $type);
     }
@@ -151,10 +151,10 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Set descrip.
      *
-     * @param string
+     * @param ?string $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(?string $description) : self
     {
         return $this->setField('descrip', $description);
     }
@@ -162,10 +162,10 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Set amount.
      *
-     * @param float
+     * @param ?float $amount
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount(?float $amount) : self
     {
         return $this->setField('amount', $amount);
     }
@@ -173,10 +173,10 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Set disp_amt.
      *
-     * @param float
+     * @param ?float $displayAmount
      * @return $this
      */
-    public function setDisplayAmount($displayAmount)
+    public function setDisplayAmount(?float $displayAmount) : self
     {
         return $this->setField('disp_amt', $displayAmount);
     }
@@ -184,10 +184,10 @@ class OrderCharge extends \MerchantAPI\Model
     /**
      * Set tax_exempt.
      *
-     * @param bool
+     * @param ?bool $taxExempt
      * @return $this
      */
-    public function setTaxExempt($taxExempt)
+    public function setTaxExempt(?bool $taxExempt) : self
     {
         return $this->setField('tax_exempt', $taxExempt);
     }

@@ -12,7 +12,9 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request URI_Insert.
@@ -25,32 +27,32 @@ use MerchantAPI\BaseClient;
 class URIInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'URI_Insert';
+    protected string $function = 'URI_Insert';
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var string */
-    protected $destinationType;
+    /** @var ?string */
+    protected ?string $destinationType = null;
 
-    /** @var string */
-    protected $destination;
+    /** @var ?string */
+    protected ?string $destination = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
     /**
      * Get URI.
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -60,7 +62,7 @@ class URIInsert extends Request
      *
      * @return string
      */
-    public function getDestinationType()
+    public function getDestinationType() : ?string
     {
         return $this->destinationType;
     }
@@ -70,7 +72,7 @@ class URIInsert extends Request
      *
      * @return string
      */
-    public function getDestination()
+    public function getDestination() : ?string
     {
         return $this->destination;
     }
@@ -80,7 +82,7 @@ class URIInsert extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -90,7 +92,7 @@ class URIInsert extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -98,10 +100,10 @@ class URIInsert extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -111,10 +113,10 @@ class URIInsert extends Request
     /**
      * Set Destination_Type.
      *
-     * @param string
+     * @param ?string $destinationType
      * @return $this
      */
-    public function setDestinationType($destinationType)
+    public function setDestinationType(?string $destinationType) : self
     {
         $this->destinationType = $destinationType;
 
@@ -124,10 +126,10 @@ class URIInsert extends Request
     /**
      * Set Destination.
      *
-     * @param string
+     * @param ?string $destination
      * @return $this
      */
-    public function setDestination($destination)
+    public function setDestination(?string $destination) : self
     {
         $this->destination = $destination;
 
@@ -137,10 +139,10 @@ class URIInsert extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -150,10 +152,10 @@ class URIInsert extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -163,7 +165,7 @@ class URIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -193,7 +195,7 @@ class URIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\URIInsert($this, $httpResponse, $data);
     }

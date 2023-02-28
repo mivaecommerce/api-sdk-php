@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\Model\AvailabilityGroupShippingMethod;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroupShippingMethodList_Load_Query.
@@ -27,37 +28,38 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroupShippingMethodList_Load_Query';
+    protected string $function = 'AvailabilityGroupShippingMethodList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'method_name',
     ];
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -72,7 +74,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -82,7 +84,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -92,7 +94,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -102,7 +104,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -112,7 +114,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -120,10 +122,10 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -133,10 +135,10 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -146,10 +148,10 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -159,10 +161,10 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -172,10 +174,10 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -185,7 +187,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -211,7 +213,7 @@ class AvailabilityGroupShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupShippingMethodListLoadQuery($this, $httpResponse, $data);
     }

@@ -20,39 +20,39 @@ class ProductVariantDimension extends \MerchantAPI\Model
     /**
      * Get attr_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
-        return (int) $this->getField('attr_id', 0);
+        return $this->getField('attr_id');
     }
 
     /**
      * Get attmpat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
-        return (int) $this->getField('attmpat_id', 0);
+        return $this->getField('attmpat_id');
     }
 
     /**
      * Get option_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOptionId()
+    public function getOptionId() : ?int
     {
-        return (int) $this->getField('option_id', 0);
+        return $this->getField('option_id');
     }
 
     /**
      * Get option_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOptionCode()
+    public function getOptionCode() : ?string
     {
         return $this->getField('option_code');
     }

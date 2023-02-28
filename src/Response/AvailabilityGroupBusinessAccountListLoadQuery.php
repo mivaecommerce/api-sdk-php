@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\AvailabilityGroupBusinessAccount;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for AvailabilityGroupBusinessAccountList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AvailabilityGroupBusinessAccountListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupBusinessAccount[] */
-    protected $availabilityGroupBusinessAccounts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $availabilityGroupBusinessAccounts;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class AvailabilityGroupBusinessAccountListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->availabilityGroupBusinessAccounts = new \MerchantAPI\Collection();
+        $this->availabilityGroupBusinessAccounts = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class AvailabilityGroupBusinessAccountListLoadQuery extends ListQueryResponse
     /**
      * Get availabilityGroupBusinessAccounts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupBusinessAccount[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAvailabilityGroupBusinessAccounts()
+    public function getAvailabilityGroupBusinessAccounts() : Collection
     {
         return $this->availabilityGroupBusinessAccounts;
     }

@@ -20,7 +20,7 @@ abstract class Model implements ModelInterface
     /**
      * @var array
      */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * Constructor.
@@ -37,7 +37,7 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function setField($key, $value)
+    public function setField(string $key, $value) : self
     {
         $this->data[$key] = $value;
         return $this;
@@ -46,7 +46,7 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function getField($key, $defaultValue = null)
+    public function getField(string $key, $defaultValue = null)
     {
         if (isset($this->data[$key])) {
             return $this->data[$key];
@@ -56,9 +56,27 @@ abstract class Model implements ModelInterface
     }
 
     /**
+     * Get a timestamp field value. Determines if the value
+     * is a datetime struct or integer timestamp and returns
+     * accordingly
+     *
+     * @return int|null
+     */
+    public function getTimestampField(string $key) : ?int
+    {
+        $value = $this->getField($key);
+
+        if (is_array($value) && isset($value['time_t'])) {
+            return $value['time_t'];
+        }
+
+        return $value;
+    }
+
+    /**
      * @inheritDoc
      */
-    public function hasField($key)
+    public function hasField(string $key) : bool
     {
         return isset($this->data[$key]);
     }
@@ -66,7 +84,7 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function removeField($key)
+    public function removeField(string $key) : self
     {
         unset($this->data[$key]);
         return $this;
@@ -75,7 +93,7 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function getData()
+    public function getData() : array
     {
         $ret = $this->data;
 
@@ -103,8 +121,16 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
-    public function hasData()
+    public function hasData() : bool
     {
-        return $this->data ? true : false;
+        return (bool)$this->data;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return $this->getData();
     }
 }

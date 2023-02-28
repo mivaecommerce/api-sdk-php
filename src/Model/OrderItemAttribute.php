@@ -22,13 +22,14 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Constructor.
      *
-     * @param array $data
-     * @throws \InvalidArgumentException
+     * @param ?OrderItemOption $option
      */
-    public function __construct(OrderItemOption $option = null)
+    public function __construct(?OrderItemOption $option = null)
     {
+        parent::__construct([]);
+
         if ($option) {
-            $this->setAttributeCode($option->getAttribute())
+            $this->setAttributeCode($option->getAttributeCode())
               ->setOptionCodeOrData($option->getValue())
               ->setPrice($option->getPrice())
               ->setWeight($option->getWeight());
@@ -38,9 +39,9 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Get attr_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->getField('attr_code');
     }
@@ -48,9 +49,9 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Get opt_code_or_data.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOptionCodeOrData()
+    public function getOptionCodeOrData() : ?string
     {
         return $this->getField('opt_code_or_data');
     }
@@ -58,30 +59,30 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return (float) $this->getField('weight');
     }
 
     /**
      * Set attr_code.
      *
-     * @param string
+     * @param string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(string $attributeCode) : self
     {
         return $this->setField('attr_code', $attributeCode);
     }
@@ -89,10 +90,10 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Set opt_code_or_data.
      *
-     * @param string
+     * @param string $optionCodeOrData
      * @return $this
      */
-    public function setOptionCodeOrData($optionCodeOrData)
+    public function setOptionCodeOrData(string $optionCodeOrData) : self
     {
         return $this->setField('opt_code_or_data', $optionCodeOrData);
     }
@@ -100,10 +101,10 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Set price.
      *
-     * @param float
+     * @param float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(float $price) : self
     {
         return $this->setField('price', $price);
     }
@@ -111,10 +112,10 @@ class OrderItemAttribute extends \MerchantAPI\Model
     /**
      * Set weight.
      *
-     * @param float
+     * @param float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(float $weight) : self
     {
         return $this->setField('weight', $weight);
     }

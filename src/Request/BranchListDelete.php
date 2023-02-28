@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BranchList_Delete.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class BranchListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BranchList_Delete';
+    protected string $function = 'BranchList_Delete';
 
     /** @var int[] */
-    protected $branchIds = [];
+    protected array $branchIds = [];
 
     /**
      * Get Branch_IDs.
      *
      * @return array
      */
-    public function getBranchIds()
+    public function getBranchIds() : array
     {
         return $this->branchIds;
     }
@@ -47,11 +48,10 @@ class BranchListDelete extends Request
     /**
      * Add Branch_IDs.
      *
-     * @param int
-     *
+     * @param int $branchId
      * @return $this
      */
-    public function addBranchId($branchId)
+    public function addBranchId(int $branchId) : self
     {
         $this->branchIds[] = $branchId;
         return $this;
@@ -60,10 +60,10 @@ class BranchListDelete extends Request
     /**
      * Add Branch model.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param \MerchantAPI\Model\Branch $branch
      * @return $this
      */
-    public function addBranch(Branch $branch)
+    public function addBranch(Branch $branch) : self
     {
         if ($branch->getId()) {
             $this->branchIds[] = $branch->getId();
@@ -75,7 +75,7 @@ class BranchListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -87,7 +87,7 @@ class BranchListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchListDelete($this, $httpResponse, $data);
     }

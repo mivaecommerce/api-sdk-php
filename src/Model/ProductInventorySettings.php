@@ -20,19 +20,19 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get in_short.
      *
-     * @return string
+     * @return ?string
      */
-    public function getInStockMessageShort()
+    public function getInStockMessageShort() : ?string
     {
         return $this->getField('in_short');
     }
@@ -40,9 +40,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get in_long.
      *
-     * @return string
+     * @return ?string
      */
-    public function getInStockMessageLong()
+    public function getInStockMessageLong() : ?string
     {
         return $this->getField('in_long');
     }
@@ -50,9 +50,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get low_track.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackLowStockLevel()
+    public function getTrackLowStockLevel() : ?string
     {
         return $this->getField('low_track');
     }
@@ -60,29 +60,29 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get low_level.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLowStockLevel()
+    public function getLowStockLevel() : ?int
     {
-        return (int) $this->getField('low_level', 0);
+        return $this->getField('low_level');
     }
 
     /**
      * Get low_lvl_d.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getLowStockLevelDefault()
+    public function getLowStockLevelDefault() : ?bool
     {
-        return (bool) $this->getField('low_lvl_d', false);
+        return $this->getField('low_lvl_d');
     }
 
     /**
      * Get low_short.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLowStockMessageShort()
+    public function getLowStockMessageShort() : ?string
     {
         return $this->getField('low_short');
     }
@@ -90,9 +90,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get low_long.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLowStockMessageLong()
+    public function getLowStockMessageLong() : ?string
     {
         return $this->getField('low_long');
     }
@@ -100,9 +100,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get out_track.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackOutOfStockLevel()
+    public function getTrackOutOfStockLevel() : ?string
     {
         return $this->getField('out_track');
     }
@@ -110,9 +110,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get out_hide.
      *
-     * @return string
+     * @return ?string
      */
-    public function getHideOutOfStock()
+    public function getHideOutOfStock() : ?string
     {
         return $this->getField('out_hide');
     }
@@ -120,29 +120,29 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get out_level.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOutOfStockLevel()
+    public function getOutOfStockLevel() : ?int
     {
-        return (int) $this->getField('out_level', 0);
+        return $this->getField('out_level');
     }
 
     /**
      * Get out_lvl_d.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getOutOfStockLevelDefault()
+    public function getOutOfStockLevelDefault() : ?bool
     {
-        return (bool) $this->getField('out_lvl_d', false);
+        return $this->getField('out_lvl_d');
     }
 
     /**
      * Get out_short.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOutOfStockMessageShort()
+    public function getOutOfStockMessageShort() : ?string
     {
         return $this->getField('out_short');
     }
@@ -150,9 +150,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get out_long.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOutOfStockMessageLong()
+    public function getOutOfStockMessageLong() : ?string
     {
         return $this->getField('out_long');
     }
@@ -160,9 +160,9 @@ class ProductInventorySettings extends \MerchantAPI\Model
     /**
      * Get ltd_long.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLimitedStockMessage()
+    public function getLimitedStockMessage() : ?string
     {
         return $this->getField('ltd_long');
     }

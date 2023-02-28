@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Product_Update.
@@ -27,71 +28,72 @@ use MerchantAPI\BaseClient;
 class ProductUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Product_Update';
+    protected string $function = 'Product_Update';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $productSku;
+    /** @var ?string */
+    protected ?string $productSku = null;
 
-    /** @var string */
-    protected $productName;
+    /** @var ?string */
+    protected ?string $productName = null;
 
-    /** @var string */
-    protected $productDescription;
+    /** @var ?string */
+    protected ?string $productDescription = null;
 
-    /** @var string */
-    protected $productCanonicalCategoryCode;
+    /** @var ?string */
+    protected ?string $productCanonicalCategoryCode = null;
 
-    /** @var string */
-    protected $productAlternateDisplayPage;
+    /** @var ?string */
+    protected ?string $productAlternateDisplayPage = null;
 
-    /** @var string */
-    protected $productPageTitle;
+    /** @var ?string */
+    protected ?string $productPageTitle = null;
 
-    /** @var string */
-    protected $productThumbnail;
+    /** @var ?string */
+    protected ?string $productThumbnail = null;
 
-    /** @var string */
-    protected $productImage;
+    /** @var ?string */
+    protected ?string $productImage = null;
 
-    /** @var float */
-    protected $productPrice;
+    /** @var ?float */
+    protected ?float $productPrice = null;
 
-    /** @var float */
-    protected $productCost;
+    /** @var ?float */
+    protected ?float $productCost = null;
 
-    /** @var float */
-    protected $productWeight;
+    /** @var ?float */
+    protected ?float $productWeight = null;
 
-    /** @var int */
-    protected $productInventory;
+    /** @var ?int */
+    protected ?int $productInventory = null;
 
-    /** @var bool */
-    protected $productTaxable;
+    /** @var ?bool */
+    protected ?bool $productTaxable = null;
 
-    /** @var bool */
-    protected $productActive;
+    /** @var ?bool */
+    protected ?bool $productActive = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -130,7 +132,7 @@ class ProductUpdate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -140,7 +142,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -150,7 +152,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -160,7 +162,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->productSku;
     }
@@ -170,7 +172,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductName()
+    public function getProductName() : ?string
     {
         return $this->productName;
     }
@@ -180,7 +182,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductDescription()
+    public function getProductDescription() : ?string
     {
         return $this->productDescription;
     }
@@ -190,7 +192,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductCanonicalCategoryCode()
+    public function getProductCanonicalCategoryCode() : ?string
     {
         return $this->productCanonicalCategoryCode;
     }
@@ -200,7 +202,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductAlternateDisplayPage()
+    public function getProductAlternateDisplayPage() : ?string
     {
         return $this->productAlternateDisplayPage;
     }
@@ -210,7 +212,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductPageTitle()
+    public function getProductPageTitle() : ?string
     {
         return $this->productPageTitle;
     }
@@ -220,7 +222,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductThumbnail()
+    public function getProductThumbnail() : ?string
     {
         return $this->productThumbnail;
     }
@@ -230,7 +232,7 @@ class ProductUpdate extends Request
      *
      * @return string
      */
-    public function getProductImage()
+    public function getProductImage() : ?string
     {
         return $this->productImage;
     }
@@ -240,7 +242,7 @@ class ProductUpdate extends Request
      *
      * @return float
      */
-    public function getProductPrice()
+    public function getProductPrice() : ?float
     {
         return $this->productPrice;
     }
@@ -250,7 +252,7 @@ class ProductUpdate extends Request
      *
      * @return float
      */
-    public function getProductCost()
+    public function getProductCost() : ?float
     {
         return $this->productCost;
     }
@@ -260,7 +262,7 @@ class ProductUpdate extends Request
      *
      * @return float
      */
-    public function getProductWeight()
+    public function getProductWeight() : ?float
     {
         return $this->productWeight;
     }
@@ -270,7 +272,7 @@ class ProductUpdate extends Request
      *
      * @return int
      */
-    public function getProductInventory()
+    public function getProductInventory() : ?int
     {
         return $this->productInventory;
     }
@@ -280,7 +282,7 @@ class ProductUpdate extends Request
      *
      * @return bool
      */
-    public function getProductTaxable()
+    public function getProductTaxable() : ?bool
     {
         return $this->productTaxable;
     }
@@ -290,7 +292,7 @@ class ProductUpdate extends Request
      *
      * @return bool
      */
-    public function getProductActive()
+    public function getProductActive() : ?bool
     {
         return $this->productActive;
     }
@@ -298,9 +300,9 @@ class ProductUpdate extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -308,10 +310,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -321,10 +323,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -334,10 +336,10 @@ class ProductUpdate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -347,10 +349,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_SKU.
      *
-     * @param string
+     * @param ?string $productSku
      * @return $this
      */
-    public function setProductSku($productSku)
+    public function setProductSku(?string $productSku) : self
     {
         $this->productSku = $productSku;
 
@@ -360,10 +362,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Name.
      *
-     * @param string
+     * @param ?string $productName
      * @return $this
      */
-    public function setProductName($productName)
+    public function setProductName(?string $productName) : self
     {
         $this->productName = $productName;
 
@@ -373,10 +375,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Description.
      *
-     * @param string
+     * @param ?string $productDescription
      * @return $this
      */
-    public function setProductDescription($productDescription)
+    public function setProductDescription(?string $productDescription) : self
     {
         $this->productDescription = $productDescription;
 
@@ -386,10 +388,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Canonical_Category_Code.
      *
-     * @param string
+     * @param ?string $productCanonicalCategoryCode
      * @return $this
      */
-    public function setProductCanonicalCategoryCode($productCanonicalCategoryCode)
+    public function setProductCanonicalCategoryCode(?string $productCanonicalCategoryCode) : self
     {
         $this->productCanonicalCategoryCode = $productCanonicalCategoryCode;
 
@@ -399,10 +401,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Alternate_Display_Page.
      *
-     * @param string
+     * @param ?string $productAlternateDisplayPage
      * @return $this
      */
-    public function setProductAlternateDisplayPage($productAlternateDisplayPage)
+    public function setProductAlternateDisplayPage(?string $productAlternateDisplayPage) : self
     {
         $this->productAlternateDisplayPage = $productAlternateDisplayPage;
 
@@ -412,10 +414,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Page_Title.
      *
-     * @param string
+     * @param ?string $productPageTitle
      * @return $this
      */
-    public function setProductPageTitle($productPageTitle)
+    public function setProductPageTitle(?string $productPageTitle) : self
     {
         $this->productPageTitle = $productPageTitle;
 
@@ -425,10 +427,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Thumbnail.
      *
-     * @param string
+     * @param ?string $productThumbnail
      * @return $this
      */
-    public function setProductThumbnail($productThumbnail)
+    public function setProductThumbnail(?string $productThumbnail) : self
     {
         $this->productThumbnail = $productThumbnail;
 
@@ -438,10 +440,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Image.
      *
-     * @param string
+     * @param ?string $productImage
      * @return $this
      */
-    public function setProductImage($productImage)
+    public function setProductImage(?string $productImage) : self
     {
         $this->productImage = $productImage;
 
@@ -451,10 +453,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Price.
      *
-     * @param float
+     * @param ?float $productPrice
      * @return $this
      */
-    public function setProductPrice($productPrice)
+    public function setProductPrice(?float $productPrice) : self
     {
         $this->productPrice = $productPrice;
 
@@ -464,10 +466,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Cost.
      *
-     * @param float
+     * @param ?float $productCost
      * @return $this
      */
-    public function setProductCost($productCost)
+    public function setProductCost(?float $productCost) : self
     {
         $this->productCost = $productCost;
 
@@ -477,10 +479,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Weight.
      *
-     * @param float
+     * @param ?float $productWeight
      * @return $this
      */
-    public function setProductWeight($productWeight)
+    public function setProductWeight(?float $productWeight) : self
     {
         $this->productWeight = $productWeight;
 
@@ -490,10 +492,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Inventory.
      *
-     * @param int
+     * @param ?int $productInventory
      * @return $this
      */
-    public function setProductInventory($productInventory)
+    public function setProductInventory(?int $productInventory) : self
     {
         $this->productInventory = $productInventory;
 
@@ -503,10 +505,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Taxable.
      *
-     * @param bool
+     * @param ?bool $productTaxable
      * @return $this
      */
-    public function setProductTaxable($productTaxable)
+    public function setProductTaxable(?bool $productTaxable) : self
     {
         $this->productTaxable = $productTaxable;
 
@@ -516,10 +518,10 @@ class ProductUpdate extends Request
     /**
      * Set Product_Active.
      *
-     * @param bool
+     * @param ?bool $productActive
      * @return $this
      */
-    public function setProductActive($productActive)
+    public function setProductActive(?bool $productActive) : self
     {
         $this->productActive = $productActive;
 
@@ -529,10 +531,10 @@ class ProductUpdate extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -549,7 +551,7 @@ class ProductUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -629,7 +631,7 @@ class ProductUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductUpdate($this, $httpResponse, $data);
     }

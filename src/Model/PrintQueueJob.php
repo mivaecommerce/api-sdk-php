@@ -20,49 +20,49 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get queue_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQueueId()
+    public function getQueueId() : ?int
     {
-        return (int) $this->getField('queue_id', 0);
+        return $this->getField('queue_id');
     }
 
     /**
      * Get store_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStoreId()
+    public function getStoreId() : ?int
     {
-        return (int) $this->getField('store_id', 0);
+        return $this->getField('store_id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -70,9 +70,9 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get job_fmt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getJobFormat()
+    public function getJobFormat() : ?string
     {
         return $this->getField('job_fmt');
     }
@@ -80,9 +80,9 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get job_data.
      *
-     * @return string
+     * @return ?string
      */
-    public function getJobData()
+    public function getJobData() : ?string
     {
         return $this->getField('job_data');
     }
@@ -90,19 +90,19 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get dt_created.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeCreated()
+    public function getDateTimeCreated() : ?int
     {
-        return (int) $this->getField('dt_created', 0);
+        return $this->getTimestampField('dt_created');
     }
 
     /**
      * Get user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserName()
+    public function getUserName() : ?string
     {
         return $this->getField('user_name');
     }
@@ -110,9 +110,9 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get store_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getStoreCode()
+    public function getStoreCode() : ?string
     {
         return $this->getField('store_code');
     }
@@ -120,9 +120,9 @@ class PrintQueueJob extends \MerchantAPI\Model
     /**
      * Get store_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getStoreName()
+    public function getStoreName() : ?string
     {
         return $this->getField('store_name');
     }

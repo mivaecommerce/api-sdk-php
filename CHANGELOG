@@ -1,3 +1,44 @@
+v2.3.0
+	MMAPI-77 - Support for PHP 5.6 has been dropped. Minimum required PHP version is now 7.4 with suggested 8.x
+	MMAPI-79 - Corrected invalid model fields:
+		Store.omin_price is now float
+		AttributeTemplateOption.attemp_id is now int
+	MMAPI-80 - New Functions:
+		PageInsertRequest
+		PageUpdateRequest
+		PageDeleteRequest
+		PageCopyRequest
+	MMAPI-81 - New Functions:
+		CSSResourceInsertRequest
+		CSSResourceUpdateRequest
+		CSSResourceDeleteRequest
+	MMAPI-82 - New Functions:
+		JavaScriptResourceInsertRequest
+		JavaScriptResourceUpdateRequest
+		JavaScriptResourceDeleteRequest
+	MMAPI-83 - New Function AllOrderPaymentListLoadQueryRequest
+		New Model AllOrderPayment
+		New Field ip on OrderPayment Model
+	MMAPI-84 - OrderItemSplitResponse now returns a model, SplitOrderItem
+		New Model SplitOrderItem
+	MMAPI-85 - All Request and Model objects now implement JsonSerializable
+	MMAPI-86 - New Client option, json_decode_flags. See https://www.php.net/manual/en/function.json-decode.php
+	MMAPI-88 - Added field product_id to model OrderItem
+	MMAPI-89 - Added display order fields to the following models:
+		Product
+		ProductKit
+		ProductSubscriptionTerm
+		RelatedProduct
+	MMAPI-90 - Added new field attributes to model ProductVariant
+		New model ProductVariantAttribute
+	MMAPI-91 - Added new field has_variant_parts to model ProductAttributeListOption
+	MMAPI-92 - ProductKit model has had its member names made friendlier
+	MMAPI-103 - Improved handling of timestamp field types
+	MMAPI-116 - New constant:	ProductSubscriptionTerm.TERM_FREQUENCY
+		Fixed Constants in:
+			InventoryProductSettingsUpdateRequest.INVENTORY_CHOICES
+			Store.CACHE_TYPE 
+	MMAPI-118 - Added field Exclusions to PriceGroupInsertRequest
 v2.2.1
 	MMAPI-75 - ProductVariantGenerateDelimiter now properly calls the parent constructor
 	MMAPI-76 - HTTPClient now checks for false instead of is_resource() on curl handle to support PHP8 changes.

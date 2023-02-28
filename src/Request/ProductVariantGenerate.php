@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductVariant_Generate.
@@ -35,29 +36,30 @@ class ProductVariantGenerate extends Request
     const VARIANT_PRICING_METHOD_SUM = 'sum';
 
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductVariant_Generate';
+    protected string $function = 'ProductVariant_Generate';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $pricingMethod;
+    /** @var ?string */
+    protected ?string $pricingMethod = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -76,7 +78,7 @@ class ProductVariantGenerate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -86,7 +88,7 @@ class ProductVariantGenerate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -96,7 +98,7 @@ class ProductVariantGenerate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -106,7 +108,7 @@ class ProductVariantGenerate extends Request
      *
      * @return string
      */
-    public function getPricingMethod()
+    public function getPricingMethod() : ?string
     {
         return $this->pricingMethod;
     }
@@ -114,10 +116,10 @@ class ProductVariantGenerate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -127,10 +129,10 @@ class ProductVariantGenerate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -140,10 +142,10 @@ class ProductVariantGenerate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -153,10 +155,10 @@ class ProductVariantGenerate extends Request
     /**
      * Set Pricing_Method.
      *
-     * @param string
+     * @param ?string $pricingMethod
      * @return $this
      */
-    public function setPricingMethod($pricingMethod)
+    public function setPricingMethod(?string $pricingMethod) : self
     {
         $this->pricingMethod = $pricingMethod;
 
@@ -166,7 +168,7 @@ class ProductVariantGenerate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -186,7 +188,7 @@ class ProductVariantGenerate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductVariantGenerate($this, $httpResponse, $data);
     }

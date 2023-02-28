@@ -30,14 +30,14 @@ class Client extends BaseClient
     const SIGN_DIGEST_NONE      = false;
 
     /**
-     * Client constructor.
+     * Constructor.
      *
-     * @param $endpoint
-     * @param $apiToken
-     * @param string|null
-     * @param array
+     * @param string $endpoint
+     * @param string $apiToken
+     * @param ?string $signingKey
+     * @param array $options
      */
-    public function __construct($endpoint, $apiToken, $signingKey = null, array $options = [])
+    public function __construct(string $endpoint, string $apiToken, ?string $signingKey = null, array $options = [])
     {
         parent::__construct($endpoint, new TokenAuthenticator($apiToken, $signingKey), $options);
     }
@@ -47,7 +47,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    public function getApiToken()
+    public function getApiToken() : ?string
     {
         if ($this->authenticator instanceof TokenAuthenticator) {
             return $this->authenticator->getApiToken();
@@ -60,9 +60,9 @@ class Client extends BaseClient
      * Set the authentication API token.
      *
      * @param string $apiToken
-     * @return \MerchantAPI\Client
+     * @return $this
      */
-    public function setApiToken($apiToken)
+    public function setApiToken(string $apiToken) : self
     {
         if ($this->authenticator instanceof TokenAuthenticator) {
             $this->authenticator->setApiToken($apiToken);
@@ -74,12 +74,12 @@ class Client extends BaseClient
     /**
      * Set a client option.
      *
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      * @return $this
      * @throws \MerchantAPI\ClientException
      */
-    public function setOption($key, $value)
+    public function setOption(string $key, $value) : self
     {
         if ($key == 'signing_key_digest') {
             if ($this->authenticator instanceof TokenAuthenticator) {
@@ -95,11 +95,11 @@ class Client extends BaseClient
     /**
      * Get a client option.
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      * @throws \MerchantAPI\ClientException
      */
-    public function getOption($key)
+    public function getOption(string $key)
     {
         if ($key == 'signing_key_digest') {
             if ($this->authenticator instanceof TokenAuthenticator) {
@@ -117,7 +117,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    public function getSigningKey()
+    public function getSigningKey() : ?string
     {
         if ($this->authenticator instanceof TokenAuthenticator) {
             return $this->authenticator->getSigningKey();
@@ -129,10 +129,10 @@ class Client extends BaseClient
     /**
      * Set the base64 encoded request signing key.
      *
-     * @param string $signingKey
-     * @return Client
+     * @param ?string $signingKey
+     * @return $this
      */
-    public function setSigningKey($signingKey)
+    public function setSigningKey(?string $signingKey) : self
     {
         if ($this->authenticator instanceof TokenAuthenticator) {
             $this->authenticator->setSigningKey($signingKey);

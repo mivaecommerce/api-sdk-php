@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Branch_Update.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class BranchUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Branch_Update';
+    protected string $function = 'Branch_Update';
 
-    /** @var int */
-    protected $branchId;
+    /** @var ?int */
+    protected ?int $branchId = null;
 
-    /** @var string */
-    protected $editBranch;
+    /** @var ?string */
+    protected ?string $editBranch = null;
 
-    /** @var string */
-    protected $branchName;
+    /** @var ?string */
+    protected ?string $branchName = null;
 
-    /** @var string */
-    protected $branchColor;
+    /** @var ?string */
+    protected ?string $branchColor = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -65,7 +67,7 @@ class BranchUpdate extends Request
      *
      * @return int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
         return $this->branchId;
     }
@@ -75,7 +77,7 @@ class BranchUpdate extends Request
      *
      * @return string
      */
-    public function getEditBranch()
+    public function getEditBranch() : ?string
     {
         return $this->editBranch;
     }
@@ -85,7 +87,7 @@ class BranchUpdate extends Request
      *
      * @return string
      */
-    public function getBranchName()
+    public function getBranchName() : ?string
     {
         return $this->branchName;
     }
@@ -95,7 +97,7 @@ class BranchUpdate extends Request
      *
      * @return string
      */
-    public function getBranchColor()
+    public function getBranchColor() : ?string
     {
         return $this->branchColor;
     }
@@ -103,10 +105,10 @@ class BranchUpdate extends Request
     /**
      * Set Branch_ID.
      *
-     * @param int
+     * @param ?int $branchId
      * @return $this
      */
-    public function setBranchId($branchId)
+    public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
 
@@ -116,10 +118,10 @@ class BranchUpdate extends Request
     /**
      * Set Edit_Branch.
      *
-     * @param string
+     * @param ?string $editBranch
      * @return $this
      */
-    public function setEditBranch($editBranch)
+    public function setEditBranch(?string $editBranch) : self
     {
         $this->editBranch = $editBranch;
 
@@ -129,10 +131,10 @@ class BranchUpdate extends Request
     /**
      * Set Branch_Name.
      *
-     * @param string
+     * @param ?string $branchName
      * @return $this
      */
-    public function setBranchName($branchName)
+    public function setBranchName(?string $branchName) : self
     {
         $this->branchName = $branchName;
 
@@ -142,10 +144,10 @@ class BranchUpdate extends Request
     /**
      * Set Branch_Color.
      *
-     * @param string
+     * @param ?string $branchColor
      * @return $this
      */
-    public function setBranchColor($branchColor)
+    public function setBranchColor(?string $branchColor) : self
     {
         $this->branchColor = $branchColor;
 
@@ -155,7 +157,7 @@ class BranchUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -179,7 +181,7 @@ class BranchUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchUpdate($this, $httpResponse, $data);
     }

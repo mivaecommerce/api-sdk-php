@@ -20,29 +20,29 @@ class OrderPaymentTotal extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get total_auth.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotalAuthorized()
+    public function getTotalAuthorized() : ?float
     {
-        return (float) $this->getField('total_auth', 0.00);
+        return $this->getField('total_auth');
     }
 
     /**
      * Get formatted_total_auth.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTotalAuthorized()
+    public function getFormattedTotalAuthorized() : ?string
     {
         return $this->getField('formatted_total_auth');
     }
@@ -50,19 +50,19 @@ class OrderPaymentTotal extends \MerchantAPI\Model
     /**
      * Get total_capt.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotalCaptured()
+    public function getTotalCaptured() : ?float
     {
-        return (float) $this->getField('total_capt', 0.00);
+        return $this->getField('total_capt');
     }
 
     /**
      * Get formatted_total_capt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTotalCaptured()
+    public function getFormattedTotalCaptured() : ?string
     {
         return $this->getField('formatted_total_capt');
     }
@@ -70,19 +70,19 @@ class OrderPaymentTotal extends \MerchantAPI\Model
     /**
      * Get total_rfnd.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotalRefunded()
+    public function getTotalRefunded() : ?float
     {
-        return (float) $this->getField('total_rfnd', 0.00);
+        return $this->getField('total_rfnd');
     }
 
     /**
      * Get formatted_total_rfnd.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTotalRefunded()
+    public function getFormattedTotalRefunded() : ?string
     {
         return $this->getField('formatted_total_rfnd');
     }
@@ -90,19 +90,19 @@ class OrderPaymentTotal extends \MerchantAPI\Model
     /**
      * Get net_capt.
      *
-     * @return float
+     * @return ?float
      */
-    public function getNetCaptured()
+    public function getNetCaptured() : ?float
     {
-        return (float) $this->getField('net_capt', 0.00);
+        return $this->getField('net_capt');
     }
 
     /**
      * Get formatted_net_capt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedNetCaptured()
+    public function getFormattedNetCaptured() : ?string
     {
         return $this->getField('formatted_net_capt');
     }

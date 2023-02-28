@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class StoreLoad extends Response
 {
-    /** @var \MerchantAPI\Model\Store */
-    protected $store;
+    /** @var ?\MerchantAPI\Model\Store */
+    protected ?Store $store = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class StoreLoad extends Response
      *
      * @return \MerchantAPI\Model\Store|null
      */
-    public function getStore()
+    public function getStore() : ?Store
     {
         return $this->store;
     }

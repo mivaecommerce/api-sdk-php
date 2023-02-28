@@ -25,7 +25,7 @@ class ProductKitVariantCount extends Response
      *
      * @return int
      */
-    public function getVariants()
+    public function getVariants() : ?int
     {
         if (isset($this->data['data']['variants'])) {
             return $this->data['data']['variants'];

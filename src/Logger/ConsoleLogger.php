@@ -19,14 +19,14 @@ class ConsoleLogger extends Logger
 
 	const DESTINATION_STDERR = 'stderr';
 
-	protected $destination = self::DESTINATION_STDOUT;
+	protected string $destination = self::DESTINATION_STDOUT;
 
 	/**
 	 * Constructor
 	 *
-	 * @param string
+	 * @param string $destination
 	 */
-	public function __construct($destination)
+	public function __construct(string $destination)
 	{
 		$this->destination = $destination;
 	}
@@ -34,7 +34,7 @@ class ConsoleLogger extends Logger
 	/**
 	 * {@inheritDoc}
 	 */
-	public function write($data)
+	public function write(string $data) : void
 	{
 		if ($this->destination == static::DESTINATION_STDERR) {
 			fwrite(STDERR, $data);
@@ -46,7 +46,7 @@ class ConsoleLogger extends Logger
 	/**
 	 * {@inheritDoc}
 	 */
-	public function writeLine($data)
+	public function writeLine(string $data) : void
 	{
 		$this->write($data . PHP_EOL);
 	}

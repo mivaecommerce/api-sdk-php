@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BusinessAccountInsert extends Response
 {
-    /** @var \MerchantAPI\Model\BusinessAccount */
-    protected $businessAccount;
+    /** @var ?\MerchantAPI\Model\BusinessAccount */
+    protected ?BusinessAccount $businessAccount = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class BusinessAccountInsert extends Response
      *
      * @return \MerchantAPI\Model\BusinessAccount|null
      */
-    public function getBusinessAccount()
+    public function getBusinessAccount() : ?BusinessAccount
     {
         return $this->businessAccount;
     }

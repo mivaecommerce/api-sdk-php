@@ -102,19 +102,19 @@ class ResourceGroup extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -122,20 +122,20 @@ class ResourceGroup extends \MerchantAPI\Model
     /**
      * Get linkedcssresources.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CSSResource[]
+     * @return \MerchantAPI\Collection
      */
-    public function getLinkedCSSResources()
+    public function getLinkedCSSResources() : ?Collection
     {
-        return $this->getField('linkedcssresources', []);
+        return $this->getField('linkedcssresources');
     }
 
     /**
      * Get linkedjavascriptresources.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\JavaScriptResource[]
+     * @return \MerchantAPI\Collection
      */
-    public function getLinkedJavaScriptResources()
+    public function getLinkedJavaScriptResources() : ?Collection
     {
-        return $this->getField('linkedjavascriptresources', []);
+        return $this->getField('linkedjavascriptresources');
     }
 }

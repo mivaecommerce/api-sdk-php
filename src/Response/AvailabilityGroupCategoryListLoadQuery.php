@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\AvailabilityGroupCategory;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for AvailabilityGroupCategoryList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AvailabilityGroupCategoryListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupCategory[] */
-    protected $availabilityGroupCategories = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $availabilityGroupCategories;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class AvailabilityGroupCategoryListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->availabilityGroupCategories = new \MerchantAPI\Collection();
+        $this->availabilityGroupCategories = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class AvailabilityGroupCategoryListLoadQuery extends ListQueryResponse
     /**
      * Get availabilityGroupCategories.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\AvailabilityGroupCategory[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAvailabilityGroupCategories()
+    public function getAvailabilityGroupCategories() : Collection
     {
         return $this->availabilityGroupCategories;
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CouponPriceGroup_Update_Assigned.
@@ -26,35 +27,36 @@ use MerchantAPI\BaseClient;
 class CouponPriceGroupUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CouponPriceGroup_Update_Assigned';
+    protected string $function = 'CouponPriceGroup_Update_Assigned';
 
-    /** @var int */
-    protected $couponId;
+    /** @var ?int */
+    protected ?int $couponId = null;
 
-    /** @var string */
-    protected $editCoupon;
+    /** @var ?string */
+    protected ?string $editCoupon = null;
 
-    /** @var string */
-    protected $couponCode;
+    /** @var ?string */
+    protected ?string $couponCode = null;
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Coupon
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Coupon $coupon
      */
-    public function __construct(BaseClient $client = null, Coupon $coupon = null)
+    public function __construct(?BaseClient $client = null, ?Coupon $coupon = null)
     {
         parent::__construct($client);
         if ($coupon) {
@@ -71,7 +73,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCouponId()
+    public function getCouponId() : ?int
     {
         return $this->couponId;
     }
@@ -81,7 +83,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCoupon()
+    public function getEditCoupon() : ?string
     {
         return $this->editCoupon;
     }
@@ -91,7 +93,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCouponCode()
+    public function getCouponCode() : ?string
     {
         return $this->couponCode;
     }
@@ -101,7 +103,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -111,7 +113,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -121,7 +123,7 @@ class CouponPriceGroupUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -129,10 +131,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set Coupon_ID.
      *
-     * @param int
+     * @param ?int $couponId
      * @return $this
      */
-    public function setCouponId($couponId)
+    public function setCouponId(?int $couponId) : self
     {
         $this->couponId = $couponId;
 
@@ -142,10 +144,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set Edit_Coupon.
      *
-     * @param string
+     * @param ?string $editCoupon
      * @return $this
      */
-    public function setEditCoupon($editCoupon)
+    public function setEditCoupon(?string $editCoupon) : self
     {
         $this->editCoupon = $editCoupon;
 
@@ -155,10 +157,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set Coupon_Code.
      *
-     * @param string
+     * @param ?string $couponCode
      * @return $this
      */
-    public function setCouponCode($couponCode)
+    public function setCouponCode(?string $couponCode) : self
     {
         $this->couponCode = $couponCode;
 
@@ -168,10 +170,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -181,10 +183,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -194,10 +196,10 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -207,7 +209,7 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -233,7 +235,7 @@ class CouponPriceGroupUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CouponPriceGroupUpdateAssigned($this, $httpResponse, $data);
     }

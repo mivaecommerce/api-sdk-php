@@ -29,19 +29,19 @@ class Coupon extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -49,9 +49,9 @@ class Coupon extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -59,9 +59,9 @@ class Coupon extends \MerchantAPI\Model
     /**
      * Get custscope.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerScope()
+    public function getCustomerScope() : ?string
     {
         return $this->getField('custscope');
     }
@@ -69,60 +69,60 @@ class Coupon extends \MerchantAPI\Model
     /**
      * Get dt_start.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStart()
+    public function getDateTimeStart() : ?int
     {
-        return (int) $this->getField('dt_start', 0);
+        return $this->getTimestampField('dt_start');
     }
 
     /**
      * Get dt_end.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeEnd()
+    public function getDateTimeEnd() : ?int
     {
-        return (int) $this->getField('dt_end', 0);
+        return $this->getTimestampField('dt_end');
     }
 
     /**
      * Get max_use.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMaxUse()
+    public function getMaxUse() : ?int
     {
-        return (int) $this->getField('max_use', 0);
+        return $this->getField('max_use');
     }
 
     /**
      * Get max_per.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMaxPer()
+    public function getMaxPer() : ?int
     {
-        return (int) $this->getField('max_per', 0);
+        return $this->getField('max_per');
     }
 
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get use_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUseCount()
+    public function getUseCount() : ?int
     {
-        return (int) $this->getField('use_count', 0);
+        return $this->getField('use_count');
     }
 }

@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchCopy extends Response
 {
-    /** @var \MerchantAPI\Model\Changeset */
-    protected $changeset;
+    /** @var ?\MerchantAPI\Model\Changeset */
+    protected ?Changeset $changeset = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class BranchCopy extends Response
      *
      * @return \MerchantAPI\Model\Changeset|null
      */
-    public function getChangeset()
+    public function getChangeset() : ?Changeset
     {
         return $this->changeset;
     }

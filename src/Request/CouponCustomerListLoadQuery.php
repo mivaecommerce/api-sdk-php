@@ -14,6 +14,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\Model\CouponCustomer;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CouponCustomerList_Load_Query.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class CouponCustomerListLoadQuery extends CustomerListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CouponCustomerList_Load_Query';
+    protected string $function = 'CouponCustomerList_Load_Query';
 
-    /** @var int */
-    protected $couponId;
+    /** @var ?int */
+    protected ?int $couponId = null;
 
-    /** @var string */
-    protected $editCoupon;
+    /** @var ?string */
+    protected ?string $editCoupon = null;
 
-    /** @var string */
-    protected $couponCode;
+    /** @var ?string */
+    protected ?string $couponCode = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Coupon
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Coupon $coupon
      */
-    public function __construct(BaseClient $client = null, Coupon $coupon = null)
+    public function __construct(?BaseClient $client = null, ?Coupon $coupon = null)
     {
         parent::__construct($client);
         if ($coupon) {
@@ -66,7 +68,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return int
      */
-    public function getCouponId()
+    public function getCouponId() : ?int
     {
         return $this->couponId;
     }
@@ -76,7 +78,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return string
      */
-    public function getEditCoupon()
+    public function getEditCoupon() : ?string
     {
         return $this->editCoupon;
     }
@@ -86,7 +88,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return string
      */
-    public function getCouponCode()
+    public function getCouponCode() : ?string
     {
         return $this->couponCode;
     }
@@ -96,7 +98,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -106,7 +108,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -114,10 +116,10 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Coupon_ID.
      *
-     * @param int
+     * @param ?int $couponId
      * @return $this
      */
-    public function setCouponId($couponId)
+    public function setCouponId(?int $couponId) : self
     {
         $this->couponId = $couponId;
 
@@ -127,10 +129,10 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Edit_Coupon.
      *
-     * @param string
+     * @param ?string $editCoupon
      * @return $this
      */
-    public function setEditCoupon($editCoupon)
+    public function setEditCoupon(?string $editCoupon) : self
     {
         $this->editCoupon = $editCoupon;
 
@@ -140,10 +142,10 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Coupon_Code.
      *
-     * @param string
+     * @param ?string $couponCode
      * @return $this
      */
-    public function setCouponCode($couponCode)
+    public function setCouponCode(?string $couponCode) : self
     {
         $this->couponCode = $couponCode;
 
@@ -153,10 +155,10 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -166,10 +168,10 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -179,7 +181,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -205,7 +207,7 @@ class CouponCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CouponCustomerListLoadQuery($this, $httpResponse, $data);
     }

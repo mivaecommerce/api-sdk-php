@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Order_Update_Customer_Information.
@@ -26,98 +27,99 @@ use MerchantAPI\BaseClient;
 class OrderUpdateCustomerInformation extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Order_Update_Customer_Information';
+    protected string $function = 'Order_Update_Customer_Information';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var bool */
-    protected $shipResidential;
+    /** @var ?bool */
+    protected ?bool $shipResidential = null;
 
-    /** @var string */
-    protected $shipFirstName;
+    /** @var ?string */
+    protected ?string $shipFirstName = null;
 
-    /** @var string */
-    protected $shipLastName;
+    /** @var ?string */
+    protected ?string $shipLastName = null;
 
-    /** @var string */
-    protected $shipEmail;
+    /** @var ?string */
+    protected ?string $shipEmail = null;
 
-    /** @var string */
-    protected $shipPhone;
+    /** @var ?string */
+    protected ?string $shipPhone = null;
 
-    /** @var string */
-    protected $shipFax;
+    /** @var ?string */
+    protected ?string $shipFax = null;
 
-    /** @var string */
-    protected $shipCompany;
+    /** @var ?string */
+    protected ?string $shipCompany = null;
 
-    /** @var string */
-    protected $shipAddress1;
+    /** @var ?string */
+    protected ?string $shipAddress1 = null;
 
-    /** @var string */
-    protected $shipAddress2;
+    /** @var ?string */
+    protected ?string $shipAddress2 = null;
 
-    /** @var string */
-    protected $shipCity;
+    /** @var ?string */
+    protected ?string $shipCity = null;
 
-    /** @var string */
-    protected $shipState;
+    /** @var ?string */
+    protected ?string $shipState = null;
 
-    /** @var string */
-    protected $shipZip;
+    /** @var ?string */
+    protected ?string $shipZip = null;
 
-    /** @var string */
-    protected $shipCountry;
+    /** @var ?string */
+    protected ?string $shipCountry = null;
 
-    /** @var string */
-    protected $billFirstName;
+    /** @var ?string */
+    protected ?string $billFirstName = null;
 
-    /** @var string */
-    protected $billLastName;
+    /** @var ?string */
+    protected ?string $billLastName = null;
 
-    /** @var string */
-    protected $billEmail;
+    /** @var ?string */
+    protected ?string $billEmail = null;
 
-    /** @var string */
-    protected $billPhone;
+    /** @var ?string */
+    protected ?string $billPhone = null;
 
-    /** @var string */
-    protected $billFax;
+    /** @var ?string */
+    protected ?string $billFax = null;
 
-    /** @var string */
-    protected $billCompany;
+    /** @var ?string */
+    protected ?string $billCompany = null;
 
-    /** @var string */
-    protected $billAddress1;
+    /** @var ?string */
+    protected ?string $billAddress1 = null;
 
-    /** @var string */
-    protected $billAddress2;
+    /** @var ?string */
+    protected ?string $billAddress2 = null;
 
-    /** @var string */
-    protected $billCity;
+    /** @var ?string */
+    protected ?string $billCity = null;
 
-    /** @var string */
-    protected $billState;
+    /** @var ?string */
+    protected ?string $billState = null;
 
-    /** @var string */
-    protected $billZip;
+    /** @var ?string */
+    protected ?string $billZip = null;
 
-    /** @var string */
-    protected $billCountry;
+    /** @var ?string */
+    protected ?string $billCountry = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -130,7 +132,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -140,7 +142,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -150,7 +152,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return bool
      */
-    public function getShipResidential()
+    public function getShipResidential() : ?bool
     {
         return $this->shipResidential;
     }
@@ -160,7 +162,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipFirstName()
+    public function getShipFirstName() : ?string
     {
         return $this->shipFirstName;
     }
@@ -170,7 +172,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipLastName()
+    public function getShipLastName() : ?string
     {
         return $this->shipLastName;
     }
@@ -180,7 +182,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipEmail()
+    public function getShipEmail() : ?string
     {
         return $this->shipEmail;
     }
@@ -190,7 +192,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipPhone()
+    public function getShipPhone() : ?string
     {
         return $this->shipPhone;
     }
@@ -200,7 +202,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipFax()
+    public function getShipFax() : ?string
     {
         return $this->shipFax;
     }
@@ -210,7 +212,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipCompany()
+    public function getShipCompany() : ?string
     {
         return $this->shipCompany;
     }
@@ -220,7 +222,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipAddress1()
+    public function getShipAddress1() : ?string
     {
         return $this->shipAddress1;
     }
@@ -230,7 +232,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipAddress2()
+    public function getShipAddress2() : ?string
     {
         return $this->shipAddress2;
     }
@@ -240,7 +242,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipCity()
+    public function getShipCity() : ?string
     {
         return $this->shipCity;
     }
@@ -250,7 +252,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipState()
+    public function getShipState() : ?string
     {
         return $this->shipState;
     }
@@ -260,7 +262,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipZip()
+    public function getShipZip() : ?string
     {
         return $this->shipZip;
     }
@@ -270,7 +272,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getShipCountry()
+    public function getShipCountry() : ?string
     {
         return $this->shipCountry;
     }
@@ -280,7 +282,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillFirstName()
+    public function getBillFirstName() : ?string
     {
         return $this->billFirstName;
     }
@@ -290,7 +292,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillLastName()
+    public function getBillLastName() : ?string
     {
         return $this->billLastName;
     }
@@ -300,7 +302,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillEmail()
+    public function getBillEmail() : ?string
     {
         return $this->billEmail;
     }
@@ -310,7 +312,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillPhone()
+    public function getBillPhone() : ?string
     {
         return $this->billPhone;
     }
@@ -320,7 +322,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillFax()
+    public function getBillFax() : ?string
     {
         return $this->billFax;
     }
@@ -330,7 +332,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillCompany()
+    public function getBillCompany() : ?string
     {
         return $this->billCompany;
     }
@@ -340,7 +342,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillAddress1()
+    public function getBillAddress1() : ?string
     {
         return $this->billAddress1;
     }
@@ -350,7 +352,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillAddress2()
+    public function getBillAddress2() : ?string
     {
         return $this->billAddress2;
     }
@@ -360,7 +362,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillCity()
+    public function getBillCity() : ?string
     {
         return $this->billCity;
     }
@@ -370,7 +372,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillState()
+    public function getBillState() : ?string
     {
         return $this->billState;
     }
@@ -380,7 +382,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillZip()
+    public function getBillZip() : ?string
     {
         return $this->billZip;
     }
@@ -390,7 +392,7 @@ class OrderUpdateCustomerInformation extends Request
      *
      * @return string
      */
-    public function getBillCountry()
+    public function getBillCountry() : ?string
     {
         return $this->billCountry;
     }
@@ -398,10 +400,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -411,10 +413,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -424,10 +426,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Residential.
      *
-     * @param bool
+     * @param ?bool $shipResidential
      * @return $this
      */
-    public function setShipResidential($shipResidential)
+    public function setShipResidential(?bool $shipResidential) : self
     {
         $this->shipResidential = $shipResidential;
 
@@ -437,10 +439,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_FirstName.
      *
-     * @param string
+     * @param ?string $shipFirstName
      * @return $this
      */
-    public function setShipFirstName($shipFirstName)
+    public function setShipFirstName(?string $shipFirstName) : self
     {
         $this->shipFirstName = $shipFirstName;
 
@@ -450,10 +452,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_LastName.
      *
-     * @param string
+     * @param ?string $shipLastName
      * @return $this
      */
-    public function setShipLastName($shipLastName)
+    public function setShipLastName(?string $shipLastName) : self
     {
         $this->shipLastName = $shipLastName;
 
@@ -463,10 +465,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Email.
      *
-     * @param string
+     * @param ?string $shipEmail
      * @return $this
      */
-    public function setShipEmail($shipEmail)
+    public function setShipEmail(?string $shipEmail) : self
     {
         $this->shipEmail = $shipEmail;
 
@@ -476,10 +478,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Phone.
      *
-     * @param string
+     * @param ?string $shipPhone
      * @return $this
      */
-    public function setShipPhone($shipPhone)
+    public function setShipPhone(?string $shipPhone) : self
     {
         $this->shipPhone = $shipPhone;
 
@@ -489,10 +491,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Fax.
      *
-     * @param string
+     * @param ?string $shipFax
      * @return $this
      */
-    public function setShipFax($shipFax)
+    public function setShipFax(?string $shipFax) : self
     {
         $this->shipFax = $shipFax;
 
@@ -502,10 +504,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Company.
      *
-     * @param string
+     * @param ?string $shipCompany
      * @return $this
      */
-    public function setShipCompany($shipCompany)
+    public function setShipCompany(?string $shipCompany) : self
     {
         $this->shipCompany = $shipCompany;
 
@@ -515,10 +517,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Address1.
      *
-     * @param string
+     * @param ?string $shipAddress1
      * @return $this
      */
-    public function setShipAddress1($shipAddress1)
+    public function setShipAddress1(?string $shipAddress1) : self
     {
         $this->shipAddress1 = $shipAddress1;
 
@@ -528,10 +530,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Address2.
      *
-     * @param string
+     * @param ?string $shipAddress2
      * @return $this
      */
-    public function setShipAddress2($shipAddress2)
+    public function setShipAddress2(?string $shipAddress2) : self
     {
         $this->shipAddress2 = $shipAddress2;
 
@@ -541,10 +543,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_City.
      *
-     * @param string
+     * @param ?string $shipCity
      * @return $this
      */
-    public function setShipCity($shipCity)
+    public function setShipCity(?string $shipCity) : self
     {
         $this->shipCity = $shipCity;
 
@@ -554,10 +556,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_State.
      *
-     * @param string
+     * @param ?string $shipState
      * @return $this
      */
-    public function setShipState($shipState)
+    public function setShipState(?string $shipState) : self
     {
         $this->shipState = $shipState;
 
@@ -567,10 +569,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Zip.
      *
-     * @param string
+     * @param ?string $shipZip
      * @return $this
      */
-    public function setShipZip($shipZip)
+    public function setShipZip(?string $shipZip) : self
     {
         $this->shipZip = $shipZip;
 
@@ -580,10 +582,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Ship_Country.
      *
-     * @param string
+     * @param ?string $shipCountry
      * @return $this
      */
-    public function setShipCountry($shipCountry)
+    public function setShipCountry(?string $shipCountry) : self
     {
         $this->shipCountry = $shipCountry;
 
@@ -593,10 +595,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_FirstName.
      *
-     * @param string
+     * @param ?string $billFirstName
      * @return $this
      */
-    public function setBillFirstName($billFirstName)
+    public function setBillFirstName(?string $billFirstName) : self
     {
         $this->billFirstName = $billFirstName;
 
@@ -606,10 +608,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_LastName.
      *
-     * @param string
+     * @param ?string $billLastName
      * @return $this
      */
-    public function setBillLastName($billLastName)
+    public function setBillLastName(?string $billLastName) : self
     {
         $this->billLastName = $billLastName;
 
@@ -619,10 +621,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Email.
      *
-     * @param string
+     * @param ?string $billEmail
      * @return $this
      */
-    public function setBillEmail($billEmail)
+    public function setBillEmail(?string $billEmail) : self
     {
         $this->billEmail = $billEmail;
 
@@ -632,10 +634,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Phone.
      *
-     * @param string
+     * @param ?string $billPhone
      * @return $this
      */
-    public function setBillPhone($billPhone)
+    public function setBillPhone(?string $billPhone) : self
     {
         $this->billPhone = $billPhone;
 
@@ -645,10 +647,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Fax.
      *
-     * @param string
+     * @param ?string $billFax
      * @return $this
      */
-    public function setBillFax($billFax)
+    public function setBillFax(?string $billFax) : self
     {
         $this->billFax = $billFax;
 
@@ -658,10 +660,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Company.
      *
-     * @param string
+     * @param ?string $billCompany
      * @return $this
      */
-    public function setBillCompany($billCompany)
+    public function setBillCompany(?string $billCompany) : self
     {
         $this->billCompany = $billCompany;
 
@@ -671,10 +673,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Address1.
      *
-     * @param string
+     * @param ?string $billAddress1
      * @return $this
      */
-    public function setBillAddress1($billAddress1)
+    public function setBillAddress1(?string $billAddress1) : self
     {
         $this->billAddress1 = $billAddress1;
 
@@ -684,10 +686,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Address2.
      *
-     * @param string
+     * @param ?string $billAddress2
      * @return $this
      */
-    public function setBillAddress2($billAddress2)
+    public function setBillAddress2(?string $billAddress2) : self
     {
         $this->billAddress2 = $billAddress2;
 
@@ -697,10 +699,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_City.
      *
-     * @param string
+     * @param ?string $billCity
      * @return $this
      */
-    public function setBillCity($billCity)
+    public function setBillCity(?string $billCity) : self
     {
         $this->billCity = $billCity;
 
@@ -710,10 +712,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_State.
      *
-     * @param string
+     * @param ?string $billState
      * @return $this
      */
-    public function setBillState($billState)
+    public function setBillState(?string $billState) : self
     {
         $this->billState = $billState;
 
@@ -723,10 +725,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Zip.
      *
-     * @param string
+     * @param ?string $billZip
      * @return $this
      */
-    public function setBillZip($billZip)
+    public function setBillZip(?string $billZip) : self
     {
         $this->billZip = $billZip;
 
@@ -736,10 +738,10 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * Set Bill_Country.
      *
-     * @param string
+     * @param ?string $billCountry
      * @return $this
      */
-    public function setBillCountry($billCountry)
+    public function setBillCountry(?string $billCountry) : self
     {
         $this->billCountry = $billCountry;
 
@@ -749,7 +751,7 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -865,7 +867,7 @@ class OrderUpdateCustomerInformation extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderUpdateCustomerInformation($this, $httpResponse, $data);
     }

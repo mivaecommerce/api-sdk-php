@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AvailabilityGroupInsert extends Response
 {
-    /** @var \MerchantAPI\Model\AvailabilityGroup */
-    protected $availabilityGroup;
+    /** @var ?\MerchantAPI\Model\AvailabilityGroup */
+    protected ?AvailabilityGroup $availabilityGroup = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class AvailabilityGroupInsert extends Response
      *
      * @return \MerchantAPI\Model\AvailabilityGroup|null
      */
-    public function getAvailabilityGroup()
+    public function getAvailabilityGroup() : ?AvailabilityGroup
     {
         return $this->availabilityGroup;
     }

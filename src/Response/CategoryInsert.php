@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CategoryInsert extends Response
 {
-    /** @var \MerchantAPI\Model\Category */
-    protected $category;
+    /** @var ?\MerchantAPI\Model\Category */
+    protected ?Category $category = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class CategoryInsert extends Response
      *
      * @return \MerchantAPI\Model\Category|null
      */
-    public function getCategory()
+    public function getCategory() : ?Category
     {
         return $this->category;
     }

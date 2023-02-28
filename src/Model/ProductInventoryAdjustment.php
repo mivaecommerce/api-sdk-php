@@ -20,19 +20,19 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get product_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->getField('product_code');
     }
@@ -40,9 +40,9 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Get product_sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->getField('product_sku');
     }
@@ -50,20 +50,20 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Get adjustment.
      *
-     * @return float
+     * @return ?float
      */
-    public function getAdjustment()
+    public function getAdjustment() : ?float
     {
-        return (float) $this->getField('adjustment', 0.00);
+        return $this->getField('adjustment');
     }
 
     /**
      * Set product_id.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         return $this->setField('product_id', $productId);
     }
@@ -71,10 +71,10 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Set product_code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         return $this->setField('product_code', $productCode);
     }
@@ -82,10 +82,10 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Set product_sku.
      *
-     * @param string
+     * @param ?string $productSku
      * @return $this
      */
-    public function setProductSku($productSku)
+    public function setProductSku(?string $productSku) : self
     {
         return $this->setField('product_sku', $productSku);
     }
@@ -93,10 +93,10 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Set adjustment.
      *
-     * @param float
+     * @param ?float $adjustment
      * @return $this
      */
-    public function setAdjustment($adjustment)
+    public function setAdjustment(?float $adjustment) : self
     {
         return $this->setField('adjustment', $adjustment);
     }

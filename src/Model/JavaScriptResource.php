@@ -19,6 +19,18 @@ use MerchantAPI\Collection;
  */
 class JavaScriptResource extends \MerchantAPI\Model
 {
+    /** @var string RESOURCE_TYPE_COMBINED */
+    const RESOURCE_TYPE_COMBINED = 'C';
+
+    /** @var string RESOURCE_TYPE_INLINE */
+    const RESOURCE_TYPE_INLINE = 'I';
+
+    /** @var string RESOURCE_TYPE_EXTERNAL */
+    const RESOURCE_TYPE_EXTERNAL = 'E';
+
+    /** @var string RESOURCE_TYPE_LOCAL */
+    const RESOURCE_TYPE_LOCAL = 'L';
+
     /**
      * Constructor.
      *
@@ -72,19 +84,19 @@ class JavaScriptResource extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -92,9 +104,9 @@ class JavaScriptResource extends \MerchantAPI\Model
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -102,50 +114,50 @@ class JavaScriptResource extends \MerchantAPI\Model
     /**
      * Get is_global.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getIsGlobal()
+    public function getIsGlobal() : ?bool
     {
-        return (bool) $this->getField('is_global', false);
+        return $this->getField('is_global');
     }
 
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get file.
      *
-     * @return int
+     * @return ?string
      */
-    public function getFile()
+    public function getFile() : ?string
     {
-        return (int) $this->getField('file', 0);
+        return $this->getField('file');
     }
 
     /**
      * Get templ_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTemplateId()
+    public function getTemplateId() : ?int
     {
-        return (int) $this->getField('templ_id', 0);
+        return $this->getField('templ_id');
     }
 
     /**
      * Get attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\JavaScriptResourceAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
-        return $this->getField('attributes', []);
+        return $this->getField('attributes');
     }
 }

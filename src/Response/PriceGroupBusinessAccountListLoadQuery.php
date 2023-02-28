@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\PriceGroupBusinessAccount;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for PriceGroupBusinessAccountList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PriceGroupBusinessAccountListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PriceGroupBusinessAccount[] */
-    protected $priceGroupBusinessAccounts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $priceGroupBusinessAccounts;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class PriceGroupBusinessAccountListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->priceGroupBusinessAccounts = new \MerchantAPI\Collection();
+        $this->priceGroupBusinessAccounts = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class PriceGroupBusinessAccountListLoadQuery extends ListQueryResponse
     /**
      * Get priceGroupBusinessAccounts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\PriceGroupBusinessAccount[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPriceGroupBusinessAccounts()
+    public function getPriceGroupBusinessAccounts() : Collection
     {
         return $this->priceGroupBusinessAccounts;
     }

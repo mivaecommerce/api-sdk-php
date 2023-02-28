@@ -57,9 +57,9 @@ class OrderItemSubscription extends Subscription
     /**
      * Get method.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethod()
+    public function getMethod() : ?string
     {
         return $this->getField('method');
     }
@@ -67,10 +67,10 @@ class OrderItemSubscription extends Subscription
     /**
      * Get productsubscriptionterm.
      *
-     * @return \MerchantAPI\Model\ProductSubscriptionTerm|null
+     * @return ?\MerchantAPI\Model\ProductSubscriptionTerm
      */
-    public function getProductSubscriptionTerm()
+    public function getProductSubscriptionTerm() : ?ProductSubscriptionTerm
     {
-        return $this->getField('productsubscriptionterm', null);
+        return $this->getField('productsubscriptionterm');
     }
 }

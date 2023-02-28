@@ -14,6 +14,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\Model\CouponPriceGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CouponPriceGroupList_Load_Query.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CouponPriceGroupList_Load_Query';
+    protected string $function = 'CouponPriceGroupList_Load_Query';
 
-    /** @var int */
-    protected $couponId;
+    /** @var ?int */
+    protected ?int $couponId = null;
 
-    /** @var string */
-    protected $editCoupon;
+    /** @var ?string */
+    protected ?string $editCoupon = null;
 
-    /** @var string */
-    protected $couponCode;
+    /** @var ?string */
+    protected ?string $couponCode = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Coupon
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Coupon $coupon
      */
-    public function __construct(BaseClient $client = null, Coupon $coupon = null)
+    public function __construct(?BaseClient $client = null, ?Coupon $coupon = null)
     {
         parent::__construct($client);
         if ($coupon) {
@@ -68,7 +70,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @return int
      */
-    public function getCouponId()
+    public function getCouponId() : ?int
     {
         return $this->couponId;
     }
@@ -78,7 +80,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @return string
      */
-    public function getEditCoupon()
+    public function getEditCoupon() : ?string
     {
         return $this->editCoupon;
     }
@@ -88,7 +90,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @return string
      */
-    public function getCouponCode()
+    public function getCouponCode() : ?string
     {
         return $this->couponCode;
     }
@@ -98,7 +100,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -108,7 +110,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -116,10 +118,10 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * Set Coupon_ID.
      *
-     * @param int
+     * @param ?int $couponId
      * @return $this
      */
-    public function setCouponId($couponId)
+    public function setCouponId(?int $couponId) : self
     {
         $this->couponId = $couponId;
 
@@ -129,10 +131,10 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * Set Edit_Coupon.
      *
-     * @param string
+     * @param ?string $editCoupon
      * @return $this
      */
-    public function setEditCoupon($editCoupon)
+    public function setEditCoupon(?string $editCoupon) : self
     {
         $this->editCoupon = $editCoupon;
 
@@ -142,10 +144,10 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * Set Coupon_Code.
      *
-     * @param string
+     * @param ?string $couponCode
      * @return $this
      */
-    public function setCouponCode($couponCode)
+    public function setCouponCode(?string $couponCode) : self
     {
         $this->couponCode = $couponCode;
 
@@ -155,10 +157,10 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -168,10 +170,10 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -181,7 +183,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -207,7 +209,7 @@ class CouponPriceGroupListLoadQuery extends PriceGroupListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CouponPriceGroupListLoadQuery($this, $httpResponse, $data);
     }

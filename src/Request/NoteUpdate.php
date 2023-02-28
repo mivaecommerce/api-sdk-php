@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Note;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Note_Update.
@@ -26,23 +27,24 @@ use MerchantAPI\BaseClient;
 class NoteUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Note_Update';
+    protected string $function = 'Note_Update';
 
-    /** @var int */
-    protected $noteId;
+    /** @var ?int */
+    protected ?int $noteId = null;
 
-    /** @var string */
-    protected $noteText;
+    /** @var ?string */
+    protected ?string $noteText = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Note
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Note $note
      */
-    public function __construct(BaseClient $client = null, Note $note = null)
+    public function __construct(?BaseClient $client = null, ?Note $note = null)
     {
         parent::__construct($client);
         if ($note) {
@@ -56,7 +58,7 @@ class NoteUpdate extends Request
      *
      * @return int
      */
-    public function getNoteId()
+    public function getNoteId() : ?int
     {
         return $this->noteId;
     }
@@ -66,7 +68,7 @@ class NoteUpdate extends Request
      *
      * @return string
      */
-    public function getNoteText()
+    public function getNoteText() : ?string
     {
         return $this->noteText;
     }
@@ -74,10 +76,10 @@ class NoteUpdate extends Request
     /**
      * Set Note_ID.
      *
-     * @param int
+     * @param ?int $noteId
      * @return $this
      */
-    public function setNoteId($noteId)
+    public function setNoteId(?int $noteId) : self
     {
         $this->noteId = $noteId;
 
@@ -87,10 +89,10 @@ class NoteUpdate extends Request
     /**
      * Set NoteText.
      *
-     * @param string
+     * @param ?string $noteText
      * @return $this
      */
-    public function setNoteText($noteText)
+    public function setNoteText(?string $noteText) : self
     {
         $this->noteText = $noteText;
 
@@ -100,7 +102,7 @@ class NoteUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -114,7 +116,7 @@ class NoteUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\NoteUpdate($this, $httpResponse, $data);
     }

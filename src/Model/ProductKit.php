@@ -72,19 +72,19 @@ class ProductKit extends \MerchantAPI\Model
     /**
      * Get attr_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttrId()
+    public function getAttributeId() : ?int
     {
-        return (int) $this->getField('attr_id', 0);
+        return $this->getField('attr_id');
     }
 
     /**
      * Get attr_type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAttrType()
+    public function getAttributeType() : ?string
     {
         return $this->getField('attr_type');
     }
@@ -92,9 +92,9 @@ class ProductKit extends \MerchantAPI\Model
     /**
      * Get attr_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAttrCode()
+    public function getAttributeCode() : ?string
     {
         return $this->getField('attr_code');
     }
@@ -102,9 +102,9 @@ class ProductKit extends \MerchantAPI\Model
     /**
      * Get attr_prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAttrPrompt()
+    public function getAttributePrompt() : ?string
     {
         return $this->getField('attr_prompt');
     }
@@ -112,29 +112,29 @@ class ProductKit extends \MerchantAPI\Model
     /**
      * Get attmpat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttmpatId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
-        return (int) $this->getField('attmpat_id', 0);
+        return $this->getField('attmpat_id');
     }
 
     /**
      * Get option_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOptionId()
+    public function getOptionId() : ?int
     {
-        return (int) $this->getField('option_id', 0);
+        return $this->getField('option_id');
     }
 
     /**
      * Get option_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOptionCode()
+    public function getOptionCode() : ?string
     {
         return $this->getField('option_code');
     }
@@ -142,20 +142,30 @@ class ProductKit extends \MerchantAPI\Model
     /**
      * Get option_prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOptionPrompt()
+    public function getOptionPrompt() : ?string
     {
         return $this->getField('option_prompt');
     }
 
     /**
+     * Get option_disp_order.
+     *
+     * @return ?int
+     */
+    public function getOptionDisplayOrder() : ?int
+    {
+        return $this->getField('option_disp_order');
+    }
+
+    /**
      * Get parts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductKitPart[]
+     * @return \MerchantAPI\Collection
      */
-    public function getParts()
+    public function getParts() : ?Collection
     {
-        return $this->getField('parts', []);
+        return $this->getField('parts');
     }
 }

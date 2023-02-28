@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\BranchTemplateVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BranchTemplateVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchTemplateVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\BranchTemplateVersion[] */
-    protected $branchTemplateVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $branchTemplateVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BranchTemplateVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->branchTemplateVersions = new \MerchantAPI\Collection();
+        $this->branchTemplateVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BranchTemplateVersionListLoadQuery extends ListQueryResponse
     /**
      * Get branchTemplateVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\BranchTemplateVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBranchTemplateVersions()
+    public function getBranchTemplateVersions() : Collection
     {
         return $this->branchTemplateVersions;
     }

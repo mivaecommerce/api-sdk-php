@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Customer_Insert.
@@ -27,110 +28,111 @@ use MerchantAPI\BaseClient;
 class CustomerInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Customer_Insert';
+    protected string $function = 'Customer_Insert';
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var string */
-    protected $customerPasswordEmail;
+    /** @var ?string */
+    protected ?string $customerPasswordEmail = null;
 
-    /** @var string */
-    protected $customerPassword;
+    /** @var ?string */
+    protected ?string $customerPassword = null;
 
-    /** @var bool */
-    protected $customerShipResidential;
+    /** @var ?bool */
+    protected ?bool $customerShipResidential = null;
 
-    /** @var string */
-    protected $customerShipFirstName;
+    /** @var ?string */
+    protected ?string $customerShipFirstName = null;
 
-    /** @var string */
-    protected $customerShipLastName;
+    /** @var ?string */
+    protected ?string $customerShipLastName = null;
 
-    /** @var string */
-    protected $customerShipEmail;
+    /** @var ?string */
+    protected ?string $customerShipEmail = null;
 
-    /** @var string */
-    protected $customerShipCompany;
+    /** @var ?string */
+    protected ?string $customerShipCompany = null;
 
-    /** @var string */
-    protected $customerShipPhone;
+    /** @var ?string */
+    protected ?string $customerShipPhone = null;
 
-    /** @var string */
-    protected $customerShipFax;
+    /** @var ?string */
+    protected ?string $customerShipFax = null;
 
-    /** @var string */
-    protected $customerShipAddress1;
+    /** @var ?string */
+    protected ?string $customerShipAddress1 = null;
 
-    /** @var string */
-    protected $customerShipAddress2;
+    /** @var ?string */
+    protected ?string $customerShipAddress2 = null;
 
-    /** @var string */
-    protected $customerShipCity;
+    /** @var ?string */
+    protected ?string $customerShipCity = null;
 
-    /** @var string */
-    protected $customerShipState;
+    /** @var ?string */
+    protected ?string $customerShipState = null;
 
-    /** @var string */
-    protected $customerShipZip;
+    /** @var ?string */
+    protected ?string $customerShipZip = null;
 
-    /** @var string */
-    protected $customerShipCountry;
+    /** @var ?string */
+    protected ?string $customerShipCountry = null;
 
-    /** @var string */
-    protected $customerBillFirstName;
+    /** @var ?string */
+    protected ?string $customerBillFirstName = null;
 
-    /** @var string */
-    protected $customerBillLastName;
+    /** @var ?string */
+    protected ?string $customerBillLastName = null;
 
-    /** @var string */
-    protected $customerBillEmail;
+    /** @var ?string */
+    protected ?string $customerBillEmail = null;
 
-    /** @var string */
-    protected $customerBillCompany;
+    /** @var ?string */
+    protected ?string $customerBillCompany = null;
 
-    /** @var string */
-    protected $customerBillPhone;
+    /** @var ?string */
+    protected ?string $customerBillPhone = null;
 
-    /** @var string */
-    protected $customerBillFax;
+    /** @var ?string */
+    protected ?string $customerBillFax = null;
 
-    /** @var string */
-    protected $customerBillAddress1;
+    /** @var ?string */
+    protected ?string $customerBillAddress1 = null;
 
-    /** @var string */
-    protected $customerBillAddress2;
+    /** @var ?string */
+    protected ?string $customerBillAddress2 = null;
 
-    /** @var string */
-    protected $customerBillCity;
+    /** @var ?string */
+    protected ?string $customerBillCity = null;
 
-    /** @var string */
-    protected $customerBillState;
+    /** @var ?string */
+    protected ?string $customerBillState = null;
 
-    /** @var string */
-    protected $customerBillZip;
+    /** @var ?string */
+    protected ?string $customerBillZip = null;
 
-    /** @var string */
-    protected $customerBillCountry;
+    /** @var ?string */
+    protected ?string $customerBillCountry = null;
 
-    /** @var bool */
-    protected $customerTaxExempt;
+    /** @var ?bool */
+    protected ?bool $customerTaxExempt = null;
 
-    /** @var string */
-    protected $customerBusinessAccount;
+    /** @var ?string */
+    protected ?string $customerBusinessAccount = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -177,7 +179,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -187,7 +189,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerPasswordEmail()
+    public function getCustomerPasswordEmail() : ?string
     {
         return $this->customerPasswordEmail;
     }
@@ -197,7 +199,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerPassword()
+    public function getCustomerPassword() : ?string
     {
         return $this->customerPassword;
     }
@@ -207,7 +209,7 @@ class CustomerInsert extends Request
      *
      * @return bool
      */
-    public function getCustomerShipResidential()
+    public function getCustomerShipResidential() : ?bool
     {
         return $this->customerShipResidential;
     }
@@ -217,7 +219,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipFirstName()
+    public function getCustomerShipFirstName() : ?string
     {
         return $this->customerShipFirstName;
     }
@@ -227,7 +229,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipLastName()
+    public function getCustomerShipLastName() : ?string
     {
         return $this->customerShipLastName;
     }
@@ -237,7 +239,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipEmail()
+    public function getCustomerShipEmail() : ?string
     {
         return $this->customerShipEmail;
     }
@@ -247,7 +249,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipCompany()
+    public function getCustomerShipCompany() : ?string
     {
         return $this->customerShipCompany;
     }
@@ -257,7 +259,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipPhone()
+    public function getCustomerShipPhone() : ?string
     {
         return $this->customerShipPhone;
     }
@@ -267,7 +269,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipFax()
+    public function getCustomerShipFax() : ?string
     {
         return $this->customerShipFax;
     }
@@ -277,7 +279,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipAddress1()
+    public function getCustomerShipAddress1() : ?string
     {
         return $this->customerShipAddress1;
     }
@@ -287,7 +289,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipAddress2()
+    public function getCustomerShipAddress2() : ?string
     {
         return $this->customerShipAddress2;
     }
@@ -297,7 +299,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipCity()
+    public function getCustomerShipCity() : ?string
     {
         return $this->customerShipCity;
     }
@@ -307,7 +309,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipState()
+    public function getCustomerShipState() : ?string
     {
         return $this->customerShipState;
     }
@@ -317,7 +319,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipZip()
+    public function getCustomerShipZip() : ?string
     {
         return $this->customerShipZip;
     }
@@ -327,7 +329,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerShipCountry()
+    public function getCustomerShipCountry() : ?string
     {
         return $this->customerShipCountry;
     }
@@ -337,7 +339,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillFirstName()
+    public function getCustomerBillFirstName() : ?string
     {
         return $this->customerBillFirstName;
     }
@@ -347,7 +349,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillLastName()
+    public function getCustomerBillLastName() : ?string
     {
         return $this->customerBillLastName;
     }
@@ -357,7 +359,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillEmail()
+    public function getCustomerBillEmail() : ?string
     {
         return $this->customerBillEmail;
     }
@@ -367,7 +369,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillCompany()
+    public function getCustomerBillCompany() : ?string
     {
         return $this->customerBillCompany;
     }
@@ -377,7 +379,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillPhone()
+    public function getCustomerBillPhone() : ?string
     {
         return $this->customerBillPhone;
     }
@@ -387,7 +389,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillFax()
+    public function getCustomerBillFax() : ?string
     {
         return $this->customerBillFax;
     }
@@ -397,7 +399,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillAddress1()
+    public function getCustomerBillAddress1() : ?string
     {
         return $this->customerBillAddress1;
     }
@@ -407,7 +409,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillAddress2()
+    public function getCustomerBillAddress2() : ?string
     {
         return $this->customerBillAddress2;
     }
@@ -417,7 +419,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillCity()
+    public function getCustomerBillCity() : ?string
     {
         return $this->customerBillCity;
     }
@@ -427,7 +429,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillState()
+    public function getCustomerBillState() : ?string
     {
         return $this->customerBillState;
     }
@@ -437,7 +439,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillZip()
+    public function getCustomerBillZip() : ?string
     {
         return $this->customerBillZip;
     }
@@ -447,7 +449,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBillCountry()
+    public function getCustomerBillCountry() : ?string
     {
         return $this->customerBillCountry;
     }
@@ -457,7 +459,7 @@ class CustomerInsert extends Request
      *
      * @return bool
      */
-    public function getCustomerTaxExempt()
+    public function getCustomerTaxExempt() : ?bool
     {
         return $this->customerTaxExempt;
     }
@@ -467,7 +469,7 @@ class CustomerInsert extends Request
      *
      * @return string
      */
-    public function getCustomerBusinessAccount()
+    public function getCustomerBusinessAccount() : ?string
     {
         return $this->customerBusinessAccount;
     }
@@ -475,9 +477,9 @@ class CustomerInsert extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -485,10 +487,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -498,10 +500,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_PasswordEmail.
      *
-     * @param string
+     * @param ?string $customerPasswordEmail
      * @return $this
      */
-    public function setCustomerPasswordEmail($customerPasswordEmail)
+    public function setCustomerPasswordEmail(?string $customerPasswordEmail) : self
     {
         $this->customerPasswordEmail = $customerPasswordEmail;
 
@@ -511,10 +513,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_Password.
      *
-     * @param string
+     * @param ?string $customerPassword
      * @return $this
      */
-    public function setCustomerPassword($customerPassword)
+    public function setCustomerPassword(?string $customerPassword) : self
     {
         $this->customerPassword = $customerPassword;
 
@@ -524,10 +526,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipResidential.
      *
-     * @param bool
+     * @param ?bool $customerShipResidential
      * @return $this
      */
-    public function setCustomerShipResidential($customerShipResidential)
+    public function setCustomerShipResidential(?bool $customerShipResidential) : self
     {
         $this->customerShipResidential = $customerShipResidential;
 
@@ -537,10 +539,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipFirstName.
      *
-     * @param string
+     * @param ?string $customerShipFirstName
      * @return $this
      */
-    public function setCustomerShipFirstName($customerShipFirstName)
+    public function setCustomerShipFirstName(?string $customerShipFirstName) : self
     {
         $this->customerShipFirstName = $customerShipFirstName;
 
@@ -550,10 +552,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipLastName.
      *
-     * @param string
+     * @param ?string $customerShipLastName
      * @return $this
      */
-    public function setCustomerShipLastName($customerShipLastName)
+    public function setCustomerShipLastName(?string $customerShipLastName) : self
     {
         $this->customerShipLastName = $customerShipLastName;
 
@@ -563,10 +565,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipEmail.
      *
-     * @param string
+     * @param ?string $customerShipEmail
      * @return $this
      */
-    public function setCustomerShipEmail($customerShipEmail)
+    public function setCustomerShipEmail(?string $customerShipEmail) : self
     {
         $this->customerShipEmail = $customerShipEmail;
 
@@ -576,10 +578,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipCompany.
      *
-     * @param string
+     * @param ?string $customerShipCompany
      * @return $this
      */
-    public function setCustomerShipCompany($customerShipCompany)
+    public function setCustomerShipCompany(?string $customerShipCompany) : self
     {
         $this->customerShipCompany = $customerShipCompany;
 
@@ -589,10 +591,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipPhone.
      *
-     * @param string
+     * @param ?string $customerShipPhone
      * @return $this
      */
-    public function setCustomerShipPhone($customerShipPhone)
+    public function setCustomerShipPhone(?string $customerShipPhone) : self
     {
         $this->customerShipPhone = $customerShipPhone;
 
@@ -602,10 +604,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipFax.
      *
-     * @param string
+     * @param ?string $customerShipFax
      * @return $this
      */
-    public function setCustomerShipFax($customerShipFax)
+    public function setCustomerShipFax(?string $customerShipFax) : self
     {
         $this->customerShipFax = $customerShipFax;
 
@@ -615,10 +617,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipAddress1.
      *
-     * @param string
+     * @param ?string $customerShipAddress1
      * @return $this
      */
-    public function setCustomerShipAddress1($customerShipAddress1)
+    public function setCustomerShipAddress1(?string $customerShipAddress1) : self
     {
         $this->customerShipAddress1 = $customerShipAddress1;
 
@@ -628,10 +630,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipAddress2.
      *
-     * @param string
+     * @param ?string $customerShipAddress2
      * @return $this
      */
-    public function setCustomerShipAddress2($customerShipAddress2)
+    public function setCustomerShipAddress2(?string $customerShipAddress2) : self
     {
         $this->customerShipAddress2 = $customerShipAddress2;
 
@@ -641,10 +643,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipCity.
      *
-     * @param string
+     * @param ?string $customerShipCity
      * @return $this
      */
-    public function setCustomerShipCity($customerShipCity)
+    public function setCustomerShipCity(?string $customerShipCity) : self
     {
         $this->customerShipCity = $customerShipCity;
 
@@ -654,10 +656,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipState.
      *
-     * @param string
+     * @param ?string $customerShipState
      * @return $this
      */
-    public function setCustomerShipState($customerShipState)
+    public function setCustomerShipState(?string $customerShipState) : self
     {
         $this->customerShipState = $customerShipState;
 
@@ -667,10 +669,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipZip.
      *
-     * @param string
+     * @param ?string $customerShipZip
      * @return $this
      */
-    public function setCustomerShipZip($customerShipZip)
+    public function setCustomerShipZip(?string $customerShipZip) : self
     {
         $this->customerShipZip = $customerShipZip;
 
@@ -680,10 +682,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_ShipCountry.
      *
-     * @param string
+     * @param ?string $customerShipCountry
      * @return $this
      */
-    public function setCustomerShipCountry($customerShipCountry)
+    public function setCustomerShipCountry(?string $customerShipCountry) : self
     {
         $this->customerShipCountry = $customerShipCountry;
 
@@ -693,10 +695,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillFirstName.
      *
-     * @param string
+     * @param ?string $customerBillFirstName
      * @return $this
      */
-    public function setCustomerBillFirstName($customerBillFirstName)
+    public function setCustomerBillFirstName(?string $customerBillFirstName) : self
     {
         $this->customerBillFirstName = $customerBillFirstName;
 
@@ -706,10 +708,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillLastName.
      *
-     * @param string
+     * @param ?string $customerBillLastName
      * @return $this
      */
-    public function setCustomerBillLastName($customerBillLastName)
+    public function setCustomerBillLastName(?string $customerBillLastName) : self
     {
         $this->customerBillLastName = $customerBillLastName;
 
@@ -719,10 +721,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillEmail.
      *
-     * @param string
+     * @param ?string $customerBillEmail
      * @return $this
      */
-    public function setCustomerBillEmail($customerBillEmail)
+    public function setCustomerBillEmail(?string $customerBillEmail) : self
     {
         $this->customerBillEmail = $customerBillEmail;
 
@@ -732,10 +734,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillCompany.
      *
-     * @param string
+     * @param ?string $customerBillCompany
      * @return $this
      */
-    public function setCustomerBillCompany($customerBillCompany)
+    public function setCustomerBillCompany(?string $customerBillCompany) : self
     {
         $this->customerBillCompany = $customerBillCompany;
 
@@ -745,10 +747,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillPhone.
      *
-     * @param string
+     * @param ?string $customerBillPhone
      * @return $this
      */
-    public function setCustomerBillPhone($customerBillPhone)
+    public function setCustomerBillPhone(?string $customerBillPhone) : self
     {
         $this->customerBillPhone = $customerBillPhone;
 
@@ -758,10 +760,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillFax.
      *
-     * @param string
+     * @param ?string $customerBillFax
      * @return $this
      */
-    public function setCustomerBillFax($customerBillFax)
+    public function setCustomerBillFax(?string $customerBillFax) : self
     {
         $this->customerBillFax = $customerBillFax;
 
@@ -771,10 +773,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillAddress1.
      *
-     * @param string
+     * @param ?string $customerBillAddress1
      * @return $this
      */
-    public function setCustomerBillAddress1($customerBillAddress1)
+    public function setCustomerBillAddress1(?string $customerBillAddress1) : self
     {
         $this->customerBillAddress1 = $customerBillAddress1;
 
@@ -784,10 +786,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillAddress2.
      *
-     * @param string
+     * @param ?string $customerBillAddress2
      * @return $this
      */
-    public function setCustomerBillAddress2($customerBillAddress2)
+    public function setCustomerBillAddress2(?string $customerBillAddress2) : self
     {
         $this->customerBillAddress2 = $customerBillAddress2;
 
@@ -797,10 +799,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillCity.
      *
-     * @param string
+     * @param ?string $customerBillCity
      * @return $this
      */
-    public function setCustomerBillCity($customerBillCity)
+    public function setCustomerBillCity(?string $customerBillCity) : self
     {
         $this->customerBillCity = $customerBillCity;
 
@@ -810,10 +812,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillState.
      *
-     * @param string
+     * @param ?string $customerBillState
      * @return $this
      */
-    public function setCustomerBillState($customerBillState)
+    public function setCustomerBillState(?string $customerBillState) : self
     {
         $this->customerBillState = $customerBillState;
 
@@ -823,10 +825,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillZip.
      *
-     * @param string
+     * @param ?string $customerBillZip
      * @return $this
      */
-    public function setCustomerBillZip($customerBillZip)
+    public function setCustomerBillZip(?string $customerBillZip) : self
     {
         $this->customerBillZip = $customerBillZip;
 
@@ -836,10 +838,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BillCountry.
      *
-     * @param string
+     * @param ?string $customerBillCountry
      * @return $this
      */
-    public function setCustomerBillCountry($customerBillCountry)
+    public function setCustomerBillCountry(?string $customerBillCountry) : self
     {
         $this->customerBillCountry = $customerBillCountry;
 
@@ -849,10 +851,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_Tax_Exempt.
      *
-     * @param bool
+     * @param ?bool $customerTaxExempt
      * @return $this
      */
-    public function setCustomerTaxExempt($customerTaxExempt)
+    public function setCustomerTaxExempt(?bool $customerTaxExempt) : self
     {
         $this->customerTaxExempt = $customerTaxExempt;
 
@@ -862,10 +864,10 @@ class CustomerInsert extends Request
     /**
      * Set Customer_BusinessAccount.
      *
-     * @param string
+     * @param ?string $customerBusinessAccount
      * @return $this
      */
-    public function setCustomerBusinessAccount($customerBusinessAccount)
+    public function setCustomerBusinessAccount(?string $customerBusinessAccount) : self
     {
         $this->customerBusinessAccount = $customerBusinessAccount;
 
@@ -875,10 +877,10 @@ class CustomerInsert extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -895,7 +897,7 @@ class CustomerInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -1023,7 +1025,7 @@ class CustomerInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerInsert($this, $httpResponse, $data);
     }

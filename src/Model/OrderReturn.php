@@ -26,29 +26,29 @@ class OrderReturn extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -56,30 +56,30 @@ class OrderReturn extends \MerchantAPI\Model
     /**
      * Get status.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
-        return (int) $this->getField('status', 0);
+        return $this->getField('status');
     }
 
     /**
      * Get dt_issued.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeIssued()
+    public function getDateTimeIssued() : ?int
     {
-        return (int) $this->getField('dt_issued', 0);
+        return $this->getTimestampField('dt_issued');
     }
 
     /**
      * Get dt_recvd.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeReceived()
+    public function getDateTimeReceived() : ?int
     {
-        return (int) $this->getField('dt_recvd', 0);
+        return $this->getTimestampField('dt_recvd');
     }
 }

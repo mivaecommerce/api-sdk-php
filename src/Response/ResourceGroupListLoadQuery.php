@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ResourceGroup;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ResourceGroupList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ResourceGroupListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ResourceGroup[] */
-    protected $resourceGroups = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $resourceGroups;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ResourceGroupListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->resourceGroups = new \MerchantAPI\Collection();
+        $this->resourceGroups = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ResourceGroupListLoadQuery extends ListQueryResponse
     /**
      * Get resourceGroups.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ResourceGroup[]
+     * @return \MerchantAPI\Collection
      */
-    public function getResourceGroups()
+    public function getResourceGroups() : Collection
     {
         return $this->resourceGroups;
     }

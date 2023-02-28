@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\Model\CustomerAddress;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerAddressList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class CustomerAddressListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerAddressList_Load_Query';
+    protected string $function = 'CustomerAddressList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'cust_id',
         'id',
         'descrip',
@@ -53,7 +54,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'cust_id',
         'id',
         'descrip',
@@ -72,21 +73,22 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
         'resdntl',
     ];
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         if ($customer) {
@@ -103,7 +105,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -113,7 +115,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -123,7 +125,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -131,10 +133,10 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -144,10 +146,10 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -157,10 +159,10 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -170,7 +172,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -188,7 +190,7 @@ class CustomerAddressListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerAddressListLoadQuery($this, $httpResponse, $data);
     }

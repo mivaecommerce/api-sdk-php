@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\OrderPriceGroup;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for OrderPriceGroupList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderPriceGroupListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderPriceGroup[] */
-    protected $orderPriceGroups = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $orderPriceGroups;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class OrderPriceGroupListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->orderPriceGroups = new \MerchantAPI\Collection();
+        $this->orderPriceGroups = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class OrderPriceGroupListLoadQuery extends ListQueryResponse
     /**
      * Get orderPriceGroups.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderPriceGroup[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOrderPriceGroups()
+    public function getOrderPriceGroups() : Collection
     {
         return $this->orderPriceGroups;
     }

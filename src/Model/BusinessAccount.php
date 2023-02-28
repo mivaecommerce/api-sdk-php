@@ -20,19 +20,19 @@ class BusinessAccount extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTitle()
+    public function getTitle() : ?string
     {
         return $this->getField('title');
     }
@@ -40,39 +40,39 @@ class BusinessAccount extends \MerchantAPI\Model
     /**
      * Get tax_exempt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxExempt()
+    public function getTaxExempt() : ?bool
     {
-        return (bool) $this->getField('tax_exempt', false);
+        return $this->getField('tax_exempt');
     }
 
     /**
      * Get order_cnt.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderCount()
+    public function getOrderCount() : ?int
     {
-        return (int) $this->getField('order_cnt', 0);
+        return $this->getField('order_cnt');
     }
 
     /**
      * Get order_avg.
      *
-     * @return float
+     * @return ?float
      */
-    public function getOrderAverage()
+    public function getOrderAverage() : ?float
     {
-        return (float) $this->getField('order_avg', 0.00);
+        return $this->getField('order_avg');
     }
 
     /**
      * Get formatted_order_avg.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedOrderAverage()
+    public function getFormattedOrderAverage() : ?string
     {
         return $this->getField('formatted_order_avg');
     }
@@ -80,19 +80,19 @@ class BusinessAccount extends \MerchantAPI\Model
     /**
      * Get order_tot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getOrderTotal()
+    public function getOrderTotal() : ?float
     {
-        return (float) $this->getField('order_tot', 0.00);
+        return $this->getField('order_tot');
     }
 
     /**
      * Get formatted_order_tot.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedOrderTotal()
+    public function getFormattedOrderTotal() : ?string
     {
         return $this->getField('formatted_order_tot');
     }
@@ -100,10 +100,10 @@ class BusinessAccount extends \MerchantAPI\Model
     /**
      * Get note_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getNoteCount()
+    public function getNoteCount() : ?int
     {
-        return (int) $this->getField('note_count', 0);
+        return $this->getField('note_count');
     }
 }

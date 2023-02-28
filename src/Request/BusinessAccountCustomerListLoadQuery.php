@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\BusinessAccountCustomer;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BusinessAccountCustomerList_Load_Query.
@@ -25,32 +26,32 @@ use MerchantAPI\BaseClient;
 class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BusinessAccountCustomerList_Load_Query';
+    protected string $function = 'BusinessAccountCustomerList_Load_Query';
 
-    /** @var int */
-    protected $businessAccountId;
+    /** @var ?int */
+    protected ?int $businessAccountId = null;
 
-    /** @var int */
-    protected $editBusinessAccount;
+    /** @var ?int */
+    protected ?int $editBusinessAccount = null;
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Get BusinessAccount_ID.
      *
      * @return int
      */
-    public function getBusinessAccountId()
+    public function getBusinessAccountId() : ?int
     {
         return $this->businessAccountId;
     }
@@ -60,7 +61,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return int
      */
-    public function getEditBusinessAccount()
+    public function getEditBusinessAccount() : ?int
     {
         return $this->editBusinessAccount;
     }
@@ -70,7 +71,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -80,7 +81,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -90,7 +91,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -98,10 +99,10 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set BusinessAccount_ID.
      *
-     * @param int
+     * @param ?int $businessAccountId
      * @return $this
      */
-    public function setBusinessAccountId($businessAccountId)
+    public function setBusinessAccountId(?int $businessAccountId) : self
     {
         $this->businessAccountId = $businessAccountId;
 
@@ -111,10 +112,10 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Edit_BusinessAccount.
      *
-     * @param int
+     * @param ?int $editBusinessAccount
      * @return $this
      */
-    public function setEditBusinessAccount($editBusinessAccount)
+    public function setEditBusinessAccount(?int $editBusinessAccount) : self
     {
         $this->editBusinessAccount = $editBusinessAccount;
 
@@ -124,10 +125,10 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -137,10 +138,10 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -150,10 +151,10 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -163,7 +164,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -193,7 +194,7 @@ class BusinessAccountCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BusinessAccountCustomerListLoadQuery($this, $httpResponse, $data);
     }

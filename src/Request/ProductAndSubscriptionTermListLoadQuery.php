@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductAndSubscriptionTerm;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductAndSubscriptionTermList_Load_Query.
@@ -25,15 +26,15 @@ use MerchantAPI\BaseClient;
 class ProductAndSubscriptionTermListLoadQuery extends ProductListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductAndSubscriptionTermList_Load_Query';
+    protected string $function = 'ProductAndSubscriptionTermList_Load_Query';
 
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -43,7 +44,7 @@ class ProductAndSubscriptionTermListLoadQuery extends ProductListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductAndSubscriptionTermListLoadQuery($this, $httpResponse, $data);
     }

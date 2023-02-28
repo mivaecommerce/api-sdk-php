@@ -20,49 +20,49 @@ class Changeset extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get branch_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
-        return (int) $this->getField('branch_id', 0);
+        return $this->getField('branch_id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get dtstamp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?int
     {
-        return (int) $this->getField('dtstamp', 0);
+        return $this->getTimestampField('dtstamp');
     }
 
     /**
      * Get notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->getField('notes');
     }
@@ -70,9 +70,9 @@ class Changeset extends \MerchantAPI\Model
     /**
      * Get user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserName()
+    public function getUserName() : ?string
     {
         return $this->getField('user_name');
     }
@@ -80,9 +80,9 @@ class Changeset extends \MerchantAPI\Model
     /**
      * Get user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserIcon()
+    public function getUserIcon() : ?string
     {
         return $this->getField('user_icon');
     }
@@ -90,19 +90,19 @@ class Changeset extends \MerchantAPI\Model
     /**
      * Get tags.
      *
-     * @return array
+     * @return ?array
      */
-    public function getTags()
+    public function getTags() : ?array
     {
-        return $this->getField('tags', []);
+        return $this->getField('tags');
     }
 
     /**
      * Get formatted_tags.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTags()
+    public function getFormattedTags() : ?string
     {
         return $this->getField('formatted_tags');
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Coupon;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CouponList_Delete.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class CouponListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CouponList_Delete';
+    protected string $function = 'CouponList_Delete';
 
     /** @var int[] */
-    protected $couponIds = [];
+    protected array $couponIds = [];
 
     /**
      * Get Coupon_IDs.
      *
      * @return array
      */
-    public function getCouponIds()
+    public function getCouponIds() : array
     {
         return $this->couponIds;
     }
@@ -47,11 +48,10 @@ class CouponListDelete extends Request
     /**
      * Add Coupon_IDs.
      *
-     * @param int
-     *
+     * @param int $couponId
      * @return $this
      */
-    public function addCouponId($couponId)
+    public function addCouponId(int $couponId) : self
     {
         $this->couponIds[] = $couponId;
         return $this;
@@ -60,10 +60,10 @@ class CouponListDelete extends Request
     /**
      * Add Coupon model.
      *
-     * @param \MerchantAPI\Model\Coupon
+     * @param \MerchantAPI\Model\Coupon $coupon
      * @return $this
      */
-    public function addCoupon(Coupon $coupon)
+    public function addCoupon(Coupon $coupon) : self
     {
         if ($coupon->getId()) {
             $this->couponIds[] = $coupon->getId();
@@ -75,7 +75,7 @@ class CouponListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -87,7 +87,7 @@ class CouponListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CouponListDelete($this, $httpResponse, $data);
     }

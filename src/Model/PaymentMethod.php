@@ -93,29 +93,29 @@ class PaymentMethod extends \MerchantAPI\Model
     /**
      * Get module_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getModuleId()
+    public function getModuleId() : ?int
     {
-        return (int) $this->getField('module_id', 0);
+        return $this->getField('module_id');
     }
 
     /**
      * Get module_api.
      *
-     * @return float
+     * @return ?float
      */
-    public function getModuleApi()
+    public function getModuleApi() : ?float
     {
-        return (float) $this->getField('module_api', 0.00);
+        return $this->getField('module_api');
     }
 
     /**
      * Get method_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodCode()
+    public function getMethodCode() : ?string
     {
         return $this->getField('method_code');
     }
@@ -123,9 +123,9 @@ class PaymentMethod extends \MerchantAPI\Model
     /**
      * Get method_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodName()
+    public function getMethodName() : ?string
     {
         return $this->getField('method_name');
     }
@@ -133,40 +133,40 @@ class PaymentMethod extends \MerchantAPI\Model
     /**
      * Get mivapay.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getMivapay()
+    public function getMivapay() : ?bool
     {
-        return (bool) $this->getField('mivapay', false);
+        return $this->getField('mivapay');
     }
 
     /**
      * Get paymentcard.
      *
-     * @return \MerchantAPI\Model\CustomerPaymentCard|null
+     * @return ?\MerchantAPI\Model\CustomerPaymentCard
      */
-    public function getPaymentCard()
+    public function getPaymentCard() : ?CustomerPaymentCard
     {
-        return $this->getField('paymentcard', null);
+        return $this->getField('paymentcard');
     }
 
     /**
      * Get orderpaymentcard.
      *
-     * @return \MerchantAPI\Model\OrderPaymentCard|null
+     * @return ?\MerchantAPI\Model\OrderPaymentCard
      */
-    public function getOrderPaymentCard()
+    public function getOrderPaymentCard() : ?OrderPaymentCard
     {
-        return $this->getField('orderpaymentcard', null);
+        return $this->getField('orderpaymentcard');
     }
 
     /**
      * Get paymentcardtype.
      *
-     * @return \MerchantAPI\Model\PaymentCardType|null
+     * @return ?\MerchantAPI\Model\PaymentCardType
      */
-    public function getPaymentCardType()
+    public function getPaymentCardType() : ?PaymentCardType
     {
-        return $this->getField('paymentcardtype', null);
+        return $this->getField('paymentcardtype');
     }
 }

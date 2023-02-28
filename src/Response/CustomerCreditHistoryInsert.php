@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerCreditHistoryInsert extends Response
 {
-    /** @var \MerchantAPI\Model\CustomerCreditHistory */
-    protected $customerCreditHistory;
+    /** @var ?\MerchantAPI\Model\CustomerCreditHistory */
+    protected ?CustomerCreditHistory $customerCreditHistory = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class CustomerCreditHistoryInsert extends Response
      *
      * @return \MerchantAPI\Model\CustomerCreditHistory|null
      */
-    public function getCustomerCreditHistory()
+    public function getCustomerCreditHistory() : ?CustomerCreditHistory
     {
         return $this->customerCreditHistory;
     }

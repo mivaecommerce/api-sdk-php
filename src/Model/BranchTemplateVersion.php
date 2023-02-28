@@ -53,49 +53,49 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get templ_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTemplateId()
+    public function getTemplateId() : ?int
     {
-        return (int) $this->getField('templ_id', 0);
+        return $this->getField('templ_id');
     }
 
     /**
      * Get parent_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getParentId()
+    public function getParentId() : ?int
     {
-        return (int) $this->getField('parent_id', 0);
+        return $this->getField('parent_id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserName()
+    public function getUserName() : ?string
     {
         return $this->getField('user_name');
     }
@@ -103,9 +103,9 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserIcon()
+    public function getUserIcon() : ?string
     {
         return $this->getField('user_icon');
     }
@@ -113,39 +113,39 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get item_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getItemId()
+    public function getItemId() : ?int
     {
-        return (int) $this->getField('item_id', 0);
+        return $this->getField('item_id');
     }
 
     /**
      * Get prop_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPropertyId()
+    public function getPropertyId() : ?int
     {
-        return (int) $this->getField('prop_id', 0);
+        return $this->getField('prop_id');
     }
 
     /**
      * Get sync.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getSync()
+    public function getSync() : ?bool
     {
-        return (bool) $this->getField('sync', false);
+        return $this->getField('sync');
     }
 
     /**
      * Get filename.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFilename()
+    public function getFilename() : ?string
     {
         return $this->getField('filename');
     }
@@ -153,19 +153,19 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get dtstamp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?int
     {
-        return (int) $this->getField('dtstamp', 0);
+        return $this->getTimestampField('dtstamp');
     }
 
     /**
      * Get notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->getField('notes');
     }
@@ -173,9 +173,9 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('source');
     }
@@ -183,10 +183,10 @@ class BranchTemplateVersion extends \MerchantAPI\Model
     /**
      * Get settings.
      *
-     * @return \MerchantAPI\Model\VersionSettings|null
+     * @return ?\MerchantAPI\Model\VersionSettings
      */
-    public function getSettings()
+    public function getSettings() : ?VersionSettings
     {
-        return $this->getField('settings', null);
+        return $this->getField('settings');
     }
 }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\BusinessAccount;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BusinessAccountList_Delete.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class BusinessAccountListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BusinessAccountList_Delete';
+    protected string $function = 'BusinessAccountList_Delete';
 
     /** @var int[] */
-    protected $businessAccountIds = [];
+    protected array $businessAccountIds = [];
 
     /**
      * Get BusinessAccount_IDs.
      *
      * @return array
      */
-    public function getBusinessAccountIds()
+    public function getBusinessAccountIds() : array
     {
         return $this->businessAccountIds;
     }
@@ -47,11 +48,10 @@ class BusinessAccountListDelete extends Request
     /**
      * Add BusinessAccount_IDs.
      *
-     * @param int
-     *
+     * @param int $businessAccountId
      * @return $this
      */
-    public function addBusinessAccountId($businessAccountId)
+    public function addBusinessAccountId(int $businessAccountId) : self
     {
         $this->businessAccountIds[] = $businessAccountId;
         return $this;
@@ -60,10 +60,10 @@ class BusinessAccountListDelete extends Request
     /**
      * Add BusinessAccount model.
      *
-     * @param \MerchantAPI\Model\BusinessAccount
+     * @param \MerchantAPI\Model\BusinessAccount $businessAccount
      * @return $this
      */
-    public function addBusinessAccount(BusinessAccount $businessAccount)
+    public function addBusinessAccount(BusinessAccount $businessAccount) : self
     {
         if ($businessAccount->getId()) {
             $this->businessAccountIds[] = $businessAccount->getId();
@@ -75,7 +75,7 @@ class BusinessAccountListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -87,7 +87,7 @@ class BusinessAccountListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BusinessAccountListDelete($this, $httpResponse, $data);
     }

@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductVariant_Generate_Delimiter.
@@ -25,20 +26,21 @@ use MerchantAPI\BaseClient;
 class ProductVariantGenerateDelimiter extends ProductVariantGenerate
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductVariant_Generate_Delimiter';
+    protected string $function = 'ProductVariant_Generate_Delimiter';
 
-    /** @var string */
-    protected $delimiter;
+    /** @var ?string */
+    protected ?string $delimiter = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client, $product);
     }
@@ -48,7 +50,7 @@ class ProductVariantGenerateDelimiter extends ProductVariantGenerate
      *
      * @return string
      */
-    public function getDelimiter()
+    public function getDelimiter() : ?string
     {
         return $this->delimiter;
     }
@@ -56,10 +58,10 @@ class ProductVariantGenerateDelimiter extends ProductVariantGenerate
     /**
      * Set Delimiter.
      *
-     * @param string
+     * @param ?string $delimiter
      * @return $this
      */
-    public function setDelimiter($delimiter)
+    public function setDelimiter(?string $delimiter) : self
     {
         $this->delimiter = $delimiter;
 
@@ -69,7 +71,7 @@ class ProductVariantGenerateDelimiter extends ProductVariantGenerate
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -83,7 +85,7 @@ class ProductVariantGenerateDelimiter extends ProductVariantGenerate
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductVariantGenerateDelimiter($this, $httpResponse, $data);
     }

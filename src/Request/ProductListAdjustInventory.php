@@ -14,6 +14,8 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductInventoryAdjustment;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request ProductList_Adjust_Inventory.
@@ -26,18 +28,20 @@ use MerchantAPI\BaseClient;
 class ProductListAdjustInventory extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductList_Adjust_Inventory';
+    protected string $function = 'ProductList_Adjust_Inventory';
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductInventoryAdjustment[] */
-    protected $inventoryAdjustments = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $inventoryAdjustments;
 
     /**
      * Constructor.
+     *
+     * @param ?\MerchantAPI\BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         parent::__construct($client);
         $this->inventoryAdjustments = new \MerchantAPI\Collection();
@@ -46,9 +50,9 @@ class ProductListAdjustInventory extends Request
     /**
      * Get Inventory_Adjustments.
      *
-     * @return \MerchantAPI\Model\ProductInventoryAdjustment[]
+     * @return \MerchantAPI\Collection
      */
-    public function getInventoryAdjustments()
+    public function getInventoryAdjustments() : ?Collection
     {
         return $this->inventoryAdjustments;
     }
@@ -56,12 +60,17 @@ class ProductListAdjustInventory extends Request
     /**
      * Set Inventory_Adjustments.
      *
-     * @param (\MerchantAPI\Model\ProductInventoryAdjustment|array)[]
+     * @param \MerchantAPI\Collection|array $inventoryAdjustments
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setInventoryAdjustments(array $inventoryAdjustments)
+    public function setInventoryAdjustments($inventoryAdjustments) : self
     {
+        if (!is_array($inventoryAdjustments) && !$inventoryAdjustments instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($inventoryAdjustments) ? get_class($inventoryAdjustments) : gettype($inventoryAdjustments)));
+        }
+
         foreach ($inventoryAdjustments as &$model) {
             if (is_array($model)) {
                 $model = new ProductInventoryAdjustment($model);
@@ -71,7 +80,7 @@ class ProductListAdjustInventory extends Request
             }
         }
 
-        $this->inventoryAdjustments = new \MerchantAPI\Collection($inventoryAdjustments);
+        $this->inventoryAdjustments = new Collection($inventoryAdjustments);
 
         return $this;
     }
@@ -80,10 +89,9 @@ class ProductListAdjustInventory extends Request
      * Add Inventory_Adjustments.
      *
      * @param \MerchantAPI\Model\ProductInventoryAdjustment
-     *
      * @return $this
      */
-    public function addInventoryAdjustment(ProductInventoryAdjustment $model)
+    public function addInventoryAdjustment(ProductInventoryAdjustment $model) : self
     {
         $this->inventoryAdjustments[] = $model;
         return $this;
@@ -96,7 +104,7 @@ class ProductListAdjustInventory extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addInventoryAdjustments(array $inventoryAdjustments)
+    public function addInventoryAdjustments(array $inventoryAdjustments) : self
     {
         foreach ($inventoryAdjustments as $e) {
             if (is_array($e)) {
@@ -115,7 +123,7 @@ class ProductListAdjustInventory extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -133,7 +141,7 @@ class ProductListAdjustInventory extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductListAdjustInventory($this, $httpResponse, $data);
     }

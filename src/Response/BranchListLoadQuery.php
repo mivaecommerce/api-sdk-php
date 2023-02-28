@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BranchList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Branch[] */
-    protected $branches = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $branches;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BranchListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->branches = new \MerchantAPI\Collection();
+        $this->branches = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BranchListLoadQuery extends ListQueryResponse
     /**
      * Get branches.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Branch[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBranches()
+    public function getBranches() : Collection
     {
         return $this->branches;
     }

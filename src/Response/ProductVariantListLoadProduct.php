@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\ProductVariant;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ProductVariantList_Load_Product.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductVariantListLoadProduct extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariant[] */
-    protected $productVariants = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $productVariants;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ProductVariantListLoadProduct extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->productVariants = new \MerchantAPI\Collection();
+        $this->productVariants = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ProductVariantListLoadProduct extends Response
     /**
      * Get productVariants.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariant[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProductVariants()
+    public function getProductVariants() : Collection
     {
         return $this->productVariants;
     }

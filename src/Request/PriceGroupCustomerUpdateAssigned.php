@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PriceGroupCustomer_Update_Assigned.
@@ -26,35 +27,36 @@ use MerchantAPI\BaseClient;
 class PriceGroupCustomerUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PriceGroupCustomer_Update_Assigned';
+    protected string $function = 'PriceGroupCustomer_Update_Assigned';
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PriceGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PriceGroup $priceGroup
      */
-    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
+    public function __construct(?BaseClient $client = null, ?PriceGroup $priceGroup = null)
     {
         parent::__construct($client);
         if ($priceGroup) {
@@ -71,7 +73,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -81,7 +83,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -91,7 +93,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -101,7 +103,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -111,7 +113,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -121,7 +123,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -129,10 +131,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -142,10 +144,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -155,10 +157,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -168,10 +170,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -181,10 +183,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -194,10 +196,10 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -207,7 +209,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -235,7 +237,7 @@ class PriceGroupCustomerUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PriceGroupCustomerUpdateAssigned($this, $httpResponse, $data);
     }

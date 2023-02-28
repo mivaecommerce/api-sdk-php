@@ -18,34 +18,34 @@ namespace MerchantAPI\Http;
 abstract class HttpMessage
 {
     /** @var string */
-    protected $host;
+    protected string $host;
 
     /** @var int */
-    protected $port;
+    protected int $port;
 
     /** @var string */
-    protected $scheme;
+    protected string $scheme;
 
     /** @var string */
-    protected $uri;
+    protected string $uri;
 
     /** @var int */
-    protected $status;
+    protected int $status;
 
     /** @var HttpHeaders */
-    protected $headers;
+    protected HttpHeaders $headers;
 
     /** @var HttpQuery */
-    protected $query;
+    protected HttpQuery $query;
 
-    /** @var mixed */
+    /** @var string|array */
     protected $content;
 
     /** @var string */
-    protected $method;
+    protected string $method;
 
     /** @var string */
-    protected $protocol;
+    protected string $protocol;
 
     /** @var string  */
     const HTTP_METHOD_GET       = 'GET';
@@ -63,7 +63,7 @@ abstract class HttpMessage
     const HTTP_METHOD_DELETE    = 'DELETE';
 
     /** @var array */
-    protected $httpMethods = [
+    protected static array $httpMethods = [
         self::HTTP_METHOD_GET,
         self::HTTP_METHOD_POST,
         self::HTTP_METHOD_PUT,
@@ -72,7 +72,7 @@ abstract class HttpMessage
     ];
 
     /** @var array */
-    protected static $statusCodes = [
+    protected static array $statusCodes = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
@@ -119,13 +119,13 @@ abstract class HttpMessage
     /**
      * HttpMessage constructor.
      *
-     * @param $url
-     * @param string $content
+     * @param string $url
+     * @param string|array $content
      * @param string $method
      * @param array $query
      * @param array $headers
      */
-    public function __construct($url, $content = '', $method = self::HTTP_METHOD_GET, array $query = [], array $headers = [])
+    public function __construct(string $url, $content = '', string $method = self::HTTP_METHOD_GET, array $query = [], array $headers = [])
     {
         $this->query    = new HttpQuery($query);
         $this->headers  = new HttpHeaders($headers);
@@ -140,7 +140,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getHost()
+    public function getHost() : string
     {
         return $this->host;
     }
@@ -148,10 +148,10 @@ abstract class HttpMessage
     /**
      * Set the hostname.
      *
-     * @param string
+     * @param string $host
      * @return $this
      */
-    public function setHost($host)
+    public function setHost(string $host) : self
     {
         $this->host = $host;
         return $this;
@@ -162,7 +162,7 @@ abstract class HttpMessage
      *
      * @return int
      */
-    public function getPort()
+    public function getPort() : int
     {
         return $this->port;
     }
@@ -170,10 +170,10 @@ abstract class HttpMessage
     /**
      * Set the port.
      *
-     * @param int
+     * @param int $port
      * @return $this
      */
-    public function setPort($port)
+    public function setPort(int $port) : self
     {
         $this->port = $port;
         return $this;
@@ -184,7 +184,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getScheme()
+    public function getScheme() : string
     {
         return $this->scheme;
     }
@@ -195,7 +195,7 @@ abstract class HttpMessage
      * @param string $scheme
      * @return $this
      */
-    public function setScheme($scheme)
+    public function setScheme(string $scheme) : self
     {
         $this->scheme = $scheme;
         return $this;
@@ -206,7 +206,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getUri()
+    public function getUri() : string
     {
         return $this->uri;
     }
@@ -214,10 +214,10 @@ abstract class HttpMessage
     /**
      * Set the URI.
      *
-     * @param string
+     * @param string $uri
      * @return $this
      */
-    public function setUri($uri)
+    public function setUri(string $uri) : self
     {
         $this->uri = $uri;
         return $this;
@@ -228,7 +228,7 @@ abstract class HttpMessage
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : int
     {
         return $this->status;
     }
@@ -236,12 +236,12 @@ abstract class HttpMessage
     /**
      * Set the status code.
      *
-     * @param mixed $status
+     * @param int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(int $status) : self
     {
-        $this->status = (int) $status;
+        $this->status = $status;
         return $this;
     }
 
@@ -250,7 +250,7 @@ abstract class HttpMessage
      *
      * @return HttpHeaders
      */
-    public function getHeaders()
+    public function getHeaders() : HttpHeaders
     {
         return $this->headers;
     }
@@ -258,10 +258,10 @@ abstract class HttpMessage
     /**
      * Set the HTTP Headers.
      *
-     * @param array|HttpHeaders
+     * @param array|HttpHeaders $headers
      * @return $this
      */
-    public function setHeaders($headers)
+    public function setHeaders($headers) : self
     {
         if (is_array($headers)) {
             $this->headers = new HttpHeaders($headers);
@@ -277,16 +277,16 @@ abstract class HttpMessage
     /**
      * @return HttpQuery
      */
-    public function getQuery()
+    public function getQuery() : HttpQuery
     {
         return $this->query;
     }
 
     /**
-     * @param HttpQuery|array
+     * @param HttpQuery|array $query
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery($query) : self
     {
         if (is_array($query)) {
             $this->query = new HttpQuery($query);
@@ -302,7 +302,7 @@ abstract class HttpMessage
     /**
      * Get the request content.
      *
-     * @return mixed
+     * @return string|array
      */
     public function getContent()
     {
@@ -312,10 +312,10 @@ abstract class HttpMessage
     /**
      * Set the request content.
      *
-     * @param mixed $content
+     * @param string|array $content
      * @return $this
      */
-    public function setContent($content)
+    public function setContent($content) : self
     {
         $this->content = $content;
         return $this;
@@ -324,10 +324,10 @@ abstract class HttpMessage
     /**
      * Append to the request content.
      *
-     * @param mixed $content
+     * @param string $content
      * @return $this
      */
-    public function appendContent($content)
+    public function appendContent(string $content) : self
     {
         $this->content .= $content;
         return $this;
@@ -338,7 +338,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getMethod()
+    public function getMethod() : string
     {
         return $this->method;
     }
@@ -349,7 +349,7 @@ abstract class HttpMessage
      * @param string $method
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod(string $method) : self
     {
         $this->method = $method;
         return $this;
@@ -360,7 +360,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getProtocol()
+    public function getProtocol() : string
     {
         return $this->protocol;
     }
@@ -371,7 +371,7 @@ abstract class HttpMessage
      * @param string $protocol
      * @return HttpMessage
      */
-    public function setProtocol($protocol)
+    public function setProtocol(string $protocol) : self
     {
         $this->protocol = $protocol;
         return $this;
@@ -382,7 +382,7 @@ abstract class HttpMessage
      *
      * @return string
      */
-    public function getStatusName()
+    public function getStatusName() : ?string
     {
         if ($this->getStatus() && isset(static::$statusCodes[$this->getStatus()])) {
             return static::$statusCodes[$this->getStatus()];
@@ -394,11 +394,11 @@ abstract class HttpMessage
     /**
      * Set the URL and parse its parts.
      *
-     * @param $url
+     * @param string $url
      * @return HttpMessage
      * @throws \InvalidArgumentException
      */
-    public function setUrl($url)
+    public function setUrl(string $url) : self
     {
         $urlinfo = parse_url($url);
 
@@ -410,10 +410,10 @@ abstract class HttpMessage
             }
         }
 
-        $this->host     = isset($urlinfo['host'])   ? $urlinfo['host']                  : null;
-        $this->port     = isset($urlinfo['port'])   ? $urlinfo['port']                  : null;
-        $this->scheme   = isset($urlinfo['scheme']) ? strtolower($urlinfo['scheme'])    : 'http';
-        $this->uri      = isset($urlinfo['path'])   ? $urlinfo['path']                  : null;
+        $this->host     = $urlinfo['host'] ?? null;
+        $this->port     = $urlinfo['port'] ?? 0;
+        $this->scheme   = isset($urlinfo['scheme']) ? strtolower($urlinfo['scheme']) : 'http';
+        $this->uri      = $urlinfo['path'] ?? null;
 
         if (!in_array($this->scheme, ['http','https'])) {
             throw new \InvalidArgumentException('Invalid URL Scheme. Only HTTP(s) is supported.');

@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderItemListCreateReturn extends Response
 {
-    /** @var \MerchantAPI\Model\OrderReturn */
-    protected $orderReturn;
+    /** @var ?\MerchantAPI\Model\OrderReturn */
+    protected ?OrderReturn $orderReturn = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OrderItemListCreateReturn extends Response
      *
      * @return \MerchantAPI\Model\OrderReturn|null
      */
-    public function getOrderReturn()
+    public function getOrderReturn() : ?OrderReturn
     {
         return $this->orderReturn;
     }

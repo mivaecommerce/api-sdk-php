@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderList_Load_Query.
@@ -38,13 +39,13 @@ class OrderListLoadQuery extends ListQueryRequest
     const PAY_STATUS_FILTER_SHIPPED_NOT_CAPTURED = 'ship_not_capt';
 
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderList_Load_Query';
+    protected string $function = 'OrderList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'batch_id',
         'status',
@@ -96,7 +97,7 @@ class OrderListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'batch_id',
         'status',
@@ -148,7 +149,7 @@ class OrderListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'ship_method',
         'cust_login',
         'cust_pw_email',
@@ -167,7 +168,7 @@ class OrderListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on custom filters */
-    protected $availableCustomFilters = [
+    protected array $availableCustomFilters = [
         'Customer_ID' => 'int',
         'BusinessAccount_ID' => 'int',
         'pay_id' => 'int',
@@ -180,15 +181,15 @@ class OrderListLoadQuery extends ListQueryRequest
         'product_code' => 'string',
     ];
 
-    /** @var string */
-    protected $passphrase;
+    /** @var ?string */
+    protected ?string $passphrase = null;
 
     /**
      * Get Passphrase.
      *
      * @return string
      */
-    public function getPassphrase()
+    public function getPassphrase() : ?string
     {
         return $this->passphrase;
     }
@@ -196,10 +197,10 @@ class OrderListLoadQuery extends ListQueryRequest
     /**
      * Set Passphrase.
      *
-     * @param string
+     * @param ?string $passphrase
      * @return $this
      */
-    public function setPassphrase($passphrase)
+    public function setPassphrase(?string $passphrase) : self
     {
         $this->passphrase = $passphrase;
 
@@ -209,7 +210,7 @@ class OrderListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -223,7 +224,7 @@ class OrderListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderListLoadQuery($this, $httpResponse, $data);
     }

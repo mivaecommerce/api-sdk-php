@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\Model\ProductOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OptionList_Load_Attribute.
@@ -27,38 +28,39 @@ use MerchantAPI\BaseClient;
 class OptionListLoadAttribute extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OptionList_Load_Attribute';
+    protected string $function = 'OptionList_Load_Attribute';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var string */
-    protected $editAttribute;
+    /** @var ?string */
+    protected ?string $editAttribute = null;
 
-    /** @var string */
-    protected $attributeCode;
+    /** @var ?string */
+    protected ?string $attributeCode = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductAttribute
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductAttribute $productAttribute
      */
-    public function __construct(BaseClient $client = null, ProductAttribute $productAttribute = null)
+    public function __construct(?BaseClient $client = null, ?ProductAttribute $productAttribute = null)
     {
         parent::__construct($client);
         if ($productAttribute) {
@@ -77,7 +79,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -87,7 +89,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -97,7 +99,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -107,7 +109,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -117,7 +119,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return string
      */
-    public function getEditAttribute()
+    public function getEditAttribute() : ?string
     {
         return $this->editAttribute;
     }
@@ -127,7 +129,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->attributeCode;
     }
@@ -137,7 +139,7 @@ class OptionListLoadAttribute extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -145,10 +147,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -158,10 +160,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -171,10 +173,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -184,10 +186,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -197,10 +199,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Edit_Attribute.
      *
-     * @param string
+     * @param ?string $editAttribute
      * @return $this
      */
-    public function setEditAttribute($editAttribute)
+    public function setEditAttribute(?string $editAttribute) : self
     {
         $this->editAttribute = $editAttribute;
 
@@ -210,10 +212,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Attribute_Code.
      *
-     * @param string
+     * @param ?string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(?string $attributeCode) : self
     {
         $this->attributeCode = $attributeCode;
 
@@ -223,10 +225,10 @@ class OptionListLoadAttribute extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -236,7 +238,7 @@ class OptionListLoadAttribute extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -266,7 +268,7 @@ class OptionListLoadAttribute extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OptionListLoadAttribute($this, $httpResponse, $data);
     }

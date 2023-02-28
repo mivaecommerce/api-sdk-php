@@ -16,6 +16,7 @@ use MerchantAPI\Model\OrderItem;
 use MerchantAPI\Model\Order;
 use MerchantAPI\Model\OrderReturn;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderItemList_CreateReturn.
@@ -28,23 +29,24 @@ use MerchantAPI\BaseClient;
 class OrderItemListCreateReturn extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderItemList_CreateReturn';
+    protected string $function = 'OrderItemList_CreateReturn';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
     /** @var int[] */
-    protected $lineIds = [];
+    protected array $lineIds = [];
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -59,7 +61,7 @@ class OrderItemListCreateReturn extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -69,7 +71,7 @@ class OrderItemListCreateReturn extends Request
      *
      * @return array
      */
-    public function getLineIds()
+    public function getLineIds() : array
     {
         return $this->lineIds;
     }
@@ -77,10 +79,10 @@ class OrderItemListCreateReturn extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -90,11 +92,10 @@ class OrderItemListCreateReturn extends Request
     /**
      * Add Line_IDs.
      *
-     * @param int
-     *
+     * @param int $lineId
      * @return $this
      */
-    public function addLineId($lineId)
+    public function addLineId(int $lineId) : self
     {
         $this->lineIds[] = $lineId;
         return $this;
@@ -103,10 +104,10 @@ class OrderItemListCreateReturn extends Request
     /**
      * Add OrderItem model.
      *
-     * @param \MerchantAPI\Model\OrderItem
+     * @param \MerchantAPI\Model\OrderItem $orderItem
      * @return $this
      */
-    public function addOrderItem(OrderItem $orderItem)
+    public function addOrderItem(OrderItem $orderItem) : self
     {
         if ($orderItem->getLineId()) {
             $this->lineIds[] = $orderItem->getLineId();
@@ -118,7 +119,7 @@ class OrderItemListCreateReturn extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -134,7 +135,7 @@ class OrderItemListCreateReturn extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderItemListCreateReturn($this, $httpResponse, $data);
     }

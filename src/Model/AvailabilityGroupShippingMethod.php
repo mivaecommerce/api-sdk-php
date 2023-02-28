@@ -20,9 +20,9 @@ class AvailabilityGroupShippingMethod extends \MerchantAPI\Model
     /**
      * Get mod_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getModuleCode()
+    public function getModuleCode() : ?string
     {
         return $this->getField('mod_code');
     }
@@ -30,9 +30,9 @@ class AvailabilityGroupShippingMethod extends \MerchantAPI\Model
     /**
      * Get meth_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodCode()
+    public function getMethodCode() : ?string
     {
         return $this->getField('meth_code');
     }
@@ -40,9 +40,9 @@ class AvailabilityGroupShippingMethod extends \MerchantAPI\Model
     /**
      * Get method_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodName()
+    public function getMethodName() : ?string
     {
         return $this->getField('method_name');
     }
@@ -50,10 +50,10 @@ class AvailabilityGroupShippingMethod extends \MerchantAPI\Model
     /**
      * Get assigned.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
-        return (bool) $this->getField('assigned', false);
+        return $this->getField('assigned');
     }
 }

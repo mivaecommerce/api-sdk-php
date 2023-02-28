@@ -23,12 +23,12 @@ interface ListQueryResponseInterface
      *
      * @return int
      */
-    public function getTotalCount();
+    public function getTotalCount() : int;
 
     /**
      * Get the starting offset of the response results.
      *
      * @return int
      */
-    public function getStartOffset();
+    public function getStartOffset() : int;
 }

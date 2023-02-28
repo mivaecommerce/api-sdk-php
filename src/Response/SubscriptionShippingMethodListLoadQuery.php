@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\SubscriptionShippingMethod;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for SubscriptionShippingMethodList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class SubscriptionShippingMethodListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionShippingMethod[] */
-    protected $subscriptionShippingMethods = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $subscriptionShippingMethods;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->subscriptionShippingMethods = new \MerchantAPI\Collection();
+        $this->subscriptionShippingMethods = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryResponse
     /**
      * Get subscriptionShippingMethods.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionShippingMethod[]
+     * @return \MerchantAPI\Collection
      */
-    public function getSubscriptionShippingMethods()
+    public function getSubscriptionShippingMethods() : Collection
     {
         return $this->subscriptionShippingMethods;
     }

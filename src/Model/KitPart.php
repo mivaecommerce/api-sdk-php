@@ -20,30 +20,30 @@ class KitPart extends \MerchantAPI\Model
     /**
      * Get part_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPartId()
+    public function getPartId() : ?int
     {
-        return (int) $this->getField('part_id', 0);
+        return $this->getField('part_id');
     }
 
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Set part_id.
      *
-     * @param int
+     * @param ?int $partId
      * @return $this
      */
-    public function setPartId($partId)
+    public function setPartId(?int $partId) : self
     {
         return $this->setField('part_id', $partId);
     }
@@ -51,10 +51,10 @@ class KitPart extends \MerchantAPI\Model
     /**
      * Set quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         return $this->setField('quantity', $quantity);
     }

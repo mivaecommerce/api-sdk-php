@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderItem;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderItemList_Cancel.
@@ -27,26 +28,27 @@ use MerchantAPI\BaseClient;
 class OrderItemListCancel extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderItemList_Cancel';
+    protected string $function = 'OrderItemList_Cancel';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
     /** @var int[] */
-    protected $lineIds = [];
+    protected array $lineIds = [];
 
-    /** @var string */
-    protected $reason;
+    /** @var ?string */
+    protected ?string $reason = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -59,7 +61,7 @@ class OrderItemListCancel extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -69,7 +71,7 @@ class OrderItemListCancel extends Request
      *
      * @return array
      */
-    public function getLineIds()
+    public function getLineIds() : array
     {
         return $this->lineIds;
     }
@@ -79,7 +81,7 @@ class OrderItemListCancel extends Request
      *
      * @return string
      */
-    public function getReason()
+    public function getReason() : ?string
     {
         return $this->reason;
     }
@@ -87,10 +89,10 @@ class OrderItemListCancel extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -100,10 +102,10 @@ class OrderItemListCancel extends Request
     /**
      * Set Reason.
      *
-     * @param string
+     * @param ?string $reason
      * @return $this
      */
-    public function setReason($reason)
+    public function setReason(?string $reason) : self
     {
         $this->reason = $reason;
 
@@ -113,11 +115,10 @@ class OrderItemListCancel extends Request
     /**
      * Add Line_IDs.
      *
-     * @param int
-     *
+     * @param int $lineId
      * @return $this
      */
-    public function addLineId($lineId)
+    public function addLineId(int $lineId) : self
     {
         $this->lineIds[] = $lineId;
         return $this;
@@ -126,10 +127,10 @@ class OrderItemListCancel extends Request
     /**
      * Add OrderItem model.
      *
-     * @param \MerchantAPI\Model\OrderItem
+     * @param \MerchantAPI\Model\OrderItem $orderItem
      * @return $this
      */
-    public function addOrderItem(OrderItem $orderItem)
+    public function addOrderItem(OrderItem $orderItem) : self
     {
         if ($orderItem->getLineId()) {
             $this->lineIds[] = $orderItem->getLineId();
@@ -141,7 +142,7 @@ class OrderItemListCancel extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -159,7 +160,7 @@ class OrderItemListCancel extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderItemListCancel($this, $httpResponse, $data);
     }

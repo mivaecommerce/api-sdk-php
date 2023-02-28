@@ -12,7 +12,11 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\PriceGroupExclusion;
+use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request PriceGroup_Insert.
@@ -25,98 +29,112 @@ use MerchantAPI\BaseClient;
 class PriceGroupInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PriceGroup_Insert';
+    protected string $function = 'PriceGroup_Insert';
 
-    /** @var string */
-    protected $name;
+    /** @var ?string */
+    protected ?string $name = null;
 
-    /** @var string */
-    protected $customerScope;
+    /** @var ?string */
+    protected ?string $customerScope = null;
 
-    /** @var string */
-    protected $rate;
+    /** @var ?string */
+    protected ?string $rate = null;
 
-    /** @var float */
-    protected $discount;
+    /** @var ?float */
+    protected ?float $discount = null;
 
-    /** @var float */
-    protected $markup;
+    /** @var ?float */
+    protected ?float $markup = null;
 
-    /** @var int */
-    protected $moduleId;
+    /** @var ?int */
+    protected ?int $moduleId = null;
 
-    /** @var string */
-    protected $editModule;
+    /** @var ?string */
+    protected ?string $editModule = null;
 
-    /** @var string */
-    protected $moduleCode;
+    /** @var ?string */
+    protected ?string $moduleCode = null;
 
-    /** @var bool */
-    protected $exclusion;
+    /** @var ?bool */
+    protected ?bool $exclusion = null;
 
-    /** @var string */
-    protected $description;
+    /** @var ?string */
+    protected ?string $description = null;
 
-    /** @var bool */
-    protected $display;
+    /** @var ?bool */
+    protected ?bool $display = null;
 
-    /** @var int */
-    protected $dateTimeStart;
+    /** @var int|\DateTime|null */
+    protected $dateTimeStart = null;
 
-    /** @var int */
-    protected $dateTimeEnd;
+    /** @var int|\DateTime|null */
+    protected $dateTimeEnd = null;
 
-    /** @var float */
-    protected $qualifyingMinSubtotal;
+    /** @var ?float */
+    protected ?float $qualifyingMinSubtotal = null;
 
-    /** @var float */
-    protected $qualifyingMaxSubtotal;
+    /** @var ?float */
+    protected ?float $qualifyingMaxSubtotal = null;
 
-    /** @var int */
-    protected $qualifyingMinQuantity;
+    /** @var ?int */
+    protected ?int $qualifyingMinQuantity = null;
 
-    /** @var int */
-    protected $qualifyingMaxQuantity;
+    /** @var ?int */
+    protected ?int $qualifyingMaxQuantity = null;
 
-    /** @var float */
-    protected $qualifyingMinWeight;
+    /** @var ?float */
+    protected ?float $qualifyingMinWeight = null;
 
-    /** @var float */
-    protected $qualifyingMaxWeight;
+    /** @var ?float */
+    protected ?float $qualifyingMaxWeight = null;
 
-    /** @var float */
-    protected $basketMinSubtotal;
+    /** @var ?float */
+    protected ?float $basketMinSubtotal = null;
 
-    /** @var float */
-    protected $basketMaxSubtotal;
+    /** @var ?float */
+    protected ?float $basketMaxSubtotal = null;
 
-    /** @var int */
-    protected $basketMinQuantity;
+    /** @var ?int */
+    protected ?int $basketMinQuantity = null;
 
-    /** @var int */
-    protected $basketMaxQuantity;
+    /** @var ?int */
+    protected ?int $basketMaxQuantity = null;
 
-    /** @var float */
-    protected $basketMinWeight;
+    /** @var ?float */
+    protected ?float $basketMinWeight = null;
 
-    /** @var float */
-    protected $basketMaxWeight;
+    /** @var ?float */
+    protected ?float $basketMaxWeight = null;
 
-    /** @var int */
-    protected $priority;
+    /** @var ?int */
+    protected ?int $priority = null;
+
+    /** @var \MerchantAPI\Collection */
+    protected Collection $exclusions;
 
     /** @var array */
-    protected $moduleFields = [];
+    protected array $moduleFields = [];
+
+    /**
+     * Constructor.
+     *
+     * @param ?\MerchantAPI\BaseClient $client
+     */
+    public function __construct(?BaseClient $client = null)
+    {
+        parent::__construct($client);
+        $this->exclusions = new \MerchantAPI\Collection();
+    }
 
     /**
      * Get Name.
      *
      * @return string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->name;
     }
@@ -126,7 +144,7 @@ class PriceGroupInsert extends Request
      *
      * @return string
      */
-    public function getCustomerScope()
+    public function getCustomerScope() : ?string
     {
         return $this->customerScope;
     }
@@ -136,7 +154,7 @@ class PriceGroupInsert extends Request
      *
      * @return string
      */
-    public function getRate()
+    public function getRate() : ?string
     {
         return $this->rate;
     }
@@ -146,7 +164,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getDiscount()
+    public function getDiscount() : ?float
     {
         return $this->discount;
     }
@@ -156,7 +174,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getMarkup()
+    public function getMarkup() : ?float
     {
         return $this->markup;
     }
@@ -166,7 +184,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getModuleId()
+    public function getModuleId() : ?int
     {
         return $this->moduleId;
     }
@@ -176,7 +194,7 @@ class PriceGroupInsert extends Request
      *
      * @return string
      */
-    public function getEditModule()
+    public function getEditModule() : ?string
     {
         return $this->editModule;
     }
@@ -186,7 +204,7 @@ class PriceGroupInsert extends Request
      *
      * @return string
      */
-    public function getModuleCode()
+    public function getModuleCode() : ?string
     {
         return $this->moduleCode;
     }
@@ -196,7 +214,7 @@ class PriceGroupInsert extends Request
      *
      * @return bool
      */
-    public function getExclusion()
+    public function getExclusion() : ?bool
     {
         return $this->exclusion;
     }
@@ -206,7 +224,7 @@ class PriceGroupInsert extends Request
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->description;
     }
@@ -216,7 +234,7 @@ class PriceGroupInsert extends Request
      *
      * @return bool
      */
-    public function getDisplay()
+    public function getDisplay() : ?bool
     {
         return $this->display;
     }
@@ -226,7 +244,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getDateTimeStart()
+    public function getDateTimeStart() : ?int
     {
         return $this->dateTimeStart;
     }
@@ -236,7 +254,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getDateTimeEnd()
+    public function getDateTimeEnd() : ?int
     {
         return $this->dateTimeEnd;
     }
@@ -246,7 +264,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getQualifyingMinSubtotal()
+    public function getQualifyingMinSubtotal() : ?float
     {
         return $this->qualifyingMinSubtotal;
     }
@@ -256,7 +274,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getQualifyingMaxSubtotal()
+    public function getQualifyingMaxSubtotal() : ?float
     {
         return $this->qualifyingMaxSubtotal;
     }
@@ -266,7 +284,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getQualifyingMinQuantity()
+    public function getQualifyingMinQuantity() : ?int
     {
         return $this->qualifyingMinQuantity;
     }
@@ -276,7 +294,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getQualifyingMaxQuantity()
+    public function getQualifyingMaxQuantity() : ?int
     {
         return $this->qualifyingMaxQuantity;
     }
@@ -286,7 +304,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getQualifyingMinWeight()
+    public function getQualifyingMinWeight() : ?float
     {
         return $this->qualifyingMinWeight;
     }
@@ -296,7 +314,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getQualifyingMaxWeight()
+    public function getQualifyingMaxWeight() : ?float
     {
         return $this->qualifyingMaxWeight;
     }
@@ -306,7 +324,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getBasketMinSubtotal()
+    public function getBasketMinSubtotal() : ?float
     {
         return $this->basketMinSubtotal;
     }
@@ -316,7 +334,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getBasketMaxSubtotal()
+    public function getBasketMaxSubtotal() : ?float
     {
         return $this->basketMaxSubtotal;
     }
@@ -326,7 +344,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getBasketMinQuantity()
+    public function getBasketMinQuantity() : ?int
     {
         return $this->basketMinQuantity;
     }
@@ -336,7 +354,7 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getBasketMaxQuantity()
+    public function getBasketMaxQuantity() : ?int
     {
         return $this->basketMaxQuantity;
     }
@@ -346,7 +364,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getBasketMinWeight()
+    public function getBasketMinWeight() : ?float
     {
         return $this->basketMinWeight;
     }
@@ -356,7 +374,7 @@ class PriceGroupInsert extends Request
      *
      * @return float
      */
-    public function getBasketMaxWeight()
+    public function getBasketMaxWeight() : ?float
     {
         return $this->basketMaxWeight;
     }
@@ -366,9 +384,19 @@ class PriceGroupInsert extends Request
      *
      * @return int
      */
-    public function getPriority()
+    public function getPriority() : ?int
     {
         return $this->priority;
+    }
+
+    /**
+     * Get Exclusions.
+     *
+     * @return \MerchantAPI\Collection
+     */
+    public function getExclusions() : ?Collection
+    {
+        return $this->exclusions;
     }
 
     /**
@@ -376,7 +404,7 @@ class PriceGroupInsert extends Request
      *
      * @return array
      */
-    public function getModuleFields()
+    public function getModuleFields() : ?array
     {
         return $this->moduleFields;
     }
@@ -387,7 +415,7 @@ class PriceGroupInsert extends Request
      * @param string
      * @param mixed
      */
-    public function getModuleField($field, $defaultValue = null)
+    public function getModuleField(string $field, $defaultValue = null)
     {
         return isset($this->moduleFields[$field]) ?
             $this->moduleFields[$field] : $defaultValue;
@@ -396,10 +424,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Name.
      *
-     * @param string
+     * @param ?string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name) : self
     {
         $this->name = $name;
 
@@ -409,10 +437,10 @@ class PriceGroupInsert extends Request
     /**
      * Set CustomerScope.
      *
-     * @param string
+     * @param ?string $customerScope
      * @return $this
      */
-    public function setCustomerScope($customerScope)
+    public function setCustomerScope(?string $customerScope) : self
     {
         $this->customerScope = $customerScope;
 
@@ -422,10 +450,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Rate.
      *
-     * @param string
+     * @param ?string $rate
      * @return $this
      */
-    public function setRate($rate)
+    public function setRate(?string $rate) : self
     {
         $this->rate = $rate;
 
@@ -435,10 +463,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Discount.
      *
-     * @param float
+     * @param ?float $discount
      * @return $this
      */
-    public function setDiscount($discount)
+    public function setDiscount(?float $discount) : self
     {
         $this->discount = $discount;
 
@@ -448,10 +476,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Markup.
      *
-     * @param float
+     * @param ?float $markup
      * @return $this
      */
-    public function setMarkup($markup)
+    public function setMarkup(?float $markup) : self
     {
         $this->markup = $markup;
 
@@ -461,10 +489,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Module_ID.
      *
-     * @param int
+     * @param ?int $moduleId
      * @return $this
      */
-    public function setModuleId($moduleId)
+    public function setModuleId(?int $moduleId) : self
     {
         $this->moduleId = $moduleId;
 
@@ -474,10 +502,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Edit_Module.
      *
-     * @param string
+     * @param ?string $editModule
      * @return $this
      */
-    public function setEditModule($editModule)
+    public function setEditModule(?string $editModule) : self
     {
         $this->editModule = $editModule;
 
@@ -487,10 +515,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Module_Code.
      *
-     * @param string
+     * @param ?string $moduleCode
      * @return $this
      */
-    public function setModuleCode($moduleCode)
+    public function setModuleCode(?string $moduleCode) : self
     {
         $this->moduleCode = $moduleCode;
 
@@ -500,10 +528,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Exclusion.
      *
-     * @param bool
+     * @param ?bool $exclusion
      * @return $this
      */
-    public function setExclusion($exclusion)
+    public function setExclusion(?bool $exclusion) : self
     {
         $this->exclusion = $exclusion;
 
@@ -513,10 +541,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Description.
      *
-     * @param string
+     * @param ?string $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(?string $description) : self
     {
         $this->description = $description;
 
@@ -526,10 +554,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Display.
      *
-     * @param bool
+     * @param ?bool $display
      * @return $this
      */
-    public function setDisplay($display)
+    public function setDisplay(?bool $display) : self
     {
         $this->display = $display;
 
@@ -539,10 +567,10 @@ class PriceGroupInsert extends Request
     /**
      * Set DateTime_Start.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $dateTimeStart
      * @return $this
      */
-    public function setDateTimeStart($dateTimeStart)
+    public function setDateTimeStart($dateTimeStart) : self
     {
         if ($dateTimeStart instanceof \DateTime) {
             $this->dateTimeStart = $dateTimeStart->getTimestamp();
@@ -556,10 +584,10 @@ class PriceGroupInsert extends Request
     /**
      * Set DateTime_End.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $dateTimeEnd
      * @return $this
      */
-    public function setDateTimeEnd($dateTimeEnd)
+    public function setDateTimeEnd($dateTimeEnd) : self
     {
         if ($dateTimeEnd instanceof \DateTime) {
             $this->dateTimeEnd = $dateTimeEnd->getTimestamp();
@@ -573,10 +601,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Min_Subtotal.
      *
-     * @param float
+     * @param ?float $qualifyingMinSubtotal
      * @return $this
      */
-    public function setQualifyingMinSubtotal($qualifyingMinSubtotal)
+    public function setQualifyingMinSubtotal(?float $qualifyingMinSubtotal) : self
     {
         $this->qualifyingMinSubtotal = $qualifyingMinSubtotal;
 
@@ -586,10 +614,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Max_Subtotal.
      *
-     * @param float
+     * @param ?float $qualifyingMaxSubtotal
      * @return $this
      */
-    public function setQualifyingMaxSubtotal($qualifyingMaxSubtotal)
+    public function setQualifyingMaxSubtotal(?float $qualifyingMaxSubtotal) : self
     {
         $this->qualifyingMaxSubtotal = $qualifyingMaxSubtotal;
 
@@ -599,10 +627,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Min_Quantity.
      *
-     * @param int
+     * @param ?int $qualifyingMinQuantity
      * @return $this
      */
-    public function setQualifyingMinQuantity($qualifyingMinQuantity)
+    public function setQualifyingMinQuantity(?int $qualifyingMinQuantity) : self
     {
         $this->qualifyingMinQuantity = $qualifyingMinQuantity;
 
@@ -612,10 +640,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Max_Quantity.
      *
-     * @param int
+     * @param ?int $qualifyingMaxQuantity
      * @return $this
      */
-    public function setQualifyingMaxQuantity($qualifyingMaxQuantity)
+    public function setQualifyingMaxQuantity(?int $qualifyingMaxQuantity) : self
     {
         $this->qualifyingMaxQuantity = $qualifyingMaxQuantity;
 
@@ -625,10 +653,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Min_Weight.
      *
-     * @param float
+     * @param ?float $qualifyingMinWeight
      * @return $this
      */
-    public function setQualifyingMinWeight($qualifyingMinWeight)
+    public function setQualifyingMinWeight(?float $qualifyingMinWeight) : self
     {
         $this->qualifyingMinWeight = $qualifyingMinWeight;
 
@@ -638,10 +666,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Qualifying_Max_Weight.
      *
-     * @param float
+     * @param ?float $qualifyingMaxWeight
      * @return $this
      */
-    public function setQualifyingMaxWeight($qualifyingMaxWeight)
+    public function setQualifyingMaxWeight(?float $qualifyingMaxWeight) : self
     {
         $this->qualifyingMaxWeight = $qualifyingMaxWeight;
 
@@ -651,10 +679,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Min_Subtotal.
      *
-     * @param float
+     * @param ?float $basketMinSubtotal
      * @return $this
      */
-    public function setBasketMinSubtotal($basketMinSubtotal)
+    public function setBasketMinSubtotal(?float $basketMinSubtotal) : self
     {
         $this->basketMinSubtotal = $basketMinSubtotal;
 
@@ -664,10 +692,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Max_Subtotal.
      *
-     * @param float
+     * @param ?float $basketMaxSubtotal
      * @return $this
      */
-    public function setBasketMaxSubtotal($basketMaxSubtotal)
+    public function setBasketMaxSubtotal(?float $basketMaxSubtotal) : self
     {
         $this->basketMaxSubtotal = $basketMaxSubtotal;
 
@@ -677,10 +705,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Min_Quantity.
      *
-     * @param int
+     * @param ?int $basketMinQuantity
      * @return $this
      */
-    public function setBasketMinQuantity($basketMinQuantity)
+    public function setBasketMinQuantity(?int $basketMinQuantity) : self
     {
         $this->basketMinQuantity = $basketMinQuantity;
 
@@ -690,10 +718,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Max_Quantity.
      *
-     * @param int
+     * @param ?int $basketMaxQuantity
      * @return $this
      */
-    public function setBasketMaxQuantity($basketMaxQuantity)
+    public function setBasketMaxQuantity(?int $basketMaxQuantity) : self
     {
         $this->basketMaxQuantity = $basketMaxQuantity;
 
@@ -703,10 +731,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Min_Weight.
      *
-     * @param float
+     * @param ?float $basketMinWeight
      * @return $this
      */
-    public function setBasketMinWeight($basketMinWeight)
+    public function setBasketMinWeight(?float $basketMinWeight) : self
     {
         $this->basketMinWeight = $basketMinWeight;
 
@@ -716,10 +744,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Basket_Max_Weight.
      *
-     * @param float
+     * @param ?float $basketMaxWeight
      * @return $this
      */
-    public function setBasketMaxWeight($basketMaxWeight)
+    public function setBasketMaxWeight(?float $basketMaxWeight) : self
     {
         $this->basketMaxWeight = $basketMaxWeight;
 
@@ -729,10 +757,10 @@ class PriceGroupInsert extends Request
     /**
      * Set Priority.
      *
-     * @param int
+     * @param ?int $priority
      * @return $this
      */
-    public function setPriority($priority)
+    public function setPriority(?int $priority) : self
     {
         $this->priority = $priority;
 
@@ -740,14 +768,77 @@ class PriceGroupInsert extends Request
     }
 
     /**
-     * Set Module_Fields.
+     * Set Exclusions.
      *
-     * @param array
+     * @param \MerchantAPI\Collection|array $exclusions
+     * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setModuleFields(array $moduleFields)
+    public function setExclusions($exclusions) : self
+    {
+        if (!is_array($exclusions) && !$exclusions instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($exclusions) ? get_class($exclusions) : gettype($exclusions)));
+        }
+
+        foreach ($exclusions as &$model) {
+            if (is_array($model)) {
+                $model = new PriceGroupExclusion($model);
+            } else if (!$model instanceof PriceGroupExclusion) {
+                throw new \InvalidArgumentException(sprintf('Expected array of PriceGroupExclusion or an array of arrays but got %s',
+                    is_object($model) ? get_class($model) : gettype($model)));
+            }
+        }
+
+        $this->exclusions = new Collection($exclusions);
+
+        return $this;
+    }
+
+    /**
+     * Set Module_Fields.
+     *
+     * @param array $moduleFields
+     * @return $this
+     */
+    public function setModuleFields(array $moduleFields) : self
     {
         $this->moduleFields = $moduleFields;
+
+        return $this;
+    }
+
+    /**
+     * Add Exclusions.
+     *
+     * @param \MerchantAPI\Model\PriceGroupExclusion
+     * @return $this
+     */
+    public function addPriceGroupExclusion(PriceGroupExclusion $model) : self
+    {
+        $this->exclusions[] = $model;
+        return $this;
+    }
+
+    /**
+     * Add many PriceGroupExclusion.
+     *
+     * @param (\MerchantAPI\Model\PriceGroupExclusion|array)[]
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function addExclusions(array $exclusions) : self
+    {
+        foreach ($exclusions as $e) {
+            if (is_array($e)) {
+                $this->exclusions[] = new PriceGroupExclusion($e);
+            } else if ($e instanceof PriceGroupExclusion) {
+                $this->exclusions[] = $e;
+            } else {
+                throw new \InvalidArgumentException(sprintf('Expected array of PriceGroupExclusion or an array of arrays but got %s',
+                    is_object($e) ? get_class($e) : gettype($e)));
+            }
+        }
 
         return $this;
     }
@@ -759,7 +850,7 @@ class PriceGroupInsert extends Request
      * @param mixed
      * @return $this
      */
-    public function setModuleField($field, $value)
+    public function setModuleField(string $field, $value) : self
     {
         $this->moduleFields[$field] = $value;
         return $this;
@@ -768,7 +859,7 @@ class PriceGroupInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = array_merge(parent::toArray(), $this->getModuleFields());
 
@@ -872,13 +963,23 @@ class PriceGroupInsert extends Request
             $data['Priority'] = $this->getPriority();
         }
 
+        if (count($this->getExclusions())) {
+            $data['Exclusions'] = [];
+
+            foreach ($this->getExclusions() as $i => $priceGroupExclusion) {
+                if ($priceGroupExclusion->hasData()) {
+                    $data['Exclusions'][] = $priceGroupExclusion->getData();
+                }
+            }
+        }
+
         return $data;
     }
 
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PriceGroupInsert($this, $httpResponse, $data);
     }

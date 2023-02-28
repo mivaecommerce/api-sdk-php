@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AttributeTemplateOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AttributeTemplateOption_Delete.
@@ -26,44 +27,45 @@ use MerchantAPI\BaseClient;
 class AttributeTemplateOptionDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AttributeTemplateOption_Delete';
+    protected string $function = 'AttributeTemplateOption_Delete';
 
-    /** @var int */
-    protected $attributeTemplateId;
+    /** @var ?int */
+    protected ?int $attributeTemplateId = null;
 
-    /** @var string */
-    protected $attributeTemplateCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplate;
+    /** @var ?string */
+    protected ?string $editAttributeTemplate = null;
 
-    /** @var int */
-    protected $attributeTemplateAttributeId;
+    /** @var ?int */
+    protected ?int $attributeTemplateAttributeId = null;
 
-    /** @var string */
-    protected $attributeTemplateAttributeCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateAttributeCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplateAttribute;
+    /** @var ?string */
+    protected ?string $editAttributeTemplateAttribute = null;
 
-    /** @var int */
-    protected $attributeTemplateOptionId;
+    /** @var ?int */
+    protected ?int $attributeTemplateOptionId = null;
 
-    /** @var string */
-    protected $attributeTemplateOptionCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateOptionCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplateOption;
+    /** @var ?string */
+    protected ?string $editAttributeTemplateOption = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AttributeTemplateOption
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AttributeTemplateOption $attributeTemplateOption
      */
-    public function __construct(BaseClient $client = null, AttributeTemplateOption $attributeTemplateOption = null)
+    public function __construct(?BaseClient $client = null, ?AttributeTemplateOption $attributeTemplateOption = null)
     {
         parent::__construct($client);
         if ($attributeTemplateOption) {
@@ -78,7 +80,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
         return $this->attributeTemplateId;
     }
@@ -88,7 +90,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateCode()
+    public function getAttributeTemplateCode() : ?string
     {
         return $this->attributeTemplateCode;
     }
@@ -98,7 +100,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplate()
+    public function getEditAttributeTemplate() : ?string
     {
         return $this->editAttributeTemplate;
     }
@@ -108,7 +110,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
         return $this->attributeTemplateAttributeId;
     }
@@ -118,7 +120,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateAttributeCode()
+    public function getAttributeTemplateAttributeCode() : ?string
     {
         return $this->attributeTemplateAttributeCode;
     }
@@ -128,7 +130,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplateAttribute()
+    public function getEditAttributeTemplateAttribute() : ?string
     {
         return $this->editAttributeTemplateAttribute;
     }
@@ -138,7 +140,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateOptionId()
+    public function getAttributeTemplateOptionId() : ?int
     {
         return $this->attributeTemplateOptionId;
     }
@@ -148,7 +150,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateOptionCode()
+    public function getAttributeTemplateOptionCode() : ?string
     {
         return $this->attributeTemplateOptionCode;
     }
@@ -158,7 +160,7 @@ class AttributeTemplateOptionDelete extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplateOption()
+    public function getEditAttributeTemplateOption() : ?string
     {
         return $this->editAttributeTemplateOption;
     }
@@ -166,10 +168,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplate_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateId
      * @return $this
      */
-    public function setAttributeTemplateId($attributeTemplateId)
+    public function setAttributeTemplateId(?int $attributeTemplateId) : self
     {
         $this->attributeTemplateId = $attributeTemplateId;
 
@@ -179,10 +181,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplate_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateCode
      * @return $this
      */
-    public function setAttributeTemplateCode($attributeTemplateCode)
+    public function setAttributeTemplateCode(?string $attributeTemplateCode) : self
     {
         $this->attributeTemplateCode = $attributeTemplateCode;
 
@@ -192,10 +194,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set Edit_AttributeTemplate.
      *
-     * @param string
+     * @param ?string $editAttributeTemplate
      * @return $this
      */
-    public function setEditAttributeTemplate($editAttributeTemplate)
+    public function setEditAttributeTemplate(?string $editAttributeTemplate) : self
     {
         $this->editAttributeTemplate = $editAttributeTemplate;
 
@@ -205,10 +207,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplateAttribute_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateAttributeId
      * @return $this
      */
-    public function setAttributeTemplateAttributeId($attributeTemplateAttributeId)
+    public function setAttributeTemplateAttributeId(?int $attributeTemplateAttributeId) : self
     {
         $this->attributeTemplateAttributeId = $attributeTemplateAttributeId;
 
@@ -218,10 +220,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplateAttribute_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateAttributeCode
      * @return $this
      */
-    public function setAttributeTemplateAttributeCode($attributeTemplateAttributeCode)
+    public function setAttributeTemplateAttributeCode(?string $attributeTemplateAttributeCode) : self
     {
         $this->attributeTemplateAttributeCode = $attributeTemplateAttributeCode;
 
@@ -231,10 +233,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set Edit_AttributeTemplateAttribute.
      *
-     * @param string
+     * @param ?string $editAttributeTemplateAttribute
      * @return $this
      */
-    public function setEditAttributeTemplateAttribute($editAttributeTemplateAttribute)
+    public function setEditAttributeTemplateAttribute(?string $editAttributeTemplateAttribute) : self
     {
         $this->editAttributeTemplateAttribute = $editAttributeTemplateAttribute;
 
@@ -244,10 +246,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplateOption_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateOptionId
      * @return $this
      */
-    public function setAttributeTemplateOptionId($attributeTemplateOptionId)
+    public function setAttributeTemplateOptionId(?int $attributeTemplateOptionId) : self
     {
         $this->attributeTemplateOptionId = $attributeTemplateOptionId;
 
@@ -257,10 +259,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set AttributeTemplateOption_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateOptionCode
      * @return $this
      */
-    public function setAttributeTemplateOptionCode($attributeTemplateOptionCode)
+    public function setAttributeTemplateOptionCode(?string $attributeTemplateOptionCode) : self
     {
         $this->attributeTemplateOptionCode = $attributeTemplateOptionCode;
 
@@ -270,10 +272,10 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * Set Edit_AttributeTemplateOption.
      *
-     * @param string
+     * @param ?string $editAttributeTemplateOption
      * @return $this
      */
-    public function setEditAttributeTemplateOption($editAttributeTemplateOption)
+    public function setEditAttributeTemplateOption(?string $editAttributeTemplateOption) : self
     {
         $this->editAttributeTemplateOption = $editAttributeTemplateOption;
 
@@ -283,7 +285,7 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -317,7 +319,7 @@ class AttributeTemplateOptionDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeTemplateOptionDelete($this, $httpResponse, $data);
     }

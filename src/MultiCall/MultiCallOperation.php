@@ -22,14 +22,14 @@ use MerchantAPI\RequestInterface;
 class MultiCallOperation
 {
     /** @var array */
-    protected $sharedData;
+    protected array $sharedData;
 
     /** @var Collection */
-    protected $requests;
+    protected Collection $requests;
 
     /**
      * MultiCallOperation constructor.
-     * @param RequestInterface|RequestInterface[]|null
+     * @param RequestInterface|array|null
      * @param array $sharedData
      */
     public function __construct($request = null, array $sharedData = [])
@@ -52,18 +52,19 @@ class MultiCallOperation
      *
      * @return array
      */
-    public function getSharedData() {
+    public function getSharedData() : array
+    {
         return $this->sharedData;
     }
 
     /**
      * Add data to be shared with all iterations.
      *
-     * @param string
-     * @param mixed
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function addSharedData($field, $value)
+    public function addSharedData(string $field, $value) : self
     {
         $this->sharedData[$field] = $value;
         return $this;
@@ -75,7 +76,7 @@ class MultiCallOperation
      * @param array $data
      * @return $this
      */
-    public function setSharedData(array $data)
+    public function setSharedData(array $data) : self
     {
         $this->sharedData = $data;
         return $this;
@@ -86,7 +87,7 @@ class MultiCallOperation
      *
      * @return Collection
      */
-    public function getRequests()
+    public function getRequests() : Collection
     {
         return $this->requests;
     }
@@ -98,7 +99,7 @@ class MultiCallOperation
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addRequest(RequestInterface $request)
+    public function addRequest(RequestInterface $request) : self
     {
         if ($request instanceof MultiCallRequest) {
             throw new \InvalidArgumentException('Can\'t nest a MultiCallRequest in a MultiCallOperation');
@@ -119,10 +120,11 @@ class MultiCallOperation
     /**
      * Add an array of requests.
      *
-     * @param RequestInterface[] $requests
+     * @param array $requests
      * @return $this
      */
-    public function addRequests(array $requests) {
+    public function addRequests(array $requests) : self
+    {
         foreach ($requests as $request) {
             $this->addRequest($request);
         }
@@ -132,10 +134,11 @@ class MultiCallOperation
 
     /**
      *
-     * @param RequestInterface[] $requests
+     * @param array $requests
      * @return $this
      */
-    public function setRequests(array $requests) {
+    public function setRequests(array $requests) : self
+    {
         $this->requests = new Collection();
 
         foreach ($requests as $request) {
@@ -150,7 +153,7 @@ class MultiCallOperation
      *
      * @return array
      */
-    public function toArray()
+    public function toArray() : array
     {
         if (!count($this->requests)) {
             return [];

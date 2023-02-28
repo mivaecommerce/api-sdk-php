@@ -72,70 +72,70 @@ class ProductShippingRules extends \MerchantAPI\Model
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get ownpackage.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getOwnPackage()
+    public function getOwnPackage() : ?bool
     {
-        return (bool) $this->getField('ownpackage', false);
+        return $this->getField('ownpackage');
     }
 
     /**
      * Get width.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWidth()
+    public function getWidth() : ?float
     {
-        return (float) $this->getField('width', 0.00);
+        return $this->getField('width');
     }
 
     /**
      * Get length.
      *
-     * @return float
+     * @return ?float
      */
-    public function getLength()
+    public function getLength() : ?float
     {
-        return (float) $this->getField('length', 0.00);
+        return $this->getField('length');
     }
 
     /**
      * Get height.
      *
-     * @return float
+     * @return ?float
      */
-    public function getHeight()
+    public function getHeight() : ?float
     {
-        return (float) $this->getField('height', 0.00);
+        return $this->getField('height');
     }
 
     /**
      * Get limitmeths.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getLimitMethods()
+    public function getLimitMethods() : ?bool
     {
-        return (bool) $this->getField('limitmeths', false);
+        return $this->getField('limitmeths');
     }
 
     /**
      * Get methods.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductShippingMethod[]
+     * @return \MerchantAPI\Collection
      */
-    public function getMethods()
+    public function getMethods() : ?Collection
     {
-        return $this->getField('methods', []);
+        return $this->getField('methods');
     }
 }

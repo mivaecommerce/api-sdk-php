@@ -254,19 +254,19 @@ class Product extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -274,9 +274,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->getField('sku');
     }
@@ -284,9 +284,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -294,9 +294,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get thumbnail.
      *
-     * @return string
+     * @return ?string
      */
-    public function getThumbnail()
+    public function getThumbnail() : ?string
     {
         return $this->getField('thumbnail');
     }
@@ -304,9 +304,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -314,19 +314,19 @@ class Product extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get formatted_price.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedPrice()
+    public function getFormattedPrice() : ?string
     {
         return $this->getField('formatted_price');
     }
@@ -334,19 +334,19 @@ class Product extends \MerchantAPI\Model
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Get formatted_cost.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedCost()
+    public function getFormattedCost() : ?string
     {
         return $this->getField('formatted_cost');
     }
@@ -354,9 +354,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -364,39 +364,39 @@ class Product extends \MerchantAPI\Model
     /**
      * Get catcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCategoryCount()
+    public function getCategoryCount() : ?int
     {
-        return (int) $this->getField('catcount', 0);
+        return $this->getField('catcount');
     }
 
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get page_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPageTitle()
+    public function getPageTitle() : ?string
     {
         return $this->getField('page_title');
     }
@@ -404,69 +404,69 @@ class Product extends \MerchantAPI\Model
     /**
      * Get taxable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxable()
+    public function getTaxable() : ?bool
     {
-        return (bool) $this->getField('taxable', false);
+        return $this->getField('taxable');
     }
 
     /**
      * Get dt_created.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeCreated()
+    public function getDateTimeCreated() : ?int
     {
-        return (int) $this->getField('dt_created', 0);
+        return $this->getTimestampField('dt_created');
     }
 
     /**
      * Get dt_updated.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeUpdate()
+    public function getDateTimeUpdate() : ?int
     {
-        return (int) $this->getField('dt_updated', 0);
+        return $this->getTimestampField('dt_updated');
     }
 
     /**
      * Get productinventorysettings.
      *
-     * @return \MerchantAPI\Model\ProductInventorySettings|null
+     * @return ?\MerchantAPI\Model\ProductInventorySettings
      */
-    public function getProductInventorySettings()
+    public function getProductInventorySettings() : ?ProductInventorySettings
     {
-        return $this->getField('productinventorysettings', null);
+        return $this->getField('productinventorysettings');
     }
 
     /**
      * Get product_inventory_active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getProductInventoryActive()
+    public function getProductInventoryActive() : ?bool
     {
-        return (bool) $this->getField('product_inventory_active', false);
+        return $this->getField('product_inventory_active');
     }
 
     /**
      * Get product_inventory.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductInventory()
+    public function getProductInventory() : ?int
     {
-        return (int) $this->getField('product_inventory', 0);
+        return $this->getField('product_inventory');
     }
 
     /**
      * Get cancat_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCanonicalCategoryCode()
+    public function getCanonicalCategoryCode() : ?string
     {
         return $this->getField('cancat_code');
     }
@@ -474,9 +474,9 @@ class Product extends \MerchantAPI\Model
     /**
      * Get page_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPageCode()
+    public function getPageCode() : ?string
     {
         return $this->getField('page_code');
     }
@@ -484,79 +484,79 @@ class Product extends \MerchantAPI\Model
     /**
      * Get CustomField_Values.
      *
-     * @return \MerchantAPI\Model\CustomFieldValues|null
+     * @return ?\MerchantAPI\Model\CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
-        return $this->getField('CustomField_Values', null);
+        return $this->getField('CustomField_Values');
     }
 
     /**
      * Get uris.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Uri[]
+     * @return \MerchantAPI\Collection
      */
-    public function getUris()
+    public function getUris() : ?Collection
     {
-        return $this->getField('uris', []);
+        return $this->getField('uris');
     }
 
     /**
      * Get relatedproducts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\RelatedProduct[]
+     * @return \MerchantAPI\Collection
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts() : ?Collection
     {
-        return $this->getField('relatedproducts', []);
+        return $this->getField('relatedproducts');
     }
 
     /**
      * Get categories.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Category[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCategories()
+    public function getCategories() : ?Collection
     {
-        return $this->getField('categories', []);
+        return $this->getField('categories');
     }
 
     /**
      * Get productshippingrules.
      *
-     * @return \MerchantAPI\Model\ProductShippingRules|null
+     * @return ?\MerchantAPI\Model\ProductShippingRules
      */
-    public function getProductShippingRules()
+    public function getProductShippingRules() : ?ProductShippingRules
     {
-        return $this->getField('productshippingrules', null);
+        return $this->getField('productshippingrules');
     }
 
     /**
      * Get productimagedata.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductImageData[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProductImageData()
+    public function getProductImageData() : ?Collection
     {
-        return $this->getField('productimagedata', []);
+        return $this->getField('productimagedata');
     }
 
     /**
      * Get attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
-        return $this->getField('attributes', []);
+        return $this->getField('attributes');
     }
 
     /**
      * Get url.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUrl()
+    public function getUrl() : ?string
     {
         return $this->getField('url');
     }
@@ -566,8 +566,18 @@ class Product extends \MerchantAPI\Model
      *
      * @return array
      */
-    public function getImageTypes()
+    public function getImageTypes() : ?array
     {
         return $this->getField('image_types');
+    }
+
+    /**
+     * Get disp_order.
+     *
+     * @return ?int
+     */
+    public function getDisplayOrder() : ?int
+    {
+        return $this->getField('disp_order');
     }
 }

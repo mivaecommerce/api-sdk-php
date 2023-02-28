@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for CustomerList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Customer[] */
-    protected $customers = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $customers;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class CustomerListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->customers = new \MerchantAPI\Collection();
+        $this->customers = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class CustomerListLoadQuery extends ListQueryResponse
     /**
      * Get customers.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Customer[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCustomers()
+    public function getCustomers() : Collection
     {
         return $this->customers;
     }

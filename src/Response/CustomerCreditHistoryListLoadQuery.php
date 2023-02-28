@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\CustomerCreditHistory;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for CustomerCreditHistoryList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerCreditHistoryListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\CustomerCreditHistory[] */
-    protected $customerCreditHistory = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $customerCreditHistory;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class CustomerCreditHistoryListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->customerCreditHistory = new \MerchantAPI\Collection();
+        $this->customerCreditHistory = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class CustomerCreditHistoryListLoadQuery extends ListQueryResponse
     /**
      * Get customerCreditHistory.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CustomerCreditHistory[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCustomerCreditHistory()
+    public function getCustomerCreditHistory() : Collection
     {
         return $this->customerCreditHistory;
     }

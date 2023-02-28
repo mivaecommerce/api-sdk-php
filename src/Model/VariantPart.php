@@ -20,19 +20,19 @@ class VariantPart extends \MerchantAPI\Model
     /**
      * Get part_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPartId()
+    public function getPartId() : ?int
     {
-        return (int) $this->getField('part_id', 0);
+        return $this->getField('part_id');
     }
 
     /**
      * Get part_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPartCode()
+    public function getPartCode() : ?string
     {
         return $this->getField('part_code');
     }
@@ -40,20 +40,20 @@ class VariantPart extends \MerchantAPI\Model
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Set part_id.
      *
-     * @param int
+     * @param ?int $partId
      * @return $this
      */
-    public function setPartId($partId)
+    public function setPartId(?int $partId) : self
     {
         return $this->setField('part_id', $partId);
     }
@@ -61,10 +61,10 @@ class VariantPart extends \MerchantAPI\Model
     /**
      * Set part_code.
      *
-     * @param string
+     * @param ?string $partCode
      * @return $this
      */
-    public function setPartCode($partCode)
+    public function setPartCode(?string $partCode) : self
     {
         return $this->setField('part_code', $partCode);
     }
@@ -72,10 +72,10 @@ class VariantPart extends \MerchantAPI\Model
     /**
      * Set quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         return $this->setField('quantity', $quantity);
     }

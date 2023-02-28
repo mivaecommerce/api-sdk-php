@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Option_Update.
@@ -26,62 +27,63 @@ use MerchantAPI\BaseClient;
 class OptionUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Option_Update';
+    protected string $function = 'Option_Update';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $optionId;
+    /** @var ?int */
+    protected ?int $optionId = null;
 
-    /** @var string */
-    protected $optionCode;
+    /** @var ?string */
+    protected ?string $optionCode = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var string */
-    protected $editAttribute;
+    /** @var ?string */
+    protected ?string $editAttribute = null;
 
-    /** @var string */
-    protected $attributeCode;
+    /** @var ?string */
+    protected ?string $attributeCode = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $default;
+    /** @var ?bool */
+    protected ?bool $default = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductOption
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductOption $productOption
      */
-    public function __construct(BaseClient $client = null, ProductOption $productOption = null)
+    public function __construct(?BaseClient $client = null, ?ProductOption $productOption = null)
     {
         parent::__construct($client);
         if ($productOption) {
@@ -113,7 +115,7 @@ class OptionUpdate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -123,7 +125,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -133,7 +135,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -143,7 +145,7 @@ class OptionUpdate extends Request
      *
      * @return int
      */
-    public function getOptionId()
+    public function getOptionId() : ?int
     {
         return $this->optionId;
     }
@@ -153,7 +155,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getOptionCode()
+    public function getOptionCode() : ?string
     {
         return $this->optionCode;
     }
@@ -163,7 +165,7 @@ class OptionUpdate extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -173,7 +175,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getEditAttribute()
+    public function getEditAttribute() : ?string
     {
         return $this->editAttribute;
     }
@@ -183,7 +185,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->attributeCode;
     }
@@ -193,7 +195,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -203,7 +205,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -213,7 +215,7 @@ class OptionUpdate extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -223,7 +225,7 @@ class OptionUpdate extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -233,7 +235,7 @@ class OptionUpdate extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -243,7 +245,7 @@ class OptionUpdate extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -253,7 +255,7 @@ class OptionUpdate extends Request
      *
      * @return bool
      */
-    public function getDefault()
+    public function getDefault() : ?bool
     {
         return $this->default;
     }
@@ -261,10 +263,10 @@ class OptionUpdate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -274,10 +276,10 @@ class OptionUpdate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -287,10 +289,10 @@ class OptionUpdate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -300,10 +302,10 @@ class OptionUpdate extends Request
     /**
      * Set Option_ID.
      *
-     * @param int
+     * @param ?int $optionId
      * @return $this
      */
-    public function setOptionId($optionId)
+    public function setOptionId(?int $optionId) : self
     {
         $this->optionId = $optionId;
 
@@ -313,10 +315,10 @@ class OptionUpdate extends Request
     /**
      * Set Option_Code.
      *
-     * @param string
+     * @param ?string $optionCode
      * @return $this
      */
-    public function setOptionCode($optionCode)
+    public function setOptionCode(?string $optionCode) : self
     {
         $this->optionCode = $optionCode;
 
@@ -326,10 +328,10 @@ class OptionUpdate extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -339,10 +341,10 @@ class OptionUpdate extends Request
     /**
      * Set Edit_Attribute.
      *
-     * @param string
+     * @param ?string $editAttribute
      * @return $this
      */
-    public function setEditAttribute($editAttribute)
+    public function setEditAttribute(?string $editAttribute) : self
     {
         $this->editAttribute = $editAttribute;
 
@@ -352,10 +354,10 @@ class OptionUpdate extends Request
     /**
      * Set Attribute_Code.
      *
-     * @param string
+     * @param ?string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(?string $attributeCode) : self
     {
         $this->attributeCode = $attributeCode;
 
@@ -365,10 +367,10 @@ class OptionUpdate extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -378,10 +380,10 @@ class OptionUpdate extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -391,10 +393,10 @@ class OptionUpdate extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -404,10 +406,10 @@ class OptionUpdate extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -417,10 +419,10 @@ class OptionUpdate extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -430,10 +432,10 @@ class OptionUpdate extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -443,10 +445,10 @@ class OptionUpdate extends Request
     /**
      * Set Default.
      *
-     * @param bool
+     * @param ?bool $default
      * @return $this
      */
-    public function setDefault($default)
+    public function setDefault(?bool $default) : self
     {
         $this->default = $default;
 
@@ -456,7 +458,7 @@ class OptionUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -516,7 +518,7 @@ class OptionUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OptionUpdate($this, $httpResponse, $data);
     }

@@ -20,13 +20,13 @@ use MerchantAPI\Http\HttpResponse;
 abstract class Response implements ResponseInterface
 {
     /** @var RequestInterface */
-    protected $request;
+    protected RequestInterface $request;
 
     /** @var HttpResponse  */
-    protected $httpResponse;
+    protected HttpResponse $httpResponse;
 
     /** @var array  */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * Response constructor.
@@ -45,7 +45,7 @@ abstract class Response implements ResponseInterface
     /**
      * @inheritDoc
      */
-    public function isSuccess()
+    public function isSuccess() : bool
     {
         return isset($this->data['success']) && $this->data['success'] == true;
     }
@@ -53,7 +53,7 @@ abstract class Response implements ResponseInterface
     /**
      * @inheritDoc
      */
-    public function isError()
+    public function isError() : bool
     {
         return isset($this->data['success']) && $this->data['success'] == false;
     }
@@ -61,97 +61,87 @@ abstract class Response implements ResponseInterface
     /**
      * @inheritDoc
      */
-    public function getErrorMessage()
+    public function getErrorMessage() : ?string
     {
-        return isset($this->data['error_message']) ?
-            $this->data['error_message'] : null;
+        return $this->data['error_message'] ?? null;
     }
 
     /**
      * @inheritDoc
      */
-    public function getErrorCode()
+    public function getErrorCode() : ?string
     {
-        return isset($this->data['error_code']) ?
-            $this->data['error_code'] : null;
+        return $this->data['error_code'] ?? null;
     }
 
     /**
      * @inheritDoc
      */
-    public function getInputErrorCount()
+    public function getInputErrorCount() : int
     {
-        return isset($this->data['input_errors']) ?
-            $this->data['input_errors'] : 0;
+        return $this->data['input_errors'] ?? 0;
     }
 
     /**
      * @inheritDoc
      */
-    public function getErrorFields()
+    public function getErrorFields() : ?array
     {
-        return isset($this->data['error_fields']) ?
-            $this->data['error_fields'] : [];
+        return $this->data['error_fields'] ?? [];
     }
 
     /**
      * @inheritDoc
      */
-    public function getErrorField()
+    public function getErrorField() : ?string
     {
-        return isset($this->data['error_field']) ?
-            $this->data['error_field'] : null;
+        return $this->data['error_field'] ?? null;
     }
 
     /**
      * @inheritDoc
      */
-    public function getErrorFieldMessage()
+    public function getErrorFieldMessage() : ?string
     {
-        return isset($this->data['error_field_message']) ?
-            $this->data['error_field_message'] : null;
+        return $this->data['error_field_message'] ?? null;
     }
 
     /**
      * @inheritDoc
      */
-    public function isListError()
+    public function isListError() : bool
     {
-        return isset($this->data['list_error']) ?
-            $this->data['list_error'] : false;
+        return $this->data['list_error'] ?? false;
     }
 
     /**
      * @inheritDoc
      */
-    public function isValidationError()
+    public function isValidationError() : bool
     {
-        return isset($this->data['validation_error']) ?
-            $this->data['validation_error'] : false;
+        return $this->data['validation_error'] ?? false;
     }
 
     /**
      * @inheritDoc
      */
-    public function isInputError()
+    public function isInputError() : bool
     {
-        return isset($this->data['input_errors']) ?
-            $this->data['input_errors'] : false;
+        return $this->data['input_errors'] ?? false;
     }
 
     /**
      * @inheritDoc
      */
-    public function getErrors()
+    public function getErrors() : ?array
     {
-        return isset($this->data['errors']) ?
-            $this->data['errors'] : [];
+        return $this->data['errors'] ?? [];
     }
 
     /**
      * @inheritDoc
      */
-    public function getData()
+    public function getData() : array
     {
         return $this->data;
     }
@@ -159,7 +149,7 @@ abstract class Response implements ResponseInterface
     /**
      * @inheritDoc
      */
-    public function getRequest()
+    public function getRequest() : RequestInterface
     {
         return $this->request;
     }
@@ -167,7 +157,7 @@ abstract class Response implements ResponseInterface
     /**
      * @inheritDoc
      */
-    public function getHttpResponse()
+    public function getHttpResponse() : HttpResponse
     {
         return $this->httpResponse;
     }

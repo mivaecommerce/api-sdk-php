@@ -22,41 +22,41 @@ use MerchantAPI\BaseClient;
 abstract class ListQueryRequest extends Request implements ListQueryRequestInterface
 {
     /** @var string  */
-    protected $sort;
+    protected string $sort = '';
 
     /** @var array|\MerchantAPI\ListQuery\FilterExpression */
     protected $filters;
 
     /** @var array */
-    protected $availableSearchFields    = [];
+    protected array $availableSearchFields    = [];
 
     /** @var array */
-    protected $availableSortFields      = [];
+    protected array $availableSortFields      = [];
 
     /** @var array */
-    protected $availableOnDemandColumns = [];
+    protected array $availableOnDemandColumns = [];
 
     /** @var array */
-    protected $onDemandColumns          = [];
+    protected array $onDemandColumns          = [];
 
     /** @var array */
-    protected $availableCustomFilters   = [];
+    protected array $availableCustomFilters   = [];
 
     /** @var array */
-    protected $customFilters            = [];
+    protected array $customFilters            = [];
 
     /** @var int */
-    protected $offset = 0;
+    protected int $offset = 0;
 
     /** @var int */
-    protected $count = 0;
+    protected int $count = 0;
 
     /**
      * Constructor
      *
-     * @param Client $client
+     * @param ?BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         parent::__construct($client);
 
@@ -66,7 +66,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getSort()
+    public function getSort() : string
     {
         return $this->sort;
     }
@@ -74,11 +74,11 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function setSort($field, $direction = self::SORT_ASCENDING)
+    public function setSort(string $field, string $direction = self::SORT_ASCENDING) : self
     {
         $direction = strtolower($direction);
 
-        if (!in_array($field, $this->getAvailableSortFields())) {
+        if (count($this->getAvailableSortFields()) && !in_array($field, $this->getAvailableSortFields())) {
             throw new \InvalidArgumentException(sprintf('Field %s is not sortable. Available fields are %s',
                 $field, implode(', ', $this->getAvailableSortFields())));
         }
@@ -95,7 +95,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getAvailableSortFields()
+    public function getAvailableSortFields() : array
     {
         return $this->availableSortFields;
     }
@@ -103,7 +103,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getOffset()
+    public function getOffset() : int
     {
         return $this->offset;
     }
@@ -111,16 +111,16 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function setOffset($offset)
+    public function setOffset(int $offset) : self
     {
-        $this->offset = (int) $offset;
+        $this->offset = $offset;
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getCount()
+    public function getCount() : int
     {
         return $this->count;
     }
@@ -128,16 +128,16 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function setCount($count)
+    public function setCount(int $count) : self
     {
-        $this->count = (int) $count;
+        $this->count = $count;
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getAvailableSearchFields()
+    public function getAvailableSearchFields() : array
     {
         return $this->availableSearchFields;
     }
@@ -146,7 +146,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
      * @inheritDoc
      * @throws \InvalidArgumentException
      */
-    public function addOnDemandColumn($column)
+    public function addOnDemandColumn(string $column) : self
     {
         if (stripos($column, ':') === false && !in_array($column, $this->getAvailableOnDemandColumns())) {
             throw new \InvalidArgumentException(sprintf('Column %s is not an on demand column. Available on demand columns are %s',
@@ -163,7 +163,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function removeOnDemandColumn($column)
+    public function removeOnDemandColumn(string $column) : self
     {
         foreach ($this->getOnDemandColumns() as $i => $col) {
             if ($column === $col) {
@@ -179,7 +179,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
      * @inheritDoc
      * @throws \InvalidArgumentException
      */
-    public function setOnDemandColumns(array $columns)
+    public function setOnDemandColumns(array $columns) : self
     {
         $org = $this->onDemandColumns;
 
@@ -198,7 +198,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getOnDemandColumns()
+    public function getOnDemandColumns() : array
     {
         return $this->onDemandColumns;
     }
@@ -206,7 +206,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getAvailableOnDemandColumns()
+    public function getAvailableOnDemandColumns() : array
     {
         return $this->availableOnDemandColumns;
     }
@@ -214,7 +214,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getCustomFilters()
+    public function getCustomFilters() : array
     {
         return $this->customFilters;
     }
@@ -222,7 +222,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function getAvailableCustomFilters()
+    public function getAvailableCustomFilters() : array
     {
         return array_keys($this->availableCustomFilters);
     }
@@ -230,7 +230,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function setFilters($filters)
+    public function setFilters($filters) : self
     {
         if (is_array($filters) || $filters instanceof FilterExpression) {
             $this->filters = $filters;
@@ -253,7 +253,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function setCustomFilter($name, $value)
+    public function setCustomFilter(string $name, $value) : self
     {
         if (!isset($this->availableCustomFilters[$name])) {
             throw new \InvalidArgumentException(sprintf('Invalid custom filter %s. Available filters are %s',
@@ -274,7 +274,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function removeCustomFilter($name)
+    public function removeCustomFilter(string $name) : self
     {
         if (isset($this->customFilters[$name])) {
             unset($this->customFilters[$name]);
@@ -285,7 +285,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function filterExpression()
+    public function filterExpression() : FilterExpression
     {
         return new FilterExpression($this);
     }
@@ -293,7 +293,7 @@ abstract class ListQueryRequest extends Request implements ListQueryRequestInter
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $return = array_merge(parent::toArray(), [
             'Sort'      => $this->getSort(),

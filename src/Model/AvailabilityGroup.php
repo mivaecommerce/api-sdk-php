@@ -20,19 +20,19 @@ class AvailabilityGroup extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -40,10 +40,10 @@ class AvailabilityGroup extends \MerchantAPI\Model
     /**
      * Get tax_exempt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxExempt()
+    public function getTaxExempt() : ?bool
     {
-        return (bool) $this->getField('tax_exempt', false);
+        return $this->getField('tax_exempt');
     }
 }

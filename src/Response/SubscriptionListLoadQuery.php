@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Subscription;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for SubscriptionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class SubscriptionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Subscription[] */
-    protected $subscriptions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $subscriptions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class SubscriptionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->subscriptions = new \MerchantAPI\Collection();
+        $this->subscriptions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class SubscriptionListLoadQuery extends ListQueryResponse
     /**
      * Get subscriptions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Subscription[]
+     * @return \MerchantAPI\Collection
      */
-    public function getSubscriptions()
+    public function getSubscriptions() : Collection
     {
         return $this->subscriptions;
     }

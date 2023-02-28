@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\Model\BranchPropertyVersion;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BranchPropertyVersionList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class BranchPropertyVersionListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BranchPropertyVersionList_Load_Query';
+    protected string $function = 'BranchPropertyVersionList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'prop_id',
         'type',
         'code',
@@ -49,7 +50,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'prop_id',
         'type',
         'code',
@@ -65,7 +66,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'settings',
         'product',
         'category',
@@ -74,24 +75,25 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
         'image',
     ];
 
-    /** @var int */
-    protected $branchId;
+    /** @var ?int */
+    protected ?int $branchId = null;
 
-    /** @var string */
-    protected $branchName;
+    /** @var ?string */
+    protected ?string $branchName = null;
 
-    /** @var string */
-    protected $editBranch;
+    /** @var ?string */
+    protected ?string $editBranch = null;
 
-    /** @var int */
-    protected $changesetId;
+    /** @var ?int */
+    protected ?int $changesetId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -108,7 +110,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
         return $this->branchId;
     }
@@ -118,7 +120,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getBranchName()
+    public function getBranchName() : ?string
     {
         return $this->branchName;
     }
@@ -128,7 +130,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditBranch()
+    public function getEditBranch() : ?string
     {
         return $this->editBranch;
     }
@@ -138,7 +140,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getChangesetId()
+    public function getChangesetId() : ?int
     {
         return $this->changesetId;
     }
@@ -146,10 +148,10 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Branch_ID.
      *
-     * @param int
+     * @param ?int $branchId
      * @return $this
      */
-    public function setBranchId($branchId)
+    public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
 
@@ -159,10 +161,10 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Branch_Name.
      *
-     * @param string
+     * @param ?string $branchName
      * @return $this
      */
-    public function setBranchName($branchName)
+    public function setBranchName(?string $branchName) : self
     {
         $this->branchName = $branchName;
 
@@ -172,10 +174,10 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Branch.
      *
-     * @param string
+     * @param ?string $editBranch
      * @return $this
      */
-    public function setEditBranch($editBranch)
+    public function setEditBranch(?string $editBranch) : self
     {
         $this->editBranch = $editBranch;
 
@@ -185,10 +187,10 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Changeset_ID.
      *
-     * @param int
+     * @param ?int $changesetId
      * @return $this
      */
-    public function setChangesetId($changesetId)
+    public function setChangesetId(?int $changesetId) : self
     {
         $this->changesetId = $changesetId;
 
@@ -198,7 +200,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -224,7 +226,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchPropertyVersionListLoadQuery($this, $httpResponse, $data);
     }

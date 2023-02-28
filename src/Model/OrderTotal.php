@@ -20,19 +20,19 @@ class OrderTotal extends \MerchantAPI\Model
     /**
      * Get total.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotal()
+    public function getTotal() : ?float
     {
-        return (float) $this->getField('total', 0.00);
+        return $this->getField('total');
     }
 
     /**
      * Get formatted_total.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTotal()
+    public function getFormattedTotal() : ?string
     {
         return $this->getField('formatted_total');
     }

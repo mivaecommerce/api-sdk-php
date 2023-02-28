@@ -19,15 +19,24 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ClientException extends \Exception
 {
-    protected $httpResponse = null;
-    
-    public function __construct(string $message = "", int $code = 0, \Throwable $previous = null, HttpResponse $httpResponse = null)
+    protected ?HttpResponse $httpResponse = null;
+
+    /**
+     * @param string $message
+     * @param int $code
+     * @param \Throwable|null $previous
+     * @param HttpResponse|null $httpResponse
+     */
+    public function __construct(string $message = "", int $code = 0, \Throwable $previous = null, ?HttpResponse $httpResponse = null)
     {
         parent::__construct($message, $code, $previous);
         $this->httpResponse = $httpResponse;
     }
 
-    public function getHttpResponse()
+    /**
+     * @return ?HttpResponse
+     */
+    public function getHttpResponse() : ?HttpResponse
     {
         return $this->httpResponse;
     }

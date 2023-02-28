@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for FeedURIList_Delete.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class FeedURIListDelete extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Uri[] */
-    protected $uris = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $uris;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class FeedURIListDelete extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->uris = new \MerchantAPI\Collection();
+        $this->uris = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class FeedURIListDelete extends Response
     /**
      * Get uris.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Uri[]
+     * @return \MerchantAPI\Collection
      */
-    public function getUris()
+    public function getUris() : Collection
     {
         return $this->uris;
     }

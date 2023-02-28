@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderCustomFields_Update.
@@ -27,23 +28,24 @@ use MerchantAPI\BaseClient;
 class OrderCustomFieldsUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderCustomFields_Update';
+    protected string $function = 'OrderCustomFields_Update';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -60,7 +62,7 @@ class OrderCustomFieldsUpdate extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -68,9 +70,9 @@ class OrderCustomFieldsUpdate extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -78,10 +80,10 @@ class OrderCustomFieldsUpdate extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -91,10 +93,10 @@ class OrderCustomFieldsUpdate extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -111,7 +113,7 @@ class OrderCustomFieldsUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -129,7 +131,7 @@ class OrderCustomFieldsUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderCustomFieldsUpdate($this, $httpResponse, $data);
     }

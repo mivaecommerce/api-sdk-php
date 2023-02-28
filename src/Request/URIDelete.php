@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request URI_Delete.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class URIDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_DOMAIN;
+    protected string $scope = self::REQUEST_SCOPE_DOMAIN;
 
     /** @var string The API function name */
-    protected $function = 'URI_Delete';
+    protected string $function = 'URI_Delete';
 
-    /** @var int */
-    protected $uRIId;
+    /** @var ?int */
+    protected ?int $uRIId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Uri
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Uri $uri
      */
-    public function __construct(BaseClient $client = null, Uri $uri = null)
+    public function __construct(?BaseClient $client = null, ?Uri $uri = null)
     {
         parent::__construct($client);
         if ($uri) {
@@ -54,7 +56,7 @@ class URIDelete extends Request
      *
      * @return int
      */
-    public function getURIId()
+    public function getURIId() : ?int
     {
         return $this->uRIId;
     }
@@ -62,10 +64,10 @@ class URIDelete extends Request
     /**
      * Set URI_ID.
      *
-     * @param int
+     * @param ?int $uRIId
      * @return $this
      */
-    public function setURIId($uRIId)
+    public function setURIId(?int $uRIId) : self
     {
         $this->uRIId = $uRIId;
 
@@ -75,7 +77,7 @@ class URIDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -89,7 +91,7 @@ class URIDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\URIDelete($this, $httpResponse, $data);
     }

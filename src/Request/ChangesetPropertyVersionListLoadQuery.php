@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\Model\ChangesetPropertyVersion;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ChangesetPropertyVersionList_Load_Query.
@@ -27,13 +28,13 @@ use MerchantAPI\BaseClient;
 class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ChangesetPropertyVersionList_Load_Query';
+    protected string $function = 'ChangesetPropertyVersionList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'prop_id',
         'type',
@@ -49,7 +50,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'prop_id',
         'type',
@@ -65,7 +66,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'settings',
         'product',
         'category',
@@ -74,15 +75,16 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
         'image',
     ];
 
-    /** @var int */
-    protected $changesetId;
+    /** @var ?int */
+    protected ?int $changesetId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Changeset
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Changeset $changeset
      */
-    public function __construct(BaseClient $client = null, Changeset $changeset = null)
+    public function __construct(?BaseClient $client = null, ?Changeset $changeset = null)
     {
         parent::__construct($client);
         if ($changeset) {
@@ -95,7 +97,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getChangesetId()
+    public function getChangesetId() : ?int
     {
         return $this->changesetId;
     }
@@ -103,10 +105,10 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * Set Changeset_ID.
      *
-     * @param int
+     * @param ?int $changesetId
      * @return $this
      */
-    public function setChangesetId($changesetId)
+    public function setChangesetId(?int $changesetId) : self
     {
         $this->changesetId = $changesetId;
 
@@ -116,7 +118,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -128,7 +130,7 @@ class ChangesetPropertyVersionListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ChangesetPropertyVersionListLoadQuery($this, $httpResponse, $data);
     }

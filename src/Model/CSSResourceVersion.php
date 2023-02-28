@@ -132,29 +132,29 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get res_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getResourceId()
+    public function getResourceId() : ?int
     {
-        return (int) $this->getField('res_id', 0);
+        return $this->getField('res_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -162,9 +162,9 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -172,29 +172,29 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get is_global.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getIsGlobal()
+    public function getIsGlobal() : ?bool
     {
-        return (bool) $this->getField('is_global', false);
+        return $this->getField('is_global');
     }
 
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get file.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFile()
+    public function getFile() : ?string
     {
         return $this->getField('file');
     }
@@ -202,9 +202,9 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get branchless_file.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBranchlessFile()
+    public function getBranchlessFile() : ?string
     {
         return $this->getField('branchless_file');
     }
@@ -212,29 +212,29 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get templ_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTemplateId()
+    public function getTemplateId() : ?int
     {
-        return (int) $this->getField('templ_id', 0);
+        return $this->getField('templ_id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserName()
+    public function getUserName() : ?string
     {
         return $this->getField('user_name');
     }
@@ -242,9 +242,9 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserIcon()
+    public function getUserIcon() : ?string
     {
         return $this->getField('user_icon');
     }
@@ -252,19 +252,19 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get source_user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSourceUserId()
+    public function getSourceUserId() : ?int
     {
-        return (int) $this->getField('source_user_id', 0);
+        return $this->getField('source_user_id');
     }
 
     /**
      * Get source_user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceUserName()
+    public function getSourceUserName() : ?string
     {
         return $this->getField('source_user_name');
     }
@@ -272,9 +272,9 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get source_user_icon.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceUserIcon()
+    public function getSourceUserIcon() : ?string
     {
         return $this->getField('source_user_icon');
     }
@@ -282,9 +282,9 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('source');
     }
@@ -292,39 +292,39 @@ class CSSResourceVersion extends \MerchantAPI\Model
     /**
      * Get attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CSSResourceVersionAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
-        return $this->getField('attributes', []);
+        return $this->getField('attributes');
     }
 
     /**
      * Get linkedpages.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Page[]
+     * @return \MerchantAPI\Collection
      */
-    public function getLinkedPages()
+    public function getLinkedPages() : ?Collection
     {
-        return $this->getField('linkedpages', []);
+        return $this->getField('linkedpages');
     }
 
     /**
      * Get linkedresources.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CSSResource[]
+     * @return \MerchantAPI\Collection
      */
-    public function getLinkedResources()
+    public function getLinkedResources() : ?Collection
     {
-        return $this->getField('linkedresources', []);
+        return $this->getField('linkedresources');
     }
 
     /**
      * Get source_notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSourceNotes()
+    public function getSourceNotes() : ?string
     {
         return $this->getField('source_notes');
     }

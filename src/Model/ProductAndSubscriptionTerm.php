@@ -20,19 +20,19 @@ class ProductAndSubscriptionTerm extends Product
     /**
      * Get term_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermId()
+    public function getTermId() : ?int
     {
-        return (int) $this->getField('term_id', 0);
+        return $this->getField('term_id');
     }
 
     /**
      * Get term_frequency.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTermFrequency()
+    public function getTermFrequency() : ?string
     {
         return $this->getField('term_frequency');
     }
@@ -40,19 +40,19 @@ class ProductAndSubscriptionTerm extends Product
     /**
      * Get term_term.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermTerm()
+    public function getTermTerm() : ?int
     {
-        return (int) $this->getField('term_term', 0);
+        return $this->getField('term_term');
     }
 
     /**
      * Get term_descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTermDescription()
+    public function getTermDescription() : ?string
     {
         return $this->getField('term_descrip');
     }
@@ -60,40 +60,40 @@ class ProductAndSubscriptionTerm extends Product
     /**
      * Get term_n.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermN()
+    public function getTermN() : ?int
     {
-        return (int) $this->getField('term_n', 0);
+        return $this->getField('term_n');
     }
 
     /**
      * Get term_fixed_dow.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermFixedDayOfWeek()
+    public function getTermFixedDayOfWeek() : ?int
     {
-        return (int) $this->getField('term_fixed_dow', 0);
+        return $this->getField('term_fixed_dow');
     }
 
     /**
      * Get term_fixed_dom.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermFixedDayOfMonth()
+    public function getTermFixedDayOfMonth() : ?int
     {
-        return (int) $this->getField('term_fixed_dom', 0);
+        return $this->getField('term_fixed_dom');
     }
 
     /**
      * Get term_sub_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermSubscriptionCount()
+    public function getTermSubscriptionCount() : ?int
     {
-        return (int) $this->getField('term_sub_count', 0);
+        return $this->getField('term_sub_count');
     }
 }

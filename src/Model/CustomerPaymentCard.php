@@ -20,29 +20,29 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get cust_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
-        return (int) $this->getField('cust_id', 0);
+        return $this->getField('cust_id');
     }
 
     /**
      * Get fname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFirstName()
+    public function getFirstName() : ?string
     {
         return $this->getField('fname');
     }
@@ -50,9 +50,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get lname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLastName()
+    public function getLastName() : ?string
     {
         return $this->getField('lname');
     }
@@ -60,29 +60,29 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get exp_month.
      *
-     * @return int
+     * @return ?int
      */
-    public function getExpirationMonth()
+    public function getExpirationMonth() : ?int
     {
-        return (int) $this->getField('exp_month', 0);
+        return $this->getField('exp_month');
     }
 
     /**
      * Get exp_year.
      *
-     * @return int
+     * @return ?int
      */
-    public function getExpirationYear()
+    public function getExpirationYear() : ?int
     {
-        return (int) $this->getField('exp_year', 0);
+        return $this->getField('exp_year');
     }
 
     /**
      * Get lastfour.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLastFour()
+    public function getLastFour() : ?string
     {
         return $this->getField('lastfour');
     }
@@ -90,9 +90,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get addr1.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress1()
+    public function getAddress1() : ?string
     {
         return $this->getField('addr1');
     }
@@ -100,9 +100,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get addr2.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress2()
+    public function getAddress2() : ?string
     {
         return $this->getField('addr2');
     }
@@ -110,9 +110,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCity()
+    public function getCity() : ?string
     {
         return $this->getField('city');
     }
@@ -120,9 +120,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getState()
+    public function getState() : ?string
     {
         return $this->getField('state');
     }
@@ -130,9 +130,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getZip()
+    public function getZip() : ?string
     {
         return $this->getField('zip');
     }
@@ -140,9 +140,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get cntry.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCountry()
+    public function getCountry() : ?string
     {
         return $this->getField('cntry');
     }
@@ -150,9 +150,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get lastused.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLastUsed()
+    public function getLastUsed() : ?string
     {
         return $this->getField('lastused');
     }
@@ -160,9 +160,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get token.
      *
-     * @return string
+     * @return ?string
      */
-    public function getToken()
+    public function getToken() : ?string
     {
         return $this->getField('token');
     }
@@ -170,29 +170,29 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get type_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTypeId()
+    public function getTypeId() : ?int
     {
-        return (int) $this->getField('type_id', 0);
+        return $this->getField('type_id');
     }
 
     /**
      * Get refcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getReferenceCount()
+    public function getReferenceCount() : ?int
     {
-        return (int) $this->getField('refcount', 0);
+        return $this->getField('refcount');
     }
 
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -200,9 +200,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get mod_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getModuleCode()
+    public function getModuleCode() : ?string
     {
         return $this->getField('mod_code');
     }
@@ -210,9 +210,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get meth_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodCode()
+    public function getMethodCode() : ?string
     {
         return $this->getField('meth_code');
     }

@@ -12,7 +12,9 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request FeedURI_Insert.
@@ -25,32 +27,32 @@ use MerchantAPI\BaseClient;
 class FeedURIInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'FeedURI_Insert';
+    protected string $function = 'FeedURI_Insert';
 
-    /** @var int */
-    protected $feedId;
+    /** @var ?int */
+    protected ?int $feedId = null;
 
-    /** @var string */
-    protected $feedCode;
+    /** @var ?string */
+    protected ?string $feedCode = null;
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
     /**
      * Get Feed_ID.
      *
      * @return int
      */
-    public function getFeedId()
+    public function getFeedId() : ?int
     {
         return $this->feedId;
     }
@@ -60,7 +62,7 @@ class FeedURIInsert extends Request
      *
      * @return string
      */
-    public function getFeedCode()
+    public function getFeedCode() : ?string
     {
         return $this->feedCode;
     }
@@ -70,7 +72,7 @@ class FeedURIInsert extends Request
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -80,7 +82,7 @@ class FeedURIInsert extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -90,7 +92,7 @@ class FeedURIInsert extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -98,10 +100,10 @@ class FeedURIInsert extends Request
     /**
      * Set Feed_ID.
      *
-     * @param int
+     * @param ?int $feedId
      * @return $this
      */
-    public function setFeedId($feedId)
+    public function setFeedId(?int $feedId) : self
     {
         $this->feedId = $feedId;
 
@@ -111,10 +113,10 @@ class FeedURIInsert extends Request
     /**
      * Set Feed_Code.
      *
-     * @param string
+     * @param ?string $feedCode
      * @return $this
      */
-    public function setFeedCode($feedCode)
+    public function setFeedCode(?string $feedCode) : self
     {
         $this->feedCode = $feedCode;
 
@@ -124,10 +126,10 @@ class FeedURIInsert extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -137,10 +139,10 @@ class FeedURIInsert extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -150,10 +152,10 @@ class FeedURIInsert extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -163,7 +165,7 @@ class FeedURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -191,7 +193,7 @@ class FeedURIInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\FeedURIInsert($this, $httpResponse, $data);
     }

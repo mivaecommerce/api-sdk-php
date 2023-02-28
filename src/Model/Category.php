@@ -90,69 +90,69 @@ class Category extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get parent_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getParentId()
+    public function getParentId() : ?int
     {
-        return (int) $this->getField('parent_id', 0);
+        return $this->getField('parent_id');
     }
 
     /**
      * Get agrpcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAvailabilityGroupCount()
+    public function getAvailabilityGroupCount() : ?int
     {
-        return (int) $this->getField('agrpcount', 0);
+        return $this->getField('agrpcount');
     }
 
     /**
      * Get depth.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDepth()
+    public function getDepth() : ?int
     {
-        return (int) $this->getField('depth', 0);
+        return $this->getField('depth');
     }
 
     /**
      * Get disp_order.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDisplayOrder()
+    public function getDisplayOrder() : ?int
     {
-        return (int) $this->getField('disp_order', 0);
+        return $this->getField('disp_order');
     }
 
     /**
      * Get page_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPageId()
+    public function getPageId() : ?int
     {
-        return (int) $this->getField('page_id', 0);
+        return $this->getField('page_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -160,9 +160,9 @@ class Category extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -170,9 +170,9 @@ class Category extends \MerchantAPI\Model
     /**
      * Get page_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPageTitle()
+    public function getPageTitle() : ?string
     {
         return $this->getField('page_title');
     }
@@ -180,39 +180,39 @@ class Category extends \MerchantAPI\Model
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 
     /**
      * Get dt_created.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeCreated()
+    public function getDateTimeCreated() : ?int
     {
-        return (int) $this->getField('dt_created', 0);
+        return $this->getTimestampField('dt_created');
     }
 
     /**
      * Get dt_updated.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeUpdated()
+    public function getDateTimeUpdated() : ?int
     {
-        return (int) $this->getField('dt_updated', 0);
+        return $this->getTimestampField('dt_updated');
     }
 
     /**
      * Get page_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPageCode()
+    public function getPageCode() : ?string
     {
         return $this->getField('page_code');
     }
@@ -220,9 +220,9 @@ class Category extends \MerchantAPI\Model
     /**
      * Get parent_category.
      *
-     * @return string
+     * @return ?string
      */
-    public function getParentCategory()
+    public function getParentCategory() : ?string
     {
         return $this->getField('parent_category');
     }
@@ -230,20 +230,20 @@ class Category extends \MerchantAPI\Model
     /**
      * Get uris.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Uri[]
+     * @return \MerchantAPI\Collection
      */
-    public function getUris()
+    public function getUris() : ?Collection
     {
-        return $this->getField('uris', []);
+        return $this->getField('uris');
     }
 
     /**
      * Get CustomField_Values.
      *
-     * @return \MerchantAPI\Model\CustomFieldValues|null
+     * @return ?\MerchantAPI\Model\CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
-        return $this->getField('CustomField_Values', null);
+        return $this->getField('CustomField_Values');
     }
 }

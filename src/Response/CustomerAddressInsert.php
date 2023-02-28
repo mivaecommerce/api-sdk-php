@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerAddressInsert extends Response
 {
-    /** @var \MerchantAPI\Model\CustomerAddress */
-    protected $customerAddress;
+    /** @var ?\MerchantAPI\Model\CustomerAddress */
+    protected ?CustomerAddress $customerAddress = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class CustomerAddressInsert extends Response
      *
      * @return \MerchantAPI\Model\CustomerAddress|null
      */
-    public function getCustomerAddress()
+    public function getCustomerAddress() : ?CustomerAddress
     {
         return $this->customerAddress;
     }

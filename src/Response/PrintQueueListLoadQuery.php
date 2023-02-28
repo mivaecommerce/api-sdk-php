@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\PrintQueue;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for PrintQueueList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PrintQueueListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PrintQueue[] */
-    protected $printQueues = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $printQueues;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class PrintQueueListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->printQueues = new \MerchantAPI\Collection();
+        $this->printQueues = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class PrintQueueListLoadQuery extends ListQueryResponse
     /**
      * Get printQueues.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\PrintQueue[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPrintQueues()
+    public function getPrintQueues() : Collection
     {
         return $this->printQueues;
     }

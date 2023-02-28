@@ -20,9 +20,9 @@ class UriDetail extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -30,9 +30,9 @@ class UriDetail extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -40,9 +40,9 @@ class UriDetail extends \MerchantAPI\Model
     /**
      * Get sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->getField('sku');
     }

@@ -15,6 +15,7 @@ use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\Model\CustomerSubscription;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerSubscriptionList_Load_Query.
@@ -27,29 +28,30 @@ use MerchantAPI\BaseClient;
 class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerSubscriptionList_Load_Query';
+    protected string $function = 'CustomerSubscriptionList_Load_Query';
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -71,7 +73,7 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -81,7 +83,7 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -91,7 +93,7 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -99,9 +101,9 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -109,10 +111,10 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -122,10 +124,10 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -135,10 +137,10 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -148,10 +150,10 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -168,7 +170,7 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -190,7 +192,7 @@ class CustomerSubscriptionListLoadQuery extends SubscriptionListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerSubscriptionListLoadQuery($this, $httpResponse, $data);
     }

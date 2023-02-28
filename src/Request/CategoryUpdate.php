@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Category_Update.
@@ -27,44 +28,45 @@ use MerchantAPI\BaseClient;
 class CategoryUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Category_Update';
+    protected string $function = 'Category_Update';
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
-    /** @var string */
-    protected $categoryName;
+    /** @var ?string */
+    protected ?string $categoryName = null;
 
-    /** @var string */
-    protected $categoryPageTitle;
+    /** @var ?string */
+    protected ?string $categoryPageTitle = null;
 
-    /** @var bool */
-    protected $categoryActive;
+    /** @var ?bool */
+    protected ?bool $categoryActive = null;
 
-    /** @var string */
-    protected $categoryParentCategory;
+    /** @var ?string */
+    protected ?string $categoryParentCategory = null;
 
-    /** @var string */
-    protected $categoryAlternateDisplayPage;
+    /** @var ?string */
+    protected ?string $categoryAlternateDisplayPage = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -94,7 +96,7 @@ class CategoryUpdate extends Request
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -104,7 +106,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -114,7 +116,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -124,7 +126,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getCategoryName()
+    public function getCategoryName() : ?string
     {
         return $this->categoryName;
     }
@@ -134,7 +136,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getCategoryPageTitle()
+    public function getCategoryPageTitle() : ?string
     {
         return $this->categoryPageTitle;
     }
@@ -144,7 +146,7 @@ class CategoryUpdate extends Request
      *
      * @return bool
      */
-    public function getCategoryActive()
+    public function getCategoryActive() : ?bool
     {
         return $this->categoryActive;
     }
@@ -154,7 +156,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getCategoryParentCategory()
+    public function getCategoryParentCategory() : ?string
     {
         return $this->categoryParentCategory;
     }
@@ -164,7 +166,7 @@ class CategoryUpdate extends Request
      *
      * @return string
      */
-    public function getCategoryAlternateDisplayPage()
+    public function getCategoryAlternateDisplayPage() : ?string
     {
         return $this->categoryAlternateDisplayPage;
     }
@@ -172,9 +174,9 @@ class CategoryUpdate extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -182,10 +184,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -195,10 +197,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -208,10 +210,10 @@ class CategoryUpdate extends Request
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -221,10 +223,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Name.
      *
-     * @param string
+     * @param ?string $categoryName
      * @return $this
      */
-    public function setCategoryName($categoryName)
+    public function setCategoryName(?string $categoryName) : self
     {
         $this->categoryName = $categoryName;
 
@@ -234,10 +236,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Page_Title.
      *
-     * @param string
+     * @param ?string $categoryPageTitle
      * @return $this
      */
-    public function setCategoryPageTitle($categoryPageTitle)
+    public function setCategoryPageTitle(?string $categoryPageTitle) : self
     {
         $this->categoryPageTitle = $categoryPageTitle;
 
@@ -247,10 +249,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Active.
      *
-     * @param bool
+     * @param ?bool $categoryActive
      * @return $this
      */
-    public function setCategoryActive($categoryActive)
+    public function setCategoryActive(?bool $categoryActive) : self
     {
         $this->categoryActive = $categoryActive;
 
@@ -260,10 +262,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Parent_Category.
      *
-     * @param string
+     * @param ?string $categoryParentCategory
      * @return $this
      */
-    public function setCategoryParentCategory($categoryParentCategory)
+    public function setCategoryParentCategory(?string $categoryParentCategory) : self
     {
         $this->categoryParentCategory = $categoryParentCategory;
 
@@ -273,10 +275,10 @@ class CategoryUpdate extends Request
     /**
      * Set Category_Alternate_Display_Page.
      *
-     * @param string
+     * @param ?string $categoryAlternateDisplayPage
      * @return $this
      */
-    public function setCategoryAlternateDisplayPage($categoryAlternateDisplayPage)
+    public function setCategoryAlternateDisplayPage(?string $categoryAlternateDisplayPage) : self
     {
         $this->categoryAlternateDisplayPage = $categoryAlternateDisplayPage;
 
@@ -286,10 +288,10 @@ class CategoryUpdate extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -306,7 +308,7 @@ class CategoryUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -350,7 +352,7 @@ class CategoryUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryUpdate($this, $httpResponse, $data);
     }

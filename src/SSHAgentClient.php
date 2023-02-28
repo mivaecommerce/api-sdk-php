@@ -22,15 +22,15 @@ class SSHAgentClient extends BaseClient
 {
     /**
      * SSHAgentClient constructor.
-     * @param $endpoint
-     * @param $username
-     * @param $publicKeyPath
-     * @param null $agentSocketPath
+     * @param string $endpoint
+     * @param string $username
+     * @param string $publicKeyPath
+     * @param ?string $agentSocketPath
      * @param int $digestType
      * @param array $options
      * @throws \Exception
      */
-    public function __construct($endpoint, $username, $publicKeyPath, $agentSocketPath = null, $digestType = SSHAgentAuthenticator::DIGEST_TYPE_SSH_RSA_SHA256, array $options = [])
+    public function __construct(string $endpoint, string $username, string $publicKeyPath, ?string $agentSocketPath = null, int $digestType = SSHAgentAuthenticator::DIGEST_TYPE_SSH_RSA_SHA256, array $options = [])
     {
         parent::__construct($endpoint, new SSHAgentAuthenticator($username, $publicKeyPath, $agentSocketPath, $digestType), $options);
     }
@@ -38,16 +38,16 @@ class SSHAgentClient extends BaseClient
     /**
      * @return string
      */
-    public function getPublicKey()
+    public function getPublicKey() : string
     {
         return $this->authenticator->getPrivateKey();
     }
 
     /**
-     * @param $publicKeyPath
+     * @param string $publicKeyPath
      * @return $this
      */
-    public function setPublicKey($publicKeyPath)
+    public function setPublicKey(string $publicKeyPath) : self
     {
         $this->authenticator->setPublicKey($publicKeyPath);
         return $this;
@@ -56,16 +56,16 @@ class SSHAgentClient extends BaseClient
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername() : string
     {
         return $this->authenticator->getUsername();
     }
 
     /**
-     * @param $username
+     * @param string $username
      * @return $this
      */
-    public function setUsername($username)
+    public function setUsername(string $username) : self
     {
         $this->authenticator->setUsername($username);
         return $this;
@@ -74,16 +74,16 @@ class SSHAgentClient extends BaseClient
     /**
      * @return string
      */
-    public function getDigestType()
+    public function getDigestType() : string
     {
         return $this->authenticator->getDigestType();
     }
 
     /**
-     * @param $digestType
+     * @param int $digestType
      * @return $this
      */
-    public function setDigestType($digestType)
+    public function setDigestType(int $digestType) : self
     {
         $this->authenticator->setDigestType($digestType);
         return $this;

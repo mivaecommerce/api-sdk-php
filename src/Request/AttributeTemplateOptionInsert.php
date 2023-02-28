@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AttributeTemplateAttribute;
+use MerchantAPI\Model\AttributeTemplateOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AttributeTemplateOption_Insert.
@@ -26,56 +28,57 @@ use MerchantAPI\BaseClient;
 class AttributeTemplateOptionInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AttributeTemplateOption_Insert';
+    protected string $function = 'AttributeTemplateOption_Insert';
 
-    /** @var int */
-    protected $attributeTemplateId;
+    /** @var ?int */
+    protected ?int $attributeTemplateId = null;
 
-    /** @var string */
-    protected $attributeTemplateCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplate;
+    /** @var ?string */
+    protected ?string $editAttributeTemplate = null;
 
-    /** @var int */
-    protected $attributeTemplateAttributeId;
+    /** @var ?int */
+    protected ?int $attributeTemplateAttributeId = null;
 
-    /** @var string */
-    protected $attributeTemplateAttributeCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateAttributeCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplateAttribute;
+    /** @var ?string */
+    protected ?string $editAttributeTemplateAttribute = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $default;
+    /** @var ?bool */
+    protected ?bool $default = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AttributeTemplateAttribute
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AttributeTemplateAttribute $attributeTemplateAttribute
      */
-    public function __construct(BaseClient $client = null, AttributeTemplateAttribute $attributeTemplateAttribute = null)
+    public function __construct(?BaseClient $client = null, ?AttributeTemplateAttribute $attributeTemplateAttribute = null)
     {
         parent::__construct($client);
         if ($attributeTemplateAttribute) {
@@ -90,7 +93,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
         return $this->attributeTemplateId;
     }
@@ -100,7 +103,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateCode()
+    public function getAttributeTemplateCode() : ?string
     {
         return $this->attributeTemplateCode;
     }
@@ -110,7 +113,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplate()
+    public function getEditAttributeTemplate() : ?string
     {
         return $this->editAttributeTemplate;
     }
@@ -120,7 +123,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
         return $this->attributeTemplateAttributeId;
     }
@@ -130,7 +133,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateAttributeCode()
+    public function getAttributeTemplateAttributeCode() : ?string
     {
         return $this->attributeTemplateAttributeCode;
     }
@@ -140,7 +143,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplateAttribute()
+    public function getEditAttributeTemplateAttribute() : ?string
     {
         return $this->editAttributeTemplateAttribute;
     }
@@ -150,7 +153,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -160,7 +163,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -170,7 +173,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -180,7 +183,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -190,7 +193,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -200,7 +203,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -210,7 +213,7 @@ class AttributeTemplateOptionInsert extends Request
      *
      * @return bool
      */
-    public function getDefault()
+    public function getDefault() : ?bool
     {
         return $this->default;
     }
@@ -218,10 +221,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set AttributeTemplate_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateId
      * @return $this
      */
-    public function setAttributeTemplateId($attributeTemplateId)
+    public function setAttributeTemplateId(?int $attributeTemplateId) : self
     {
         $this->attributeTemplateId = $attributeTemplateId;
 
@@ -231,10 +234,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set AttributeTemplate_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateCode
      * @return $this
      */
-    public function setAttributeTemplateCode($attributeTemplateCode)
+    public function setAttributeTemplateCode(?string $attributeTemplateCode) : self
     {
         $this->attributeTemplateCode = $attributeTemplateCode;
 
@@ -244,10 +247,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Edit_AttributeTemplate.
      *
-     * @param string
+     * @param ?string $editAttributeTemplate
      * @return $this
      */
-    public function setEditAttributeTemplate($editAttributeTemplate)
+    public function setEditAttributeTemplate(?string $editAttributeTemplate) : self
     {
         $this->editAttributeTemplate = $editAttributeTemplate;
 
@@ -257,10 +260,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set AttributeTemplateAttribute_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateAttributeId
      * @return $this
      */
-    public function setAttributeTemplateAttributeId($attributeTemplateAttributeId)
+    public function setAttributeTemplateAttributeId(?int $attributeTemplateAttributeId) : self
     {
         $this->attributeTemplateAttributeId = $attributeTemplateAttributeId;
 
@@ -270,10 +273,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set AttributeTemplateAttribute_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateAttributeCode
      * @return $this
      */
-    public function setAttributeTemplateAttributeCode($attributeTemplateAttributeCode)
+    public function setAttributeTemplateAttributeCode(?string $attributeTemplateAttributeCode) : self
     {
         $this->attributeTemplateAttributeCode = $attributeTemplateAttributeCode;
 
@@ -283,10 +286,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Edit_AttributeTemplateAttribute.
      *
-     * @param string
+     * @param ?string $editAttributeTemplateAttribute
      * @return $this
      */
-    public function setEditAttributeTemplateAttribute($editAttributeTemplateAttribute)
+    public function setEditAttributeTemplateAttribute(?string $editAttributeTemplateAttribute) : self
     {
         $this->editAttributeTemplateAttribute = $editAttributeTemplateAttribute;
 
@@ -296,10 +299,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -309,10 +312,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -322,10 +325,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -335,10 +338,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -348,10 +351,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -361,10 +364,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -374,10 +377,10 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * Set Default.
      *
-     * @param bool
+     * @param ?bool $default
      * @return $this
      */
-    public function setDefault($default)
+    public function setDefault(?bool $default) : self
     {
         $this->default = $default;
 
@@ -387,7 +390,7 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -437,7 +440,7 @@ class AttributeTemplateOptionInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeTemplateOptionInsert($this, $httpResponse, $data);
     }

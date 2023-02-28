@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\BranchPropertyVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BranchPropertyVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchPropertyVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\BranchPropertyVersion[] */
-    protected $branchPropertyVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $branchPropertyVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BranchPropertyVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->branchPropertyVersions = new \MerchantAPI\Collection();
+        $this->branchPropertyVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BranchPropertyVersionListLoadQuery extends ListQueryResponse
     /**
      * Get branchPropertyVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\BranchPropertyVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBranchPropertyVersions()
+    public function getBranchPropertyVersions() : Collection
     {
         return $this->branchPropertyVersions;
     }

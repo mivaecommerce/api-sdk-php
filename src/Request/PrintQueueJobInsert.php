@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PrintQueue;
+use MerchantAPI\Model\PrintQueueJob;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PrintQueueJob_Insert.
@@ -26,35 +28,36 @@ use MerchantAPI\BaseClient;
 class PrintQueueJobInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PrintQueueJob_Insert';
+    protected string $function = 'PrintQueueJob_Insert';
 
-    /** @var int */
-    protected $printQueueId;
+    /** @var ?int */
+    protected ?int $printQueueId = null;
 
-    /** @var string */
-    protected $editPrintQueue;
+    /** @var ?string */
+    protected ?string $editPrintQueue = null;
 
-    /** @var string */
-    protected $printQueueDescription;
+    /** @var ?string */
+    protected ?string $printQueueDescription = null;
 
-    /** @var string */
-    protected $printQueueJobDescription;
+    /** @var ?string */
+    protected ?string $printQueueJobDescription = null;
 
-    /** @var string */
-    protected $printQueueJobFormat;
+    /** @var ?string */
+    protected ?string $printQueueJobFormat = null;
 
-    /** @var string */
-    protected $printQueueJobData;
+    /** @var ?string */
+    protected ?string $printQueueJobData = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PrintQueue
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PrintQueue $printQueue
      */
-    public function __construct(BaseClient $client = null, PrintQueue $printQueue = null)
+    public function __construct(?BaseClient $client = null, ?PrintQueue $printQueue = null)
     {
         parent::__construct($client);
         if ($printQueue) {
@@ -71,7 +74,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return int
      */
-    public function getPrintQueueId()
+    public function getPrintQueueId() : ?int
     {
         return $this->printQueueId;
     }
@@ -81,7 +84,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return string
      */
-    public function getEditPrintQueue()
+    public function getEditPrintQueue() : ?string
     {
         return $this->editPrintQueue;
     }
@@ -91,7 +94,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return string
      */
-    public function getPrintQueueDescription()
+    public function getPrintQueueDescription() : ?string
     {
         return $this->printQueueDescription;
     }
@@ -101,7 +104,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return string
      */
-    public function getPrintQueueJobDescription()
+    public function getPrintQueueJobDescription() : ?string
     {
         return $this->printQueueJobDescription;
     }
@@ -111,7 +114,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return string
      */
-    public function getPrintQueueJobFormat()
+    public function getPrintQueueJobFormat() : ?string
     {
         return $this->printQueueJobFormat;
     }
@@ -121,7 +124,7 @@ class PrintQueueJobInsert extends Request
      *
      * @return string
      */
-    public function getPrintQueueJobData()
+    public function getPrintQueueJobData() : ?string
     {
         return $this->printQueueJobData;
     }
@@ -129,10 +132,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set PrintQueue_ID.
      *
-     * @param int
+     * @param ?int $printQueueId
      * @return $this
      */
-    public function setPrintQueueId($printQueueId)
+    public function setPrintQueueId(?int $printQueueId) : self
     {
         $this->printQueueId = $printQueueId;
 
@@ -142,10 +145,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set Edit_PrintQueue.
      *
-     * @param string
+     * @param ?string $editPrintQueue
      * @return $this
      */
-    public function setEditPrintQueue($editPrintQueue)
+    public function setEditPrintQueue(?string $editPrintQueue) : self
     {
         $this->editPrintQueue = $editPrintQueue;
 
@@ -155,10 +158,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set PrintQueue_Description.
      *
-     * @param string
+     * @param ?string $printQueueDescription
      * @return $this
      */
-    public function setPrintQueueDescription($printQueueDescription)
+    public function setPrintQueueDescription(?string $printQueueDescription) : self
     {
         $this->printQueueDescription = $printQueueDescription;
 
@@ -168,10 +171,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set PrintQueueJob_Description.
      *
-     * @param string
+     * @param ?string $printQueueJobDescription
      * @return $this
      */
-    public function setPrintQueueJobDescription($printQueueJobDescription)
+    public function setPrintQueueJobDescription(?string $printQueueJobDescription) : self
     {
         $this->printQueueJobDescription = $printQueueJobDescription;
 
@@ -181,10 +184,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set PrintQueueJob_Format.
      *
-     * @param string
+     * @param ?string $printQueueJobFormat
      * @return $this
      */
-    public function setPrintQueueJobFormat($printQueueJobFormat)
+    public function setPrintQueueJobFormat(?string $printQueueJobFormat) : self
     {
         $this->printQueueJobFormat = $printQueueJobFormat;
 
@@ -194,10 +197,10 @@ class PrintQueueJobInsert extends Request
     /**
      * Set PrintQueueJob_Data.
      *
-     * @param string
+     * @param ?string $printQueueJobData
      * @return $this
      */
-    public function setPrintQueueJobData($printQueueJobData)
+    public function setPrintQueueJobData(?string $printQueueJobData) : self
     {
         $this->printQueueJobData = $printQueueJobData;
 
@@ -207,7 +210,7 @@ class PrintQueueJobInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -237,7 +240,7 @@ class PrintQueueJobInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PrintQueueJobInsert($this, $httpResponse, $data);
     }

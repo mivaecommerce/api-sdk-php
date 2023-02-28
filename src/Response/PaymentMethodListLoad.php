@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\PaymentMethod;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for PaymentMethodList_Load.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PaymentMethodListLoad extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PaymentMethod[] */
-    protected $paymentMethods = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $paymentMethods;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class PaymentMethodListLoad extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->paymentMethods = new \MerchantAPI\Collection();
+        $this->paymentMethods = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class PaymentMethodListLoad extends Response
     /**
      * Get paymentMethods.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\PaymentMethod[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods() : Collection
     {
         return $this->paymentMethods;
     }

@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PriceGroupInsert extends Response
 {
-    /** @var \MerchantAPI\Model\PriceGroup */
-    protected $priceGroup;
+    /** @var ?\MerchantAPI\Model\PriceGroup */
+    protected ?PriceGroup $priceGroup = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class PriceGroupInsert extends Response
      *
      * @return \MerchantAPI\Model\PriceGroup|null
      */
-    public function getPriceGroup()
+    public function getPriceGroup() : ?PriceGroup
     {
         return $this->priceGroup;
     }

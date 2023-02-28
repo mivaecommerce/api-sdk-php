@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryURI_Redirect.
@@ -26,32 +27,32 @@ use MerchantAPI\BaseClient;
 class CategoryURIRedirect extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryURI_Redirect';
+    protected string $function = 'CategoryURI_Redirect';
 
-    /** @var string */
-    protected $destinationStoreCode;
+    /** @var ?string */
+    protected ?string $destinationStoreCode = null;
 
-    /** @var string */
-    protected $destinationType;
+    /** @var ?string */
+    protected ?string $destinationType = null;
 
-    /** @var string */
-    protected $destination;
+    /** @var ?string */
+    protected ?string $destination = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
     /** @var int[] */
-    protected $uRIIds = [];
+    protected array $uRIIds = [];
 
     /**
      * Get Destination_Store_Code.
      *
      * @return string
      */
-    public function getDestinationStoreCode()
+    public function getDestinationStoreCode() : ?string
     {
         return $this->destinationStoreCode;
     }
@@ -61,7 +62,7 @@ class CategoryURIRedirect extends ListQueryRequest
      *
      * @return string
      */
-    public function getDestinationType()
+    public function getDestinationType() : ?string
     {
         return $this->destinationType;
     }
@@ -71,7 +72,7 @@ class CategoryURIRedirect extends ListQueryRequest
      *
      * @return string
      */
-    public function getDestination()
+    public function getDestination() : ?string
     {
         return $this->destination;
     }
@@ -81,7 +82,7 @@ class CategoryURIRedirect extends ListQueryRequest
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -91,7 +92,7 @@ class CategoryURIRedirect extends ListQueryRequest
      *
      * @return array
      */
-    public function getURIIds()
+    public function getURIIds() : array
     {
         return $this->uRIIds;
     }
@@ -99,10 +100,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Set Destination_Store_Code.
      *
-     * @param string
+     * @param ?string $destinationStoreCode
      * @return $this
      */
-    public function setDestinationStoreCode($destinationStoreCode)
+    public function setDestinationStoreCode(?string $destinationStoreCode) : self
     {
         $this->destinationStoreCode = $destinationStoreCode;
 
@@ -112,10 +113,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Set Destination_Type.
      *
-     * @param string
+     * @param ?string $destinationType
      * @return $this
      */
-    public function setDestinationType($destinationType)
+    public function setDestinationType(?string $destinationType) : self
     {
         $this->destinationType = $destinationType;
 
@@ -125,10 +126,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Set Destination.
      *
-     * @param string
+     * @param ?string $destination
      * @return $this
      */
-    public function setDestination($destination)
+    public function setDestination(?string $destination) : self
     {
         $this->destination = $destination;
 
@@ -138,10 +139,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -151,11 +152,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Add URI_IDs.
      *
-     * @param int
-     *
+     * @param int $uriId
      * @return $this
      */
-    public function addUriID($uriId)
+    public function addUriID(int $uriId) : self
     {
         $this->uRIIds[] = $uriId;
         return $this;
@@ -164,10 +164,10 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * Add Uri model.
      *
-     * @param \MerchantAPI\Model\Uri
+     * @param \MerchantAPI\Model\Uri $uri
      * @return $this
      */
-    public function addUri(Uri $uri)
+    public function addUri(Uri $uri) : self
     {
         if ($uri->getId()) {
             $this->uRIIds[] = $uri->getId();
@@ -179,7 +179,7 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -207,7 +207,7 @@ class CategoryURIRedirect extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryURIRedirect($this, $httpResponse, $data);
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Option_Set_Default.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class OptionSetDefault extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Option_Set_Default';
+    protected string $function = 'Option_Set_Default';
 
-    /** @var int */
-    protected $optionId;
+    /** @var ?int */
+    protected ?int $optionId = null;
 
-    /** @var string */
-    protected $optionCode;
+    /** @var ?string */
+    protected ?string $optionCode = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var bool */
-    protected $optionDefault;
+    /** @var ?bool */
+    protected ?bool $optionDefault = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductOption
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductOption $productOption
      */
-    public function __construct(BaseClient $client = null, ProductOption $productOption = null)
+    public function __construct(?BaseClient $client = null, ?ProductOption $productOption = null)
     {
         parent::__construct($client);
         if ($productOption) {
@@ -71,7 +73,7 @@ class OptionSetDefault extends Request
      *
      * @return int
      */
-    public function getOptionId()
+    public function getOptionId() : ?int
     {
         return $this->optionId;
     }
@@ -81,7 +83,7 @@ class OptionSetDefault extends Request
      *
      * @return string
      */
-    public function getOptionCode()
+    public function getOptionCode() : ?string
     {
         return $this->optionCode;
     }
@@ -91,7 +93,7 @@ class OptionSetDefault extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -101,7 +103,7 @@ class OptionSetDefault extends Request
      *
      * @return bool
      */
-    public function getOptionDefault()
+    public function getOptionDefault() : ?bool
     {
         return $this->optionDefault;
     }
@@ -109,10 +111,10 @@ class OptionSetDefault extends Request
     /**
      * Set Option_ID.
      *
-     * @param int
+     * @param ?int $optionId
      * @return $this
      */
-    public function setOptionId($optionId)
+    public function setOptionId(?int $optionId) : self
     {
         $this->optionId = $optionId;
 
@@ -122,10 +124,10 @@ class OptionSetDefault extends Request
     /**
      * Set Option_Code.
      *
-     * @param string
+     * @param ?string $optionCode
      * @return $this
      */
-    public function setOptionCode($optionCode)
+    public function setOptionCode(?string $optionCode) : self
     {
         $this->optionCode = $optionCode;
 
@@ -135,10 +137,10 @@ class OptionSetDefault extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -148,10 +150,10 @@ class OptionSetDefault extends Request
     /**
      * Set Option_Default.
      *
-     * @param bool
+     * @param ?bool $optionDefault
      * @return $this
      */
-    public function setOptionDefault($optionDefault)
+    public function setOptionDefault(?bool $optionDefault) : self
     {
         $this->optionDefault = $optionDefault;
 
@@ -161,7 +163,7 @@ class OptionSetDefault extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -189,7 +191,7 @@ class OptionSetDefault extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OptionSetDefault($this, $httpResponse, $data);
     }

@@ -174,69 +174,69 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get line_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLineId()
+    public function getLineId() : ?int
     {
-        return (int) $this->getField('line_id', 0);
+        return $this->getField('line_id');
     }
 
     /**
      * Get status.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
-        return (int) $this->getField('status', 0);
+        return $this->getField('status');
     }
 
     /**
      * Get subscrp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionId()
+    public function getSubscriptionId() : ?int
     {
-        return (int) $this->getField('subscrp_id', 0);
+        return $this->getField('subscrp_id');
     }
 
     /**
      * Get subterm_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionTermId()
+    public function getSubscriptionTermId() : ?int
     {
-        return (int) $this->getField('subterm_id', 0);
+        return $this->getField('subterm_id');
     }
 
     /**
      * Get rma_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRmaId()
+    public function getRmaId() : ?int
     {
-        return (int) $this->getField('rma_id', 0);
+        return $this->getField('rma_id');
     }
 
     /**
      * Get rma_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getRmaCode()
+    public function getRmaCode() : ?string
     {
         return $this->getField('rma_code');
     }
@@ -244,39 +244,39 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get rma_dt_issued.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRmaDataTimeIssued()
+    public function getRmaDataTimeIssued() : ?int
     {
-        return (int) $this->getField('rma_dt_issued', 0);
+        return $this->getTimestampField('rma_dt_issued');
     }
 
     /**
      * Get rma_dt_recvd.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRmaDateTimeReceived()
+    public function getRmaDateTimeReceived() : ?int
     {
-        return (int) $this->getField('rma_dt_recvd', 0);
+        return $this->getTimestampField('rma_dt_recvd');
     }
 
     /**
      * Get dt_instock.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateInStock()
+    public function getDateInStock() : ?int
     {
-        return (int) $this->getField('dt_instock', 0);
+        return $this->getTimestampField('dt_instock');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -284,9 +284,9 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -294,9 +294,9 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSku()
+    public function getSku() : ?string
     {
         return $this->getField('sku');
     }
@@ -304,49 +304,49 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get retail.
      *
-     * @return float
+     * @return ?float
      */
-    public function getRetail()
+    public function getRetail() : ?float
     {
-        return (float) $this->getField('retail', 0.00);
+        return $this->getField('retail');
     }
 
     /**
      * Get base_price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getBasePrice()
+    public function getBasePrice() : ?float
     {
-        return (float) $this->getField('base_price', 0.00);
+        return $this->getField('base_price');
     }
 
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get tax.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTax()
+    public function getTax() : ?float
     {
-        return (float) $this->getField('tax', 0.00);
+        return $this->getField('tax');
     }
 
     /**
      * Get formatted_tax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedTax()
+    public function getFormattedTax() : ?string
     {
         return $this->getField('formatted_tax');
     }
@@ -354,99 +354,89 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get taxable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxable()
+    public function getTaxable() : ?bool
     {
-        return (bool) $this->getField('taxable', false);
+        return $this->getField('taxable');
     }
 
     /**
      * Get upsold.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getUpsold()
+    public function getUpsold() : ?bool
     {
-        return (bool) $this->getField('upsold', false);
+        return $this->getField('upsold');
     }
 
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Get shipment.
      *
-     * @return \MerchantAPI\Model\OrderShipment|null
+     * @return ?\MerchantAPI\Model\OrderShipment
      */
-    public function getShipment()
+    public function getShipment() : ?OrderShipment
     {
-        return $this->getField('shipment', null);
+        return $this->getField('shipment');
     }
 
     /**
      * Get discounts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderItemDiscount[]
+     * @return \MerchantAPI\Collection
      */
-    public function getDiscounts()
+    public function getDiscounts() : ?Collection
     {
-        return $this->getField('discounts', []);
+        return $this->getField('discounts');
     }
 
     /**
      * Get options.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderItemOption[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOptions()
+    public function getOptions() : ?Collection
     {
-        return $this->getField('options', []);
-    }
-
-    /**
-     * Get subscription.
-     *
-     * @return \MerchantAPI\Model\OrderItemSubscription|null
-     */
-    public function getSubscription()
-    {
-        return $this->getField('subscription', null);
+        return $this->getField('options');
     }
 
     /**
      * Get total.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotal()
+    public function getTotal() : ?float
     {
-        return (float) $this->getField('total', 0.00);
+        return $this->getField('total');
     }
 
     /**
      * Get tracktype.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingType()
+    public function getTrackingType() : ?string
     {
         return $this->getField('tracktype');
     }
@@ -454,9 +444,9 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get tracknum.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingNumber()
+    public function getTrackingNumber() : ?string
     {
         return $this->getField('tracknum');
     }
@@ -464,20 +454,40 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get shpmnt_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipmentId()
+    public function getShipmentId() : ?int
     {
-        return (int) $this->getField('shpmnt_id', 0);
+        return $this->getField('shpmnt_id');
+    }
+
+    /**
+     * Get subscription.
+     *
+     * @return ?\MerchantAPI\Model\OrderItemSubscription
+     */
+    public function getSubscription() : ?OrderItemSubscription
+    {
+        return $this->getField('subscription');
+    }
+
+    /**
+     * Get product_id.
+     *
+     * @return ?int
+     */
+    public function getProductId() : ?int
+    {
+        return $this->getField('product_id');
     }
 
     /**
      * Set code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         return $this->setField('code', $code);
     }
@@ -485,10 +495,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set name.
      *
-     * @param string
+     * @param ?string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name) : self
     {
         return $this->setField('name', $name);
     }
@@ -496,10 +506,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set sku.
      *
-     * @param string
+     * @param ?string $sku
      * @return $this
      */
-    public function setSku($sku)
+    public function setSku(?string $sku) : self
     {
         return $this->setField('sku', $sku);
     }
@@ -507,10 +517,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         return $this->setField('price', $price);
     }
@@ -518,10 +528,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set tax.
      *
-     * @param float
+     * @param ?float $tax
      * @return $this
      */
-    public function setTax($tax)
+    public function setTax(?float $tax) : self
     {
         return $this->setField('tax', $tax);
     }
@@ -529,10 +539,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         return $this->setField('weight', $weight);
     }
@@ -540,10 +550,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set taxable.
      *
-     * @param bool
+     * @param ?bool $taxable
      * @return $this
      */
-    public function setTaxable($taxable)
+    public function setTaxable(?bool $taxable) : self
     {
         return $this->setField('taxable', $taxable);
     }
@@ -551,10 +561,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set upsold.
      *
-     * @param bool
+     * @param ?bool $upsold
      * @return $this
      */
-    public function setUpsold($upsold)
+    public function setUpsold(?bool $upsold) : self
     {
         return $this->setField('upsold', $upsold);
     }
@@ -562,10 +572,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         return $this->setField('quantity', $quantity);
     }
@@ -573,11 +583,11 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set options.
      *
-     * @param array[OrderItemOption]
+     * @param array $options
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options) : self
     {
         foreach ($options as &$model) {
             if (is_array($model)) {
@@ -594,10 +604,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set tracktype.
      *
-     * @param string
+     * @param ?string $trackingType
      * @return $this
      */
-    public function setTrackingType($trackingType)
+    public function setTrackingType(?string $trackingType) : self
     {
         return $this->setField('tracktype', $trackingType);
     }
@@ -605,10 +615,10 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set tracknum.
      *
-     * @param string
+     * @param ?string $trackingNumber
      * @return $this
      */
-    public function setTrackingNumber($trackingNumber)
+    public function setTrackingNumber(?string $trackingNumber) : self
     {
         return $this->setField('tracknum', $trackingNumber);
     }
@@ -619,7 +629,7 @@ class OrderItem extends \MerchantAPI\Model
      * @param OrderItemOption
      * @return $this
      */
-    public function addOption(OrderItemOption $model)
+    public function addOption(OrderItemOption $model) : self
     {
         if (!isset($this->data['options'])) {
             $this->data['options'] = [];

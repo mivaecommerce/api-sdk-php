@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AvailabilityGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroupPaymentMethod_Update_Assigned.
@@ -26,38 +27,39 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroupPaymentMethod_Update_Assigned';
+    protected string $function = 'AvailabilityGroupPaymentMethod_Update_Assigned';
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var string */
-    protected $moduleCode;
+    /** @var ?string */
+    protected ?string $moduleCode = null;
 
-    /** @var string */
-    protected $methodCode;
+    /** @var ?string */
+    protected ?string $methodCode = null;
 
-    /** @var int */
-    protected $paymentCardTypeId;
+    /** @var ?int */
+    protected ?int $paymentCardTypeId = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AvailabilityGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AvailabilityGroup $availabilityGroup
      */
-    public function __construct(BaseClient $client = null, AvailabilityGroup $availabilityGroup = null)
+    public function __construct(?BaseClient $client = null, ?AvailabilityGroup $availabilityGroup = null)
     {
         parent::__construct($client);
         if ($availabilityGroup) {
@@ -74,7 +76,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -84,7 +86,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -94,7 +96,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -104,7 +106,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getModuleCode()
+    public function getModuleCode() : ?string
     {
         return $this->moduleCode;
     }
@@ -114,7 +116,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getMethodCode()
+    public function getMethodCode() : ?string
     {
         return $this->methodCode;
     }
@@ -124,7 +126,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPaymentCardTypeId()
+    public function getPaymentCardTypeId() : ?int
     {
         return $this->paymentCardTypeId;
     }
@@ -134,7 +136,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -142,10 +144,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -155,10 +157,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -168,10 +170,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -181,10 +183,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set Module_Code.
      *
-     * @param string
+     * @param ?string $moduleCode
      * @return $this
      */
-    public function setModuleCode($moduleCode)
+    public function setModuleCode(?string $moduleCode) : self
     {
         $this->moduleCode = $moduleCode;
 
@@ -194,10 +196,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set Method_Code.
      *
-     * @param string
+     * @param ?string $methodCode
      * @return $this
      */
-    public function setMethodCode($methodCode)
+    public function setMethodCode(?string $methodCode) : self
     {
         $this->methodCode = $methodCode;
 
@@ -207,10 +209,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set PaymentCardType_ID.
      *
-     * @param int
+     * @param ?int $paymentCardTypeId
      * @return $this
      */
-    public function setPaymentCardTypeId($paymentCardTypeId)
+    public function setPaymentCardTypeId(?int $paymentCardTypeId) : self
     {
         $this->paymentCardTypeId = $paymentCardTypeId;
 
@@ -220,10 +222,10 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -233,7 +235,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -261,7 +263,7 @@ class AvailabilityGroupPaymentMethodUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupPaymentMethodUpdateAssigned($this, $httpResponse, $data);
     }

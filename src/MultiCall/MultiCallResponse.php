@@ -24,11 +24,10 @@ use MerchantAPI\ResponseInterface;
 class MultiCallResponse extends Response
 {
     /** @var array[ResponseInterface] */
-    protected $responses = [];
-
+    protected array $responses = [];
 
     /** @var bool */
-    public $timeout = false;
+    public bool $timeout = false;
 
     /**
      * MultiCallResponse constructor.
@@ -76,10 +75,9 @@ class MultiCallResponse extends Response
     /**
      * Read the header range into its parts
      *
-     * @param $range
      * @return array
      */
-    public function readRange()
+    public function readRange() : array
     {
         $range = $this->getHttpResponse()->getHeaders()->get('Content-Range');
 
@@ -98,15 +96,17 @@ class MultiCallResponse extends Response
     /**
      * @inheritDoc
      */
-    public function isSuccess()
+    public function isSuccess() : bool
     {
         return !isset($this->data['success']);
     }
 
     /**
      * Check if the request timed out
+     *
+     * @return bool
      */
-    public function isTimeout()
+    public function isTimeout() : bool
     {
         return $this->timeout;
     }
@@ -114,9 +114,9 @@ class MultiCallResponse extends Response
     /**
      * Get the responses.
      *
-     * @return array[ResponseInterface]
+     * @return array
      */
-    public function getResponses()
+    public function getResponses() : array
     {
         return $this->responses;
     }
@@ -127,7 +127,7 @@ class MultiCallResponse extends Response
      * @param ResponseInterface $response
      * @return $this
      */
-    public function addResponse(ResponseInterface $response)
+    public function addResponse(ResponseInterface $response) : self
     {
         $this->responses[] = $response;
 
@@ -137,10 +137,10 @@ class MultiCallResponse extends Response
     /**
      * Set and overwrite the responses.
      *
-     * @param array[ResponseInterface]
+     * @param array $responses
      * @return $this
      */
-    public function setResponses(array $responses)
+    public function setResponses(array $responses) : self
     {
         foreach ($responses as $response) {
             if (!$response instanceof ResponseInterface) {

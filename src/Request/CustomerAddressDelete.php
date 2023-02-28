@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomerAddress;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerAddress_Delete.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class CustomerAddressDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerAddress_Delete';
+    protected string $function = 'CustomerAddress_Delete';
 
-    /** @var int */
-    protected $addressId;
+    /** @var ?int */
+    protected ?int $addressId = null;
 
-    /** @var int */
-    protected $customerAddressId;
+    /** @var ?int */
+    protected ?int $customerAddressId = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\CustomerAddress
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\CustomerAddress $customerAddress
      */
-    public function __construct(BaseClient $client = null, CustomerAddress $customerAddress = null)
+    public function __construct(?BaseClient $client = null, ?CustomerAddress $customerAddress = null)
     {
         parent::__construct($client);
         if ($customerAddress) {
@@ -70,7 +72,7 @@ class CustomerAddressDelete extends Request
      *
      * @return int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
         return $this->addressId;
     }
@@ -80,7 +82,7 @@ class CustomerAddressDelete extends Request
      *
      * @return int
      */
-    public function getCustomerAddressId()
+    public function getCustomerAddressId() : ?int
     {
         return $this->customerAddressId;
     }
@@ -90,7 +92,7 @@ class CustomerAddressDelete extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -100,7 +102,7 @@ class CustomerAddressDelete extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -110,7 +112,7 @@ class CustomerAddressDelete extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -118,10 +120,10 @@ class CustomerAddressDelete extends Request
     /**
      * Set Address_ID.
      *
-     * @param int
+     * @param ?int $addressId
      * @return $this
      */
-    public function setAddressId($addressId)
+    public function setAddressId(?int $addressId) : self
     {
         $this->addressId = $addressId;
 
@@ -131,10 +133,10 @@ class CustomerAddressDelete extends Request
     /**
      * Set CustomerAddress_ID.
      *
-     * @param int
+     * @param ?int $customerAddressId
      * @return $this
      */
-    public function setCustomerAddressId($customerAddressId)
+    public function setCustomerAddressId(?int $customerAddressId) : self
     {
         $this->customerAddressId = $customerAddressId;
 
@@ -144,10 +146,10 @@ class CustomerAddressDelete extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -157,10 +159,10 @@ class CustomerAddressDelete extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -170,10 +172,10 @@ class CustomerAddressDelete extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -183,7 +185,7 @@ class CustomerAddressDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -207,7 +209,7 @@ class CustomerAddressDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerAddressDelete($this, $httpResponse, $data);
     }

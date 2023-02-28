@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Attribute_Load_Code.
@@ -27,32 +28,33 @@ use MerchantAPI\BaseClient;
 class AttributeLoadCode extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Attribute_Load_Code';
+    protected string $function = 'Attribute_Load_Code';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $attributeCode;
+    /** @var ?string */
+    protected ?string $attributeCode = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -67,7 +69,7 @@ class AttributeLoadCode extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -77,7 +79,7 @@ class AttributeLoadCode extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -87,7 +89,7 @@ class AttributeLoadCode extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -97,7 +99,7 @@ class AttributeLoadCode extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -107,7 +109,7 @@ class AttributeLoadCode extends Request
      *
      * @return string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->attributeCode;
     }
@@ -115,10 +117,10 @@ class AttributeLoadCode extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -128,10 +130,10 @@ class AttributeLoadCode extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -141,10 +143,10 @@ class AttributeLoadCode extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -154,10 +156,10 @@ class AttributeLoadCode extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -167,10 +169,10 @@ class AttributeLoadCode extends Request
     /**
      * Set Attribute_Code.
      *
-     * @param string
+     * @param ?string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(?string $attributeCode) : self
     {
         $this->attributeCode = $attributeCode;
 
@@ -180,7 +182,7 @@ class AttributeLoadCode extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -204,7 +206,7 @@ class AttributeLoadCode extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeLoadCode($this, $httpResponse, $data);
     }

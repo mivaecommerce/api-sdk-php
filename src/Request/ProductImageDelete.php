@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductImageData;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductImage_Delete.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class ProductImageDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductImage_Delete';
+    protected string $function = 'ProductImage_Delete';
 
-    /** @var int */
-    protected $productImageId;
+    /** @var ?int */
+    protected ?int $productImageId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductImageData
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductImageData $productImageData
      */
-    public function __construct(BaseClient $client = null, ProductImageData $productImageData = null)
+    public function __construct(?BaseClient $client = null, ?ProductImageData $productImageData = null)
     {
         parent::__construct($client);
         if ($productImageData) {
@@ -52,7 +54,7 @@ class ProductImageDelete extends Request
      *
      * @return int
      */
-    public function getProductImageId()
+    public function getProductImageId() : ?int
     {
         return $this->productImageId;
     }
@@ -60,10 +62,10 @@ class ProductImageDelete extends Request
     /**
      * Set ProductImage_ID.
      *
-     * @param int
+     * @param ?int $productImageId
      * @return $this
      */
-    public function setProductImageId($productImageId)
+    public function setProductImageId(?int $productImageId) : self
     {
         $this->productImageId = $productImageId;
 
@@ -73,7 +75,7 @@ class ProductImageDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -85,7 +87,7 @@ class ProductImageDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductImageDelete($this, $httpResponse, $data);
     }

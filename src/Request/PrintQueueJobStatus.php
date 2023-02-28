@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PrintQueueJob;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PrintQueueJob_Status.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class PrintQueueJobStatus extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PrintQueueJob_Status';
+    protected string $function = 'PrintQueueJob_Status';
 
-    /** @var int */
-    protected $printQueueJobId;
+    /** @var ?int */
+    protected ?int $printQueueJobId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PrintQueueJob
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PrintQueueJob $printQueueJob
      */
-    public function __construct(BaseClient $client = null, PrintQueueJob $printQueueJob = null)
+    public function __construct(?BaseClient $client = null, ?PrintQueueJob $printQueueJob = null)
     {
         parent::__construct($client);
         if ($printQueueJob) {
@@ -54,7 +56,7 @@ class PrintQueueJobStatus extends Request
      *
      * @return int
      */
-    public function getPrintQueueJobId()
+    public function getPrintQueueJobId() : ?int
     {
         return $this->printQueueJobId;
     }
@@ -62,10 +64,10 @@ class PrintQueueJobStatus extends Request
     /**
      * Set PrintQueueJob_ID.
      *
-     * @param int
+     * @param ?int $printQueueJobId
      * @return $this
      */
-    public function setPrintQueueJobId($printQueueJobId)
+    public function setPrintQueueJobId(?int $printQueueJobId) : self
     {
         $this->printQueueJobId = $printQueueJobId;
 
@@ -75,7 +77,7 @@ class PrintQueueJobStatus extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -89,7 +91,7 @@ class PrintQueueJobStatus extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PrintQueueJobStatus($this, $httpResponse, $data);
     }

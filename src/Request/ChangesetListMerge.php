@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ChangesetList_Merge.
@@ -27,26 +28,27 @@ use MerchantAPI\BaseClient;
 class ChangesetListMerge extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ChangesetList_Merge';
+    protected string $function = 'ChangesetList_Merge';
 
     /** @var int[] */
-    protected $sourceChangesetIds = [];
+    protected array $sourceChangesetIds = [];
 
-    /** @var int */
-    protected $destinationBranchId;
+    /** @var ?int */
+    protected ?int $destinationBranchId = null;
 
-    /** @var string */
-    protected $notes;
+    /** @var ?string */
+    protected ?string $notes = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -61,7 +63,7 @@ class ChangesetListMerge extends Request
      *
      * @return array
      */
-    public function getSourceChangesetIds()
+    public function getSourceChangesetIds() : array
     {
         return $this->sourceChangesetIds;
     }
@@ -71,7 +73,7 @@ class ChangesetListMerge extends Request
      *
      * @return int
      */
-    public function getDestinationBranchId()
+    public function getDestinationBranchId() : ?int
     {
         return $this->destinationBranchId;
     }
@@ -81,7 +83,7 @@ class ChangesetListMerge extends Request
      *
      * @return string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->notes;
     }
@@ -89,10 +91,10 @@ class ChangesetListMerge extends Request
     /**
      * Set Destination_Branch_ID.
      *
-     * @param int
+     * @param ?int $destinationBranchId
      * @return $this
      */
-    public function setDestinationBranchId($destinationBranchId)
+    public function setDestinationBranchId(?int $destinationBranchId) : self
     {
         $this->destinationBranchId = $destinationBranchId;
 
@@ -102,10 +104,10 @@ class ChangesetListMerge extends Request
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         $this->notes = $notes;
 
@@ -115,11 +117,10 @@ class ChangesetListMerge extends Request
     /**
      * Add Source_Changeset_IDs.
      *
-     * @param int
-     *
+     * @param int $sourceChangesetId
      * @return $this
      */
-    public function addSourceChangesetID($sourceChangesetId)
+    public function addSourceChangesetID(int $sourceChangesetId) : self
     {
         $this->sourceChangesetIds[] = $sourceChangesetId;
         return $this;
@@ -128,10 +129,10 @@ class ChangesetListMerge extends Request
     /**
      * Add Changeset model.
      *
-     * @param \MerchantAPI\Model\Changeset
+     * @param \MerchantAPI\Model\Changeset $changeset
      * @return $this
      */
-    public function addChangeset(Changeset $changeset)
+    public function addChangeset(Changeset $changeset) : self
     {
         if ($changeset->getId()) {
             $this->sourceChangesetIds[] = $changeset->getId();
@@ -143,7 +144,7 @@ class ChangesetListMerge extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -163,7 +164,7 @@ class ChangesetListMerge extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ChangesetListMerge($this, $httpResponse, $data);
     }

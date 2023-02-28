@@ -20,29 +20,29 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Get shpmnt_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipmentId()
+    public function getShipmentId() : ?int
     {
-        return (int) $this->getField('shpmnt_id', 0);
+        return $this->getField('shpmnt_id');
     }
 
     /**
      * Get mark_shipped.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getMarkShipped()
+    public function getMarkShipped() : ?bool
     {
-        return (bool) $this->getField('mark_shipped', false);
+        return $this->getField('mark_shipped');
     }
 
     /**
      * Get tracknum.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingNumber()
+    public function getTrackingNumber() : ?string
     {
         return $this->getField('tracknum');
     }
@@ -50,9 +50,9 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Get tracktype.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingType()
+    public function getTrackingType() : ?string
     {
         return $this->getField('tracktype');
     }
@@ -60,20 +60,20 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Set shpmnt_id.
      *
-     * @param int
+     * @param ?int $shipmentId
      * @return $this
      */
-    public function setShipmentId($shipmentId)
+    public function setShipmentId(?int $shipmentId) : self
     {
         return $this->setField('shpmnt_id', $shipmentId);
     }
@@ -81,10 +81,10 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Set mark_shipped.
      *
-     * @param bool
+     * @param ?bool $markShipped
      * @return $this
      */
-    public function setMarkShipped($markShipped)
+    public function setMarkShipped(?bool $markShipped) : self
     {
         return $this->setField('mark_shipped', $markShipped);
     }
@@ -92,10 +92,10 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Set tracknum.
      *
-     * @param string
+     * @param ?string $trackingNumber
      * @return $this
      */
-    public function setTrackingNumber($trackingNumber)
+    public function setTrackingNumber(?string $trackingNumber) : self
     {
         return $this->setField('tracknum', $trackingNumber);
     }
@@ -103,10 +103,10 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Set tracktype.
      *
-     * @param string
+     * @param ?string $trackingType
      * @return $this
      */
-    public function setTrackingType($trackingType)
+    public function setTrackingType(?string $trackingType) : self
     {
         return $this->setField('tracktype', $trackingType);
     }
@@ -114,10 +114,10 @@ class OrderShipmentUpdate extends \MerchantAPI\Model
     /**
      * Set cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         return $this->setField('cost', $cost);
     }

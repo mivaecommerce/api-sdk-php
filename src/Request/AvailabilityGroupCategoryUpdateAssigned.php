@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AvailabilityGroupCategory_Update_Assigned.
@@ -26,38 +27,39 @@ use MerchantAPI\BaseClient;
 class AvailabilityGroupCategoryUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AvailabilityGroupCategory_Update_Assigned';
+    protected string $function = 'AvailabilityGroupCategory_Update_Assigned';
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var int */
-    protected $availabilityGroupId;
+    /** @var ?int */
+    protected ?int $availabilityGroupId = null;
 
-    /** @var string */
-    protected $editAvailabilityGroup;
+    /** @var ?string */
+    protected ?string $editAvailabilityGroup = null;
 
-    /** @var string */
-    protected $availabilityGroupName;
+    /** @var ?string */
+    protected ?string $availabilityGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         if ($category) {
@@ -74,7 +76,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -84,7 +86,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -94,7 +96,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -104,7 +106,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getAvailabilityGroupId()
+    public function getAvailabilityGroupId() : ?int
     {
         return $this->availabilityGroupId;
     }
@@ -114,7 +116,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditAvailabilityGroup()
+    public function getEditAvailabilityGroup() : ?string
     {
         return $this->editAvailabilityGroup;
     }
@@ -124,7 +126,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getAvailabilityGroupName()
+    public function getAvailabilityGroupName() : ?string
     {
         return $this->availabilityGroupName;
     }
@@ -134,7 +136,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -142,10 +144,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -155,10 +157,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -168,10 +170,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -181,10 +183,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_ID.
      *
-     * @param int
+     * @param ?int $availabilityGroupId
      * @return $this
      */
-    public function setAvailabilityGroupId($availabilityGroupId)
+    public function setAvailabilityGroupId(?int $availabilityGroupId) : self
     {
         $this->availabilityGroupId = $availabilityGroupId;
 
@@ -194,10 +196,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set Edit_AvailabilityGroup.
      *
-     * @param string
+     * @param ?string $editAvailabilityGroup
      * @return $this
      */
-    public function setEditAvailabilityGroup($editAvailabilityGroup)
+    public function setEditAvailabilityGroup(?string $editAvailabilityGroup) : self
     {
         $this->editAvailabilityGroup = $editAvailabilityGroup;
 
@@ -207,10 +209,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set AvailabilityGroup_Name.
      *
-     * @param string
+     * @param ?string $availabilityGroupName
      * @return $this
      */
-    public function setAvailabilityGroupName($availabilityGroupName)
+    public function setAvailabilityGroupName(?string $availabilityGroupName) : self
     {
         $this->availabilityGroupName = $availabilityGroupName;
 
@@ -220,10 +222,10 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -233,7 +235,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -267,7 +269,7 @@ class AvailabilityGroupCategoryUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AvailabilityGroupCategoryUpdateAssigned($this, $httpResponse, $data);
     }

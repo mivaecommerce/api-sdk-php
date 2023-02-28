@@ -30,21 +30,21 @@ class TokenAuthenticator implements Authenticator
     const SIGN_DIGEST_NONE      = false;
 
     /** @var string */
-	protected $apiToken;
+	protected string $apiToken;
+
+	/** @var ?string */
+	protected ?string $signingKey;
 
 	/** @var string */
-	protected $signingKey;
-
-	/** @var string */
-	protected $digestType;
+	protected string $digestType;
 
     /** @var array Valid Digests */
-    protected $digests = [
+    protected array $digests = [
         self::SIGN_DIGEST_SHA1,
         self::SIGN_DIGEST_SHA256
     ];
 
-    public function __construct($apiToken, $signingKey, $digestType = self::SIGN_DIGEST_SHA256)
+    public function __construct(string $apiToken, ?string $signingKey, string $digestType = self::SIGN_DIGEST_SHA256)
     {
     	$this->apiToken = $apiToken;
     	$this->signingKey = $signingKey;
@@ -56,7 +56,7 @@ class TokenAuthenticator implements Authenticator
      * @return mixed|string
      * @throws \Exception
      */
-    public function generateAuthenticationHeader($data)
+    public function generateAuthenticationHeader(string $data) : string
 	{
         $digest = strtolower(trim($this->digestType));
 
@@ -68,11 +68,11 @@ class TokenAuthenticator implements Authenticator
 	}
 
     /**
-     * @param $data
-     * @return mixed|string
+     * @param string $data
+     * @return string
      * @throws \Exception
      */
-	public function signData($data)
+	public function signData(string $data) : string
 	{
 		if (!is_string($data)) {
             throw new \Exception(sprintf('Invalid signing data type. Expecting string but got %s',
@@ -103,7 +103,7 @@ class TokenAuthenticator implements Authenticator
      *
      * @return string
      */
-    public function getApiToken()
+    public function getApiToken() : string
     {
         return $this->apiToken;
     }
@@ -112,9 +112,9 @@ class TokenAuthenticator implements Authenticator
      * Set the authentication API token.
      *
      * @param string $apiToken
-     * @return \MerchantAPI\TokenAuthenticator
+     * @return $this
      */
-    public function setApiToken($apiToken)
+    public function setApiToken(string $apiToken) : self
     {
         $this->apiToken = $apiToken;
         return $this;
@@ -125,7 +125,7 @@ class TokenAuthenticator implements Authenticator
      *
      * @return string
      */
-    public function getSigningKey()
+    public function getSigningKey() : ?string
     {
         return $this->signingKey;
     }
@@ -133,10 +133,10 @@ class TokenAuthenticator implements Authenticator
     /**
      * Set the base64 encoded request signing key.
      *
-     * @param string $signingKey
-     * @return TokenAuthenticator
+     * @param ?string $signingKey
+     * @return $this
      */
-    public function setSigningKey($signingKey)
+    public function setSigningKey(?string $signingKey) : self
     {
         $this->signingKey = $signingKey;
         return $this;
@@ -147,7 +147,7 @@ class TokenAuthenticator implements Authenticator
      *
      * @return string
      */
-    public function getDigestType()
+    public function getDigestType() : string
     {
         return $this->digestType;
     }
@@ -156,9 +156,9 @@ class TokenAuthenticator implements Authenticator
      * Set the digest type
      *
      * @param string $digestType
-     * @return TokenAuthenticator
+     * @return $this
      */
-    public function setDigestType($digestType)
+    public function setDigestType(string $digestType) : self
     {
         $this->digestType = $digestType;
         return $this;

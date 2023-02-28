@@ -27,9 +27,9 @@ interface ListQueryRequestInterface extends RequestInterface
     /**
      * Get the sorting field.
      *
-     * @return mixed
+     * @return ?string
      */
-    public function getSort();
+    public function getSort() : string;
 
     /**
      * Set the sorting field.
@@ -38,112 +38,112 @@ interface ListQueryRequestInterface extends RequestInterface
      * @param string
      * @return $this
      */
-    public function setSort($field, $direction = self::SORT_ASCENDING);
+    public function setSort(string $field, string $direction = self::SORT_ASCENDING);
 
     /**
      * Get the available sorting fields for the request.
      *
      * @return array
      */
-    public function getAvailableSortFields();
+    public function getAvailableSortFields() : array;
 
     /**
      * Get the record offset.
      *
-     * @return mixed
+     * @return int
      */
-    public function getOffset();
+    public function getOffset() : int;
 
     /**
      * Set the record offset.
      *
-     * @param mixed $offset
+     * @param int $offset
      * @return $this
      */
-    public function setOffset($offset);
+    public function setOffset(int $offset) : self;
 
     /**
      * Get the maximum records to request.
      *
-     * @return mixed
+     * @return int
      */
-    public function getCount();
+    public function getCount() : int;
 
     /**
      * Set the maximum records to request.
      *
-     * @param mixed $count
+     * @param int $count
      * @return $this
      */
-    public function setCount($count);
+    public function setCount(int $count) : self;
 
     /**
      * Get the available search fields for the request.
      *
      * @return array
      */
-    public function getAvailableSearchFields();
+    public function getAvailableSearchFields() : array;
 
     /**
      * Add an on demand column to the request.
      *
-     * @param string|array
+     * @param string $column
      * @return $this
      */
-    public function addOnDemandColumn($column);
+    public function addOnDemandColumn(string $column) : self;
 
     /**
      * Remove an on demand column from the request.
      *
-     * @param string|array
+     * @param string $column
      * @return $this
      */
-    public function removeOnDemandColumn($column);
+    public function removeOnDemandColumn(string $column) : self;
 
     /**
      * Set the on demand columns to fetch.
      *
-     * @param array
+     * @param array $columns
      * @return $this
      */
-    public function setOnDemandColumns(array $columns);
+    public function setOnDemandColumns(array $columns) : self;
 
     /**
      * Get the on demand columns to fetch.
      *
      * @return array
      */
-    public function getOnDemandColumns();
+    public function getOnDemandColumns() : array;
 
     /**
      * Get the available on demand columns for the request.
      *
      * @return array
      */
-    public function getAvailableOnDemandColumns();
+    public function getAvailableOnDemandColumns() : array;
 
     /**
      * Get the custom filters to apply.
      *
      * @return array
      */
-    public function getCustomFilters();
+    public function getCustomFilters() : array;
 
     /**
      * Get the available custom filters for the request.
      *
      * @return array
      */
-    public function getAvailableCustomFilters();
+    public function getAvailableCustomFilters() : array;
 
     /**
      * Set the search filters to apply to the request.
      *
-     * @param array| \MerchantAPI\ListQuery\FilterExpression
+     * @param array|\MerchantAPI\ListQuery\FilterExpression $filters
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setFilters($filters);
+    public function setFilters($filters) : self;
 
     /**
      * Get the search filters to apply to the request.
@@ -155,25 +155,25 @@ interface ListQueryRequestInterface extends RequestInterface
     /**
      * Set a custom filter supported by the request.
      *
-     * @param string The custom filter name
-     * @param mixed The custom filter value
+     * @param string $name The custom filter name
+     * @param mixed $value The custom filter value
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function setCustomFilter($name, $value);
+    public function setCustomFilter(string $name, $value) : self;
 
     /**
      * Remove a custom filter applied to the request.
      *
-     * @param string
+     * @param string $name
      * @return $this
      */
-    public function removeCustomFilter($name);
+    public function removeCustomFilter(string $name) : self;
 
     /**
      * Creates a new FilterExpression object in the context the request.
      *
      * @return \MerchantAPI\ListQuery\FilterExpression
      */
-    public function filterExpression();
+    public function filterExpression() : FilterExpression;
 }

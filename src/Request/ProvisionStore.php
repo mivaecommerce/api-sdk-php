@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProvisionMessage;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Provision_Store.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class ProvisionStore extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Provision_Store';
+    protected string $function = 'Provision_Store';
 
-    /** @var string */
-    protected $xml;
+    /** @var ?string */
+    protected ?string $xml = null;
 
     /**
      * Get xml.
      *
      * @return string
      */
-    public function getXml()
+    public function getXml() : ?string
     {
         return $this->xml;
     }
@@ -47,10 +48,10 @@ class ProvisionStore extends Request
     /**
      * Set xml.
      *
-     * @param string
+     * @param ?string $xml
      * @return $this
      */
-    public function setXml($xml)
+    public function setXml(?string $xml) : self
     {
         $this->xml = $xml;
 
@@ -60,7 +61,7 @@ class ProvisionStore extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -72,7 +73,7 @@ class ProvisionStore extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProvisionStore($this, $httpResponse, $data);
     }

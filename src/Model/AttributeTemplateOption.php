@@ -20,44 +20,44 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get attemp_id.
      *
-     * @return 
+     * @return ?int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
-        // Missing 
+        return $this->getField('attemp_id');
     }
 
     /**
      * Get attmpat_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
-        return (int) $this->getField('attmpat_id', 0);
+        return $this->getField('attmpat_id');
     }
 
     /**
      * Get disporder.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDisplayOrder()
+    public function getDisplayOrder() : ?int
     {
         if ($this->hasField('disporder')) {
             return (int) $this->getField('disporder', 0);
         } else if ($this->hasField('disp_order')) {
-            return (int) $this->getField('disp_order', 0);
+            return (int) $this->getField('disp_order');
         }
 
         return 0;
@@ -66,9 +66,9 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -76,9 +76,9 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->getField('prompt');
     }
@@ -86,39 +86,39 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -126,9 +126,9 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get formatted_price.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedPrice()
+    public function getFormattedPrice() : ?string
     {
         return $this->getField('formatted_price');
     }
@@ -136,9 +136,9 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get formatted_cost.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedCost()
+    public function getFormattedCost() : ?string
     {
         return $this->getField('formatted_cost');
     }
@@ -146,10 +146,10 @@ class AttributeTemplateOption extends \MerchantAPI\Model
     /**
      * Get default_opt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getDefaultOpt()
+    public function getDefaultOpt() : ?bool
     {
-        return (bool) $this->getField('default_opt', false);
+        return $this->getField('default_opt');
     }
 }

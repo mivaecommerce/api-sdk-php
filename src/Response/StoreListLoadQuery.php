@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Store;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for StoreList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class StoreListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Store[] */
-    protected $stores = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $stores;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class StoreListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->stores = new \MerchantAPI\Collection();
+        $this->stores = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class StoreListLoadQuery extends ListQueryResponse
     /**
      * Get stores.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Store[]
+     * @return \MerchantAPI\Collection
      */
-    public function getStores()
+    public function getStores() : Collection
     {
         return $this->stores;
     }

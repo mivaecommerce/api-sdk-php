@@ -20,49 +20,49 @@ class ProductImageData extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get image_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getImageId()
+    public function getImageId() : ?int
     {
-        return (int) $this->getField('image_id', 0);
+        return $this->getField('image_id');
     }
 
     /**
      * Get type_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTypeId()
+    public function getTypeId() : ?int
     {
-        return (int) $this->getField('type_id', 0);
+        return $this->getField('type_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -70,9 +70,9 @@ class ProductImageData extends \MerchantAPI\Model
     /**
      * Get type_desc.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTypeDescription()
+    public function getTypeDescription() : ?string
     {
         return $this->getField('type_desc');
     }
@@ -80,9 +80,9 @@ class ProductImageData extends \MerchantAPI\Model
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -90,30 +90,30 @@ class ProductImageData extends \MerchantAPI\Model
     /**
      * Get width.
      *
-     * @return int
+     * @return ?int
      */
-    public function getWidth()
+    public function getWidth() : ?int
     {
-        return (int) $this->getField('width', 0);
+        return $this->getField('width');
     }
 
     /**
      * Get height.
      *
-     * @return int
+     * @return ?int
      */
-    public function getHeight()
+    public function getHeight() : ?int
     {
-        return (int) $this->getField('height', 0);
+        return $this->getField('height');
     }
 
     /**
      * Get disp_order.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDisplayOrder()
+    public function getDisplayOrder() : ?int
     {
-        return (int) $this->getField('disp_order', 0);
+        return $this->getField('disp_order');
     }
 }

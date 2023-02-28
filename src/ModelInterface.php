@@ -15,53 +15,53 @@ namespace MerchantAPI;
  *
  * @package MerchantAPI
  */
-interface ModelInterface
+interface ModelInterface extends \JsonSerializable
 {
     /**
      * Check if the data has a field by key.
      *
-     * @param string
+     * @param string $key
      * @return bool
      */
-    public function hasField($key);
+    public function hasField(string $key) : bool;
 
     /**
      * Set a a data value by key.
      *
-     * @param string
-     * @param mixed
+     * @param string $key
+     * @param mixed $value
      * @return $this
      */
-    public function setField($key, $value);
+    public function setField(string $key, $value) : self;
 
     /**
      * Get a data value by key.
      *
-     * @param string
-     * @param mixed
+     * @param string $key
+     * @param mixed $defaultValue
      * @return mixed
      */
-    public function getField($key, $defaultValue = null);
+    public function getField(string $key, $defaultValue = null);
 
     /**
      * Remove a data value by key.
      *
-     * @param string
+     * @param string $key
      * @return $this
      */
-    public function removeField($key);
+    public function removeField(string $key) : self;
 
     /**
      * Get the data array.
      *
      * @return array
      */
-    public function getData();
+    public function getData() : array;
 
     /**
      * Check if data array is populated with anything.
      *
      * @return bool
      */
-    public function hasData();
+    public function hasData() : bool;
 }

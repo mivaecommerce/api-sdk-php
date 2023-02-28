@@ -17,6 +17,8 @@ use MerchantAPI\Model\ProductVariantExclusion;
 use MerchantAPI\Model\Product;
 use MerchantAPI\Model\ProductVariant;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request ProductVariantList_Load_Product.
@@ -29,42 +31,43 @@ use MerchantAPI\BaseClient;
 class ProductVariantListLoadProduct extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductVariantList_Load_Product';
+    protected string $function = 'ProductVariantList_Load_Product';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $productSku;
+    /** @var ?string */
+    protected ?string $productSku = null;
 
-    /** @var bool */
-    protected $includeDefaultVariant;
+    /** @var ?bool */
+    protected ?bool $includeDefaultVariant = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariantLimit[] */
-    protected $limits = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $limits;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariantExclusion[] */
-    protected $exclusions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $exclusions;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
-        $this->limits = new \MerchantAPI\Collection();
-        $this->exclusions = new \MerchantAPI\Collection();
+        $this->limits = new Collection();
+        $this->exclusions = new Collection();
 
         if ($product) {
             if ($product->getId()) {
@@ -82,7 +85,7 @@ class ProductVariantListLoadProduct extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -92,7 +95,7 @@ class ProductVariantListLoadProduct extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -102,7 +105,7 @@ class ProductVariantListLoadProduct extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -112,7 +115,7 @@ class ProductVariantListLoadProduct extends Request
      *
      * @return string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->productSku;
     }
@@ -122,7 +125,7 @@ class ProductVariantListLoadProduct extends Request
      *
      * @return bool
      */
-    public function getIncludeDefaultVariant()
+    public function getIncludeDefaultVariant() : ?bool
     {
         return $this->includeDefaultVariant;
     }
@@ -130,9 +133,9 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Get Limits.
      *
-     * @return \MerchantAPI\Model\ProductVariantLimit[]
+     * @return \MerchantAPI\Collection
      */
-    public function getLimits()
+    public function getLimits() : ?Collection
     {
         return $this->limits;
     }
@@ -140,9 +143,9 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Get Exclusions.
      *
-     * @return \MerchantAPI\Model\ProductVariantExclusion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getExclusions()
+    public function getExclusions() : ?Collection
     {
         return $this->exclusions;
     }
@@ -150,10 +153,10 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -163,10 +166,10 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -176,10 +179,10 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -189,10 +192,10 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Product_SKU.
      *
-     * @param string
+     * @param ?string $productSku
      * @return $this
      */
-    public function setProductSku($productSku)
+    public function setProductSku(?string $productSku) : self
     {
         $this->productSku = $productSku;
 
@@ -202,10 +205,10 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Include_Default_Variant.
      *
-     * @param bool
+     * @param ?bool $includeDefaultVariant
      * @return $this
      */
-    public function setIncludeDefaultVariant($includeDefaultVariant)
+    public function setIncludeDefaultVariant(?bool $includeDefaultVariant) : self
     {
         $this->includeDefaultVariant = $includeDefaultVariant;
 
@@ -215,12 +218,17 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Limits.
      *
-     * @param (\MerchantAPI\Model\ProductVariantLimit|array)[]
+     * @param \MerchantAPI\Collection|array $limits
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setLimits(array $limits)
+    public function setLimits($limits) : self
     {
+        if (!is_array($limits) && !$limits instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($limits) ? get_class($limits) : gettype($limits)));
+        }
+
         foreach ($limits as &$model) {
             if (is_array($model)) {
                 $model = new ProductVariantLimit($model);
@@ -230,7 +238,7 @@ class ProductVariantListLoadProduct extends Request
             }
         }
 
-        $this->limits = new \MerchantAPI\Collection($limits);
+        $this->limits = new Collection($limits);
 
         return $this;
     }
@@ -238,12 +246,17 @@ class ProductVariantListLoadProduct extends Request
     /**
      * Set Exclusions.
      *
-     * @param (\MerchantAPI\Model\ProductVariantExclusion|array)[]
+     * @param \MerchantAPI\Collection|array $exclusions
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setExclusions(array $exclusions)
+    public function setExclusions($exclusions) : self
     {
+        if (!is_array($exclusions) && !$exclusions instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($exclusions) ? get_class($exclusions) : gettype($exclusions)));
+        }
+
         foreach ($exclusions as &$model) {
             if (is_array($model)) {
                 $model = new ProductVariantExclusion($model);
@@ -253,7 +266,7 @@ class ProductVariantListLoadProduct extends Request
             }
         }
 
-        $this->exclusions = new \MerchantAPI\Collection($exclusions);
+        $this->exclusions = new Collection($exclusions);
 
         return $this;
     }
@@ -262,10 +275,9 @@ class ProductVariantListLoadProduct extends Request
      * Add Limits.
      *
      * @param \MerchantAPI\Model\ProductVariantLimit
-     *
      * @return $this
      */
-    public function addLimit(ProductVariantLimit $model)
+    public function addLimit(ProductVariantLimit $model) : self
     {
         $this->limits[] = $model;
         return $this;
@@ -278,7 +290,7 @@ class ProductVariantListLoadProduct extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addLimits(array $limits)
+    public function addLimits(array $limits) : self
     {
         foreach ($limits as $e) {
             if (is_array($e)) {
@@ -298,10 +310,9 @@ class ProductVariantListLoadProduct extends Request
      * Add Exclusions.
      *
      * @param \MerchantAPI\Model\ProductVariantExclusion
-     *
      * @return $this
      */
-    public function addExclusion(ProductVariantExclusion $model)
+    public function addExclusion(ProductVariantExclusion $model) : self
     {
         $this->exclusions[] = $model;
         return $this;
@@ -314,7 +325,7 @@ class ProductVariantListLoadProduct extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addExclusions(array $exclusions)
+    public function addExclusions(array $exclusions) : self
     {
         foreach ($exclusions as $e) {
             if (is_array($e)) {
@@ -333,7 +344,7 @@ class ProductVariantListLoadProduct extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -377,7 +388,7 @@ class ProductVariantListLoadProduct extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductVariantListLoadProduct($this, $httpResponse, $data);
     }

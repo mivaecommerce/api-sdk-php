@@ -20,14 +20,14 @@ namespace MerchantAPI\Authenticator;
 interface Authenticator
 {
     /**
-     * @param $data
-     * @return mixed
+     * @param string $data
+     * @return string
      */
-	public function generateAuthenticationHeader($data);
+	public function generateAuthenticationHeader(string $data) : string;
 
     /**
-     * @param $data
-     * @return mixed
+     * @param string $data
+     * @return string
      */
-	public function signData($data);
+	public function signData(string $data) : string;
 }

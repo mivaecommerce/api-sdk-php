@@ -29,23 +29,26 @@ class SSHAgentAuthenticator implements Authenticator
 	const DIGEST_TYPE_SSH_RSA_SHA512 = SSHAgentSignClient::SSH_AGENT_RSA_SHA2_512;
 
 	/** @var string */
-	protected $username;
+	protected string $username;
 
-	/** @var array */
-	protected $publicKey;
+	/** @var string */
+	protected string $publicKey;
 
 	/** @var int */
-	protected $digestType;
+	protected int $digestType;
+
+    /** @var SSHAgentSignClient */
+    protected SSHAgentSignClient $agent;
 
     /**
      * SSHAgentAuthenticator constructor.
-     * @param $username
-     * @param $publicKeyPath
-     * @param null $agentSockPath
+     * @param string $username
+     * @param string $publicKeyPath
+     * @param ?string $agentSockPath
      * @param int $digestType
      * @throws \Exception
      */
-	public function __construct($username, $publicKeyPath, $agentSockPath = null, $digestType = self::DIGEST_TYPE_SSH_RSA_SHA256)
+	public function __construct(string $username, string $publicKeyPath, ?string $agentSockPath = null, int $digestType = self::DIGEST_TYPE_SSH_RSA_SHA256)
 	{
 		$this->username = $username;
 		$this->agent = new SSHAgentSignClient($agentSockPath);
@@ -54,11 +57,11 @@ class SSHAgentAuthenticator implements Authenticator
 	}
 
     /**
-     * @param $publicKeyPath
+     * @param string $publicKeyPath
      * @return $this
      * @throws \Exception
      */
-	public function setPublicKey($publicKeyPath) {
+	public function setPublicKey(string $publicKeyPath) {
 		if (strlen($publicKeyPath)) {
 			if (!file_exists($publicKeyPath)) {
 				throw new \Exception('Public key file does not exist');
@@ -71,9 +74,9 @@ class SSHAgentAuthenticator implements Authenticator
 	}
 
     /**
-     * @return array
+     * @return string
      */
-	public function getPublicKey()
+	public function getPublicKey() : string
 	{
 		return $this->publicKey;
 	}
@@ -81,16 +84,16 @@ class SSHAgentAuthenticator implements Authenticator
     /**
      * @return int
      */
-    public function getDigestType()
+    public function getDigestType() : int
     {
         return $this->digestType;
     }
 
     /**
-     * @param $digestType
+     * @param int $digestType
      * @return $this
      */
-    public function setDigestType($digestType)
+    public function setDigestType(int $digestType) : self
     {
         $this->digestType = $digestType;
         return $this;
@@ -99,24 +102,27 @@ class SSHAgentAuthenticator implements Authenticator
     /**
      * @return string
      */
-	public function getUsername()
+	public function getUsername() : string
 	{
 		return $this->username;
 	}
 
     /**
-     * @param $username
+     * @param string $username
+     * @return $this
      */
-	public function setUsername($username)
+	public function setUsername(string $username) : self
 	{
 		$this->username = $username;
+        return $this;
 	}
 
     /**
-     * @param $publicKey
+     * @param string $publicKey
      * @return $this
      */
-	public function setPublicKeyString($publicKey) {
+	public function setPublicKeyString(string $publicKey) : self
+    {
 		if (strpos($publicKey, ' ') !== false) {
 			$parts = explode(' ', $publicKey);
 
@@ -133,11 +139,11 @@ class SSHAgentAuthenticator implements Authenticator
 	}
 
     /**
-     * @param $data
-     * @return mixed|string
+     * @param string $data
+     * @return string
      * @throws \Exception
      */
-	public function generateAuthenticationHeader($data)
+	public function generateAuthenticationHeader(string $data) : string
 	{
 		if ($this->digestType == static::DIGEST_TYPE_SSH_RSA_SHA512) {
 			return sprintf('SSH-RSA-SHA2-512 %s:%s', base64_encode($this->username), $this->signData($data));			
@@ -147,11 +153,11 @@ class SSHAgentAuthenticator implements Authenticator
 	}
 
     /**
-     * @param $data
-     * @return mixed|string
+     * @param string $data
+     * @return string
      * @throws \Exception
      */
-	public function signData($data)
+	public function signData(string $data) : string
 	{
 		$this->agent->connect();
 

@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\BranchJavaScriptResourceVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BranchJavaScriptResourceVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\BranchJavaScriptResourceVersion[] */
-    protected $branchJavaScriptResourceVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $branchJavaScriptResourceVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BranchJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->branchJavaScriptResourceVersions = new \MerchantAPI\Collection();
+        $this->branchJavaScriptResourceVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BranchJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
     /**
      * Get branchJavaScriptResourceVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\BranchJavaScriptResourceVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBranchJavaScriptResourceVersions()
+    public function getBranchJavaScriptResourceVersions() : Collection
     {
         return $this->branchJavaScriptResourceVersions;
     }

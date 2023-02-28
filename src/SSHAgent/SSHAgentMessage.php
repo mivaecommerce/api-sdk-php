@@ -18,18 +18,19 @@ namespace MerchantAPI\SSHAgent;
 abstract class SSHAgentMessage
 {
     /**
-     * @return string
+     * @return ?string
      */
-	public function Pack()
+	public function Pack() : ?string
     {
 	    return '';
     }
 
     /**
-     * @param $data
+     * @param string $data
+     * @return void
      * @throws \Exception
      */
-    public function Unpack($data)
+    public function Unpack(string $data) : void
 	{
 		$size = unpack('N', $data, 0);
 

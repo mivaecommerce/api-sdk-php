@@ -16,6 +16,8 @@ use MerchantAPI\Model\SubscriptionAttribute;
 use MerchantAPI\Model\Product;
 use MerchantAPI\Model\SubscriptionShippingMethod;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request SubscriptionShippingMethodList_Load_Query.
@@ -28,74 +30,75 @@ use MerchantAPI\BaseClient;
 class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'SubscriptionShippingMethodList_Load_Query';
+    protected string $function = 'SubscriptionShippingMethodList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'method',
         'price',
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'method',
         'price',
     ];
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var int */
-    protected $productSubscriptionTermId;
+    /** @var ?int */
+    protected ?int $productSubscriptionTermId = null;
 
-    /** @var string */
-    protected $productSubscriptionTermDescription;
+    /** @var ?string */
+    protected ?string $productSubscriptionTermDescription = null;
 
-    /** @var int */
-    protected $customerAddressId;
+    /** @var ?int */
+    protected ?int $customerAddressId = null;
 
-    /** @var int */
-    protected $addressId;
+    /** @var ?int */
+    protected ?int $addressId = null;
 
-    /** @var int */
-    protected $paymentCardId;
+    /** @var ?int */
+    protected ?int $paymentCardId = null;
 
-    /** @var int */
-    protected $customerPaymentCardId;
+    /** @var ?int */
+    protected ?int $customerPaymentCardId = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\SubscriptionAttribute[] */
-    protected $attributes = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $attributes;
 
-    /** @var int */
-    protected $quantity;
+    /** @var ?int */
+    protected ?int $quantity = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
-        $this->attributes = new \MerchantAPI\Collection();
+        $this->attributes = new Collection();
 
         if ($product) {
             if ($product->getId()) {
@@ -111,7 +114,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -121,7 +124,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -131,7 +134,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -141,7 +144,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getProductSubscriptionTermId()
+    public function getProductSubscriptionTermId() : ?int
     {
         return $this->productSubscriptionTermId;
     }
@@ -151,7 +154,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getProductSubscriptionTermDescription()
+    public function getProductSubscriptionTermDescription() : ?string
     {
         return $this->productSubscriptionTermDescription;
     }
@@ -161,7 +164,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getCustomerAddressId()
+    public function getCustomerAddressId() : ?int
     {
         return $this->customerAddressId;
     }
@@ -171,7 +174,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
         return $this->addressId;
     }
@@ -181,7 +184,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getPaymentCardId()
+    public function getPaymentCardId() : ?int
     {
         return $this->paymentCardId;
     }
@@ -191,7 +194,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getCustomerPaymentCardId()
+    public function getCustomerPaymentCardId() : ?int
     {
         return $this->customerPaymentCardId;
     }
@@ -201,7 +204,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -211,7 +214,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -221,7 +224,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -229,9 +232,9 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Get Attributes.
      *
-     * @return \MerchantAPI\Model\SubscriptionAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
         return $this->attributes;
     }
@@ -241,7 +244,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      *
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
         return $this->quantity;
     }
@@ -249,10 +252,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -262,10 +265,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -275,10 +278,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -288,10 +291,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set ProductSubscriptionTerm_ID.
      *
-     * @param int
+     * @param ?int $productSubscriptionTermId
      * @return $this
      */
-    public function setProductSubscriptionTermId($productSubscriptionTermId)
+    public function setProductSubscriptionTermId(?int $productSubscriptionTermId) : self
     {
         $this->productSubscriptionTermId = $productSubscriptionTermId;
 
@@ -301,10 +304,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set ProductSubscriptionTerm_Description.
      *
-     * @param string
+     * @param ?string $productSubscriptionTermDescription
      * @return $this
      */
-    public function setProductSubscriptionTermDescription($productSubscriptionTermDescription)
+    public function setProductSubscriptionTermDescription(?string $productSubscriptionTermDescription) : self
     {
         $this->productSubscriptionTermDescription = $productSubscriptionTermDescription;
 
@@ -314,10 +317,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set CustomerAddress_ID.
      *
-     * @param int
+     * @param ?int $customerAddressId
      * @return $this
      */
-    public function setCustomerAddressId($customerAddressId)
+    public function setCustomerAddressId(?int $customerAddressId) : self
     {
         $this->customerAddressId = $customerAddressId;
 
@@ -327,10 +330,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Address_ID.
      *
-     * @param int
+     * @param ?int $addressId
      * @return $this
      */
-    public function setAddressId($addressId)
+    public function setAddressId(?int $addressId) : self
     {
         $this->addressId = $addressId;
 
@@ -340,10 +343,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set PaymentCard_ID.
      *
-     * @param int
+     * @param ?int $paymentCardId
      * @return $this
      */
-    public function setPaymentCardId($paymentCardId)
+    public function setPaymentCardId(?int $paymentCardId) : self
     {
         $this->paymentCardId = $paymentCardId;
 
@@ -353,10 +356,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set CustomerPaymentCard_ID.
      *
-     * @param int
+     * @param ?int $customerPaymentCardId
      * @return $this
      */
-    public function setCustomerPaymentCardId($customerPaymentCardId)
+    public function setCustomerPaymentCardId(?int $customerPaymentCardId) : self
     {
         $this->customerPaymentCardId = $customerPaymentCardId;
 
@@ -366,10 +369,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -379,10 +382,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -392,10 +395,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -405,12 +408,17 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Attributes.
      *
-     * @param (\MerchantAPI\Model\SubscriptionAttribute|array)[]
+     * @param \MerchantAPI\Collection|array $attributes
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes($attributes) : self
     {
+        if (!is_array($attributes) && !$attributes instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($attributes) ? get_class($attributes) : gettype($attributes)));
+        }
+
         foreach ($attributes as &$model) {
             if (is_array($model)) {
                 $model = new SubscriptionAttribute($model);
@@ -420,7 +428,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
             }
         }
 
-        $this->attributes = new \MerchantAPI\Collection($attributes);
+        $this->attributes = new Collection($attributes);
 
         return $this;
     }
@@ -428,10 +436,10 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * Set Quantity.
      *
-     * @param int
+     * @param ?int $quantity
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity) : self
     {
         $this->quantity = $quantity;
 
@@ -442,10 +450,9 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      * Add Attributes.
      *
      * @param \MerchantAPI\Model\SubscriptionAttribute
-     *
      * @return $this
      */
-    public function addSubscriptionAttribute(SubscriptionAttribute $model)
+    public function addSubscriptionAttribute(SubscriptionAttribute $model) : self
     {
         $this->attributes[] = $model;
         return $this;
@@ -458,7 +465,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addAttributes(array $attributes)
+    public function addAttributes(array $attributes) : self
     {
         foreach ($attributes as $e) {
             if (is_array($e)) {
@@ -477,7 +484,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -533,7 +540,7 @@ class SubscriptionShippingMethodListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\SubscriptionShippingMethodListLoadQuery($this, $httpResponse, $data);
     }

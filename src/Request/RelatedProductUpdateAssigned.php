@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\Model\RelatedProduct;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request RelatedProduct_Update_Assigned.
@@ -27,38 +28,39 @@ use MerchantAPI\BaseClient;
 class RelatedProductUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'RelatedProduct_Update_Assigned';
+    protected string $function = 'RelatedProduct_Update_Assigned';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $relatedProductId;
+    /** @var ?int */
+    protected ?int $relatedProductId = null;
 
-    /** @var string */
-    protected $relatedProductCode;
+    /** @var ?string */
+    protected ?string $relatedProductCode = null;
 
-    /** @var string */
-    protected $editRelatedProduct;
+    /** @var ?string */
+    protected ?string $editRelatedProduct = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -75,7 +77,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -85,7 +87,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -95,7 +97,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -105,7 +107,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getRelatedProductId()
+    public function getRelatedProductId() : ?int
     {
         return $this->relatedProductId;
     }
@@ -115,7 +117,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getRelatedProductCode()
+    public function getRelatedProductCode() : ?string
     {
         return $this->relatedProductCode;
     }
@@ -125,7 +127,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditRelatedProduct()
+    public function getEditRelatedProduct() : ?string
     {
         return $this->editRelatedProduct;
     }
@@ -135,7 +137,7 @@ class RelatedProductUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -143,10 +145,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -156,10 +158,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -169,10 +171,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -182,10 +184,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set RelatedProduct_ID.
      *
-     * @param int
+     * @param ?int $relatedProductId
      * @return $this
      */
-    public function setRelatedProductId($relatedProductId)
+    public function setRelatedProductId(?int $relatedProductId) : self
     {
         $this->relatedProductId = $relatedProductId;
 
@@ -195,10 +197,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set RelatedProduct_Code.
      *
-     * @param string
+     * @param ?string $relatedProductCode
      * @return $this
      */
-    public function setRelatedProductCode($relatedProductCode)
+    public function setRelatedProductCode(?string $relatedProductCode) : self
     {
         $this->relatedProductCode = $relatedProductCode;
 
@@ -208,10 +210,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set Edit_RelatedProduct.
      *
-     * @param string
+     * @param ?string $editRelatedProduct
      * @return $this
      */
-    public function setEditRelatedProduct($editRelatedProduct)
+    public function setEditRelatedProduct(?string $editRelatedProduct) : self
     {
         $this->editRelatedProduct = $editRelatedProduct;
 
@@ -221,10 +223,10 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -234,7 +236,7 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -264,7 +266,7 @@ class RelatedProductUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\RelatedProductUpdateAssigned($this, $httpResponse, $data);
     }

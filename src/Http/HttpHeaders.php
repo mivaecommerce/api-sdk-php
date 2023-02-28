@@ -18,7 +18,7 @@ namespace MerchantAPI\Http;
 class HttpHeaders
 {
     /** @var array  */
-    protected $entries = [];
+    protected array $entries = [];
 
     /**
      * HttpHeaders constructor.
@@ -35,11 +35,11 @@ class HttpHeaders
     /**
      * Add/replace a header value.
      *
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      * @return $this
      */
-    public function add($key, $value)
+    public function add(string $key, $value) : self
     {
         foreach($this->entries as $k => &$v) {
             if (strcasecmp($key, $k) == 0) {
@@ -55,11 +55,11 @@ class HttpHeaders
     /**
      * Get a header value.
      *
-     * @param $key
-     * @param null $defaultValue
+     * @param string $key
+     * @param mixed $defaultValue
      * @return string
      */
-    public function get($key, $defaultValue = null)
+    public function get(string $key, $defaultValue = null) : ?string
     {
         foreach($this->entries as $k => $v) {
             if (strcasecmp($key, $k) == 0) {
@@ -73,10 +73,10 @@ class HttpHeaders
     /**
      * Check if a header value is defined.
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function has($key)
+    public function has(string $key) : bool
     {
         foreach($this->entries as $k => $v) {
             if (strcasecmp($key, $k) == 0) {
@@ -90,10 +90,10 @@ class HttpHeaders
     /**
      * Remove a header value by key.
      *
-     * @param $key
+     * @param string $key
      * @return $this
      */
-    public function remove($key)
+    public function remove(string $key) : self
     {
         foreach($this->entries as $k => $v) {
             if (strcasecmp($key, $k) == 0) {
@@ -109,7 +109,7 @@ class HttpHeaders
      *
      * @return array
      */
-    public function all()
+    public function all() : array
     {
         return $this->entries;
     }
@@ -117,9 +117,9 @@ class HttpHeaders
     /**
      * Get the total count of defined header entries.
      *
-     * @return array
+     * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->entries);
     }

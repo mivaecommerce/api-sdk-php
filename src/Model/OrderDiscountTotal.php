@@ -20,29 +20,29 @@ class OrderDiscountTotal extends \MerchantAPI\Model
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get pgrp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
-        return (int) $this->getField('pgrp_id', 0);
+        return $this->getField('pgrp_id');
     }
 
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -50,9 +50,9 @@ class OrderDiscountTotal extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -60,10 +60,10 @@ class OrderDiscountTotal extends \MerchantAPI\Model
     /**
      * Get total.
      *
-     * @return float
+     * @return ?float
      */
-    public function getTotal()
+    public function getTotal() : ?float
     {
-        return (float) $this->getField('total', 0.00);
+        return $this->getField('total');
     }
 }

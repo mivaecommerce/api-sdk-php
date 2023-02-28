@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\PrintQueueJob;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for PrintQueueJobList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PrintQueueJobListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PrintQueueJob[] */
-    protected $printQueueJobs = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $printQueueJobs;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class PrintQueueJobListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->printQueueJobs = new \MerchantAPI\Collection();
+        $this->printQueueJobs = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class PrintQueueJobListLoadQuery extends ListQueryResponse
     /**
      * Get printQueueJobs.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\PrintQueueJob[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPrintQueueJobs()
+    public function getPrintQueueJobs() : Collection
     {
         return $this->printQueueJobs;
     }

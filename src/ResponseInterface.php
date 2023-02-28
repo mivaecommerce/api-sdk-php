@@ -10,6 +10,8 @@
 
 namespace MerchantAPI;
 
+use MerchantAPI\Http\HttpResponse;
+
 /**
  * All Response objects must implement this interface.
  *
@@ -22,103 +24,103 @@ interface ResponseInterface
      *
      * @return bool
      */
-    public function isSuccess();
+    public function isSuccess() : bool;
 
     /**
      * Check is the response was a error.
      *
      * @return bool
      */
-    public function isError();
+    public function isError() : bool;
 
     /**
      * Get the error message.
      *
-     * @return string|null
+     * @return ?string
      */
-    public function getErrorMessage();
+    public function getErrorMessage() : ?string;
 
     /**
      * Get the error code.
      *
-     * @return string|null
+     * @return ?string
      */
-    public function getErrorCode();
+    public function getErrorCode() : ?string;
 
     /**
      * Get the number of input errors.
      *
      * @return int
      */
-    public function getInputErrorCount();
+    public function getInputErrorCount() : int;
 
     /**
      * Get the fields which encountered a validation error.
      *
-     * @return array
+     * @return ?array
      */
-    public function getErrorFields();
+    public function getErrorFields() : ?array;
 
     /**
      * Get the field which triggered the error.
      *
-     * @return string|null
+     * @return ?string
      */
-    public function getErrorField();
+    public function getErrorField() : ?string;
 
     /**
      * Get the error message associated with the error field that cause the error.
      *
-     * @return string|null
+     * @return ?string
      */
-    public function getErrorFieldMessage();
+    public function getErrorFieldMessage() : ?string;
 
     /**
      * Check if the error response is a list error.
      *
      * @return bool
      */
-    public function isListError();
+    public function isListError() : bool;
 
     /**
      * Check if the error response is a validation error.
      *
      * @return bool
      */
-    public function isValidationError();
+    public function isValidationError() : bool;
 
     /**
-     * Check if the error response is a input error.
+     * Check if the error response is an input error.
      *
      * @return bool
      */
-    public function isInputError();
+    public function isInputError() : bool;
 
     /**
      * Get the error messages associated with the response.
      *
-     * @return array
+     * @return ?array
      */
-    public function getErrors();
+    public function getErrors() : ?array;
 
     /**
      * Get the underlying JSON response data as an array.
      *
      * @return array
      */
-    public function getData();
+    public function getData() : array;
 
     /**
      * Get the initiating Request object.
      *
      * @return RequestInterface
      */
-    public function getRequest();
+    public function getRequest() : RequestInterface;
 
     /**
      * Get the underlying Http Response object.
      *
      * @return \MerchantAPI\Http\HttpResponse
      */
-    public function getHttpResponse();
+    public function getHttpResponse() : HttpResponse;
 }

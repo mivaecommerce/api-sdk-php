@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\CustomerPaymentCard;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for CustomerPaymentCardList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CustomerPaymentCardListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\CustomerPaymentCard[] */
-    protected $customerPaymentCards = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $customerPaymentCards;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class CustomerPaymentCardListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->customerPaymentCards = new \MerchantAPI\Collection();
+        $this->customerPaymentCards = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class CustomerPaymentCardListLoadQuery extends ListQueryResponse
     /**
      * Get customerPaymentCards.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CustomerPaymentCard[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCustomerPaymentCards()
+    public function getCustomerPaymentCards() : Collection
     {
         return $this->customerPaymentCards;
     }

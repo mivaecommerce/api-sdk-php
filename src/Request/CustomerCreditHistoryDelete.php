@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomerCreditHistory;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerCreditHistory_Delete.
@@ -26,20 +27,21 @@ use MerchantAPI\BaseClient;
 class CustomerCreditHistoryDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerCreditHistory_Delete';
+    protected string $function = 'CustomerCreditHistory_Delete';
 
-    /** @var int */
-    protected $customerCreditHistoryId;
+    /** @var ?int */
+    protected ?int $customerCreditHistoryId = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\CustomerCreditHistory
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\CustomerCreditHistory $customerCreditHistory
      */
-    public function __construct(BaseClient $client = null, CustomerCreditHistory $customerCreditHistory = null)
+    public function __construct(?BaseClient $client = null, ?CustomerCreditHistory $customerCreditHistory = null)
     {
         parent::__construct($client);
         if ($customerCreditHistory) {
@@ -52,7 +54,7 @@ class CustomerCreditHistoryDelete extends Request
      *
      * @return int
      */
-    public function getCustomerCreditHistoryId()
+    public function getCustomerCreditHistoryId() : ?int
     {
         return $this->customerCreditHistoryId;
     }
@@ -60,10 +62,10 @@ class CustomerCreditHistoryDelete extends Request
     /**
      * Set CustomerCreditHistory_ID.
      *
-     * @param int
+     * @param ?int $customerCreditHistoryId
      * @return $this
      */
-    public function setCustomerCreditHistoryId($customerCreditHistoryId)
+    public function setCustomerCreditHistoryId(?int $customerCreditHistoryId) : self
     {
         $this->customerCreditHistoryId = $customerCreditHistoryId;
 
@@ -73,7 +75,7 @@ class CustomerCreditHistoryDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -85,7 +87,7 @@ class CustomerCreditHistoryDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerCreditHistoryDelete($this, $httpResponse, $data);
     }

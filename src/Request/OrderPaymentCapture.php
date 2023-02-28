@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderPayment;
 use MerchantAPI\Model\OrderPaymentTotal;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderPayment_Capture.
@@ -27,23 +28,24 @@ use MerchantAPI\BaseClient;
 class OrderPaymentCapture extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderPayment_Capture';
+    protected string $function = 'OrderPayment_Capture';
 
-    /** @var int */
-    protected $orderPaymentId;
+    /** @var ?int */
+    protected ?int $orderPaymentId = null;
 
-    /** @var float */
-    protected $amount;
+    /** @var ?float */
+    protected ?float $amount = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\OrderPayment
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\OrderPayment $orderPayment
      */
-    public function __construct(BaseClient $client = null, OrderPayment $orderPayment = null)
+    public function __construct(?BaseClient $client = null, ?OrderPayment $orderPayment = null)
     {
         parent::__construct($client);
         if ($orderPayment) {
@@ -56,7 +58,7 @@ class OrderPaymentCapture extends Request
      *
      * @return int
      */
-    public function getOrderPaymentId()
+    public function getOrderPaymentId() : ?int
     {
         return $this->orderPaymentId;
     }
@@ -66,7 +68,7 @@ class OrderPaymentCapture extends Request
      *
      * @return float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
         return $this->amount;
     }
@@ -74,10 +76,10 @@ class OrderPaymentCapture extends Request
     /**
      * Set OrderPayment_ID.
      *
-     * @param int
+     * @param ?int $orderPaymentId
      * @return $this
      */
-    public function setOrderPaymentId($orderPaymentId)
+    public function setOrderPaymentId(?int $orderPaymentId) : self
     {
         $this->orderPaymentId = $orderPaymentId;
 
@@ -87,10 +89,10 @@ class OrderPaymentCapture extends Request
     /**
      * Set Amount.
      *
-     * @param float
+     * @param ?float $amount
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount(?float $amount) : self
     {
         $this->amount = $amount;
 
@@ -100,7 +102,7 @@ class OrderPaymentCapture extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -116,7 +118,7 @@ class OrderPaymentCapture extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderPaymentCapture($this, $httpResponse, $data);
     }

@@ -99,19 +99,19 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -119,59 +119,59 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get batch_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBatchId()
+    public function getBatchId() : ?int
     {
-        return (int) $this->getField('batch_id', 0);
+        return $this->getField('batch_id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get status.
      *
-     * @return int
+     * @return ?int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
-        return (int) $this->getField('status', 0);
+        return $this->getField('status');
     }
 
     /**
      * Get labelcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLabelCount()
+    public function getLabelCount() : ?int
     {
-        return (int) $this->getField('labelcount', 0);
+        return $this->getField('labelcount');
     }
 
     /**
      * Get ship_date.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipDate()
+    public function getShipDate() : ?int
     {
-        return (int) $this->getField('ship_date', 0);
+        return $this->getField('ship_date');
     }
 
     /**
      * Get tracknum.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingNumber()
+    public function getTrackingNumber() : ?string
     {
         return $this->getField('tracknum');
     }
@@ -179,9 +179,9 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get tracktype.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingType()
+    public function getTrackingType() : ?string
     {
         return $this->getField('tracktype');
     }
@@ -189,9 +189,9 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get tracklink.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTrackingLink()
+    public function getTrackingLink() : ?string
     {
         return $this->getField('tracklink');
     }
@@ -199,29 +199,29 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Get formatted_cost.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedCost()
+    public function getFormattedCost() : ?string
     {
         return $this->getField('formatted_cost');
     }
@@ -229,20 +229,20 @@ class OrderShipment extends \MerchantAPI\Model
     /**
      * Get order.
      *
-     * @return \MerchantAPI\Model\Order|null
+     * @return ?\MerchantAPI\Model\Order
      */
-    public function getOrder()
+    public function getOrder() : ?Order
     {
-        return $this->getField('order', null);
+        return $this->getField('order');
     }
 
     /**
      * Get items.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\OrderItem[]
+     * @return \MerchantAPI\Collection
      */
-    public function getItems()
+    public function getItems() : ?Collection
     {
-        return $this->getField('items', []);
+        return $this->getField('items');
     }
 }

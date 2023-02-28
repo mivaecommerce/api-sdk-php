@@ -31,6 +31,7 @@ class ProductVariant extends \MerchantAPI\Model
 
         $this->setField('parts', new Collection());
         $this->setField('dimensions', new Collection());
+        $this->setField('attributes', new Collection());
 
         if (isset($data['parts']) && is_array($data['parts'])) {
             $parts = new Collection();
@@ -65,6 +66,23 @@ class ProductVariant extends \MerchantAPI\Model
 
             $this->setField('dimensions', $dimensions);
         }
+
+        if (isset($data['attributes']) && is_array($data['attributes'])) {
+            $attributes = new Collection();
+
+            foreach($data['attributes'] as $e) {
+                if ($e instanceof ProductVariantAttribute) {
+                    $attributes[] = $e;
+                } else if (is_array($e)) {
+                    $attributes[] = new ProductVariantAttribute($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of ProductVariantAttribute or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('attributes', $attributes);
+        }
     }
 
     /**
@@ -97,45 +115,67 @@ class ProductVariant extends \MerchantAPI\Model
                 }
             }
         }
+
+        if (isset($this->data['attributes']) && is_array($this->data['attributes'])) {
+            if ($this->data['attributes'] instanceof Collection) {
+                $this->data['attributes'] = clone $this->data['attributes'];
+            } else {
+                foreach($this->data['attributes'] as $i => $e) {
+                    if ($e instanceof ProductVariantAttribute) {
+                        $this->data['attributes'][$i] = clone $this->data['attributes'][$i];
+                    }
+                }
+            }
+        }
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get variant_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getVariantId()
+    public function getVariantId() : ?int
     {
-        return (int) $this->getField('variant_id', 0);
+        return $this->getField('variant_id');
     }
 
     /**
      * Get parts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariantPart[]
+     * @return \MerchantAPI\Collection
      */
-    public function getParts()
+    public function getParts() : ?Collection
     {
-        return $this->getField('parts', []);
+        return $this->getField('parts');
     }
 
     /**
      * Get dimensions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductVariantDimension[]
+     * @return \MerchantAPI\Collection
      */
-    public function getDimensions()
+    public function getDimensions() : ?Collection
     {
-        return $this->getField('dimensions', []);
+        return $this->getField('dimensions');
+    }
+
+    /**
+     * Get attributes.
+     *
+     * @return \MerchantAPI\Collection
+     */
+    public function getAttributes() : ?Collection
+    {
+        return $this->getField('attributes');
     }
 }

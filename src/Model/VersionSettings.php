@@ -22,7 +22,8 @@ class VersionSettings extends \MerchantAPI\Model
      *
      * @param mixed $data
      */
-    public function __construct($data) {
+    public function __construct($data)
+    {
         $this->data = $data;
     }
 
@@ -31,7 +32,7 @@ class VersionSettings extends \MerchantAPI\Model
      *
      * @return bool
      */
-    public function isObject()
+    public function isObject() : bool
     {
         return is_array($this->data) && !isset($this->data[0]);
     }
@@ -41,7 +42,7 @@ class VersionSettings extends \MerchantAPI\Model
      *
      * @return bool
      */
-    public function isArray()
+    public function isArray() : bool
     {
         return is_array($this->data) && isset($this->data[0]);
     }
@@ -51,7 +52,7 @@ class VersionSettings extends \MerchantAPI\Model
      *
      * @return bool
      */
-    public function isScalar()
+    public function isScalar() : bool
     {
         return !$this->isArray() && !$this->isObject();
     }
@@ -62,7 +63,8 @@ class VersionSettings extends \MerchantAPI\Model
      * @param string
      * @return array|null
      */
-    public function getItem($name) {
+    public function getItem(string $name)
+    {
         if ($this->hasItem($name)) {
             return $this->data[$name];
         }
@@ -76,7 +78,8 @@ class VersionSettings extends \MerchantAPI\Model
      * @param string
      * @return bool
      */
-    public function hasItem($item) {
+    public function hasItem(string $item) : bool
+    {
         return $this->isObject() && isset($this->data[$item]);
     }
 
@@ -87,7 +90,8 @@ class VersionSettings extends \MerchantAPI\Model
      * @param string
      * @return array|null
      */
-    public function getItemProperty($item, $property) {
+    public function getItemProperty(string $item, string $property) : ?array
+    {
         if ($this->hasItemProperty($item, $property)) {
             return $this->data[$item][$property];
         }
@@ -102,18 +106,20 @@ class VersionSettings extends \MerchantAPI\Model
      * @param string
      * @return bool
      */
-    public function hasItemProperty($item, $property) {
+    public function hasItemProperty(string $item, string $property) : bool
+    {
         return $this->hasItem($item) && isset($this->data[$item][$property]);
     }
 
     /**
      * Set an item value
      *
-     * @param string
-     * @param mixed
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function setItem($name, $value) {
+    public function setItem(string $name, $value) : self
+    {
         if (is_null($this->data)) {
             $this->data = [
                 $name => []
@@ -128,12 +134,13 @@ class VersionSettings extends \MerchantAPI\Model
     /**
      * Set an item's property value
      *
-     * @param string
-     * @param string
-     * @param mixed
+     * @param string $item
+     * @param string $property
+     * @param mixed $value
      * @return $this
      */
-    public function setItemProperty($item, $property, $value) {
+    public function setItemProperty(string $item, string $property, $value) : self
+    {
         if (is_null($this->data)) {
             $this->data = [
                 $item => [
@@ -150,7 +157,7 @@ class VersionSettings extends \MerchantAPI\Model
     /**
      * @inheritDoc
      */
-    public function getData()
+    public function getData() : array
     {
         return $this->data;
     }

@@ -18,7 +18,7 @@ namespace MerchantAPI\Model;
 class Store extends \MerchantAPI\Model
 {
     /** @var string CACHE_TYPE_NONE */
-    const CACHE_TYPE_NONE = '';
+    const CACHE_TYPE_NONE = 'none';
 
     /** @var string CACHE_TYPE_REDIS */
     const CACHE_TYPE_REDIS = 'redis';
@@ -26,29 +26,29 @@ class Store extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get manager_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getManagerId()
+    public function getManagerId() : ?int
     {
-        return (int) $this->getField('manager_id', 0);
+        return $this->getField('manager_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -56,9 +56,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get license.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLicense()
+    public function getLicense() : ?string
     {
         return $this->getField('license');
     }
@@ -66,9 +66,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -76,9 +76,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get owner.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOwner()
+    public function getOwner() : ?string
     {
         return $this->getField('owner');
     }
@@ -86,9 +86,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getEmail()
+    public function getEmail() : ?string
     {
         return $this->getField('email');
     }
@@ -96,9 +96,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get company.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCompany()
+    public function getCompany() : ?string
     {
         return $this->getField('company');
     }
@@ -106,9 +106,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get address.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAddress()
+    public function getAddress() : ?string
     {
         return $this->getField('address');
     }
@@ -116,9 +116,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCity()
+    public function getCity() : ?string
     {
         return $this->getField('city');
     }
@@ -126,9 +126,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getState()
+    public function getState() : ?string
     {
         return $this->getField('state');
     }
@@ -136,9 +136,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getZip()
+    public function getZip() : ?string
     {
         return $this->getField('zip');
     }
@@ -146,9 +146,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get phone.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPhone()
+    public function getPhone() : ?string
     {
         return $this->getField('phone');
     }
@@ -156,9 +156,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get fax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFax()
+    public function getFax() : ?string
     {
         return $this->getField('fax');
     }
@@ -166,9 +166,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get country.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCountry()
+    public function getCountry() : ?string
     {
         return $this->getField('country');
     }
@@ -176,9 +176,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get wtunits.
      *
-     * @return string
+     * @return ?string
      */
-    public function getWeightUnits()
+    public function getWeightUnits() : ?string
     {
         return $this->getField('wtunits');
     }
@@ -186,9 +186,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get wtunitcode.
      *
-     * @return string
+     * @return ?string
      */
-    public function getWeightUnitCode()
+    public function getWeightUnitCode() : ?string
     {
         return $this->getField('wtunitcode');
     }
@@ -196,9 +196,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get dmunitcode.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDimensionUnits()
+    public function getDimensionUnits() : ?string
     {
         return $this->getField('dmunitcode');
     }
@@ -206,19 +206,19 @@ class Store extends \MerchantAPI\Model
     /**
      * Get baskexp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBasketExpiration()
+    public function getBasketExpiration() : ?int
     {
-        return (int) $this->getField('baskexp', 0);
+        return $this->getField('baskexp');
     }
 
     /**
      * Get pgrp_ovlp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPriceGroupOverlapResolution()
+    public function getPriceGroupOverlapResolution() : ?string
     {
         return $this->getField('pgrp_ovlp');
     }
@@ -226,39 +226,39 @@ class Store extends \MerchantAPI\Model
     /**
      * Get ui_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserInterfaceId()
+    public function getUserInterfaceId() : ?int
     {
-        return (int) $this->getField('ui_id', 0);
+        return $this->getField('ui_id');
     }
 
     /**
      * Get tax_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTaxId()
+    public function getTaxId() : ?int
     {
-        return (int) $this->getField('tax_id', 0);
+        return $this->getField('tax_id');
     }
 
     /**
      * Get currncy_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCurrencyId()
+    public function getCurrencyId() : ?int
     {
-        return (int) $this->getField('currncy_id', 0);
+        return $this->getField('currncy_id');
     }
 
     /**
      * Get mnt_warn.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMaintenanceWarningMessage()
+    public function getMaintenanceWarningMessage() : ?string
     {
         return $this->getField('mnt_warn');
     }
@@ -266,9 +266,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get mnt_close.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMaintenanceClosedMessage()
+    public function getMaintenanceClosedMessage() : ?string
     {
         return $this->getField('mnt_close');
     }
@@ -276,59 +276,59 @@ class Store extends \MerchantAPI\Model
     /**
      * Get mnt_time.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMaintenanceTime()
+    public function getMaintenanceTime() : ?int
     {
-        return (int) $this->getField('mnt_time', 0);
+        return $this->getField('mnt_time');
     }
 
     /**
      * Get mnt_no_new.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMaintenanceNoNewCustomersBefore()
+    public function getMaintenanceNoNewCustomersBefore() : ?int
     {
-        return (int) $this->getField('mnt_no_new', 0);
+        return $this->getField('mnt_no_new');
     }
 
     /**
      * Get omin_quant.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderMinimumQuantity()
+    public function getOrderMinimumQuantity() : ?int
     {
-        return (int) $this->getField('omin_quant', 0);
+        return $this->getField('omin_quant');
     }
 
     /**
      * Get omin_price.
      *
-     * @return foat
+     * @return ?float
      */
-    public function getOrderMinimumPrice()
+    public function getOrderMinimumPrice() : ?float
     {
-        // Missing foat
+        return $this->getField('omin_price');
     }
 
     /**
      * Get omin_all.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getOrderMinimumRequiredAll()
+    public function getOrderMinimumRequiredAll() : ?bool
     {
-        return (bool) $this->getField('omin_all', false);
+        return $this->getField('omin_all');
     }
 
     /**
      * Get omin_msg.
      *
-     * @return string
+     * @return ?string
      */
-    public function getOrderMinimumMessage()
+    public function getOrderMinimumMessage() : ?string
     {
         return $this->getField('omin_msg');
     }
@@ -336,59 +336,59 @@ class Store extends \MerchantAPI\Model
     /**
      * Get crypt_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCryptId()
+    public function getCryptId() : ?int
     {
-        return (int) $this->getField('crypt_id', 0);
+        return $this->getField('crypt_id');
     }
 
     /**
      * Get req_ship.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getRequireShipping()
+    public function getRequireShipping() : ?bool
     {
-        return (bool) $this->getField('req_ship', false);
+        return $this->getField('req_ship');
     }
 
     /**
      * Get req_tax.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getRequireTax()
+    public function getRequireTax() : ?bool
     {
-        return (bool) $this->getField('req_tax', false);
+        return $this->getField('req_tax');
     }
 
     /**
      * Get req_frship.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getRequireFreeOrderShipping()
+    public function getRequireFreeOrderShipping() : ?bool
     {
-        return (bool) $this->getField('req_frship', false);
+        return $this->getField('req_frship');
     }
 
     /**
      * Get item_adel.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getItemModuleUninstallable()
+    public function getItemModuleUninstallable() : ?bool
     {
-        return (bool) $this->getField('item_adel', false);
+        return $this->getField('item_adel');
     }
 
     /**
      * Get cache_type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCacheType()
+    public function getCacheType() : ?string
     {
         return $this->getField('cache_type');
     }
@@ -396,9 +396,9 @@ class Store extends \MerchantAPI\Model
     /**
      * Get redishost.
      *
-     * @return string
+     * @return ?string
      */
-    public function getRedisHost()
+    public function getRedisHost() : ?string
     {
         return $this->getField('redishost');
     }
@@ -406,30 +406,30 @@ class Store extends \MerchantAPI\Model
     /**
      * Get redisport.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRedisPort()
+    public function getRedisPort() : ?int
     {
-        return (int) $this->getField('redisport', 0);
+        return $this->getField('redisport');
     }
 
     /**
      * Get redisto.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRedisTimeout()
+    public function getRedisTimeout() : ?int
     {
-        return (int) $this->getField('redisto', 0);
+        return $this->getField('redisto');
     }
 
     /**
      * Get redisex.
      *
-     * @return int
+     * @return ?int
      */
-    public function getRedisExpiration()
+    public function getRedisExpiration() : ?int
     {
-        return (int) $this->getField('redisex', 0);
+        return $this->getField('redisex');
     }
 }

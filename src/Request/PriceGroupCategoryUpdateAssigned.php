@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PriceGroupCategory_Update_Assigned.
@@ -26,38 +27,39 @@ use MerchantAPI\BaseClient;
 class PriceGroupCategoryUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PriceGroupCategory_Update_Assigned';
+    protected string $function = 'PriceGroupCategory_Update_Assigned';
 
-    /** @var int */
-    protected $categoryId;
+    /** @var ?int */
+    protected ?int $categoryId = null;
 
-    /** @var string */
-    protected $editCategory;
+    /** @var ?string */
+    protected ?string $editCategory = null;
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $editPriceGroup;
+    /** @var ?string */
+    protected ?string $editPriceGroup = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PriceGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PriceGroup $priceGroup
      */
-    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
+    public function __construct(?BaseClient $client = null, ?PriceGroup $priceGroup = null)
     {
         parent::__construct($client);
         if ($priceGroup) {
@@ -78,7 +80,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
         return $this->categoryId;
     }
@@ -88,7 +90,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->editCategory;
     }
@@ -98,7 +100,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -108,7 +110,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -118,7 +120,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditPriceGroup()
+    public function getEditPriceGroup() : ?string
     {
         return $this->editPriceGroup;
     }
@@ -128,7 +130,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -138,7 +140,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -146,10 +148,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         $this->categoryId = $categoryId;
 
@@ -159,10 +161,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         $this->editCategory = $editCategory;
 
@@ -172,10 +174,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -185,10 +187,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -198,10 +200,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set Edit_PriceGroup.
      *
-     * @param string
+     * @param ?string $editPriceGroup
      * @return $this
      */
-    public function setEditPriceGroup($editPriceGroup)
+    public function setEditPriceGroup(?string $editPriceGroup) : self
     {
         $this->editPriceGroup = $editPriceGroup;
 
@@ -211,10 +213,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -224,10 +226,10 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -237,7 +239,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -267,7 +269,7 @@ class PriceGroupCategoryUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PriceGroupCategoryUpdateAssigned($this, $httpResponse, $data);
     }

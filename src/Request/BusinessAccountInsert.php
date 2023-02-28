@@ -12,7 +12,9 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Model\BusinessAccount;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BusinessAccount_Insert.
@@ -25,23 +27,23 @@ use MerchantAPI\BaseClient;
 class BusinessAccountInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BusinessAccount_Insert';
+    protected string $function = 'BusinessAccount_Insert';
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var bool */
-    protected $businessAccountTaxExempt;
+    /** @var ?bool */
+    protected ?bool $businessAccountTaxExempt = null;
 
     /**
      * Get BusinessAccount_Title.
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -51,7 +53,7 @@ class BusinessAccountInsert extends Request
      *
      * @return bool
      */
-    public function getBusinessAccountTaxExempt()
+    public function getBusinessAccountTaxExempt() : ?bool
     {
         return $this->businessAccountTaxExempt;
     }
@@ -59,10 +61,10 @@ class BusinessAccountInsert extends Request
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -72,10 +74,10 @@ class BusinessAccountInsert extends Request
     /**
      * Set BusinessAccount_Tax_Exempt.
      *
-     * @param bool
+     * @param ?bool $businessAccountTaxExempt
      * @return $this
      */
-    public function setBusinessAccountTaxExempt($businessAccountTaxExempt)
+    public function setBusinessAccountTaxExempt(?bool $businessAccountTaxExempt) : self
     {
         $this->businessAccountTaxExempt = $businessAccountTaxExempt;
 
@@ -85,7 +87,7 @@ class BusinessAccountInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -103,7 +105,7 @@ class BusinessAccountInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BusinessAccountInsert($this, $httpResponse, $data);
     }

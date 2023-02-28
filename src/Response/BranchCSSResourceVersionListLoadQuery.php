@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\BranchCSSResourceVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for BranchCSSResourceVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class BranchCSSResourceVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\BranchCSSResourceVersion[] */
-    protected $branchCSSResourceVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $branchCSSResourceVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->branchCSSResourceVersions = new \MerchantAPI\Collection();
+        $this->branchCSSResourceVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class BranchCSSResourceVersionListLoadQuery extends ListQueryResponse
     /**
      * Get branchCSSResourceVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\BranchCSSResourceVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getBranchCSSResourceVersions()
+    public function getBranchCSSResourceVersions() : Collection
     {
         return $this->branchCSSResourceVersions;
     }

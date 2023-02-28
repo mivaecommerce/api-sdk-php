@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderCoupon_Update_Assigned.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class OrderCouponUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderCoupon_Update_Assigned';
+    protected string $function = 'OrderCoupon_Update_Assigned';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $couponId;
+    /** @var ?int */
+    protected ?int $couponId = null;
 
-    /** @var string */
-    protected $editCoupon;
+    /** @var ?string */
+    protected ?string $editCoupon = null;
 
-    /** @var string */
-    protected $couponCode;
+    /** @var ?string */
+    protected ?string $couponCode = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -66,7 +68,7 @@ class OrderCouponUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -76,7 +78,7 @@ class OrderCouponUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCouponId()
+    public function getCouponId() : ?int
     {
         return $this->couponId;
     }
@@ -86,7 +88,7 @@ class OrderCouponUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCoupon()
+    public function getEditCoupon() : ?string
     {
         return $this->editCoupon;
     }
@@ -96,7 +98,7 @@ class OrderCouponUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCouponCode()
+    public function getCouponCode() : ?string
     {
         return $this->couponCode;
     }
@@ -106,7 +108,7 @@ class OrderCouponUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -114,10 +116,10 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -127,10 +129,10 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * Set Coupon_ID.
      *
-     * @param int
+     * @param ?int $couponId
      * @return $this
      */
-    public function setCouponId($couponId)
+    public function setCouponId(?int $couponId) : self
     {
         $this->couponId = $couponId;
 
@@ -140,10 +142,10 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * Set Edit_Coupon.
      *
-     * @param string
+     * @param ?string $editCoupon
      * @return $this
      */
-    public function setEditCoupon($editCoupon)
+    public function setEditCoupon(?string $editCoupon) : self
     {
         $this->editCoupon = $editCoupon;
 
@@ -153,10 +155,10 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * Set Coupon_Code.
      *
-     * @param string
+     * @param ?string $couponCode
      * @return $this
      */
-    public function setCouponCode($couponCode)
+    public function setCouponCode(?string $couponCode) : self
     {
         $this->couponCode = $couponCode;
 
@@ -166,10 +168,10 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -179,7 +181,7 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -205,7 +207,7 @@ class OrderCouponUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderCouponUpdateAssigned($this, $httpResponse, $data);
     }

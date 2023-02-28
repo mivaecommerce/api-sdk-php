@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomerAddress;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerAddress_Update.
@@ -26,71 +27,72 @@ use MerchantAPI\BaseClient;
 class CustomerAddressUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerAddress_Update';
+    protected string $function = 'CustomerAddress_Update';
 
-    /** @var int */
-    protected $addressId;
+    /** @var ?int */
+    protected ?int $addressId = null;
 
-    /** @var int */
-    protected $customerAddressId;
+    /** @var ?int */
+    protected ?int $customerAddressId = null;
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var string */
-    protected $description;
+    /** @var ?string */
+    protected ?string $description = null;
 
-    /** @var string */
-    protected $firstName;
+    /** @var ?string */
+    protected ?string $firstName = null;
 
-    /** @var string */
-    protected $lastName;
+    /** @var ?string */
+    protected ?string $lastName = null;
 
-    /** @var string */
-    protected $email;
+    /** @var ?string */
+    protected ?string $email = null;
 
-    /** @var string */
-    protected $phone;
+    /** @var ?string */
+    protected ?string $phone = null;
 
-    /** @var string */
-    protected $fax;
+    /** @var ?string */
+    protected ?string $fax = null;
 
-    /** @var string */
-    protected $company;
+    /** @var ?string */
+    protected ?string $company = null;
 
-    /** @var string */
-    protected $address1;
+    /** @var ?string */
+    protected ?string $address1 = null;
 
-    /** @var string */
-    protected $address2;
+    /** @var ?string */
+    protected ?string $address2 = null;
 
-    /** @var string */
-    protected $city;
+    /** @var ?string */
+    protected ?string $city = null;
 
-    /** @var string */
-    protected $state;
+    /** @var ?string */
+    protected ?string $state = null;
 
-    /** @var string */
-    protected $zip;
+    /** @var ?string */
+    protected ?string $zip = null;
 
-    /** @var string */
-    protected $country;
+    /** @var ?string */
+    protected ?string $country = null;
 
-    /** @var bool */
-    protected $residential;
+    /** @var ?bool */
+    protected ?bool $residential = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\CustomerAddress
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\CustomerAddress $customerAddress
      */
-    public function __construct(BaseClient $client = null, CustomerAddress $customerAddress = null)
+    public function __construct(?BaseClient $client = null, ?CustomerAddress $customerAddress = null)
     {
         parent::__construct($client);
         if ($customerAddress) {
@@ -124,7 +126,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return int
      */
-    public function getAddressId()
+    public function getAddressId() : ?int
     {
         return $this->addressId;
     }
@@ -134,7 +136,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return int
      */
-    public function getCustomerAddressId()
+    public function getCustomerAddressId() : ?int
     {
         return $this->customerAddressId;
     }
@@ -144,7 +146,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -154,7 +156,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -164,7 +166,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->description;
     }
@@ -174,7 +176,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName() : ?string
     {
         return $this->firstName;
     }
@@ -184,7 +186,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastName() : ?string
     {
         return $this->lastName;
     }
@@ -194,7 +196,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail() : ?string
     {
         return $this->email;
     }
@@ -204,7 +206,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getPhone()
+    public function getPhone() : ?string
     {
         return $this->phone;
     }
@@ -214,7 +216,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getFax()
+    public function getFax() : ?string
     {
         return $this->fax;
     }
@@ -224,7 +226,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getCompany()
+    public function getCompany() : ?string
     {
         return $this->company;
     }
@@ -234,7 +236,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getAddress1()
+    public function getAddress1() : ?string
     {
         return $this->address1;
     }
@@ -244,7 +246,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getAddress2()
+    public function getAddress2() : ?string
     {
         return $this->address2;
     }
@@ -254,7 +256,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getCity()
+    public function getCity() : ?string
     {
         return $this->city;
     }
@@ -264,7 +266,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getState()
+    public function getState() : ?string
     {
         return $this->state;
     }
@@ -274,7 +276,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getZip()
+    public function getZip() : ?string
     {
         return $this->zip;
     }
@@ -284,7 +286,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return string
      */
-    public function getCountry()
+    public function getCountry() : ?string
     {
         return $this->country;
     }
@@ -294,7 +296,7 @@ class CustomerAddressUpdate extends Request
      *
      * @return bool
      */
-    public function getResidential()
+    public function getResidential() : ?bool
     {
         return $this->residential;
     }
@@ -302,10 +304,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Address_ID.
      *
-     * @param int
+     * @param ?int $addressId
      * @return $this
      */
-    public function setAddressId($addressId)
+    public function setAddressId(?int $addressId) : self
     {
         $this->addressId = $addressId;
 
@@ -315,10 +317,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set CustomerAddress_ID.
      *
-     * @param int
+     * @param ?int $customerAddressId
      * @return $this
      */
-    public function setCustomerAddressId($customerAddressId)
+    public function setCustomerAddressId(?int $customerAddressId) : self
     {
         $this->customerAddressId = $customerAddressId;
 
@@ -328,10 +330,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -341,10 +343,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -354,10 +356,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Description.
      *
-     * @param string
+     * @param ?string $description
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(?string $description) : self
     {
         $this->description = $description;
 
@@ -367,10 +369,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set FirstName.
      *
-     * @param string
+     * @param ?string $firstName
      * @return $this
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName) : self
     {
         $this->firstName = $firstName;
 
@@ -380,10 +382,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set LastName.
      *
-     * @param string
+     * @param ?string $lastName
      * @return $this
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName) : self
     {
         $this->lastName = $lastName;
 
@@ -393,10 +395,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Email.
      *
-     * @param string
+     * @param ?string $email
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail(?string $email) : self
     {
         $this->email = $email;
 
@@ -406,10 +408,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Phone.
      *
-     * @param string
+     * @param ?string $phone
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone(?string $phone) : self
     {
         $this->phone = $phone;
 
@@ -419,10 +421,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Fax.
      *
-     * @param string
+     * @param ?string $fax
      * @return $this
      */
-    public function setFax($fax)
+    public function setFax(?string $fax) : self
     {
         $this->fax = $fax;
 
@@ -432,10 +434,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Company.
      *
-     * @param string
+     * @param ?string $company
      * @return $this
      */
-    public function setCompany($company)
+    public function setCompany(?string $company) : self
     {
         $this->company = $company;
 
@@ -445,10 +447,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Address1.
      *
-     * @param string
+     * @param ?string $address1
      * @return $this
      */
-    public function setAddress1($address1)
+    public function setAddress1(?string $address1) : self
     {
         $this->address1 = $address1;
 
@@ -458,10 +460,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Address2.
      *
-     * @param string
+     * @param ?string $address2
      * @return $this
      */
-    public function setAddress2($address2)
+    public function setAddress2(?string $address2) : self
     {
         $this->address2 = $address2;
 
@@ -471,10 +473,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set City.
      *
-     * @param string
+     * @param ?string $city
      * @return $this
      */
-    public function setCity($city)
+    public function setCity(?string $city) : self
     {
         $this->city = $city;
 
@@ -484,10 +486,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set State.
      *
-     * @param string
+     * @param ?string $state
      * @return $this
      */
-    public function setState($state)
+    public function setState(?string $state) : self
     {
         $this->state = $state;
 
@@ -497,10 +499,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Zip.
      *
-     * @param string
+     * @param ?string $zip
      * @return $this
      */
-    public function setZip($zip)
+    public function setZip(?string $zip) : self
     {
         $this->zip = $zip;
 
@@ -510,10 +512,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Country.
      *
-     * @param string
+     * @param ?string $country
      * @return $this
      */
-    public function setCountry($country)
+    public function setCountry(?string $country) : self
     {
         $this->country = $country;
 
@@ -523,10 +525,10 @@ class CustomerAddressUpdate extends Request
     /**
      * Set Residential.
      *
-     * @param bool
+     * @param ?bool $residential
      * @return $this
      */
-    public function setResidential($residential)
+    public function setResidential(?bool $residential) : self
     {
         $this->residential = $residential;
 
@@ -536,7 +538,7 @@ class CustomerAddressUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -612,7 +614,7 @@ class CustomerAddressUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerAddressUpdate($this, $httpResponse, $data);
     }

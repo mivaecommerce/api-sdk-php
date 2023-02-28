@@ -18,20 +18,20 @@ namespace MerchantAPI\Http;
 class HttpResponse extends HttpMessage
 {
     /** @var HttpRequest|null */
-    protected $request;
+    protected ?HttpRequest $request;
 
     /**
      * HttpResponse constructor.
      *
-     * @param $url
-     * @param string $content
+     * @param string $url
+     * @param ?string $content
      * @param array $query
      * @param array $headers
      * @param HttpRequest|null $request
      */
-    public function __construct($url, $content = '', array $query = [], array $headers = [], HttpRequest $request = null)
+    public function __construct(string $url, ?string $content = '', array $query = [], array $headers = [], ?HttpRequest $request = null)
     {
-        parent::__construct($url, $content, null, $query, $headers);
+        parent::__construct($url, $content, '', $query, $headers);
 
         $this->request = $request;
 
@@ -45,18 +45,18 @@ class HttpResponse extends HttpMessage
      *
      * @return HttpRequest|null
      */
-    public function getRequest()
+    public function getRequest() : ?HttpRequest
     {
         return $this->request;
     }
 
     /**
-     * Set the sent request object or clear it.
+     * Set the request object or clear it.
      *
-     * @param HttpRequest|null
+     * @param ?HttpRequest $request
      * @return $this
      */
-    public function setRequest(HttpRequest $request = null)
+    public function setRequest(?HttpRequest $request = null) : self
     {
         $this->request = $request;
         return $this;
@@ -65,11 +65,11 @@ class HttpResponse extends HttpMessage
     /**
      * cURL callback to write the header data to the response.
      *
-     * @param resource
-     * @param string
+     * @param resource $handle
+     * @param string $header
      * @return int Bytes written
      */
-    public function receiveHeaderCallback($handle, $header)
+    public function receiveHeaderCallback($handle, string $header) : int
     {
         $length = strlen($header);
 
@@ -97,11 +97,11 @@ class HttpResponse extends HttpMessage
     /**
      * cURL callback to write the body data to the response.
      *
-     * @param resource
-     * @param mixed
+     * @param resource $handle
+     * @param ?string $content
      * @return int Bytes written
      */
-    public function receiveContentCallback($handle, $content)
+    public function receiveContentCallback($handle, ?string $content) : int
     {
         $this->appendContent($content);
         return strlen($content);

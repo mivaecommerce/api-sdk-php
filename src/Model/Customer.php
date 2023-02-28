@@ -57,29 +57,29 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get account_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAccountId()
+    public function getAccountId() : ?int
     {
-        return (int) $this->getField('account_id', 0);
+        return $this->getField('account_id');
     }
 
     /**
      * Get login.
      *
-     * @return string
+     * @return ?string
      */
-    public function getLogin()
+    public function getLogin() : ?string
     {
         return $this->getField('login');
     }
@@ -87,9 +87,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get pw_email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPasswordEmail()
+    public function getPasswordEmail() : ?string
     {
         return $this->getField('pw_email');
     }
@@ -97,29 +97,29 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipId()
+    public function getShipId() : ?int
     {
-        return (int) $this->getField('ship_id', 0);
+        return $this->getField('ship_id');
     }
 
     /**
      * Get ship_res.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getShippingResidential()
+    public function getShippingResidential() : ?bool
     {
-        return (bool) $this->getField('ship_res', false);
+        return $this->getField('ship_res');
     }
 
     /**
      * Get ship_fname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipFirstName()
+    public function getShipFirstName() : ?string
     {
         return $this->getField('ship_fname');
     }
@@ -127,9 +127,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_lname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipLastName()
+    public function getShipLastName() : ?string
     {
         return $this->getField('ship_lname');
     }
@@ -137,9 +137,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipEmail()
+    public function getShipEmail() : ?string
     {
         return $this->getField('ship_email');
     }
@@ -147,9 +147,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_comp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipCompany()
+    public function getShipCompany() : ?string
     {
         return $this->getField('ship_comp');
     }
@@ -157,9 +157,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_phone.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipPhone()
+    public function getShipPhone() : ?string
     {
         return $this->getField('ship_phone');
     }
@@ -167,9 +167,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_fax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipFax()
+    public function getShipFax() : ?string
     {
         return $this->getField('ship_fax');
     }
@@ -177,9 +177,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_addr1.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipAddress1()
+    public function getShipAddress1() : ?string
     {
         return $this->getField('ship_addr1');
     }
@@ -187,9 +187,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_addr2.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipAddress2()
+    public function getShipAddress2() : ?string
     {
         return $this->getField('ship_addr2');
     }
@@ -197,9 +197,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipCity()
+    public function getShipCity() : ?string
     {
         return $this->getField('ship_city');
     }
@@ -207,9 +207,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipState()
+    public function getShipState() : ?string
     {
         return $this->getField('ship_state');
     }
@@ -217,9 +217,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipZip()
+    public function getShipZip() : ?string
     {
         return $this->getField('ship_zip');
     }
@@ -227,9 +227,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get ship_cntry.
      *
-     * @return string
+     * @return ?string
      */
-    public function getShipCountry()
+    public function getShipCountry() : ?string
     {
         return $this->getField('ship_cntry');
     }
@@ -237,19 +237,19 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBillId()
+    public function getBillId() : ?int
     {
-        return (int) $this->getField('bill_id', 0);
+        return $this->getField('bill_id');
     }
 
     /**
      * Get bill_fname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillFirstName()
+    public function getBillFirstName() : ?string
     {
         return $this->getField('bill_fname');
     }
@@ -257,9 +257,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_lname.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillLastName()
+    public function getBillLastName() : ?string
     {
         return $this->getField('bill_lname');
     }
@@ -267,9 +267,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_email.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillEmail()
+    public function getBillEmail() : ?string
     {
         return $this->getField('bill_email');
     }
@@ -277,9 +277,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_comp.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillCompany()
+    public function getBillCompany() : ?string
     {
         return $this->getField('bill_comp');
     }
@@ -287,9 +287,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_phone.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillPhone()
+    public function getBillPhone() : ?string
     {
         return $this->getField('bill_phone');
     }
@@ -297,9 +297,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_fax.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillFax()
+    public function getBillFax() : ?string
     {
         return $this->getField('bill_fax');
     }
@@ -307,9 +307,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_addr1.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillAddress1()
+    public function getBillAddress1() : ?string
     {
         return $this->getField('bill_addr1');
     }
@@ -317,9 +317,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_addr2.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillAddress2()
+    public function getBillAddress2() : ?string
     {
         return $this->getField('bill_addr2');
     }
@@ -327,9 +327,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_city.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillCity()
+    public function getBillCity() : ?string
     {
         return $this->getField('bill_city');
     }
@@ -337,9 +337,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_state.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillState()
+    public function getBillState() : ?string
     {
         return $this->getField('bill_state');
     }
@@ -347,9 +347,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_zip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillZip()
+    public function getBillZip() : ?string
     {
         return $this->getField('bill_zip');
     }
@@ -357,9 +357,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get bill_cntry.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBillCountry()
+    public function getBillCountry() : ?string
     {
         return $this->getField('bill_cntry');
     }
@@ -367,39 +367,39 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get tax_exempt.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getTaxExempt()
+    public function getTaxExempt() : ?bool
     {
-        return (bool) $this->getField('tax_exempt', false);
+        return $this->getField('tax_exempt');
     }
 
     /**
      * Get order_cnt.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderCount()
+    public function getOrderCount() : ?int
     {
-        return (int) $this->getField('order_cnt', 0);
+        return $this->getField('order_cnt');
     }
 
     /**
      * Get order_avg.
      *
-     * @return float
+     * @return ?float
      */
-    public function getOrderAverage()
+    public function getOrderAverage() : ?float
     {
-        return (float) $this->getField('order_avg', 0.00);
+        return $this->getField('order_avg');
     }
 
     /**
      * Get formatted_order_avg.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedOrderAverage()
+    public function getFormattedOrderAverage() : ?string
     {
         return $this->getField('formatted_order_avg');
     }
@@ -407,19 +407,19 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get order_tot.
      *
-     * @return float
+     * @return ?float
      */
-    public function getOrderTotal()
+    public function getOrderTotal() : ?float
     {
-        return (float) $this->getField('order_tot', 0.00);
+        return $this->getField('order_tot');
     }
 
     /**
      * Get formatted_order_tot.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedOrderTotal()
+    public function getFormattedOrderTotal() : ?string
     {
         return $this->getField('formatted_order_tot');
     }
@@ -427,59 +427,59 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get note_count.
      *
-     * @return int
+     * @return ?int
      */
-    public function getNoteCount()
+    public function getNoteCount() : ?int
     {
-        return (int) $this->getField('note_count', 0);
+        return $this->getField('note_count');
     }
 
     /**
      * Get dt_created.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCreatedOn()
+    public function getCreatedOn() : ?int
     {
-        return (int) $this->getField('dt_created', 0);
+        return $this->getTimestampField('dt_created');
     }
 
     /**
      * Get dt_login.
      *
-     * @return int
+     * @return ?int
      */
-    public function getLastLogin()
+    public function getLastLogin() : ?int
     {
-        return (int) $this->getField('dt_login', 0);
+        return $this->getTimestampField('dt_login');
     }
 
     /**
      * Get dt_pwchg.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPasswordChangeDateTime()
+    public function getPasswordChangeDateTime() : ?int
     {
-        return (int) $this->getField('dt_pwchg', 0);
+        return $this->getTimestampField('dt_pwchg');
     }
 
     /**
      * Get credit.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCredit()
+    public function getCredit() : ?float
     {
-        return (float) $this->getField('credit', 0.00);
+        return $this->getField('credit');
     }
 
     /**
      * Get formatted_credit.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedCredit()
+    public function getFormattedCredit() : ?string
     {
         return $this->getField('formatted_credit');
     }
@@ -487,9 +487,9 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get business_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBusinessTitle()
+    public function getBusinessTitle() : ?string
     {
         return $this->getField('business_title');
     }
@@ -497,10 +497,10 @@ class Customer extends \MerchantAPI\Model
     /**
      * Get CustomField_Values.
      *
-     * @return \MerchantAPI\Model\CustomFieldValues|null
+     * @return ?\MerchantAPI\Model\CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
-        return $this->getField('CustomField_Values', null);
+        return $this->getField('CustomField_Values');
     }
 }

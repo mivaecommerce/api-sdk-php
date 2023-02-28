@@ -72,19 +72,19 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get CSSResource_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCSSResourceId()
+    public function getCSSResourceId() : ?int
     {
-        return (int) $this->getField('CSSResource_ID', 0);
+        return $this->getField('CSSResource_ID');
     }
 
     /**
      * Get CSSResource_Code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCSSResourceCode()
+    public function getCSSResourceCode() : ?string
     {
         return $this->getField('CSSResource_Code');
     }
@@ -92,9 +92,9 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get Type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('Type');
     }
@@ -102,29 +102,29 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get Global.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getGlobal()
+    public function getGlobal() : ?bool
     {
-        return (bool) $this->getField('Global', false);
+        return $this->getField('Global');
     }
 
     /**
      * Get Active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('Active', false);
+        return $this->getField('Active');
     }
 
     /**
      * Get File_Path.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFilePath()
+    public function getFilePath() : ?string
     {
         return $this->getField('File_Path');
     }
@@ -132,9 +132,9 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get Branchless_File_Path.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBranchlessFilePath()
+    public function getBranchlessFilePath() : ?string
     {
         return $this->getField('Branchless_File_Path');
     }
@@ -142,9 +142,9 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get Source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('Source');
     }
@@ -152,39 +152,39 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Get LinkedPages.
      *
-     * @return array
+     * @return ?array
      */
-    public function getLinkedPages()
+    public function getLinkedPages() : ?array
     {
-        return $this->getField('LinkedPages', []);
+        return $this->getField('LinkedPages');
     }
 
     /**
      * Get LinkedResources.
      *
-     * @return array
+     * @return ?array
      */
-    public function getLinkedResources()
+    public function getLinkedResources() : ?array
     {
-        return $this->getField('LinkedResources', []);
+        return $this->getField('LinkedResources');
     }
 
     /**
      * Get Attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CSSResourceVersionAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributes()
+    public function getAttributes() : ?Collection
     {
-        return $this->getField('Attributes', []);
+        return $this->getField('Attributes');
     }
 
     /**
      * Get Notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->getField('Notes');
     }
@@ -192,10 +192,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set CSSResource_ID.
      *
-     * @param int
+     * @param ?int $CSSResourceId
      * @return $this
      */
-    public function setCSSResourceId($CSSResourceId)
+    public function setCSSResourceId(?int $CSSResourceId) : self
     {
         return $this->setField('CSSResource_ID', $CSSResourceId);
     }
@@ -203,10 +203,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set CSSResource_Code.
      *
-     * @param string
+     * @param ?string $CSSResourceCode
      * @return $this
      */
-    public function setCSSResourceCode($CSSResourceCode)
+    public function setCSSResourceCode(?string $CSSResourceCode) : self
     {
         return $this->setField('CSSResource_Code', $CSSResourceCode);
     }
@@ -214,10 +214,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Type.
      *
-     * @param string
+     * @param ?string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(?string $type) : self
     {
         return $this->setField('Type', $type);
     }
@@ -225,10 +225,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Global.
      *
-     * @param bool
+     * @param ?bool $global
      * @return $this
      */
-    public function setGlobal($global)
+    public function setGlobal(?bool $global) : self
     {
         return $this->setField('Global', $global);
     }
@@ -236,10 +236,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Active.
      *
-     * @param bool
+     * @param ?bool $active
      * @return $this
      */
-    public function setActive($active)
+    public function setActive(?bool $active) : self
     {
         return $this->setField('Active', $active);
     }
@@ -247,10 +247,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set File_Path.
      *
-     * @param string
+     * @param ?string $filePath
      * @return $this
      */
-    public function setFilePath($filePath)
+    public function setFilePath(?string $filePath) : self
     {
         return $this->setField('File_Path', $filePath);
     }
@@ -258,10 +258,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Branchless_File_Path.
      *
-     * @param string
+     * @param ?string $branchlessFilePath
      * @return $this
      */
-    public function setBranchlessFilePath($branchlessFilePath)
+    public function setBranchlessFilePath(?string $branchlessFilePath) : self
     {
         return $this->setField('Branchless_File_Path', $branchlessFilePath);
     }
@@ -269,10 +269,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Source.
      *
-     * @param string
+     * @param ?string $source
      * @return $this
      */
-    public function setSource($source)
+    public function setSource(?string $source) : self
     {
         return $this->setField('Source', $source);
     }
@@ -280,10 +280,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set LinkedPages.
      *
-     * @param array
+     * @param ?array $linkedPages
      * @return $this
      */
-    public function setLinkedPages(array $linkedPages)
+    public function setLinkedPages(?array $linkedPages) : self
     {
         return $this->setField('LinkedPages', $linkedPages);
     }
@@ -291,10 +291,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set LinkedResources.
      *
-     * @param array
+     * @param ?array $linkedResources
      * @return $this
      */
-    public function setLinkedResources(array $linkedResources)
+    public function setLinkedResources(?array $linkedResources) : self
     {
         return $this->setField('LinkedResources', $linkedResources);
     }
@@ -302,11 +302,11 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Attributes.
      *
-     * @param array[CSSResourceVersionAttribute]
+     * @param array $attributes
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes) : self
     {
         foreach ($attributes as &$model) {
             if (is_array($model)) {
@@ -323,10 +323,10 @@ class CSSResourceChange extends \MerchantAPI\Model
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         return $this->setField('Notes', $notes);
     }
@@ -337,7 +337,7 @@ class CSSResourceChange extends \MerchantAPI\Model
      * @param CSSResourceVersionAttribute
      * @return $this
      */
-    public function addAttribute(CSSResourceVersionAttribute $model)
+    public function addAttribute(CSSResourceVersionAttribute $model) : self
     {
         if (!isset($this->data['Attributes'])) {
             $this->data['Attributes'] = [];

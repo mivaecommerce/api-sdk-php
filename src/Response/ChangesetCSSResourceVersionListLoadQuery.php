@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ChangesetCSSResourceVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ChangesetCSSResourceVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ChangesetCSSResourceVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetCSSResourceVersion[] */
-    protected $changesetCSSResourceVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $changesetCSSResourceVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ChangesetCSSResourceVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->changesetCSSResourceVersions = new \MerchantAPI\Collection();
+        $this->changesetCSSResourceVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ChangesetCSSResourceVersionListLoadQuery extends ListQueryResponse
     /**
      * Get changesetCSSResourceVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetCSSResourceVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getChangesetCSSResourceVersions()
+    public function getChangesetCSSResourceVersions() : Collection
     {
         return $this->changesetCSSResourceVersions;
     }

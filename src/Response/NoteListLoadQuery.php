@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\Note;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for NoteList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class NoteListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\Note[] */
-    protected $notes = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $notes;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class NoteListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->notes = new \MerchantAPI\Collection();
+        $this->notes = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class NoteListLoadQuery extends ListQueryResponse
     /**
      * Get notes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\Note[]
+     * @return \MerchantAPI\Collection
      */
-    public function getNotes()
+    public function getNotes() : Collection
     {
         return $this->notes;
     }

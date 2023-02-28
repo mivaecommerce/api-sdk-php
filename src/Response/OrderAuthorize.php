@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderAuthorize extends Response
 {
-    /** @var \MerchantAPI\Model\OrderPaymentAuthorize */
-    protected $orderPaymentAuthorize;
+    /** @var ?\MerchantAPI\Model\OrderPaymentAuthorize */
+    protected ?OrderPaymentAuthorize $orderPaymentAuthorize = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OrderAuthorize extends Response
      *
      * @return \MerchantAPI\Model\OrderPaymentAuthorize|null
      */
-    public function getOrderPaymentAuthorize()
+    public function getOrderPaymentAuthorize() : ?OrderPaymentAuthorize
     {
         return $this->orderPaymentAuthorize;
     }

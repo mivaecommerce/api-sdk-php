@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OptionInsert extends Response
 {
-    /** @var \MerchantAPI\Model\ProductOption */
-    protected $productOption;
+    /** @var ?\MerchantAPI\Model\ProductOption */
+    protected ?ProductOption $productOption = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OptionInsert extends Response
      *
      * @return \MerchantAPI\Model\ProductOption|null
      */
-    public function getProductOption()
+    public function getProductOption() : ?ProductOption
     {
         return $this->productOption;
     }

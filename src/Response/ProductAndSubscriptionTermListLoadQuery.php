@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ProductAndSubscriptionTerm;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ProductAndSubscriptionTermList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductAndSubscriptionTermListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductAndSubscriptionTerm[] */
-    protected $productAndSubscriptionTerms = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $productAndSubscriptionTerms;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ProductAndSubscriptionTermListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->productAndSubscriptionTerms = new \MerchantAPI\Collection();
+        $this->productAndSubscriptionTerms = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ProductAndSubscriptionTermListLoadQuery extends ListQueryResponse
     /**
      * Get productAndSubscriptionTerms.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductAndSubscriptionTerm[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProductAndSubscriptionTerms()
+    public function getProductAndSubscriptionTerms() : Collection
     {
         return $this->productAndSubscriptionTerms;
     }

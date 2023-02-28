@@ -20,30 +20,30 @@ class ProductSubscriptionTermDate extends \MerchantAPI\Model
     /**
      * Get subterm_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionTermId()
+    public function getSubscriptionTermId() : ?int
     {
-        return (int) $this->getField('subterm_id', 0);
+        return $this->getField('subterm_id');
     }
 
     /**
      * Get term_dom.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermDayOfMonth()
+    public function getTermDayOfMonth() : ?int
     {
-        return (int) $this->getField('term_dom', 0);
+        return $this->getField('term_dom');
     }
 
     /**
      * Get term_mon.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTermMonth()
+    public function getTermMonth() : ?int
     {
-        return (int) $this->getField('term_mon', 0);
+        return $this->getField('term_mon');
     }
 }

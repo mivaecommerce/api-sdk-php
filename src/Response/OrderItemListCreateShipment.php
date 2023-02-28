@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderItemListCreateShipment extends Response
 {
-    /** @var \MerchantAPI\Model\OrderShipment */
-    protected $orderShipment;
+    /** @var ?\MerchantAPI\Model\OrderShipment */
+    protected ?OrderShipment $orderShipment = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OrderItemListCreateShipment extends Response
      *
      * @return \MerchantAPI\Model\OrderShipment|null
      */
-    public function getOrderShipment()
+    public function getOrderShipment() : ?OrderShipment
     {
         return $this->orderShipment;
     }

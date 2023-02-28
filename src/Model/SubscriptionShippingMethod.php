@@ -57,19 +57,19 @@ class SubscriptionShippingMethod extends \MerchantAPI\Model
     /**
      * Get module.
      *
-     * @return \MerchantAPI\Model\Module|null
+     * @return ?\MerchantAPI\Model\Module
      */
-    public function getModule()
+    public function getModule() : ?Module
     {
-        return $this->getField('module', null);
+        return $this->getField('module');
     }
 
     /**
      * Get method_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodCode()
+    public function getMethodCode() : ?string
     {
         return $this->getField('method_code');
     }
@@ -77,9 +77,9 @@ class SubscriptionShippingMethod extends \MerchantAPI\Model
     /**
      * Get method_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getMethodName()
+    public function getMethodName() : ?string
     {
         return $this->getField('method_name');
     }
@@ -87,19 +87,19 @@ class SubscriptionShippingMethod extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get formatted_price.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFormattedPrice()
+    public function getFormattedPrice() : ?string
     {
         return $this->getField('formatted_price');
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\BusinessAccount;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BusinessAccount_Update.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class BusinessAccountUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BusinessAccount_Update';
+    protected string $function = 'BusinessAccount_Update';
 
-    /** @var int */
-    protected $businessAccountId;
+    /** @var ?int */
+    protected ?int $businessAccountId = null;
 
-    /** @var int */
-    protected $editBusinessAccount;
+    /** @var ?int */
+    protected ?int $editBusinessAccount = null;
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var bool */
-    protected $businessAccountTaxExempt;
+    /** @var ?bool */
+    protected ?bool $businessAccountTaxExempt = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\BusinessAccount
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\BusinessAccount $businessAccount
      */
-    public function __construct(BaseClient $client = null, BusinessAccount $businessAccount = null)
+    public function __construct(?BaseClient $client = null, ?BusinessAccount $businessAccount = null)
     {
         parent::__construct($client);
         if ($businessAccount) {
@@ -66,7 +68,7 @@ class BusinessAccountUpdate extends Request
      *
      * @return int
      */
-    public function getBusinessAccountId()
+    public function getBusinessAccountId() : ?int
     {
         return $this->businessAccountId;
     }
@@ -76,7 +78,7 @@ class BusinessAccountUpdate extends Request
      *
      * @return int
      */
-    public function getEditBusinessAccount()
+    public function getEditBusinessAccount() : ?int
     {
         return $this->editBusinessAccount;
     }
@@ -86,7 +88,7 @@ class BusinessAccountUpdate extends Request
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -96,7 +98,7 @@ class BusinessAccountUpdate extends Request
      *
      * @return bool
      */
-    public function getBusinessAccountTaxExempt()
+    public function getBusinessAccountTaxExempt() : ?bool
     {
         return $this->businessAccountTaxExempt;
     }
@@ -104,10 +106,10 @@ class BusinessAccountUpdate extends Request
     /**
      * Set BusinessAccount_ID.
      *
-     * @param int
+     * @param ?int $businessAccountId
      * @return $this
      */
-    public function setBusinessAccountId($businessAccountId)
+    public function setBusinessAccountId(?int $businessAccountId) : self
     {
         $this->businessAccountId = $businessAccountId;
 
@@ -117,10 +119,10 @@ class BusinessAccountUpdate extends Request
     /**
      * Set Edit_BusinessAccount.
      *
-     * @param int
+     * @param ?int $editBusinessAccount
      * @return $this
      */
-    public function setEditBusinessAccount($editBusinessAccount)
+    public function setEditBusinessAccount(?int $editBusinessAccount) : self
     {
         $this->editBusinessAccount = $editBusinessAccount;
 
@@ -130,10 +132,10 @@ class BusinessAccountUpdate extends Request
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -143,10 +145,10 @@ class BusinessAccountUpdate extends Request
     /**
      * Set BusinessAccount_Tax_Exempt.
      *
-     * @param bool
+     * @param ?bool $businessAccountTaxExempt
      * @return $this
      */
-    public function setBusinessAccountTaxExempt($businessAccountTaxExempt)
+    public function setBusinessAccountTaxExempt(?bool $businessAccountTaxExempt) : self
     {
         $this->businessAccountTaxExempt = $businessAccountTaxExempt;
 
@@ -156,7 +158,7 @@ class BusinessAccountUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -182,7 +184,7 @@ class BusinessAccountUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BusinessAccountUpdate($this, $httpResponse, $data);
     }

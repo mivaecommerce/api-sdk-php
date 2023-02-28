@@ -19,7 +19,7 @@ use MerchantAPI\Client;
  *
  * @package MerchantAPI
  */
-interface RequestInterface
+interface RequestInterface extends \JsonSerializable
 {
     /** @var string REQUEST_SCOPE_STORE */
     const REQUEST_SCOPE_STORE   = 'store';
@@ -41,90 +41,88 @@ interface RequestInterface
      *
      * @return string
      */
-    public function getFunction();
+    public function getFunction() : string;
 
     /**
      * Get the request level store code, if set.
      *
-     * @return mixed
+     * @return ?string
      */
-    public function getStoreCode();
+    public function getStoreCode() : ?string;
 
     /**
      * Get the scope of the request. Returns a RequestInterface::REQUEST_SCOPE_* constant.
      *
      * @return string
      */
-    public function getScope();
+    public function getScope() : string;
 
     /**
      * Override client level store code from the request. Only applies to store scoped requests.
      *
-     * @param string
-     * @return ResponseInterface
+     * @param string $storeCode
+     * @return $this
      */
-    public function setStoreCode($storeCode);
+    public function setStoreCode(string $storeCode) : self;
 
     /**
      * Get the client used to send the request
      *
-     * @param string
-     * @return ResponseInterface
+     * @return ?BaseClient
      */
-    public function getClient();
+    public function getClient() : ?BaseClient;
 
     /**
      * Send the request using the assigned client.
      *
-     * @param string
      * @return ResponseInterface
      */
-    public function send();
+    public function send() : ResponseInterface;
 
     /**
      * Set the Client to use to send the request.
      *
-     * @param string
-     * @return ResponseInterface
+     * @param ?BaseClient $client
+     * @return $this
      */
-    public function setClient(Client $client);
+    public function setClient(?BaseClient $client) : self;
 
     /**
      * Returns the data for the request as an array.
      *
      * @return array
      */
-    public function toArray();
+    public function toArray() : array;
 
     /**
      * Create a response object from the http response.
      *
-     * @param \MerchantAPI\Http\HttpResponse
-     * @param array
+     * @param \MerchantAPI\Http\HttpResponse $httpResponse
+     * @param array $data
      * @return ResponseInterface
      */
-    public function createResponse(HttpResponse $httpResponse, array $data);
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface;
 
     /**
      * Allows manipulation of the HTTP Request Headers
      *
      * @param HttpHeaders $headers
      */
-    public function processRequestHeaders(HttpHeaders $headers);
+    public function processRequestHeaders(HttpHeaders $headers) : void;
 
     /**
      * Get the binary encoding method
      *
-     * @return HttpHeaders $headers
+     * @return ?string
      */
-    public function getBinaryEncoding();
+    public function getBinaryEncoding() : ?string;
 
 
     /**
      * Set the binary encoding method
      *
-     * @param string $encoding
-     * @return ResponseInterface
+     * @param ?string $encoding
+     * @return RequestInterface
      */
-    public function setBinaryEncoding($encoding);
+    public function setBinaryEncoding(?string $binaryEncoding) : self;
 }

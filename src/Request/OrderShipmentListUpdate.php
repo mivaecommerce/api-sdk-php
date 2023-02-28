@@ -14,6 +14,8 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderShipmentUpdate;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request OrderShipmentList_Update.
@@ -26,18 +28,20 @@ use MerchantAPI\BaseClient;
 class OrderShipmentListUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderShipmentList_Update';
+    protected string $function = 'OrderShipmentList_Update';
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\OrderShipmentUpdate[] */
-    protected $shipmentUpdates = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $shipmentUpdates;
 
     /**
      * Constructor.
+     *
+     * @param ?\MerchantAPI\BaseClient $client
      */
-    public function __construct(BaseClient $client = null)
+    public function __construct(?BaseClient $client = null)
     {
         parent::__construct($client);
         $this->shipmentUpdates = new \MerchantAPI\Collection();
@@ -46,9 +50,9 @@ class OrderShipmentListUpdate extends Request
     /**
      * Get Shipment_Updates.
      *
-     * @return \MerchantAPI\Model\OrderShipmentUpdate[]
+     * @return \MerchantAPI\Collection
      */
-    public function getShipmentUpdates()
+    public function getShipmentUpdates() : ?Collection
     {
         return $this->shipmentUpdates;
     }
@@ -56,12 +60,17 @@ class OrderShipmentListUpdate extends Request
     /**
      * Set Shipment_Updates.
      *
-     * @param (\MerchantAPI\Model\OrderShipmentUpdate|array)[]
+     * @param \MerchantAPI\Collection|array $shipmentUpdates
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setShipmentUpdates(array $shipmentUpdates)
+    public function setShipmentUpdates($shipmentUpdates) : self
     {
+        if (!is_array($shipmentUpdates) && !$shipmentUpdates instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($shipmentUpdates) ? get_class($shipmentUpdates) : gettype($shipmentUpdates)));
+        }
+
         foreach ($shipmentUpdates as &$model) {
             if (is_array($model)) {
                 $model = new OrderShipmentUpdate($model);
@@ -71,7 +80,7 @@ class OrderShipmentListUpdate extends Request
             }
         }
 
-        $this->shipmentUpdates = new \MerchantAPI\Collection($shipmentUpdates);
+        $this->shipmentUpdates = new Collection($shipmentUpdates);
 
         return $this;
     }
@@ -80,10 +89,9 @@ class OrderShipmentListUpdate extends Request
      * Add Shipment_Updates.
      *
      * @param \MerchantAPI\Model\OrderShipmentUpdate
-     *
      * @return $this
      */
-    public function addShipmentUpdate(OrderShipmentUpdate $model)
+    public function addShipmentUpdate(OrderShipmentUpdate $model) : self
     {
         $this->shipmentUpdates[] = $model;
         return $this;
@@ -96,7 +104,7 @@ class OrderShipmentListUpdate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addShipmentUpdates(array $shipmentUpdates)
+    public function addShipmentUpdates(array $shipmentUpdates) : self
     {
         foreach ($shipmentUpdates as $e) {
             if (is_array($e)) {
@@ -115,7 +123,7 @@ class OrderShipmentListUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -133,7 +141,7 @@ class OrderShipmentListUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderShipmentListUpdate($this, $httpResponse, $data);
     }

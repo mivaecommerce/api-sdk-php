@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request InventoryProductSettings_Update.
@@ -26,80 +27,81 @@ use MerchantAPI\BaseClient;
 class InventoryProductSettingsUpdate extends Request
 {
     /** @var string INVENTORY_CHOICE_DEFAULT */
-    const INVENTORY_CHOICE_DEFAULT = 'd';
+    const INVENTORY_CHOICE_DEFAULT = 'Default';
 
     /** @var string INVENTORY_CHOICE_YES */
-    const INVENTORY_CHOICE_YES = 'y';
+    const INVENTORY_CHOICE_YES = 'Yes';
 
     /** @var string INVENTORY_CHOICE_NO */
-    const INVENTORY_CHOICE_NO = 'n';
+    const INVENTORY_CHOICE_NO = 'No';
 
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'InventoryProductSettings_Update';
+    protected string $function = 'InventoryProductSettings_Update';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var string */
-    protected $trackLowStockLevel;
+    /** @var ?string */
+    protected ?string $trackLowStockLevel = null;
 
-    /** @var string */
-    protected $trackOutOfStockLevel;
+    /** @var ?string */
+    protected ?string $trackOutOfStockLevel = null;
 
-    /** @var string */
-    protected $hideOutOfStockProducts;
+    /** @var ?string */
+    protected ?string $hideOutOfStockProducts = null;
 
-    /** @var int */
-    protected $lowStockLevel;
+    /** @var ?int */
+    protected ?int $lowStockLevel = null;
 
-    /** @var int */
-    protected $outOfStockLevel;
+    /** @var ?int */
+    protected ?int $outOfStockLevel = null;
 
-    /** @var bool */
-    protected $trackProduct;
+    /** @var ?bool */
+    protected ?bool $trackProduct = null;
 
-    /** @var string */
-    protected $inStockMessageShort;
+    /** @var ?string */
+    protected ?string $inStockMessageShort = null;
 
-    /** @var string */
-    protected $inStockMessageLong;
+    /** @var ?string */
+    protected ?string $inStockMessageLong = null;
 
-    /** @var string */
-    protected $lowStockMessageShort;
+    /** @var ?string */
+    protected ?string $lowStockMessageShort = null;
 
-    /** @var string */
-    protected $lowStockMessageLong;
+    /** @var ?string */
+    protected ?string $lowStockMessageLong = null;
 
-    /** @var string */
-    protected $outOfStockMessageShort;
+    /** @var ?string */
+    protected ?string $outOfStockMessageShort = null;
 
-    /** @var string */
-    protected $outOfStockMessageLong;
+    /** @var ?string */
+    protected ?string $outOfStockMessageLong = null;
 
-    /** @var string */
-    protected $limitedStockMessage;
+    /** @var ?string */
+    protected ?string $limitedStockMessage = null;
 
-    /** @var int */
-    protected $adjustStockBy;
+    /** @var ?int */
+    protected ?int $adjustStockBy = null;
 
-    /** @var int */
-    protected $currentStock;
+    /** @var ?int */
+    protected ?int $currentStock = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -116,7 +118,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -126,7 +128,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -136,7 +138,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -146,7 +148,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getTrackLowStockLevel()
+    public function getTrackLowStockLevel() : ?string
     {
         return $this->trackLowStockLevel;
     }
@@ -156,7 +158,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getTrackOutOfStockLevel()
+    public function getTrackOutOfStockLevel() : ?string
     {
         return $this->trackOutOfStockLevel;
     }
@@ -166,7 +168,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getHideOutOfStockProducts()
+    public function getHideOutOfStockProducts() : ?string
     {
         return $this->hideOutOfStockProducts;
     }
@@ -176,7 +178,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return int
      */
-    public function getLowStockLevel()
+    public function getLowStockLevel() : ?int
     {
         return $this->lowStockLevel;
     }
@@ -186,7 +188,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return int
      */
-    public function getOutOfStockLevel()
+    public function getOutOfStockLevel() : ?int
     {
         return $this->outOfStockLevel;
     }
@@ -196,7 +198,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return bool
      */
-    public function getTrackProduct()
+    public function getTrackProduct() : ?bool
     {
         return $this->trackProduct;
     }
@@ -206,7 +208,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getInStockMessageShort()
+    public function getInStockMessageShort() : ?string
     {
         return $this->inStockMessageShort;
     }
@@ -216,7 +218,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getInStockMessageLong()
+    public function getInStockMessageLong() : ?string
     {
         return $this->inStockMessageLong;
     }
@@ -226,7 +228,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getLowStockMessageShort()
+    public function getLowStockMessageShort() : ?string
     {
         return $this->lowStockMessageShort;
     }
@@ -236,7 +238,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getLowStockMessageLong()
+    public function getLowStockMessageLong() : ?string
     {
         return $this->lowStockMessageLong;
     }
@@ -246,7 +248,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getOutOfStockMessageShort()
+    public function getOutOfStockMessageShort() : ?string
     {
         return $this->outOfStockMessageShort;
     }
@@ -256,7 +258,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getOutOfStockMessageLong()
+    public function getOutOfStockMessageLong() : ?string
     {
         return $this->outOfStockMessageLong;
     }
@@ -266,7 +268,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return string
      */
-    public function getLimitedStockMessage()
+    public function getLimitedStockMessage() : ?string
     {
         return $this->limitedStockMessage;
     }
@@ -276,7 +278,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return int
      */
-    public function getAdjustStockBy()
+    public function getAdjustStockBy() : ?int
     {
         return $this->adjustStockBy;
     }
@@ -286,7 +288,7 @@ class InventoryProductSettingsUpdate extends Request
      *
      * @return int
      */
-    public function getCurrentStock()
+    public function getCurrentStock() : ?int
     {
         return $this->currentStock;
     }
@@ -294,10 +296,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -307,10 +309,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -320,10 +322,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -333,10 +335,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set TrackLowStockLevel.
      *
-     * @param string
+     * @param ?string $trackLowStockLevel
      * @return $this
      */
-    public function setTrackLowStockLevel($trackLowStockLevel)
+    public function setTrackLowStockLevel(?string $trackLowStockLevel) : self
     {
         $this->trackLowStockLevel = $trackLowStockLevel;
 
@@ -346,10 +348,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set TrackOutOfStockLevel.
      *
-     * @param string
+     * @param ?string $trackOutOfStockLevel
      * @return $this
      */
-    public function setTrackOutOfStockLevel($trackOutOfStockLevel)
+    public function setTrackOutOfStockLevel(?string $trackOutOfStockLevel) : self
     {
         $this->trackOutOfStockLevel = $trackOutOfStockLevel;
 
@@ -359,10 +361,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set HideOutOfStockProducts.
      *
-     * @param string
+     * @param ?string $hideOutOfStockProducts
      * @return $this
      */
-    public function setHideOutOfStockProducts($hideOutOfStockProducts)
+    public function setHideOutOfStockProducts(?string $hideOutOfStockProducts) : self
     {
         $this->hideOutOfStockProducts = $hideOutOfStockProducts;
 
@@ -372,10 +374,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set LowStockLevel.
      *
-     * @param int
+     * @param ?int $lowStockLevel
      * @return $this
      */
-    public function setLowStockLevel($lowStockLevel)
+    public function setLowStockLevel(?int $lowStockLevel) : self
     {
         $this->lowStockLevel = $lowStockLevel;
 
@@ -385,10 +387,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set OutOfStockLevel.
      *
-     * @param int
+     * @param ?int $outOfStockLevel
      * @return $this
      */
-    public function setOutOfStockLevel($outOfStockLevel)
+    public function setOutOfStockLevel(?int $outOfStockLevel) : self
     {
         $this->outOfStockLevel = $outOfStockLevel;
 
@@ -398,10 +400,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set TrackProduct.
      *
-     * @param bool
+     * @param ?bool $trackProduct
      * @return $this
      */
-    public function setTrackProduct($trackProduct)
+    public function setTrackProduct(?bool $trackProduct) : self
     {
         $this->trackProduct = $trackProduct;
 
@@ -411,10 +413,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set InStockMessageShort.
      *
-     * @param string
+     * @param ?string $inStockMessageShort
      * @return $this
      */
-    public function setInStockMessageShort($inStockMessageShort)
+    public function setInStockMessageShort(?string $inStockMessageShort) : self
     {
         $this->inStockMessageShort = $inStockMessageShort;
 
@@ -424,10 +426,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set InStockMessageLong.
      *
-     * @param string
+     * @param ?string $inStockMessageLong
      * @return $this
      */
-    public function setInStockMessageLong($inStockMessageLong)
+    public function setInStockMessageLong(?string $inStockMessageLong) : self
     {
         $this->inStockMessageLong = $inStockMessageLong;
 
@@ -437,10 +439,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set LowStockMessageShort.
      *
-     * @param string
+     * @param ?string $lowStockMessageShort
      * @return $this
      */
-    public function setLowStockMessageShort($lowStockMessageShort)
+    public function setLowStockMessageShort(?string $lowStockMessageShort) : self
     {
         $this->lowStockMessageShort = $lowStockMessageShort;
 
@@ -450,10 +452,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set LowStockMessageLong.
      *
-     * @param string
+     * @param ?string $lowStockMessageLong
      * @return $this
      */
-    public function setLowStockMessageLong($lowStockMessageLong)
+    public function setLowStockMessageLong(?string $lowStockMessageLong) : self
     {
         $this->lowStockMessageLong = $lowStockMessageLong;
 
@@ -463,10 +465,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set OutOfStockMessageShort.
      *
-     * @param string
+     * @param ?string $outOfStockMessageShort
      * @return $this
      */
-    public function setOutOfStockMessageShort($outOfStockMessageShort)
+    public function setOutOfStockMessageShort(?string $outOfStockMessageShort) : self
     {
         $this->outOfStockMessageShort = $outOfStockMessageShort;
 
@@ -476,10 +478,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set OutOfStockMessageLong.
      *
-     * @param string
+     * @param ?string $outOfStockMessageLong
      * @return $this
      */
-    public function setOutOfStockMessageLong($outOfStockMessageLong)
+    public function setOutOfStockMessageLong(?string $outOfStockMessageLong) : self
     {
         $this->outOfStockMessageLong = $outOfStockMessageLong;
 
@@ -489,10 +491,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set LimitedStockMessage.
      *
-     * @param string
+     * @param ?string $limitedStockMessage
      * @return $this
      */
-    public function setLimitedStockMessage($limitedStockMessage)
+    public function setLimitedStockMessage(?string $limitedStockMessage) : self
     {
         $this->limitedStockMessage = $limitedStockMessage;
 
@@ -502,10 +504,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set AdjustStockBy.
      *
-     * @param int
+     * @param ?int $adjustStockBy
      * @return $this
      */
-    public function setAdjustStockBy($adjustStockBy)
+    public function setAdjustStockBy(?int $adjustStockBy) : self
     {
         $this->adjustStockBy = $adjustStockBy;
 
@@ -515,10 +517,10 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * Set CurrentStock.
      *
-     * @param int
+     * @param ?int $currentStock
      * @return $this
      */
-    public function setCurrentStock($currentStock)
+    public function setCurrentStock(?int $currentStock) : self
     {
         $this->currentStock = $currentStock;
 
@@ -528,7 +530,7 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -606,7 +608,7 @@ class InventoryProductSettingsUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\InventoryProductSettingsUpdate($this, $httpResponse, $data);
     }

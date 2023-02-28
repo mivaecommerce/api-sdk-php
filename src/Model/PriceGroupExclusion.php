@@ -29,19 +29,19 @@ class PriceGroupExclusion extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get scope.
      *
-     * @return string
+     * @return ?string
      */
-    public function getScope()
+    public function getScope() : ?string
     {
         return $this->getField('scope');
     }
@@ -49,10 +49,10 @@ class PriceGroupExclusion extends \MerchantAPI\Model
     /**
      * Set id.
      *
-     * @param int
+     * @param ?int $id
      * @return $this
      */
-    public function setId($id)
+    public function setId(?int $id) : self
     {
         return $this->setField('id', $id);
     }
@@ -60,10 +60,10 @@ class PriceGroupExclusion extends \MerchantAPI\Model
     /**
      * Set scope.
      *
-     * @param string
+     * @param ?string $scope
      * @return $this
      */
-    public function setScope($scope)
+    public function setScope(?string $scope) : self
     {
         return $this->setField('scope', $scope);
     }

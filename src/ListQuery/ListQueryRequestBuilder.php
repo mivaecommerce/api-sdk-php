@@ -13,8 +13,9 @@
 namespace MerchantAPI\ListQuery;
 
 use MerchantAPI\Request;
-use MerchantAPI\Client;
+use MerchantAPI\BaseClient;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\ResponseInterface;
 
 /**
  * This class is a utility to create custom list query requests.
@@ -24,25 +25,21 @@ use MerchantAPI\Http\HttpResponse;
 class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
 {
     /** @var string */
-    protected $function;
+    protected string $function;
 
     /** @var array */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * Constructor.
      *
-     * @param string
-     * @param array
-     * @return RequestBuilder
+     * @param ?BaseClient $client
+     * @param string $function
+     * @param array $data
      */
-    public function __construct(Client $client = null, $function = '', array $data = [])
+    public function __construct(?BaseClient $client = null, string $function = '', array $data = [])
     {
         parent::__construct($client);
-
-        if (!is_string($function)) {
-            throw new \InvalidArgumentException(sprintf('Expected a string but got %s', gettype($function)));
-        }
 
         $this->function = $function;
         $this->data     = $data;
@@ -51,22 +48,23 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * Set the API function name.
      *
-     * @return RequestBuilder
+     * @param string $function
+     * @return $this
      */
-    public function setFunction($function)
+    public function setFunction(string $function) : self
     {
         $this->function = $function;
         return $this;
     }
 
     /**
-     * Set a field int the request.
+     * Set a field in the request.
      *
-     * @param string
-     * @param mixed
-     * @return RequestBuilder
+     * @param string $field
+     * @param mixed $value
+     * @return $this
      */
-    public function set($field, $value)
+    public function set(string $field, $value) : self
     {
         $fieldLower = strtolower($field);
 
@@ -83,11 +81,11 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * Get a defined field from the request, or provided default.
      *
-     * @param string
-     * @param mixed
+     * @param string $field
+     * @param mixed $defaultValue
      * @return mixed
      */
-    public function get($field, $defaultValue = null)
+    public function get(string $field, $defaultValue = null)
     {
         $fieldLower = strtolower($field);
 
@@ -107,10 +105,10 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * Check if a field is defined in the request.
      *
-     * @param string
+     * @param string $field
      * @return bool
      */
-    public function has($field)
+    public function has(string $field) : bool
     {
         if (in_array(strtolower($field), ['function', 'store_code'])) {
             return true;
@@ -126,10 +124,10 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * Remove a defined field from the request.
      *
-     * @param string
-     * @return RequestBuilder
+     * @param string $field
+     * @return $this
      */
-    public function remove($field)
+    public function remove(string $field) : self
     {
         $fieldLower = strtolower($field);
 
@@ -147,7 +145,8 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value) : void
+    {
         if (is_string($offset)) {
             $fieldLower = strtolower($offset);
 
@@ -170,7 +169,8 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset) : bool
+    {
         if (is_string($offset) && in_array(strtolower($offset), ['function', 'store_code'])) {
             return true;
         }
@@ -181,7 +181,8 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset) : void
+    {
         if (is_string($offset)) {
             $fieldLower = strtolower($offset);
 
@@ -198,7 +199,8 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         if (is_string($offset)) {
             $fieldLower = strtolower($offset);
 
@@ -209,17 +211,17 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
             }
         }
 
-        return isset($this->data[$offset]) ? $this->data[$offset] : null;
+        return $this->data[$offset] ?? null;
     }
 
     /**
      * Set the scope of the request.
      *
-     * @param string Either store, or domain. Use RequestInterface::REQUEST_SCOPE_* constants.
-     * @return RequestBuilder
+     * @param string $scope Either store, or domain. Use RequestInterface::REQUEST_SCOPE_* constants.
+     * @return $this
      * @throws \InvalidArgumentException
      */
-    public function setScope($scope)
+    public function setScope(string $scope) : self
     {
         $scope = strtolower($scope);
 
@@ -235,7 +237,7 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         return array_merge(parent::toArray(), $this->data);
     }
@@ -243,7 +245,7 @@ class ListQueryRequestBuilder extends ListQueryRequest implements \ArrayAccess
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\RequestBuilder($this, $httpResponse, $data);
     }

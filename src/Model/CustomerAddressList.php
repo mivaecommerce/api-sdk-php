@@ -72,30 +72,30 @@ class CustomerAddressList extends \MerchantAPI\Model
     /**
      * Get ship_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getShipId()
+    public function getShipId() : ?int
     {
-        return (int) $this->getField('ship_id', 0);
+        return $this->getField('ship_id');
     }
 
     /**
      * Get bill_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBillId()
+    public function getBillId() : ?int
     {
-        return (int) $this->getField('bill_id', 0);
+        return $this->getField('bill_id');
     }
 
     /**
      * Get addresses.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CustomerAddress[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAddresses()
+    public function getAddresses() : ?Collection
     {
-        return $this->getField('addresses', []);
+        return $this->getField('addresses');
     }
 }

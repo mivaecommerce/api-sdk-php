@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductImage_Update_Type.
@@ -25,23 +26,23 @@ use MerchantAPI\BaseClient;
 class ProductImageUpdateType extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductImage_Update_Type';
+    protected string $function = 'ProductImage_Update_Type';
 
-    /** @var int */
-    protected $productImageId;
+    /** @var ?int */
+    protected ?int $productImageId = null;
 
-    /** @var int */
-    protected $imageTypeId;
+    /** @var ?int */
+    protected ?int $imageTypeId = null;
 
     /**
      * Get ProductImage_ID.
      *
      * @return int
      */
-    public function getProductImageId()
+    public function getProductImageId() : ?int
     {
         return $this->productImageId;
     }
@@ -51,7 +52,7 @@ class ProductImageUpdateType extends Request
      *
      * @return int
      */
-    public function getImageTypeId()
+    public function getImageTypeId() : ?int
     {
         return $this->imageTypeId;
     }
@@ -59,10 +60,10 @@ class ProductImageUpdateType extends Request
     /**
      * Set ProductImage_ID.
      *
-     * @param int
+     * @param ?int $productImageId
      * @return $this
      */
-    public function setProductImageId($productImageId)
+    public function setProductImageId(?int $productImageId) : self
     {
         $this->productImageId = $productImageId;
 
@@ -72,10 +73,10 @@ class ProductImageUpdateType extends Request
     /**
      * Set ImageType_ID.
      *
-     * @param int
+     * @param ?int $imageTypeId
      * @return $this
      */
-    public function setImageTypeId($imageTypeId)
+    public function setImageTypeId(?int $imageTypeId) : self
     {
         $this->imageTypeId = $imageTypeId;
 
@@ -85,7 +86,7 @@ class ProductImageUpdateType extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -101,7 +102,7 @@ class ProductImageUpdateType extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductImageUpdateType($this, $httpResponse, $data);
     }

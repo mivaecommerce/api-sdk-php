@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OrderCreateFromOrder extends Response
 {
-    /** @var \MerchantAPI\Model\Order */
-    protected $order;
+    /** @var ?\MerchantAPI\Model\Order */
+    protected ?Order $order = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class OrderCreateFromOrder extends Response
      *
      * @return \MerchantAPI\Model\Order|null
      */
-    public function getOrder()
+    public function getOrder() : ?Order
     {
         return $this->order;
     }

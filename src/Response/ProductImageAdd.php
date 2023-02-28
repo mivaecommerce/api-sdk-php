@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductImageAdd extends Response
 {
-    /** @var \MerchantAPI\Model\ProductImageData */
-    protected $productImageData;
+    /** @var ?\MerchantAPI\Model\ProductImageData */
+    protected ?ProductImageData $productImageData = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class ProductImageAdd extends Response
      *
      * @return \MerchantAPI\Model\ProductImageData|null
      */
-    public function getProductImageData()
+    public function getProductImageData() : ?ProductImageData
     {
         return $this->productImageData;
     }

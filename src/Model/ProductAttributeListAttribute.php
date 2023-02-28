@@ -120,44 +120,44 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get default_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDefaultId()
+    public function getDefaultId() : ?int
     {
-        return (int) $this->getField('default_id', 0);
+        return $this->getField('default_id');
     }
 
     /**
      * Get disp_order.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDisplayOrder()
+    public function getDisplayOrder() : ?int
     {
         if ($this->hasField('disp_order')) {
             return (int) $this->getField('disp_order', 0);
         } else if ($this->hasField('disporder')) {
-            return (int) $this->getField('disporder', 0);
+            return (int) $this->getField('disporder');
         }
 
         return 0;
@@ -166,19 +166,19 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get attemp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
-        return (int) $this->getField('attemp_id', 0);
+        return $this->getField('attemp_id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -186,9 +186,9 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->getField('type');
     }
@@ -196,9 +196,9 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->getField('prompt');
     }
@@ -206,59 +206,59 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return float
+     * @return ?float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
-        return (float) $this->getField('price', 0.00);
+        return $this->getField('price');
     }
 
     /**
      * Get cost.
      *
-     * @return float
+     * @return ?float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
-        return (float) $this->getField('cost', 0.00);
+        return $this->getField('cost');
     }
 
     /**
      * Get weight.
      *
-     * @return float
+     * @return ?float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
-        return (float) $this->getField('weight', 0.00);
+        return $this->getField('weight');
     }
 
     /**
      * Get required.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getRequired()
+    public function getRequired() : ?bool
     {
-        return (bool) $this->getField('required', false);
+        return $this->getField('required');
     }
 
     /**
      * Get inventory.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getInventory()
+    public function getInventory() : ?bool
     {
-        return (bool) $this->getField('inventory', false);
+        return $this->getField('inventory');
     }
 
     /**
      * Get image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('image');
     }
@@ -266,40 +266,40 @@ class ProductAttributeListAttribute extends \MerchantAPI\Model
     /**
      * Get attributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductAttributeListAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getTemplateAttributes()
+    public function getTemplateAttributes() : ?Collection
     {
-        return $this->getField('attributes', []);
+        return $this->getField('attributes');
     }
 
     /**
      * Get options.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductOption[]
+     * @return \MerchantAPI\Collection
      */
-    public function getOptions()
+    public function getOptions() : ?Collection
     {
-        return $this->getField('options', []);
+        return $this->getField('options');
     }
 
     /**
      * Get has_variant_parts.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getHasVariantParts()
+    public function getHasVariantParts() : ?bool
     {
-        return (bool) $this->getField('has_variant_parts', false);
+        return $this->getField('has_variant_parts');
     }
 
     /**
      * Get template.
      *
-     * @return \MerchantAPI\Model\ProductAttributeListTemplate|null
+     * @return ?\MerchantAPI\Model\ProductAttributeListTemplate
      */
-    public function getTemplate()
+    public function getTemplate() : ?ProductAttributeListTemplate
     {
-        return $this->getField('template', null);
+        return $this->getField('template');
     }
 }

@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\ChangesetJavaScriptResourceVersion;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for ChangesetJavaScriptResourceVersionList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ChangesetJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetJavaScriptResourceVersion[] */
-    protected $changesetJavaScriptResourceVersions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $changesetJavaScriptResourceVersions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ChangesetJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->changesetJavaScriptResourceVersions = new \MerchantAPI\Collection();
+        $this->changesetJavaScriptResourceVersions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ChangesetJavaScriptResourceVersionListLoadQuery extends ListQueryResponse
     /**
      * Get changesetJavaScriptResourceVersions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ChangesetJavaScriptResourceVersion[]
+     * @return \MerchantAPI\Collection
      */
-    public function getChangesetJavaScriptResourceVersions()
+    public function getChangesetJavaScriptResourceVersions() : Collection
     {
         return $this->changesetJavaScriptResourceVersions;
     }

@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request URI_Update.
@@ -26,35 +27,36 @@ use MerchantAPI\BaseClient;
 class URIUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'URI_Update';
+    protected string $function = 'URI_Update';
 
-    /** @var int */
-    protected $uRIId;
+    /** @var ?int */
+    protected ?int $uRIId = null;
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var string */
-    protected $destinationType;
+    /** @var ?string */
+    protected ?string $destinationType = null;
 
-    /** @var string */
-    protected $destination;
+    /** @var ?string */
+    protected ?string $destination = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Uri
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Uri $uri
      */
-    public function __construct(BaseClient $client = null, Uri $uri = null)
+    public function __construct(?BaseClient $client = null, ?Uri $uri = null)
     {
         parent::__construct($client);
         if ($uri) {
@@ -69,7 +71,7 @@ class URIUpdate extends Request
      *
      * @return int
      */
-    public function getURIId()
+    public function getURIId() : ?int
     {
         return $this->uRIId;
     }
@@ -79,7 +81,7 @@ class URIUpdate extends Request
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -89,7 +91,7 @@ class URIUpdate extends Request
      *
      * @return string
      */
-    public function getDestinationType()
+    public function getDestinationType() : ?string
     {
         return $this->destinationType;
     }
@@ -99,7 +101,7 @@ class URIUpdate extends Request
      *
      * @return string
      */
-    public function getDestination()
+    public function getDestination() : ?string
     {
         return $this->destination;
     }
@@ -109,7 +111,7 @@ class URIUpdate extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -119,7 +121,7 @@ class URIUpdate extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -127,10 +129,10 @@ class URIUpdate extends Request
     /**
      * Set URI_ID.
      *
-     * @param int
+     * @param ?int $uRIId
      * @return $this
      */
-    public function setURIId($uRIId)
+    public function setURIId(?int $uRIId) : self
     {
         $this->uRIId = $uRIId;
 
@@ -140,10 +142,10 @@ class URIUpdate extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -153,10 +155,10 @@ class URIUpdate extends Request
     /**
      * Set Destination_Type.
      *
-     * @param string
+     * @param ?string $destinationType
      * @return $this
      */
-    public function setDestinationType($destinationType)
+    public function setDestinationType(?string $destinationType) : self
     {
         $this->destinationType = $destinationType;
 
@@ -166,10 +168,10 @@ class URIUpdate extends Request
     /**
      * Set Destination.
      *
-     * @param string
+     * @param ?string $destination
      * @return $this
      */
-    public function setDestination($destination)
+    public function setDestination(?string $destination) : self
     {
         $this->destination = $destination;
 
@@ -179,10 +181,10 @@ class URIUpdate extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -192,10 +194,10 @@ class URIUpdate extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -205,7 +207,7 @@ class URIUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -239,7 +241,7 @@ class URIUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\URIUpdate($this, $httpResponse, $data);
     }

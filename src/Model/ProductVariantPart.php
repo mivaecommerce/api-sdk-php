@@ -20,19 +20,19 @@ class ProductVariantPart extends \MerchantAPI\Model
     /**
      * Get product_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('product_id', 0);
+        return $this->getField('product_id');
     }
 
     /**
      * Get product_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->getField('product_code');
     }
@@ -40,9 +40,9 @@ class ProductVariantPart extends \MerchantAPI\Model
     /**
      * Get product_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductName()
+    public function getProductName() : ?string
     {
         return $this->getField('product_name');
     }
@@ -50,9 +50,9 @@ class ProductVariantPart extends \MerchantAPI\Model
     /**
      * Get product_sku.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductSku()
+    public function getProductSku() : ?string
     {
         return $this->getField('product_sku');
     }
@@ -60,20 +60,20 @@ class ProductVariantPart extends \MerchantAPI\Model
     /**
      * Get quantity.
      *
-     * @return int
+     * @return ?int
      */
-    public function getQuantity()
+    public function getQuantity() : ?int
     {
-        return (int) $this->getField('quantity', 0);
+        return $this->getField('quantity');
     }
 
     /**
      * Get offset.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOffset()
+    public function getOffset() : ?int
     {
-        return (int) $this->getField('offset', 0);
+        return $this->getField('offset');
     }
 }

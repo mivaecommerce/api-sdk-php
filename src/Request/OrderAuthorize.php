@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Order;
 use MerchantAPI\Model\OrderPaymentAuthorize;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Order_Authorize.
@@ -27,32 +28,33 @@ use MerchantAPI\BaseClient;
 class OrderAuthorize extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Order_Authorize';
+    protected string $function = 'Order_Authorize';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
-    /** @var int */
-    protected $moduleId;
+    /** @var ?int */
+    protected ?int $moduleId = null;
 
-    /** @var string */
-    protected $moduleData;
+    /** @var ?string */
+    protected ?string $moduleData = null;
 
-    /** @var float */
-    protected $amount;
+    /** @var ?float */
+    protected ?float $amount = null;
 
     /** @var array */
-    protected $moduleFields = [];
+    protected array $moduleFields = [];
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -67,7 +69,7 @@ class OrderAuthorize extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -77,7 +79,7 @@ class OrderAuthorize extends Request
      *
      * @return int
      */
-    public function getModuleId()
+    public function getModuleId() : ?int
     {
         return $this->moduleId;
     }
@@ -87,7 +89,7 @@ class OrderAuthorize extends Request
      *
      * @return string
      */
-    public function getModuleData()
+    public function getModuleData() : ?string
     {
         return $this->moduleData;
     }
@@ -97,7 +99,7 @@ class OrderAuthorize extends Request
      *
      * @return float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
         return $this->amount;
     }
@@ -107,7 +109,7 @@ class OrderAuthorize extends Request
      *
      * @return array
      */
-    public function getModuleFields()
+    public function getModuleFields() : ?array
     {
         return $this->moduleFields;
     }
@@ -118,7 +120,7 @@ class OrderAuthorize extends Request
      * @param string
      * @param mixed
      */
-    public function getModuleField($field, $defaultValue = null)
+    public function getModuleField(string $field, $defaultValue = null)
     {
         return isset($this->moduleFields[$field]) ?
             $this->moduleFields[$field] : $defaultValue;
@@ -127,10 +129,10 @@ class OrderAuthorize extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -140,10 +142,10 @@ class OrderAuthorize extends Request
     /**
      * Set Module_ID.
      *
-     * @param int
+     * @param ?int $moduleId
      * @return $this
      */
-    public function setModuleId($moduleId)
+    public function setModuleId(?int $moduleId) : self
     {
         $this->moduleId = $moduleId;
 
@@ -153,10 +155,10 @@ class OrderAuthorize extends Request
     /**
      * Set Module_Data.
      *
-     * @param string
+     * @param ?string $moduleData
      * @return $this
      */
-    public function setModuleData($moduleData)
+    public function setModuleData(?string $moduleData) : self
     {
         $this->moduleData = $moduleData;
 
@@ -166,10 +168,10 @@ class OrderAuthorize extends Request
     /**
      * Set Amount.
      *
-     * @param float
+     * @param ?float $amount
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount(?float $amount) : self
     {
         $this->amount = $amount;
 
@@ -179,10 +181,10 @@ class OrderAuthorize extends Request
     /**
      * Set Module_Fields.
      *
-     * @param array
+     * @param array $moduleFields
      * @return $this
      */
-    public function setModuleFields(array $moduleFields)
+    public function setModuleFields(array $moduleFields) : self
     {
         $this->moduleFields = $moduleFields;
 
@@ -196,7 +198,7 @@ class OrderAuthorize extends Request
      * @param mixed
      * @return $this
      */
-    public function setModuleField($field, $value)
+    public function setModuleField(string $field, $value) : self
     {
         $this->moduleFields[$field] = $value;
         return $this;
@@ -205,7 +207,7 @@ class OrderAuthorize extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = array_merge(parent::toArray(), $this->getModuleFields());
 
@@ -229,7 +231,7 @@ class OrderAuthorize extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderAuthorize($this, $httpResponse, $data);
     }

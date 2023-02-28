@@ -20,29 +20,29 @@ class Branch extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get immutable.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getImmutable()
+    public function getImmutable() : ?bool
     {
-        return (bool) $this->getField('immutable', false);
+        return $this->getField('immutable');
     }
 
     /**
      * Get branchkey.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBranchKey()
+    public function getBranchKey() : ?string
     {
         return $this->getField('branchkey');
     }
@@ -50,9 +50,9 @@ class Branch extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -60,9 +60,9 @@ class Branch extends \MerchantAPI\Model
     /**
      * Get color.
      *
-     * @return string
+     * @return ?string
      */
-    public function getColor()
+    public function getColor() : ?string
     {
         return $this->getField('color');
     }
@@ -70,9 +70,9 @@ class Branch extends \MerchantAPI\Model
     /**
      * Get framework.
      *
-     * @return string
+     * @return ?string
      */
-    public function getFramework()
+    public function getFramework() : ?string
     {
         return $this->getField('framework');
     }
@@ -80,29 +80,29 @@ class Branch extends \MerchantAPI\Model
     /**
      * Get is_primary.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getIsPrimary()
+    public function getIsPrimary() : ?bool
     {
-        return (bool) $this->getField('is_primary', false);
+        return $this->getField('is_primary');
     }
 
     /**
      * Get is_working.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getIsWorking()
+    public function getIsWorking() : ?bool
     {
-        return (bool) $this->getField('is_working', false);
+        return $this->getField('is_working');
     }
 
     /**
      * Get preview_url.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPreviewUrl()
+    public function getPreviewUrl() : ?string
     {
         return $this->getField('preview_url');
     }

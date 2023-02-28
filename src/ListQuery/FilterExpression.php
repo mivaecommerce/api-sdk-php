@@ -18,23 +18,23 @@ namespace MerchantAPI\ListQuery;
  */
 class FilterExpression
 {
-    /** @var \MerchantAPI\ListQuery\ListQueryRequestInterface|null  */
-    protected $request;
+    /** @var ?ListQueryRequestInterface  */
+    protected ?ListQueryRequestInterface $request;
 
-    /** @var FilterExpression|null  */
-    protected $parent = null;
+    /** @var ?FilterExpression  */
+    protected ?FilterExpression $parent = null;
 
-    /** @var string Search */
+    /** @var int Search */
     const FILTER_SEARCH        = 1;
 
-    /** @var string Search And */
+    /** @var int Search And */
     const FILTER_SEARCH_AND    = 2;
 
-    /** @var string Search Or */
+    /** @var int Search Or */
     const FILTER_SEARCH_OR     = 3;
 
     /** @var array Available search filters */
-    public static $searchFilters = [
+    public static array $searchFilters = [
         self::FILTER_SEARCH        => 'search',
         self::FILTER_SEARCH_AND    => 'search_AND',
         self::FILTER_SEARCH_OR     => 'search_OR'
@@ -89,7 +89,7 @@ class FilterExpression
     const OPERATOR_SUBWHERE = 'SUBWHERE';
 
     /** @var array  */
-    public static $operators = [
+    public static array $operators = [
         self::OPERATOR_EQ,
         self::OPERATOR_GT,
         self::OPERATOR_GE,
@@ -109,14 +109,14 @@ class FilterExpression
     ];
 
     /** @var array */
-    protected $expressions = [];
+    protected array $expressions = [];
 
     /**
      * FilterExpression constructor.
      *
      * @param ListQueryRequestInterface|null $request
      */
-    public function __construct(ListQueryRequestInterface $request = null)
+    public function __construct(?ListQueryRequestInterface $request = null)
     {
         $this->request = $request;
     }
@@ -126,7 +126,7 @@ class FilterExpression
      *
      * @return FilterExpression|null
      */
-    public function getParent()
+    public function getParent() : ?FilterExpression
     {
         return $this->parent;
     }
@@ -137,7 +137,7 @@ class FilterExpression
      * @param FilterExpression|null $parent
      * @return FilterExpression
      */
-    public function setParent(FilterExpression $parent = null)
+    public function setParent(?FilterExpression $parent = null) : self
     {
         $this->parent = $parent;
         return $this;
@@ -148,7 +148,7 @@ class FilterExpression
      *
      * @return bool
      */
-    public function isChild()
+    public function isChild() : bool
     {
         return $this->parent !== null;
     }
@@ -158,7 +158,7 @@ class FilterExpression
      *
      * @return int
      */
-    public function childDepth()
+    public function childDepth() : int
     {
         $i = 0;
 
@@ -177,7 +177,7 @@ class FilterExpression
      *
      * @return FilterExpression
      */
-    public function expr()
+    public function expr() : FilterExpression
     {
         return new FilterExpression($this->request);
     }
@@ -185,13 +185,13 @@ class FilterExpression
     /**
      * Add a search filter.
      *
-     * @param string
-     * @param string
-     * @param string
-     * @param string
+     * @param string $field
+     * @param string $operator
+     * @param mixed $value
+     * @param int $type
      * @return $this
      */
-    public function add($field, $operator, $value, $type)
+    public function add(string $field, string $operator, $value, int $type) : self
     {
         $operator = strtoupper($operator);
 
@@ -223,12 +223,12 @@ class FilterExpression
     }
 
     /**
-     * Add a AND expression.
+     * Add an AND expression.
      *
      * @param FilterExpression $expression
      * @return $this
      */
-    public function andX(FilterExpression $expression)
+    public function andX(FilterExpression $expression) : self
     {
         $expression->setParent($this);
 
@@ -238,12 +238,12 @@ class FilterExpression
     }
 
     /**
-     * Add a OR expression.
+     * Add an OR expression.
      *
      * @param FilterExpression $expression
      * @return $this
      */
-    public function orX(FilterExpression $expression)
+    public function orX(FilterExpression $expression) : self
     {
         $expression->setParent($this);
 
@@ -253,37 +253,37 @@ class FilterExpression
     }
 
     /**
-     * Add a equal (x EQ y) filter for specified field.
+     * Add an equal (x EQ y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function equal($field, $value)
+    public function equal(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_EQ, $value, static::FILTER_SEARCH);
     }
 
     /**
-     * Add a equal (AND x EQ y) filter for specified field.
+     * Add an equal (AND x EQ y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andEqual($field, $value)
+    public function andEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_EQ, $value, static::FILTER_SEARCH_AND);
     }
 
     /**
-     * Add a equal (OR x EQ y) filter for specified field.
+     * Add an equal (OR x EQ y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orEqual($field, $value)
+    public function orEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_EQ, $value, static::FILTER_SEARCH_OR);
     }
@@ -291,11 +291,11 @@ class FilterExpression
     /**
      * Add a greater than (x GT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function greaterThan($field, $value)
+    public function greaterThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GT, $value, static::FILTER_SEARCH);
     }
@@ -303,11 +303,11 @@ class FilterExpression
     /**
      * Add a greater than (AND x GT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andGreaterThan($field, $value)
+    public function andGreaterThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GT, $value, static::FILTER_SEARCH_AND);
     }
@@ -315,11 +315,11 @@ class FilterExpression
     /**
      * Add a greater than (OR x GT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orGreaterThan($field, $value)
+    public function orGreaterThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GT, $value, static::FILTER_SEARCH_OR);
     }
@@ -327,11 +327,11 @@ class FilterExpression
     /**
      * Add a greater than or equal (x GE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function greaterThanEqual($field, $value)
+    public function greaterThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GE, $value, static::FILTER_SEARCH);
     }
@@ -339,11 +339,11 @@ class FilterExpression
     /**
      * Add a greater than or equal (AND x GE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andGreaterThanEqual($field, $value)
+    public function andGreaterThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GE, $value, static::FILTER_SEARCH_AND);
     }
@@ -351,11 +351,11 @@ class FilterExpression
     /**
      * Add a greater than or equal (OR x GE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orGreaterThanEqual($field, $value)
+    public function orGreaterThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_GE, $value, static::FILTER_SEARCH_OR);
     }
@@ -363,11 +363,11 @@ class FilterExpression
     /**
      * Add a less than (x LT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function lessThan($field, $value)
+    public function lessThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LT, $value, static::FILTER_SEARCH);
     }
@@ -375,11 +375,11 @@ class FilterExpression
     /**
      * Add a less than (AND x LT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andLessThan($field, $value)
+    public function andLessThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LT, $value, static::FILTER_SEARCH_AND);
     }
@@ -387,11 +387,11 @@ class FilterExpression
     /**
      * Add a less than (OR x LT y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orLessThan($field, $value)
+    public function orLessThan(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LT, $value, static::FILTER_SEARCH_OR);
     }
@@ -399,11 +399,11 @@ class FilterExpression
     /**
      * Add a less than or equal (x LE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function lessThanEqual($field, $value)
+    public function lessThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LE, $value, static::FILTER_SEARCH);
     }
@@ -411,11 +411,11 @@ class FilterExpression
     /**
      * Add a less than or equal (AND x LE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andLessThanEqual($field, $value)
+    public function andLessThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LE, $value, static::FILTER_SEARCH_AND);
     }
@@ -423,11 +423,11 @@ class FilterExpression
     /**
      * Add a less than or equal (OR x LE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orLessThanEqual($field, $value)
+    public function orLessThanEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LE, $value, static::FILTER_SEARCH_OR);
     }
@@ -435,11 +435,11 @@ class FilterExpression
     /**
      * Add a contains (x CO y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function contains($field, $value)
+    public function contains(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_CO, $value, static::FILTER_SEARCH);
     }
@@ -447,11 +447,11 @@ class FilterExpression
     /**
      * Add a contains (AND x CO y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andContains($field, $value)
+    public function andContains(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_CO, $value, static::FILTER_SEARCH_AND);
     }
@@ -459,47 +459,47 @@ class FilterExpression
     /**
      * Add a contains (OR x CO y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orContains($field, $value)
+    public function orContains(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_CO, $value, static::FILTER_SEARCH_OR);
     }
 
     /**
-     * Add a does not contains (x NC y) filter for specified field.
+     * Add a does not contain (x NC y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function doesNotContain($field, $value)
+    public function doesNotContain(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NC, $value, static::FILTER_SEARCH);
     }
 
     /**
-     * Add a does not contains (AND x NC y) filter for specified field.
+     * Add a does not contain (AND x NC y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andDoesNotContain($field, $value)
+    public function andDoesNotContain(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NC, $value, static::FILTER_SEARCH_AND);
     }
 
     /**
-     * Add a does not contains (OR x NC y) filter for specified field.
+     * Add a does not contain (OR x NC y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orDoesNotContain($field, $value)
+    public function orDoesNotContain(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NC, $value, static::FILTER_SEARCH_OR);
     }
@@ -507,11 +507,11 @@ class FilterExpression
     /**
      * Add a like (x LIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function like($field, $value)
+    public function like(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LIKE, $value, static::FILTER_SEARCH);
     }
@@ -519,11 +519,11 @@ class FilterExpression
     /**
      * Add a like (AND x LIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andLike($field, $value)
+    public function andLike(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LIKE, $value, static::FILTER_SEARCH_AND);
     }
@@ -531,11 +531,11 @@ class FilterExpression
     /**
      * Add a like (OR x LIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orLike($field, $value)
+    public function orLike(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_LIKE, $value, static::FILTER_SEARCH_OR);
     }
@@ -543,11 +543,11 @@ class FilterExpression
     /**
      * Add a not like (x NOTLIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function notLike($field, $value)
+    public function notLike(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NOTLIKE, $value, static::FILTER_SEARCH);
     }
@@ -555,11 +555,11 @@ class FilterExpression
     /**
      * Add a not like (AND x NOTLIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andNotLike($field, $value)
+    public function andNotLike(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NOTLIKE, $value, static::FILTER_SEARCH_AND);
     }
@@ -567,11 +567,11 @@ class FilterExpression
     /**
      * Add a not like (OR x NOTLIKE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orNotLike($field, $value)
+    public function orNotLike(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NOTLIKE, $value, static::FILTER_SEARCH_OR);
     }
@@ -579,11 +579,11 @@ class FilterExpression
     /**
      * Add a not equal (x NE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function notEqual($field, $value)
+    public function notEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NE, $value, static::FILTER_SEARCH);
     }
@@ -591,11 +591,11 @@ class FilterExpression
     /**
      * Add a not equal (AND x NE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function andNotEqual($field, $value)
+    public function andNotEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NE, $value, static::FILTER_SEARCH_AND);
     }
@@ -603,11 +603,11 @@ class FilterExpression
     /**
      * Add a not equal (OR x NE y) filter for specified field.
      *
-     * @param string
-     * @param string
+     * @param string $field
+     * @param mixed $value
      * @return $this
      */
-    public function orNotEqual($field, $value)
+    public function orNotEqual(string $field, $value) : self
     {
         return $this->add($field, static::OPERATOR_NE, $value, static::FILTER_SEARCH_OR);
     }
@@ -615,10 +615,10 @@ class FilterExpression
     /**
      * Add a true (x == true) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function true($field)
+    public function true(string $field) : self
     {
         return $this->add($field, static::OPERATOR_TRUE, null, static::FILTER_SEARCH);
     }
@@ -626,10 +626,10 @@ class FilterExpression
     /**
      * Add a true (AND x == true) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function andTrue($field)
+    public function andTrue(string $field) : self
     {
         return $this->add($field, static::OPERATOR_TRUE, null, static::FILTER_SEARCH_AND);
     }
@@ -637,10 +637,10 @@ class FilterExpression
     /**
      * Add a true (OR x == true) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function orTrue($field)
+    public function orTrue(string $field) : self
     {
         return $this->add($field, static::OPERATOR_TRUE, null, static::FILTER_SEARCH_OR);
     }
@@ -648,10 +648,10 @@ class FilterExpression
     /**
      * Add a false (x == false) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function false($field)
+    public function false(string $field) : self
     {
         return $this->add($field, static::OPERATOR_FALSE, null, static::FILTER_SEARCH);
     }
@@ -659,10 +659,10 @@ class FilterExpression
     /**
      * Add a false (AND x == false) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function andFalse($field)
+    public function andFalse(string $field) : self
     {
         return $this->add($field, static::OPERATOR_FALSE, null, static::FILTER_SEARCH_AND);
     }
@@ -670,10 +670,10 @@ class FilterExpression
     /**
      * Add a false (OR x == false) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function orFalse($field)
+    public function orFalse(string $field) : self
     {
         return $this->add($field, static::OPERATOR_FALSE, null, static::FILTER_SEARCH_OR);
     }
@@ -681,32 +681,32 @@ class FilterExpression
     /**
      * Add a is null (x == null) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function null($field)
+    public function null(string $field) : self
     {
         return $this->add($field, static::OPERATOR_NULL, null, static::FILTER_SEARCH);
     }
 
     /**
-     * Add a is null (AND x == null) filter for specified field.
+     * Add an is null (AND x == null) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function andNull($field)
+    public function andNull(string $field) : self
     {
         return $this->add($field, static::OPERATOR_NULL, null, static::FILTER_SEARCH_AND);
     }
 
     /**
-     * Add a is null (OR x == null) filter for specified field.
+     * Add an is null (OR x == null) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @return $this
      */
-    public function orNull($field)
+    public function orNull(string $field) : self
     {
         return $this->add($field, static::OPERATOR_NULL, null, static::FILTER_SEARCH_OR);
     }
@@ -714,11 +714,11 @@ class FilterExpression
     /**
      * Add a in (x IN y,z,.. ) filter for specified field.
      *
-     * @param string
+     * @param string $field
      * @param array|string $values
      * @return $this
      */
-    public function in($field, $values)
+    public function in(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_IN, $values, static::FILTER_SEARCH);
     }
@@ -726,11 +726,11 @@ class FilterExpression
     /**
      * Add a in (AND x IN y,z,.. ) filter for specified field.
      *
-     * @param string
-     * @param array|string
+     * @param string $field
+     * @param array|string $values
      * @return $this
      */
-    public function andIn($field, $values)
+    public function andIn(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_IN, $values, static::FILTER_SEARCH_AND);
     }
@@ -738,11 +738,11 @@ class FilterExpression
     /**
      * Add a in (OR x IN y,z,.. ) filter for specified field.
      *
-     * @param string
-     * @param array|string
+     * @param string $field
+     * @param array|string $values
      * @return $this
      */
-    public function orIn($field, $values)
+    public function orIn(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_IN, $values, static::FILTER_SEARCH_OR);
     }
@@ -750,11 +750,11 @@ class FilterExpression
     /**
      * Add a not in (x NOTIN y,z,.. ) filter for specified field.
      *
-     * @param string
-     * @param array|string
+     * @param string $field
+     * @param array|string $values
      * @return $this
      */
-    public function notIn($field, $values)
+    public function notIn(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_NOT_IN, $values, static::FILTER_SEARCH);
     }
@@ -762,11 +762,11 @@ class FilterExpression
     /**
      * Add a not in (AND x NOTIN y,z,.. ) filter for specified field.
      *
-     * @param string
-     * @param array|string
+     * @param string $field
+     * @param array|string $values
      * @return $this
      */
-    public function andNotIn($field, $values)
+    public function andNotIn(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_NOT_IN, $values, static::FILTER_SEARCH_AND);
     }
@@ -774,11 +774,11 @@ class FilterExpression
     /**
      * Add a not in (OR x NOTIN y,z,.. ) filter for specified field.
      *
-     * @param string
-     * @param array|string
+     * @param string $field
+     * @param array|string $values
      * @return $this
      */
-    public function orNotIn($field, $values)
+    public function orNotIn(string $field, $values) : self
     {
         return $this->add($field, static::OPERATOR_NOT_IN, $values, static::FILTER_SEARCH_OR);
     }
@@ -788,7 +788,7 @@ class FilterExpression
      *
      * @return array
      */
-    public function toArray()
+    public function toArray() : array
     {
         $return = [];
 

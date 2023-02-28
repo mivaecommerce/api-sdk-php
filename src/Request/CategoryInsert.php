@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Category_Insert.
@@ -27,38 +28,39 @@ use MerchantAPI\BaseClient;
 class CategoryInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Category_Insert';
+    protected string $function = 'Category_Insert';
 
-    /** @var string */
-    protected $categoryCode;
+    /** @var ?string */
+    protected ?string $categoryCode = null;
 
-    /** @var string */
-    protected $categoryName;
+    /** @var ?string */
+    protected ?string $categoryName = null;
 
-    /** @var bool */
-    protected $categoryActive;
+    /** @var ?bool */
+    protected ?bool $categoryActive = null;
 
-    /** @var string */
-    protected $categoryPageTitle;
+    /** @var ?string */
+    protected ?string $categoryPageTitle = null;
 
-    /** @var string */
-    protected $categoryParentCategory;
+    /** @var ?string */
+    protected ?string $categoryParentCategory = null;
 
-    /** @var string */
-    protected $categoryAlternateDisplayPage;
+    /** @var ?string */
+    protected ?string $categoryAlternateDisplayPage = null;
 
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
-    protected $customFieldValues = null;
+    protected ?CustomFieldValues $customFieldValues = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Category
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Category $category
      */
-    public function __construct(BaseClient $client = null, Category $category = null)
+    public function __construct(?BaseClient $client = null, ?Category $category = null)
     {
         parent::__construct($client);
         $this->customFieldValues = new CustomFieldValues();
@@ -82,7 +84,7 @@ class CategoryInsert extends Request
      *
      * @return string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->categoryCode;
     }
@@ -92,7 +94,7 @@ class CategoryInsert extends Request
      *
      * @return string
      */
-    public function getCategoryName()
+    public function getCategoryName() : ?string
     {
         return $this->categoryName;
     }
@@ -102,7 +104,7 @@ class CategoryInsert extends Request
      *
      * @return bool
      */
-    public function getCategoryActive()
+    public function getCategoryActive() : ?bool
     {
         return $this->categoryActive;
     }
@@ -112,7 +114,7 @@ class CategoryInsert extends Request
      *
      * @return string
      */
-    public function getCategoryPageTitle()
+    public function getCategoryPageTitle() : ?string
     {
         return $this->categoryPageTitle;
     }
@@ -122,7 +124,7 @@ class CategoryInsert extends Request
      *
      * @return string
      */
-    public function getCategoryParentCategory()
+    public function getCategoryParentCategory() : ?string
     {
         return $this->categoryParentCategory;
     }
@@ -132,7 +134,7 @@ class CategoryInsert extends Request
      *
      * @return string
      */
-    public function getCategoryAlternateDisplayPage()
+    public function getCategoryAlternateDisplayPage() : ?string
     {
         return $this->categoryAlternateDisplayPage;
     }
@@ -140,9 +142,9 @@ class CategoryInsert extends Request
     /**
      * Get CustomField_Values.
      *
-     * @return CustomFieldValues|null
+     * @return ?CustomFieldValues
      */
-    public function getCustomFieldValues()
+    public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
     }
@@ -150,10 +152,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         $this->categoryCode = $categoryCode;
 
@@ -163,10 +165,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Name.
      *
-     * @param string
+     * @param ?string $categoryName
      * @return $this
      */
-    public function setCategoryName($categoryName)
+    public function setCategoryName(?string $categoryName) : self
     {
         $this->categoryName = $categoryName;
 
@@ -176,10 +178,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Active.
      *
-     * @param bool
+     * @param ?bool $categoryActive
      * @return $this
      */
-    public function setCategoryActive($categoryActive)
+    public function setCategoryActive(?bool $categoryActive) : self
     {
         $this->categoryActive = $categoryActive;
 
@@ -189,10 +191,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Page_Title.
      *
-     * @param string
+     * @param ?string $categoryPageTitle
      * @return $this
      */
-    public function setCategoryPageTitle($categoryPageTitle)
+    public function setCategoryPageTitle(?string $categoryPageTitle) : self
     {
         $this->categoryPageTitle = $categoryPageTitle;
 
@@ -202,10 +204,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Parent_Category.
      *
-     * @param string
+     * @param ?string $categoryParentCategory
      * @return $this
      */
-    public function setCategoryParentCategory($categoryParentCategory)
+    public function setCategoryParentCategory(?string $categoryParentCategory) : self
     {
         $this->categoryParentCategory = $categoryParentCategory;
 
@@ -215,10 +217,10 @@ class CategoryInsert extends Request
     /**
      * Set Category_Alternate_Display_Page.
      *
-     * @param string
+     * @param ?string $categoryAlternateDisplayPage
      * @return $this
      */
-    public function setCategoryAlternateDisplayPage($categoryAlternateDisplayPage)
+    public function setCategoryAlternateDisplayPage(?string $categoryAlternateDisplayPage) : self
     {
         $this->categoryAlternateDisplayPage = $categoryAlternateDisplayPage;
 
@@ -228,10 +230,10 @@ class CategoryInsert extends Request
     /**
      * Set CustomField_Values.
      *
-     * @param \MerchantAPI\Model\CustomFieldValues|null
+     * @param \MerchantAPI\Model\CustomFieldValues|array $customFieldValues
      * @return $this
      */
-    public function setCustomFieldValues($customFieldValues)
+    public function setCustomFieldValues($customFieldValues) : self
     {
         if (is_array($customFieldValues)) {
             $customFieldValues = new CustomFieldValues($customFieldValues);
@@ -248,7 +250,7 @@ class CategoryInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -282,7 +284,7 @@ class CategoryInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryInsert($this, $httpResponse, $data);
     }

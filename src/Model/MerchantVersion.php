@@ -20,9 +20,9 @@ class MerchantVersion extends \MerchantAPI\Model
     /**
      * Get version.
      *
-     * @return string
+     * @return ?string
      */
-    public function getVersion()
+    public function getVersion() : ?string
     {
         return $this->getField('version');
     }
@@ -30,30 +30,30 @@ class MerchantVersion extends \MerchantAPI\Model
     /**
      * Get major.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMajor()
+    public function getMajor() : ?int
     {
-        return (int) $this->getField('major', 0);
+        return $this->getField('major');
     }
 
     /**
      * Get minor.
      *
-     * @return int
+     * @return ?int
      */
-    public function getMinor()
+    public function getMinor() : ?int
     {
-        return (int) $this->getField('minor', 0);
+        return $this->getField('minor');
     }
 
     /**
      * Get bugfix.
      *
-     * @return int
+     * @return ?int
      */
-    public function getBugfix()
+    public function getBugfix() : ?int
     {
-        return (int) $this->getField('bugfix', 0);
+        return $this->getField('bugfix');
     }
 }

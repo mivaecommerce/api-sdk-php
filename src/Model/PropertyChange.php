@@ -53,19 +53,19 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Property_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getPropertyId()
+    public function getPropertyId() : ?int
     {
-        return (int) $this->getField('Property_ID', 0);
+        return $this->getField('Property_ID');
     }
 
     /**
      * Get Property_Type.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPropertyType()
+    public function getPropertyType() : ?string
     {
         return $this->getField('Property_Type');
     }
@@ -73,9 +73,9 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Property_Code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPropertyCode()
+    public function getPropertyCode() : ?string
     {
         return $this->getField('Property_Code');
     }
@@ -83,19 +83,19 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Product_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
-        return (int) $this->getField('Product_ID', 0);
+        return $this->getField('Product_ID');
     }
 
     /**
      * Get Product_Code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->getField('Product_Code');
     }
@@ -103,9 +103,9 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Edit_Product.
      *
-     * @return string
+     * @return ?string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->getField('Edit_Product');
     }
@@ -113,19 +113,19 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Category_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCategoryId()
+    public function getCategoryId() : ?int
     {
-        return (int) $this->getField('Category_ID', 0);
+        return $this->getField('Category_ID');
     }
 
     /**
      * Get Category_Code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCategoryCode()
+    public function getCategoryCode() : ?string
     {
         return $this->getField('Category_Code');
     }
@@ -133,9 +133,9 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Edit_Category.
      *
-     * @return string
+     * @return ?string
      */
-    public function getEditCategory()
+    public function getEditCategory() : ?string
     {
         return $this->getField('Edit_Category');
     }
@@ -143,9 +143,9 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('Source');
     }
@@ -153,19 +153,19 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Settings.
      *
-     * @return \MerchantAPI\Model\VersionSettings|null
+     * @return ?\MerchantAPI\Model\VersionSettings
      */
-    public function getSettings()
+    public function getSettings() : ?VersionSettings
     {
-        return $this->getField('Settings', null);
+        return $this->getField('Settings');
     }
 
     /**
      * Get Image.
      *
-     * @return string
+     * @return ?string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->getField('Image');
     }
@@ -173,19 +173,19 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Get Image_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getImageId()
+    public function getImageId() : ?int
     {
-        return (int) $this->getField('Image_ID', 0);
+        return $this->getField('Image_ID');
     }
 
     /**
      * Get Notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->getField('Notes');
     }
@@ -193,10 +193,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Property_ID.
      *
-     * @param int
+     * @param ?int $propertyId
      * @return $this
      */
-    public function setPropertyId($propertyId)
+    public function setPropertyId(?int $propertyId) : self
     {
         return $this->setField('Property_ID', $propertyId);
     }
@@ -204,10 +204,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Property_Type.
      *
-     * @param string
+     * @param ?string $propertyType
      * @return $this
      */
-    public function setPropertyType($propertyType)
+    public function setPropertyType(?string $propertyType) : self
     {
         return $this->setField('Property_Type', $propertyType);
     }
@@ -215,10 +215,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Property_Code.
      *
-     * @param string
+     * @param ?string $propertyCode
      * @return $this
      */
-    public function setPropertyCode($propertyCode)
+    public function setPropertyCode(?string $propertyCode) : self
     {
         return $this->setField('Property_Code', $propertyCode);
     }
@@ -226,10 +226,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         return $this->setField('Product_ID', $productId);
     }
@@ -237,10 +237,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         return $this->setField('Product_Code', $productCode);
     }
@@ -248,10 +248,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         return $this->setField('Edit_Product', $editProduct);
     }
@@ -259,10 +259,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Category_ID.
      *
-     * @param int
+     * @param ?int $categoryId
      * @return $this
      */
-    public function setCategoryId($categoryId)
+    public function setCategoryId(?int $categoryId) : self
     {
         return $this->setField('Category_ID', $categoryId);
     }
@@ -270,10 +270,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Category_Code.
      *
-     * @param string
+     * @param ?string $categoryCode
      * @return $this
      */
-    public function setCategoryCode($categoryCode)
+    public function setCategoryCode(?string $categoryCode) : self
     {
         return $this->setField('Category_Code', $categoryCode);
     }
@@ -281,10 +281,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Edit_Category.
      *
-     * @param string
+     * @param ?string $editCategory
      * @return $this
      */
-    public function setEditCategory($editCategory)
+    public function setEditCategory(?string $editCategory) : self
     {
         return $this->setField('Edit_Category', $editCategory);
     }
@@ -292,10 +292,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Source.
      *
-     * @param string
+     * @param ?string $source
      * @return $this
      */
-    public function setSource($source)
+    public function setSource(?string $source) : self
     {
         return $this->setField('Source', $source);
     }
@@ -303,11 +303,11 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Settings.
      *
-     * @param array|VersionSettings
+     * @param \MerchantAPI\Model\VersionSettings $settings
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setSettings($settings)
+    public function setSettings($settings) : self
     {
         if (is_array($settings)) {
             return $this->setField('Settings', new VersionSettings($settings));
@@ -322,10 +322,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         return $this->setField('Image', $image);
     }
@@ -333,10 +333,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Image_ID.
      *
-     * @param int
+     * @param ?int $imageId
      * @return $this
      */
-    public function setImageId($imageId)
+    public function setImageId(?int $imageId) : self
     {
         return $this->setField('Image_ID', $imageId);
     }
@@ -344,10 +344,10 @@ class PropertyChange extends \MerchantAPI\Model
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         return $this->setField('Notes', $notes);
     }

@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\CouponCustomer;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for CouponCustomerList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class CouponCustomerListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\CouponCustomer[] */
-    protected $couponCustomers = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $couponCustomers;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class CouponCustomerListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->couponCustomers = new \MerchantAPI\Collection();
+        $this->couponCustomers = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class CouponCustomerListLoadQuery extends ListQueryResponse
     /**
      * Get couponCustomers.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\CouponCustomer[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCouponCustomers()
+    public function getCouponCustomers() : Collection
     {
         return $this->couponCustomers;
     }

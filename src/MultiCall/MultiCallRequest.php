@@ -10,12 +10,13 @@
 
 namespace MerchantAPI\MultiCall;
 
+use MerchantAPI\BaseClient;
 use MerchantAPI\Collection;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Http\HttpHeaders;
-use MerchantAPI\Client;
 use MerchantAPI\Request;
 use MerchantAPI\RequestInterface;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Class MultiCallRequest. Handles a MultiCallRequest API Call allowing you to send many in one shot.
@@ -26,27 +27,28 @@ use MerchantAPI\RequestInterface;
 class MultiCallRequest extends Request
 {
     /** @var \MerchantAPI\Collection */
-    protected $requests = [];
+    protected Collection $requests;
 
     /** @var bool */
-    protected $autoTimeoutContinue = false;
+    protected bool $autoTimeoutContinue = false;
 
-    /** @var MutliCallResponse */
-    public $_initialResponse = null;
-
-    /** @var int */
-    protected $completed = 0;
+    /** @var ?MultiCallResponse */
+    public ?MultiCallResponse $_initialResponse = null;
 
     /** @var int */
-    protected $total = 0;
+    protected int $completed = 0;
+
+    /** @var int */
+    protected int $total = 0;
 
     /**
      * Constructor.
      *
+     * @param ?BaseClient $client
      * @param array $requests
      * @throws \InvalidArgumentException
      */
-    public function __construct(Client $client = null, array $requests = [])
+    public function __construct(?BaseClient $client = null, array $requests = [])
     {
         parent::__construct($client);
 
@@ -68,7 +70,7 @@ class MultiCallRequest extends Request
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function addRequest(RequestInterface $request)
+    public function addRequest(RequestInterface $request) : self
     {
         if ($request instanceof MultiCallRequest) {
             foreach ($request->getRequests() as $req) {
@@ -86,7 +88,7 @@ class MultiCallRequest extends Request
      *
      * @return \MerchantAPI\Collection
      */
-    public function getRequests()
+    public function getRequests() : Collection
     {
         return $this->requests;
     }
@@ -98,7 +100,7 @@ class MultiCallRequest extends Request
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function setRequests(array $requests)
+    public function setRequests(array $requests) : self
     {
         $this->requests = new Collection();
 
@@ -112,11 +114,11 @@ class MultiCallRequest extends Request
     /**
      * Create and insert a MultiCallOperation into the request.
      *
-     * @param RequestInterface|RequestInterface[]|null $request
+     * @param RequestInterface|array|null $request
      * @param array $sharedData
      * @return MultiCallOperation
      */
-    public function operation($request = null, array $sharedData = [])
+    public function operation($request = null, array $sharedData = []) : MultiCallOperation
     {
         $operation = new MultiCallOperation($request, $sharedData);
 
@@ -131,7 +133,7 @@ class MultiCallRequest extends Request
      * @param MultiCallOperation $operation
      * @return $this
      */
-    public function addOperation(MultiCallOperation $operation)
+    public function addOperation(MultiCallOperation $operation) : self
     {
         $this->requests->insert($operation);
         return $this;
@@ -140,7 +142,7 @@ class MultiCallRequest extends Request
     /**
      * @return bool
      */
-    public function hasOperations()
+    public function hasOperations() : bool
     {
         foreach ($this->requests as $request) {
             if ($request instanceof  MultiCallOperation) {
@@ -154,7 +156,7 @@ class MultiCallRequest extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = [
             'Operations' => []
@@ -176,7 +178,7 @@ class MultiCallRequest extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         $response = new MultiCallResponse($this, $httpResponse, $data);
 
@@ -190,8 +192,12 @@ class MultiCallRequest extends Request
     /**
      * Handles processing the auto continue functionality.
      * Retries to get the next data set until completed or error
+     *
+     * @param MultiCallResponse $initialResponse
+     * @return void
+     * @throws
      */
-    protected function processContinue(MultiCallResponse $initialResponse)
+    protected function processContinue(MultiCallResponse $initialResponse) : void
     {
         if ($this->_initialResponse)          return;
         if (!$initialResponse)                return;
@@ -225,7 +231,7 @@ class MultiCallRequest extends Request
                 $this->completed += $ranges['completed'];
             }  else {
                 if ($this->total - $this->completed == count($initialResponse->getResponses())) {
-                    $this->compelted = $this->total;
+                    $this->completed = $this->total;
                 }
                 break;
             }
@@ -238,7 +244,7 @@ class MultiCallRequest extends Request
     /**
      * @inheritDoc
      */
-    public function processRequestHeaders(HttpHeaders $headers)
+    public function processRequestHeaders(HttpHeaders $headers) : void
     {
         if ($this->_initialResponse && $this->_initialResponse->isTimeout())
         {
@@ -249,19 +255,22 @@ class MultiCallRequest extends Request
 
     /**
      * Get the auto timeout continue flag.
+     *
+     * @return bool
      */
-    public function getAutoTimeoutContinue()
+    public function getAutoTimeoutContinue() : bool
     {
         return $this->autoTimeoutContinue;
     }
 
     /**
-     * Set the auto timeout continue flag. When set, timeouts that are encounted
-     * will continue until all data is completed or an error is encounted.
+     * Set the auto timeout continue flag. When set, timeouts that are encountered
+     * will continue until all data is completed or an error is encountered.
      *
      * @oaram bool
+     * @return $this
      */
-    public function setAutoTimeoutContinue($state)
+    public function setAutoTimeoutContinue(bool $state) : self
     {
         $this->autoTimeoutContinue = $state;
         return $this;

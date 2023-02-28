@@ -13,7 +13,9 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductAttribute;
+use MerchantAPI\Model\ProductOption;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Option_Insert.
@@ -26,56 +28,57 @@ use MerchantAPI\BaseClient;
 class OptionInsert extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Option_Insert';
+    protected string $function = 'Option_Insert';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
-    /** @var int */
-    protected $attributeId;
+    /** @var ?int */
+    protected ?int $attributeId = null;
 
-    /** @var string */
-    protected $editAttribute;
+    /** @var ?string */
+    protected ?string $editAttribute = null;
 
-    /** @var string */
-    protected $attributeCode;
+    /** @var ?string */
+    protected ?string $attributeCode = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $default;
+    /** @var ?bool */
+    protected ?bool $default = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\ProductAttribute
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\ProductAttribute $productAttribute
      */
-    public function __construct(BaseClient $client = null, ProductAttribute $productAttribute = null)
+    public function __construct(?BaseClient $client = null, ?ProductAttribute $productAttribute = null)
     {
         parent::__construct($client);
         if ($productAttribute) {
@@ -98,7 +101,7 @@ class OptionInsert extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -108,7 +111,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -118,7 +121,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -128,7 +131,7 @@ class OptionInsert extends Request
      *
      * @return int
      */
-    public function getAttributeId()
+    public function getAttributeId() : ?int
     {
         return $this->attributeId;
     }
@@ -138,7 +141,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getEditAttribute()
+    public function getEditAttribute() : ?string
     {
         return $this->editAttribute;
     }
@@ -148,7 +151,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->attributeCode;
     }
@@ -158,7 +161,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -168,7 +171,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -178,7 +181,7 @@ class OptionInsert extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -188,7 +191,7 @@ class OptionInsert extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -198,7 +201,7 @@ class OptionInsert extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -208,7 +211,7 @@ class OptionInsert extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -218,7 +221,7 @@ class OptionInsert extends Request
      *
      * @return bool
      */
-    public function getDefault()
+    public function getDefault() : ?bool
     {
         return $this->default;
     }
@@ -226,10 +229,10 @@ class OptionInsert extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -239,10 +242,10 @@ class OptionInsert extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -252,10 +255,10 @@ class OptionInsert extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -265,10 +268,10 @@ class OptionInsert extends Request
     /**
      * Set Attribute_ID.
      *
-     * @param int
+     * @param ?int $attributeId
      * @return $this
      */
-    public function setAttributeId($attributeId)
+    public function setAttributeId(?int $attributeId) : self
     {
         $this->attributeId = $attributeId;
 
@@ -278,10 +281,10 @@ class OptionInsert extends Request
     /**
      * Set Edit_Attribute.
      *
-     * @param string
+     * @param ?string $editAttribute
      * @return $this
      */
-    public function setEditAttribute($editAttribute)
+    public function setEditAttribute(?string $editAttribute) : self
     {
         $this->editAttribute = $editAttribute;
 
@@ -291,10 +294,10 @@ class OptionInsert extends Request
     /**
      * Set Attribute_Code.
      *
-     * @param string
+     * @param ?string $attributeCode
      * @return $this
      */
-    public function setAttributeCode($attributeCode)
+    public function setAttributeCode(?string $attributeCode) : self
     {
         $this->attributeCode = $attributeCode;
 
@@ -304,10 +307,10 @@ class OptionInsert extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -317,10 +320,10 @@ class OptionInsert extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -330,10 +333,10 @@ class OptionInsert extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -343,10 +346,10 @@ class OptionInsert extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -356,10 +359,10 @@ class OptionInsert extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -369,10 +372,10 @@ class OptionInsert extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -382,10 +385,10 @@ class OptionInsert extends Request
     /**
      * Set Default.
      *
-     * @param bool
+     * @param ?bool $default
      * @return $this
      */
-    public function setDefault($default)
+    public function setDefault(?bool $default) : self
     {
         $this->default = $default;
 
@@ -395,7 +398,7 @@ class OptionInsert extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -445,7 +448,7 @@ class OptionInsert extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OptionInsert($this, $httpResponse, $data);
     }

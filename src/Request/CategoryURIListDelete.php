@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryURIList_Delete.
@@ -26,20 +27,20 @@ use MerchantAPI\BaseClient;
 class CategoryURIListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryURIList_Delete';
+    protected string $function = 'CategoryURIList_Delete';
 
     /** @var int[] */
-    protected $uRIIds = [];
+    protected array $uRIIds = [];
 
     /**
      * Get URI_IDs.
      *
      * @return array
      */
-    public function getURIIds()
+    public function getURIIds() : array
     {
         return $this->uRIIds;
     }
@@ -47,11 +48,10 @@ class CategoryURIListDelete extends Request
     /**
      * Add URI_IDs.
      *
-     * @param int
-     *
+     * @param int $uriId
      * @return $this
      */
-    public function addUriID($uriId)
+    public function addUriID(int $uriId) : self
     {
         $this->uRIIds[] = $uriId;
         return $this;
@@ -60,10 +60,10 @@ class CategoryURIListDelete extends Request
     /**
      * Add Uri model.
      *
-     * @param \MerchantAPI\Model\Uri
+     * @param \MerchantAPI\Model\Uri $uri
      * @return $this
      */
-    public function addUri(Uri $uri)
+    public function addUri(Uri $uri) : self
     {
         if ($uri->getId()) {
             $this->uRIIds[] = $uri->getId();
@@ -75,7 +75,7 @@ class CategoryURIListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -87,7 +87,7 @@ class CategoryURIListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryURIListDelete($this, $httpResponse, $data);
     }

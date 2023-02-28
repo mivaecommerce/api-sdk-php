@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\ProductVariant;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request ProductVariantList_Delete.
@@ -27,29 +28,30 @@ use MerchantAPI\BaseClient;
 class ProductVariantListDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'ProductVariantList_Delete';
+    protected string $function = 'ProductVariantList_Delete';
 
-    /** @var int */
-    protected $productId;
+    /** @var ?int */
+    protected ?int $productId = null;
 
-    /** @var string */
-    protected $productCode;
+    /** @var ?string */
+    protected ?string $productCode = null;
 
-    /** @var string */
-    protected $editProduct;
+    /** @var ?string */
+    protected ?string $editProduct = null;
 
     /** @var int[] */
-    protected $productVariantIds = [];
+    protected array $productVariantIds = [];
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Product
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Product $product
      */
-    public function __construct(BaseClient $client = null, Product $product = null)
+    public function __construct(?BaseClient $client = null, ?Product $product = null)
     {
         parent::__construct($client);
         if ($product) {
@@ -66,7 +68,7 @@ class ProductVariantListDelete extends Request
      *
      * @return int
      */
-    public function getProductId()
+    public function getProductId() : ?int
     {
         return $this->productId;
     }
@@ -76,7 +78,7 @@ class ProductVariantListDelete extends Request
      *
      * @return string
      */
-    public function getProductCode()
+    public function getProductCode() : ?string
     {
         return $this->productCode;
     }
@@ -86,7 +88,7 @@ class ProductVariantListDelete extends Request
      *
      * @return string
      */
-    public function getEditProduct()
+    public function getEditProduct() : ?string
     {
         return $this->editProduct;
     }
@@ -96,7 +98,7 @@ class ProductVariantListDelete extends Request
      *
      * @return array
      */
-    public function getProductVariantIds()
+    public function getProductVariantIds() : array
     {
         return $this->productVariantIds;
     }
@@ -104,10 +106,10 @@ class ProductVariantListDelete extends Request
     /**
      * Set Product_ID.
      *
-     * @param int
+     * @param ?int $productId
      * @return $this
      */
-    public function setProductId($productId)
+    public function setProductId(?int $productId) : self
     {
         $this->productId = $productId;
 
@@ -117,10 +119,10 @@ class ProductVariantListDelete extends Request
     /**
      * Set Product_Code.
      *
-     * @param string
+     * @param ?string $productCode
      * @return $this
      */
-    public function setProductCode($productCode)
+    public function setProductCode(?string $productCode) : self
     {
         $this->productCode = $productCode;
 
@@ -130,10 +132,10 @@ class ProductVariantListDelete extends Request
     /**
      * Set Edit_Product.
      *
-     * @param string
+     * @param ?string $editProduct
      * @return $this
      */
-    public function setEditProduct($editProduct)
+    public function setEditProduct(?string $editProduct) : self
     {
         $this->editProduct = $editProduct;
 
@@ -143,11 +145,10 @@ class ProductVariantListDelete extends Request
     /**
      * Add ProductVariant_IDs.
      *
-     * @param int
-     *
+     * @param int $variantId
      * @return $this
      */
-    public function addVariantId($variantId)
+    public function addVariantId(int $variantId) : self
     {
         $this->productVariantIds[] = $variantId;
         return $this;
@@ -156,10 +157,10 @@ class ProductVariantListDelete extends Request
     /**
      * Add ProductVariant model.
      *
-     * @param \MerchantAPI\Model\ProductVariant
+     * @param \MerchantAPI\Model\ProductVariant $productVariant
      * @return $this
      */
-    public function addProductVariant(ProductVariant $productVariant)
+    public function addProductVariant(ProductVariant $productVariant) : self
     {
         if ($productVariant->getVariantId()) {
             $this->productVariantIds[] = $productVariant->getVariantId();
@@ -171,7 +172,7 @@ class ProductVariantListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -191,7 +192,7 @@ class ProductVariantListDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ProductVariantListDelete($this, $httpResponse, $data);
     }

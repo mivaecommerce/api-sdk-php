@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Uri;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request FeedURI_Update.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class FeedURIUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'FeedURI_Update';
+    protected string $function = 'FeedURI_Update';
 
-    /** @var int */
-    protected $uRIId;
+    /** @var ?int */
+    protected ?int $uRIId = null;
 
-    /** @var string */
-    protected $uRI;
+    /** @var ?string */
+    protected ?string $uRI = null;
 
-    /** @var int */
-    protected $status;
+    /** @var ?int */
+    protected ?int $status = null;
 
-    /** @var bool */
-    protected $canonical;
+    /** @var ?bool */
+    protected ?bool $canonical = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Uri
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Uri $uri
      */
-    public function __construct(BaseClient $client = null, Uri $uri = null)
+    public function __construct(?BaseClient $client = null, ?Uri $uri = null)
     {
         parent::__construct($client);
         if ($uri) {
@@ -63,7 +65,7 @@ class FeedURIUpdate extends Request
      *
      * @return int
      */
-    public function getURIId()
+    public function getURIId() : ?int
     {
         return $this->uRIId;
     }
@@ -73,7 +75,7 @@ class FeedURIUpdate extends Request
      *
      * @return string
      */
-    public function getURI()
+    public function getURI() : ?string
     {
         return $this->uRI;
     }
@@ -83,7 +85,7 @@ class FeedURIUpdate extends Request
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus() : ?int
     {
         return $this->status;
     }
@@ -93,7 +95,7 @@ class FeedURIUpdate extends Request
      *
      * @return bool
      */
-    public function getCanonical()
+    public function getCanonical() : ?bool
     {
         return $this->canonical;
     }
@@ -101,10 +103,10 @@ class FeedURIUpdate extends Request
     /**
      * Set URI_ID.
      *
-     * @param int
+     * @param ?int $uRIId
      * @return $this
      */
-    public function setURIId($uRIId)
+    public function setURIId(?int $uRIId) : self
     {
         $this->uRIId = $uRIId;
 
@@ -114,10 +116,10 @@ class FeedURIUpdate extends Request
     /**
      * Set URI.
      *
-     * @param string
+     * @param ?string $uRI
      * @return $this
      */
-    public function setURI($uRI)
+    public function setURI(?string $uRI) : self
     {
         $this->uRI = $uRI;
 
@@ -127,10 +129,10 @@ class FeedURIUpdate extends Request
     /**
      * Set Status.
      *
-     * @param int
+     * @param ?int $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(?int $status) : self
     {
         $this->status = $status;
 
@@ -140,10 +142,10 @@ class FeedURIUpdate extends Request
     /**
      * Set Canonical.
      *
-     * @param bool
+     * @param ?bool $canonical
      * @return $this
      */
-    public function setCanonical($canonical)
+    public function setCanonical(?bool $canonical) : self
     {
         $this->canonical = $canonical;
 
@@ -153,7 +155,7 @@ class FeedURIUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -179,7 +181,7 @@ class FeedURIUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\FeedURIUpdate($this, $httpResponse, $data);
     }

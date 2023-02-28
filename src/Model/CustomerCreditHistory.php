@@ -20,49 +20,49 @@ class CustomerCreditHistory extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get cust_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
-        return (int) $this->getField('cust_id', 0);
+        return $this->getField('cust_id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get txref.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTransactionReference()
+    public function getTransactionReference() : ?string
     {
         return $this->getField('txref');
     }
@@ -70,9 +70,9 @@ class CustomerCreditHistory extends \MerchantAPI\Model
     /**
      * Get descrip.
      *
-     * @return string
+     * @return ?string
      */
-    public function getDescription()
+    public function getDescription() : ?string
     {
         return $this->getField('descrip');
     }
@@ -80,29 +80,29 @@ class CustomerCreditHistory extends \MerchantAPI\Model
     /**
      * Get amount.
      *
-     * @return float
+     * @return ?float
      */
-    public function getAmount()
+    public function getAmount() : ?float
     {
-        return (float) $this->getField('amount', 0.00);
+        return $this->getField('amount');
     }
 
     /**
      * Get dtstamp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?int
     {
-        return (int) $this->getField('dtstamp', 0);
+        return $this->getTimestampField('dtstamp');
     }
 
     /**
      * Get user_name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getUserName()
+    public function getUserName() : ?string
     {
         return $this->getField('user_name');
     }

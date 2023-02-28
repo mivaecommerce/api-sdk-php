@@ -14,6 +14,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\PriceGroup;
 use MerchantAPI\Model\PriceGroupCustomer;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request PriceGroupCustomerList_Load_Query.
@@ -26,29 +27,30 @@ use MerchantAPI\BaseClient;
 class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'PriceGroupCustomerList_Load_Query';
+    protected string $function = 'PriceGroupCustomerList_Load_Query';
 
-    /** @var int */
-    protected $priceGroupId;
+    /** @var ?int */
+    protected ?int $priceGroupId = null;
 
-    /** @var string */
-    protected $priceGroupName;
+    /** @var ?string */
+    protected ?string $priceGroupName = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
-    /** @var bool */
-    protected $unassigned;
+    /** @var ?bool */
+    protected ?bool $unassigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\PriceGroup
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\PriceGroup $priceGroup
      */
-    public function __construct(BaseClient $client = null, PriceGroup $priceGroup = null)
+    public function __construct(?BaseClient $client = null, ?PriceGroup $priceGroup = null)
     {
         parent::__construct($client);
         if ($priceGroup) {
@@ -65,7 +67,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return int
      */
-    public function getPriceGroupId()
+    public function getPriceGroupId() : ?int
     {
         return $this->priceGroupId;
     }
@@ -75,7 +77,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return string
      */
-    public function getPriceGroupName()
+    public function getPriceGroupName() : ?string
     {
         return $this->priceGroupName;
     }
@@ -85,7 +87,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -95,7 +97,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
      *
      * @return bool
      */
-    public function getUnassigned()
+    public function getUnassigned() : ?bool
     {
         return $this->unassigned;
     }
@@ -103,10 +105,10 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set PriceGroup_ID.
      *
-     * @param int
+     * @param ?int $priceGroupId
      * @return $this
      */
-    public function setPriceGroupId($priceGroupId)
+    public function setPriceGroupId(?int $priceGroupId) : self
     {
         $this->priceGroupId = $priceGroupId;
 
@@ -116,10 +118,10 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set PriceGroup_Name.
      *
-     * @param string
+     * @param ?string $priceGroupName
      * @return $this
      */
-    public function setPriceGroupName($priceGroupName)
+    public function setPriceGroupName(?string $priceGroupName) : self
     {
         $this->priceGroupName = $priceGroupName;
 
@@ -129,10 +131,10 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -142,10 +144,10 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * Set Unassigned.
      *
-     * @param bool
+     * @param ?bool $unassigned
      * @return $this
      */
-    public function setUnassigned($unassigned)
+    public function setUnassigned(?bool $unassigned) : self
     {
         $this->unassigned = $unassigned;
 
@@ -155,7 +157,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -179,7 +181,7 @@ class PriceGroupCustomerListLoadQuery extends CustomerListLoadQuery
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\PriceGroupCustomerListLoadQuery($this, $httpResponse, $data);
     }

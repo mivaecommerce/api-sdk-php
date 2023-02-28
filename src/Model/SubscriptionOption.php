@@ -20,19 +20,19 @@ class SubscriptionOption extends \MerchantAPI\Model
     /**
      * Get subscrp_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getSubscriptionId()
+    public function getSubscriptionId() : ?int
     {
-        return (int) $this->getField('subscrp_id', 0);
+        return $this->getField('subscrp_id');
     }
 
     /**
      * Get templ_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTemplateCode()
+    public function getTemplateCode() : ?string
     {
         return $this->getField('templ_code');
     }
@@ -40,9 +40,9 @@ class SubscriptionOption extends \MerchantAPI\Model
     /**
      * Get attr_code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAttributeCode()
+    public function getAttributeCode() : ?string
     {
         return $this->getField('attr_code');
     }
@@ -50,9 +50,9 @@ class SubscriptionOption extends \MerchantAPI\Model
     /**
      * Get value.
      *
-     * @return string
+     * @return ?string
      */
-    public function getValue()
+    public function getValue() : ?string
     {
         return $this->getField('value');
     }

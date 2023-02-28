@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\ProvisionMessage;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for Provision_Store.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProvisionStore extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProvisionMessage[] */
-    protected $provisionMessages = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $provisionMessages;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class ProvisionStore extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->provisionMessages = new \MerchantAPI\Collection();
+        $this->provisionMessages = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class ProvisionStore extends Response
     /**
      * Get provisionMessages.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProvisionMessage[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProvisionMessages()
+    public function getProvisionMessages() : Collection
     {
         return $this->provisionMessages;
     }

@@ -20,30 +20,30 @@ class ReceivedReturn extends \MerchantAPI\Model
     /**
      * Get return_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getReturnId()
+    public function getReturnId() : ?int
     {
-        return (int) $this->getField('return_id', 0);
+        return $this->getField('return_id');
     }
 
     /**
      * Get adjust_inventory.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAdjustInventory()
+    public function getAdjustInventory() : ?int
     {
-        return (int) $this->getField('adjust_inventory', 0);
+        return $this->getField('adjust_inventory');
     }
 
     /**
      * Set return_id.
      *
-     * @param int
+     * @param ?int $returnId
      * @return $this
      */
-    public function setReturnId($returnId)
+    public function setReturnId(?int $returnId) : self
     {
         return $this->setField('return_id', $returnId);
     }
@@ -51,10 +51,10 @@ class ReceivedReturn extends \MerchantAPI\Model
     /**
      * Set adjust_inventory.
      *
-     * @param int
+     * @param ?int $adjustInventory
      * @return $this
      */
-    public function setAdjustInventory($adjustInventory)
+    public function setAdjustInventory(?int $adjustInventory) : self
     {
         return $this->setField('adjust_inventory', $adjustInventory);
     }

@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\AttributeTemplateAttribute;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for AttributeTemplateAttributeList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AttributeTemplateAttributeListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\AttributeTemplateAttribute[] */
-    protected $attributeTemplateAttributes = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $attributeTemplateAttributes;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class AttributeTemplateAttributeListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->attributeTemplateAttributes = new \MerchantAPI\Collection();
+        $this->attributeTemplateAttributes = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class AttributeTemplateAttributeListLoadQuery extends ListQueryResponse
     /**
      * Get attributeTemplateAttributes.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\AttributeTemplateAttribute[]
+     * @return \MerchantAPI\Collection
      */
-    public function getAttributeTemplateAttributes()
+    public function getAttributeTemplateAttributes() : Collection
     {
         return $this->attributeTemplateAttributes;
     }

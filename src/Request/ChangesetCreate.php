@@ -20,6 +20,8 @@ use MerchantAPI\Model\PropertyChange;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
+use MerchantAPI\Collection;
 
 /**
  * Handles API Request Changeset_Create.
@@ -32,54 +34,55 @@ use MerchantAPI\BaseClient;
 class ChangesetCreate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Changeset_Create';
+    protected string $function = 'Changeset_Create';
 
-    /** @var int */
-    protected $branchId;
+    /** @var ?int */
+    protected ?int $branchId = null;
 
-    /** @var string */
-    protected $branchName;
+    /** @var ?string */
+    protected ?string $branchName = null;
 
-    /** @var string */
-    protected $editBranch;
+    /** @var ?string */
+    protected ?string $editBranch = null;
 
-    /** @var string */
-    protected $notes;
+    /** @var ?string */
+    protected ?string $notes = null;
 
-    /** @var string */
-    protected $tags;
+    /** @var ?string */
+    protected ?string $tags = null;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\TemplateChange[] */
-    protected $templateChanges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $templateChanges;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ResourceGroupChange[] */
-    protected $resourceGroupChanges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $resourceGroupChanges;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\CSSResourceChange[] */
-    protected $CSSResourceChanges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $CSSResourceChanges;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\JavaScriptResourceChange[] */
-    protected $javaScriptResourceChanges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $javaScriptResourceChanges;
 
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\PropertyChange[] */
-    protected $propertyChanges = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $propertyChanges;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
-        $this->templateChanges = new \MerchantAPI\Collection();
-        $this->resourceGroupChanges = new \MerchantAPI\Collection();
-        $this->CSSResourceChanges = new \MerchantAPI\Collection();
-        $this->javaScriptResourceChanges = new \MerchantAPI\Collection();
-        $this->propertyChanges = new \MerchantAPI\Collection();
+        $this->templateChanges = new Collection();
+        $this->resourceGroupChanges = new Collection();
+        $this->CSSResourceChanges = new Collection();
+        $this->javaScriptResourceChanges = new Collection();
+        $this->propertyChanges = new Collection();
 
         if ($branch) {
             if ($branch->getId()) {
@@ -95,7 +98,7 @@ class ChangesetCreate extends Request
      *
      * @return int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
         return $this->branchId;
     }
@@ -105,7 +108,7 @@ class ChangesetCreate extends Request
      *
      * @return string
      */
-    public function getBranchName()
+    public function getBranchName() : ?string
     {
         return $this->branchName;
     }
@@ -115,7 +118,7 @@ class ChangesetCreate extends Request
      *
      * @return string
      */
-    public function getEditBranch()
+    public function getEditBranch() : ?string
     {
         return $this->editBranch;
     }
@@ -125,7 +128,7 @@ class ChangesetCreate extends Request
      *
      * @return string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->notes;
     }
@@ -135,7 +138,7 @@ class ChangesetCreate extends Request
      *
      * @return string
      */
-    public function getTags()
+    public function getTags() : ?string
     {
         return $this->tags;
     }
@@ -143,9 +146,9 @@ class ChangesetCreate extends Request
     /**
      * Get Template_Changes.
      *
-     * @return \MerchantAPI\Model\TemplateChange[]
+     * @return \MerchantAPI\Collection
      */
-    public function getTemplateChanges()
+    public function getTemplateChanges() : ?Collection
     {
         return $this->templateChanges;
     }
@@ -153,9 +156,9 @@ class ChangesetCreate extends Request
     /**
      * Get ResourceGroup_Changes.
      *
-     * @return \MerchantAPI\Model\ResourceGroupChange[]
+     * @return \MerchantAPI\Collection
      */
-    public function getResourceGroupChanges()
+    public function getResourceGroupChanges() : ?Collection
     {
         return $this->resourceGroupChanges;
     }
@@ -163,9 +166,9 @@ class ChangesetCreate extends Request
     /**
      * Get CSSResource_Changes.
      *
-     * @return \MerchantAPI\Model\CSSResourceChange[]
+     * @return \MerchantAPI\Collection
      */
-    public function getCSSResourceChanges()
+    public function getCSSResourceChanges() : ?Collection
     {
         return $this->CSSResourceChanges;
     }
@@ -173,9 +176,9 @@ class ChangesetCreate extends Request
     /**
      * Get JavaScriptResource_Changes.
      *
-     * @return \MerchantAPI\Model\JavaScriptResourceChange[]
+     * @return \MerchantAPI\Collection
      */
-    public function getJavaScriptResourceChanges()
+    public function getJavaScriptResourceChanges() : ?Collection
     {
         return $this->javaScriptResourceChanges;
     }
@@ -183,9 +186,9 @@ class ChangesetCreate extends Request
     /**
      * Get Property_Changes.
      *
-     * @return \MerchantAPI\Model\PropertyChange[]
+     * @return \MerchantAPI\Collection
      */
-    public function getPropertyChanges()
+    public function getPropertyChanges() : ?Collection
     {
         return $this->propertyChanges;
     }
@@ -193,10 +196,10 @@ class ChangesetCreate extends Request
     /**
      * Set Branch_ID.
      *
-     * @param int
+     * @param ?int $branchId
      * @return $this
      */
-    public function setBranchId($branchId)
+    public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
 
@@ -206,10 +209,10 @@ class ChangesetCreate extends Request
     /**
      * Set Branch_Name.
      *
-     * @param string
+     * @param ?string $branchName
      * @return $this
      */
-    public function setBranchName($branchName)
+    public function setBranchName(?string $branchName) : self
     {
         $this->branchName = $branchName;
 
@@ -219,10 +222,10 @@ class ChangesetCreate extends Request
     /**
      * Set Edit_Branch.
      *
-     * @param string
+     * @param ?string $editBranch
      * @return $this
      */
-    public function setEditBranch($editBranch)
+    public function setEditBranch(?string $editBranch) : self
     {
         $this->editBranch = $editBranch;
 
@@ -232,10 +235,10 @@ class ChangesetCreate extends Request
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         $this->notes = $notes;
 
@@ -245,10 +248,10 @@ class ChangesetCreate extends Request
     /**
      * Set Tags.
      *
-     * @param string
+     * @param ?string $tags
      * @return $this
      */
-    public function setTags($tags)
+    public function setTags(?string $tags) : self
     {
         $this->tags = $tags;
 
@@ -258,12 +261,17 @@ class ChangesetCreate extends Request
     /**
      * Set Template_Changes.
      *
-     * @param (\MerchantAPI\Model\TemplateChange|array)[]
+     * @param \MerchantAPI\Collection|array $templateChanges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setTemplateChanges(array $templateChanges)
+    public function setTemplateChanges($templateChanges) : self
     {
+        if (!is_array($templateChanges) && !$templateChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($templateChanges) ? get_class($templateChanges) : gettype($templateChanges)));
+        }
+
         foreach ($templateChanges as &$model) {
             if (is_array($model)) {
                 $model = new TemplateChange($model);
@@ -273,7 +281,7 @@ class ChangesetCreate extends Request
             }
         }
 
-        $this->templateChanges = new \MerchantAPI\Collection($templateChanges);
+        $this->templateChanges = new Collection($templateChanges);
 
         return $this;
     }
@@ -281,12 +289,17 @@ class ChangesetCreate extends Request
     /**
      * Set ResourceGroup_Changes.
      *
-     * @param (\MerchantAPI\Model\ResourceGroupChange|array)[]
+     * @param \MerchantAPI\Collection|array $resourceGroupChanges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setResourceGroupChanges(array $resourceGroupChanges)
+    public function setResourceGroupChanges($resourceGroupChanges) : self
     {
+        if (!is_array($resourceGroupChanges) && !$resourceGroupChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($resourceGroupChanges) ? get_class($resourceGroupChanges) : gettype($resourceGroupChanges)));
+        }
+
         foreach ($resourceGroupChanges as &$model) {
             if (is_array($model)) {
                 $model = new ResourceGroupChange($model);
@@ -296,7 +309,7 @@ class ChangesetCreate extends Request
             }
         }
 
-        $this->resourceGroupChanges = new \MerchantAPI\Collection($resourceGroupChanges);
+        $this->resourceGroupChanges = new Collection($resourceGroupChanges);
 
         return $this;
     }
@@ -304,12 +317,17 @@ class ChangesetCreate extends Request
     /**
      * Set CSSResource_Changes.
      *
-     * @param (\MerchantAPI\Model\CSSResourceChange|array)[]
+     * @param \MerchantAPI\Collection|array $CSSResourceChanges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setCSSResourceChanges(array $CSSResourceChanges)
+    public function setCSSResourceChanges($CSSResourceChanges) : self
     {
+        if (!is_array($CSSResourceChanges) && !$CSSResourceChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($CSSResourceChanges) ? get_class($CSSResourceChanges) : gettype($CSSResourceChanges)));
+        }
+
         foreach ($CSSResourceChanges as &$model) {
             if (is_array($model)) {
                 $model = new CSSResourceChange($model);
@@ -319,7 +337,7 @@ class ChangesetCreate extends Request
             }
         }
 
-        $this->CSSResourceChanges = new \MerchantAPI\Collection($CSSResourceChanges);
+        $this->CSSResourceChanges = new Collection($CSSResourceChanges);
 
         return $this;
     }
@@ -327,12 +345,17 @@ class ChangesetCreate extends Request
     /**
      * Set JavaScriptResource_Changes.
      *
-     * @param (\MerchantAPI\Model\JavaScriptResourceChange|array)[]
+     * @param \MerchantAPI\Collection|array $javaScriptResourceChanges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setJavaScriptResourceChanges(array $javaScriptResourceChanges)
+    public function setJavaScriptResourceChanges($javaScriptResourceChanges) : self
     {
+        if (!is_array($javaScriptResourceChanges) && !$javaScriptResourceChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($javaScriptResourceChanges) ? get_class($javaScriptResourceChanges) : gettype($javaScriptResourceChanges)));
+        }
+
         foreach ($javaScriptResourceChanges as &$model) {
             if (is_array($model)) {
                 $model = new JavaScriptResourceChange($model);
@@ -342,7 +365,7 @@ class ChangesetCreate extends Request
             }
         }
 
-        $this->javaScriptResourceChanges = new \MerchantAPI\Collection($javaScriptResourceChanges);
+        $this->javaScriptResourceChanges = new Collection($javaScriptResourceChanges);
 
         return $this;
     }
@@ -350,12 +373,17 @@ class ChangesetCreate extends Request
     /**
      * Set Property_Changes.
      *
-     * @param (\MerchantAPI\Model\PropertyChange|array)[]
+     * @param \MerchantAPI\Collection|array $propertyChanges
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setPropertyChanges(array $propertyChanges)
+    public function setPropertyChanges($propertyChanges) : self
     {
+        if (!is_array($propertyChanges) && !$propertyChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($propertyChanges) ? get_class($propertyChanges) : gettype($propertyChanges)));
+        }
+
         foreach ($propertyChanges as &$model) {
             if (is_array($model)) {
                 $model = new PropertyChange($model);
@@ -365,7 +393,7 @@ class ChangesetCreate extends Request
             }
         }
 
-        $this->propertyChanges = new \MerchantAPI\Collection($propertyChanges);
+        $this->propertyChanges = new Collection($propertyChanges);
 
         return $this;
     }
@@ -374,10 +402,9 @@ class ChangesetCreate extends Request
      * Add Template_Changes.
      *
      * @param \MerchantAPI\Model\TemplateChange
-     *
      * @return $this
      */
-    public function addTemplateChange(TemplateChange $model)
+    public function addTemplateChange(TemplateChange $model) : self
     {
         $this->templateChanges[] = $model;
         return $this;
@@ -390,7 +417,7 @@ class ChangesetCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addTemplateChanges(array $templateChanges)
+    public function addTemplateChanges(array $templateChanges) : self
     {
         foreach ($templateChanges as $e) {
             if (is_array($e)) {
@@ -410,10 +437,9 @@ class ChangesetCreate extends Request
      * Add ResourceGroup_Changes.
      *
      * @param \MerchantAPI\Model\ResourceGroupChange
-     *
      * @return $this
      */
-    public function addResourceGroupChange(ResourceGroupChange $model)
+    public function addResourceGroupChange(ResourceGroupChange $model) : self
     {
         $this->resourceGroupChanges[] = $model;
         return $this;
@@ -426,7 +452,7 @@ class ChangesetCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addResourceGroupChanges(array $resourceGroupChanges)
+    public function addResourceGroupChanges(array $resourceGroupChanges) : self
     {
         foreach ($resourceGroupChanges as $e) {
             if (is_array($e)) {
@@ -446,10 +472,9 @@ class ChangesetCreate extends Request
      * Add CSSResource_Changes.
      *
      * @param \MerchantAPI\Model\CSSResourceChange
-     *
      * @return $this
      */
-    public function addCSSResourceChange(CSSResourceChange $model)
+    public function addCSSResourceChange(CSSResourceChange $model) : self
     {
         $this->CSSResourceChanges[] = $model;
         return $this;
@@ -462,7 +487,7 @@ class ChangesetCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addCSSResourceChanges(array $CSSResourceChanges)
+    public function addCSSResourceChanges(array $CSSResourceChanges) : self
     {
         foreach ($CSSResourceChanges as $e) {
             if (is_array($e)) {
@@ -482,10 +507,9 @@ class ChangesetCreate extends Request
      * Add JavaScriptResource_Changes.
      *
      * @param \MerchantAPI\Model\JavaScriptResourceChange
-     *
      * @return $this
      */
-    public function addJavaScriptResourceChange(JavaScriptResourceChange $model)
+    public function addJavaScriptResourceChange(JavaScriptResourceChange $model) : self
     {
         $this->javaScriptResourceChanges[] = $model;
         return $this;
@@ -498,7 +522,7 @@ class ChangesetCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addJavaScriptResourceChanges(array $javaScriptResourceChanges)
+    public function addJavaScriptResourceChanges(array $javaScriptResourceChanges) : self
     {
         foreach ($javaScriptResourceChanges as $e) {
             if (is_array($e)) {
@@ -518,10 +542,9 @@ class ChangesetCreate extends Request
      * Add Property_Changes.
      *
      * @param \MerchantAPI\Model\PropertyChange
-     *
      * @return $this
      */
-    public function addPropertyChange(PropertyChange $model)
+    public function addPropertyChange(PropertyChange $model) : self
     {
         $this->propertyChanges[] = $model;
         return $this;
@@ -534,7 +557,7 @@ class ChangesetCreate extends Request
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function addPropertyChanges(array $propertyChanges)
+    public function addPropertyChanges(array $propertyChanges) : self
     {
         foreach ($propertyChanges as $e) {
             if (is_array($e)) {
@@ -553,7 +576,7 @@ class ChangesetCreate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -633,7 +656,7 @@ class ChangesetCreate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\ChangesetCreate($this, $httpResponse, $data);
     }

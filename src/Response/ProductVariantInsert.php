@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class ProductVariantInsert extends Response
 {
-    /** @var \MerchantAPI\Model\ProductVariant */
-    protected $productVariant;
+    /** @var ?\MerchantAPI\Model\ProductVariant */
+    protected ?ProductVariant $productVariant = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class ProductVariantInsert extends Response
      *
      * @return \MerchantAPI\Model\ProductVariant|null
      */
-    public function getProductVariant()
+    public function getProductVariant() : ?ProductVariant
     {
         return $this->productVariant;
     }

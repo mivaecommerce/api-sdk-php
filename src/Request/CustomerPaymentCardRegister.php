@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Customer;
 use MerchantAPI\Model\CustomerPaymentCard;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CustomerPaymentCard_Register.
@@ -27,62 +28,63 @@ use MerchantAPI\BaseClient;
 class CustomerPaymentCardRegister extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CustomerPaymentCard_Register';
+    protected string $function = 'CustomerPaymentCard_Register';
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var string */
-    protected $firstName;
+    /** @var ?string */
+    protected ?string $firstName = null;
 
-    /** @var string */
-    protected $lastName;
+    /** @var ?string */
+    protected ?string $lastName = null;
 
-    /** @var string */
-    protected $cardType;
+    /** @var ?string */
+    protected ?string $cardType = null;
 
-    /** @var string */
-    protected $cardNumber;
+    /** @var ?string */
+    protected ?string $cardNumber = null;
 
-    /** @var int */
-    protected $expirationMonth;
+    /** @var ?int */
+    protected ?int $expirationMonth = null;
 
-    /** @var int */
-    protected $expirationYear;
+    /** @var ?int */
+    protected ?int $expirationYear = null;
 
-    /** @var string */
-    protected $address1;
+    /** @var ?string */
+    protected ?string $address1 = null;
 
-    /** @var string */
-    protected $address2;
+    /** @var ?string */
+    protected ?string $address2 = null;
 
-    /** @var string */
-    protected $city;
+    /** @var ?string */
+    protected ?string $city = null;
 
-    /** @var string */
-    protected $state;
+    /** @var ?string */
+    protected ?string $state = null;
 
-    /** @var string */
-    protected $zip;
+    /** @var ?string */
+    protected ?string $zip = null;
 
-    /** @var string */
-    protected $country;
+    /** @var ?string */
+    protected ?string $country = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Customer
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Customer $customer
      */
-    public function __construct(BaseClient $client = null, Customer $customer = null)
+    public function __construct(?BaseClient $client = null, ?Customer $customer = null)
     {
         parent::__construct($client);
         if ($customer) {
@@ -99,7 +101,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -109,7 +111,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -119,7 +121,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -129,7 +131,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName() : ?string
     {
         return $this->firstName;
     }
@@ -139,7 +141,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastName() : ?string
     {
         return $this->lastName;
     }
@@ -149,7 +151,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getCardType()
+    public function getCardType() : ?string
     {
         return $this->cardType;
     }
@@ -159,7 +161,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getCardNumber()
+    public function getCardNumber() : ?string
     {
         return $this->cardNumber;
     }
@@ -169,7 +171,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return int
      */
-    public function getExpirationMonth()
+    public function getExpirationMonth() : ?int
     {
         return $this->expirationMonth;
     }
@@ -179,7 +181,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return int
      */
-    public function getExpirationYear()
+    public function getExpirationYear() : ?int
     {
         return $this->expirationYear;
     }
@@ -189,7 +191,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getAddress1()
+    public function getAddress1() : ?string
     {
         return $this->address1;
     }
@@ -199,7 +201,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getAddress2()
+    public function getAddress2() : ?string
     {
         return $this->address2;
     }
@@ -209,7 +211,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getCity()
+    public function getCity() : ?string
     {
         return $this->city;
     }
@@ -219,7 +221,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getState()
+    public function getState() : ?string
     {
         return $this->state;
     }
@@ -229,7 +231,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getZip()
+    public function getZip() : ?string
     {
         return $this->zip;
     }
@@ -239,7 +241,7 @@ class CustomerPaymentCardRegister extends Request
      *
      * @return string
      */
-    public function getCountry()
+    public function getCountry() : ?string
     {
         return $this->country;
     }
@@ -247,10 +249,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -260,10 +262,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -273,10 +275,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -286,10 +288,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set FirstName.
      *
-     * @param string
+     * @param ?string $firstName
      * @return $this
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName) : self
     {
         $this->firstName = $firstName;
 
@@ -299,10 +301,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set LastName.
      *
-     * @param string
+     * @param ?string $lastName
      * @return $this
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName) : self
     {
         $this->lastName = $lastName;
 
@@ -312,10 +314,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set CardType.
      *
-     * @param string
+     * @param ?string $cardType
      * @return $this
      */
-    public function setCardType($cardType)
+    public function setCardType(?string $cardType) : self
     {
         $this->cardType = $cardType;
 
@@ -325,10 +327,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set CardNumber.
      *
-     * @param string
+     * @param ?string $cardNumber
      * @return $this
      */
-    public function setCardNumber($cardNumber)
+    public function setCardNumber(?string $cardNumber) : self
     {
         $this->cardNumber = $cardNumber;
 
@@ -338,10 +340,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set ExpirationMonth.
      *
-     * @param int
+     * @param ?int $expirationMonth
      * @return $this
      */
-    public function setExpirationMonth($expirationMonth)
+    public function setExpirationMonth(?int $expirationMonth) : self
     {
         $this->expirationMonth = $expirationMonth;
 
@@ -351,10 +353,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set ExpirationYear.
      *
-     * @param int
+     * @param ?int $expirationYear
      * @return $this
      */
-    public function setExpirationYear($expirationYear)
+    public function setExpirationYear(?int $expirationYear) : self
     {
         $this->expirationYear = $expirationYear;
 
@@ -364,10 +366,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Address1.
      *
-     * @param string
+     * @param ?string $address1
      * @return $this
      */
-    public function setAddress1($address1)
+    public function setAddress1(?string $address1) : self
     {
         $this->address1 = $address1;
 
@@ -377,10 +379,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Address2.
      *
-     * @param string
+     * @param ?string $address2
      * @return $this
      */
-    public function setAddress2($address2)
+    public function setAddress2(?string $address2) : self
     {
         $this->address2 = $address2;
 
@@ -390,10 +392,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set City.
      *
-     * @param string
+     * @param ?string $city
      * @return $this
      */
-    public function setCity($city)
+    public function setCity(?string $city) : self
     {
         $this->city = $city;
 
@@ -403,10 +405,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set State.
      *
-     * @param string
+     * @param ?string $state
      * @return $this
      */
-    public function setState($state)
+    public function setState(?string $state) : self
     {
         $this->state = $state;
 
@@ -416,10 +418,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Zip.
      *
-     * @param string
+     * @param ?string $zip
      * @return $this
      */
-    public function setZip($zip)
+    public function setZip(?string $zip) : self
     {
         $this->zip = $zip;
 
@@ -429,10 +431,10 @@ class CustomerPaymentCardRegister extends Request
     /**
      * Set Country.
      *
-     * @param string
+     * @param ?string $country
      * @return $this
      */
-    public function setCountry($country)
+    public function setCountry(?string $country) : self
     {
         $this->country = $country;
 
@@ -442,7 +444,7 @@ class CustomerPaymentCardRegister extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -508,7 +510,7 @@ class CustomerPaymentCardRegister extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CustomerPaymentCardRegister($this, $httpResponse, $data);
     }

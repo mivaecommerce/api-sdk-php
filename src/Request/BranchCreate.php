@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Branch_Create.
@@ -26,32 +27,33 @@ use MerchantAPI\BaseClient;
 class BranchCreate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Branch_Create';
+    protected string $function = 'Branch_Create';
 
-    /** @var int */
-    protected $parentBranchId;
+    /** @var ?int */
+    protected ?int $parentBranchId = null;
 
-    /** @var string */
-    protected $name;
+    /** @var ?string */
+    protected ?string $name = null;
 
-    /** @var string */
-    protected $color;
+    /** @var ?string */
+    protected ?string $color = null;
 
-    /** @var int */
-    protected $changesetId;
+    /** @var ?int */
+    protected ?int $changesetId = null;
 
-    /** @var string */
-    protected $tags;
+    /** @var ?string */
+    protected ?string $tags = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -66,7 +68,7 @@ class BranchCreate extends Request
      *
      * @return int
      */
-    public function getParentBranchId()
+    public function getParentBranchId() : ?int
     {
         return $this->parentBranchId;
     }
@@ -76,7 +78,7 @@ class BranchCreate extends Request
      *
      * @return string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->name;
     }
@@ -86,7 +88,7 @@ class BranchCreate extends Request
      *
      * @return string
      */
-    public function getColor()
+    public function getColor() : ?string
     {
         return $this->color;
     }
@@ -96,7 +98,7 @@ class BranchCreate extends Request
      *
      * @return int
      */
-    public function getChangesetId()
+    public function getChangesetId() : ?int
     {
         return $this->changesetId;
     }
@@ -106,7 +108,7 @@ class BranchCreate extends Request
      *
      * @return string
      */
-    public function getTags()
+    public function getTags() : ?string
     {
         return $this->tags;
     }
@@ -114,10 +116,10 @@ class BranchCreate extends Request
     /**
      * Set Parent_Branch_ID.
      *
-     * @param int
+     * @param ?int $parentBranchId
      * @return $this
      */
-    public function setParentBranchId($parentBranchId)
+    public function setParentBranchId(?int $parentBranchId) : self
     {
         $this->parentBranchId = $parentBranchId;
 
@@ -127,10 +129,10 @@ class BranchCreate extends Request
     /**
      * Set Name.
      *
-     * @param string
+     * @param ?string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name) : self
     {
         $this->name = $name;
 
@@ -140,10 +142,10 @@ class BranchCreate extends Request
     /**
      * Set Color.
      *
-     * @param string
+     * @param ?string $color
      * @return $this
      */
-    public function setColor($color)
+    public function setColor(?string $color) : self
     {
         $this->color = $color;
 
@@ -153,10 +155,10 @@ class BranchCreate extends Request
     /**
      * Set Changeset_ID.
      *
-     * @param int
+     * @param ?int $changesetId
      * @return $this
      */
-    public function setChangesetId($changesetId)
+    public function setChangesetId(?int $changesetId) : self
     {
         $this->changesetId = $changesetId;
 
@@ -166,10 +168,10 @@ class BranchCreate extends Request
     /**
      * Set Tags.
      *
-     * @param string
+     * @param ?string $tags
      * @return $this
      */
-    public function setTags($tags)
+    public function setTags(?string $tags) : self
     {
         $this->tags = $tags;
 
@@ -179,7 +181,7 @@ class BranchCreate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -209,7 +211,7 @@ class BranchCreate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchCreate($this, $httpResponse, $data);
     }

@@ -15,6 +15,7 @@ use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderItem;
 use MerchantAPI\Model\Order;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request OrderItemList_BackOrder.
@@ -27,26 +28,27 @@ use MerchantAPI\BaseClient;
 class OrderItemListBackOrder extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'OrderItemList_BackOrder';
+    protected string $function = 'OrderItemList_BackOrder';
 
-    /** @var int */
-    protected $orderId;
+    /** @var ?int */
+    protected ?int $orderId = null;
 
     /** @var int[] */
-    protected $lineIds = [];
+    protected array $lineIds = [];
 
-    /** @var int */
-    protected $dateInStock;
+    /** @var int|\DateTime|null */
+    protected $dateInStock = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Order
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Order $order
      */
-    public function __construct(BaseClient $client = null, Order $order = null)
+    public function __construct(?BaseClient $client = null, ?Order $order = null)
     {
         parent::__construct($client);
         if ($order) {
@@ -61,7 +63,7 @@ class OrderItemListBackOrder extends Request
      *
      * @return int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
         return $this->orderId;
     }
@@ -71,7 +73,7 @@ class OrderItemListBackOrder extends Request
      *
      * @return array
      */
-    public function getLineIds()
+    public function getLineIds() : array
     {
         return $this->lineIds;
     }
@@ -81,7 +83,7 @@ class OrderItemListBackOrder extends Request
      *
      * @return int
      */
-    public function getDateInStock()
+    public function getDateInStock() : ?int
     {
         return $this->dateInStock;
     }
@@ -89,10 +91,10 @@ class OrderItemListBackOrder extends Request
     /**
      * Set Order_ID.
      *
-     * @param int
+     * @param ?int $orderId
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?int $orderId) : self
     {
         $this->orderId = $orderId;
 
@@ -102,10 +104,10 @@ class OrderItemListBackOrder extends Request
     /**
      * Set Date_InStock.
      *
-     * @param int|\DateTime
+     * @param ?int|?\DateTime $dateInStock
      * @return $this
      */
-    public function setDateInStock($dateInStock)
+    public function setDateInStock($dateInStock) : self
     {
         if ($dateInStock instanceof \DateTime) {
             $this->dateInStock = $dateInStock->getTimestamp();
@@ -119,11 +121,10 @@ class OrderItemListBackOrder extends Request
     /**
      * Add Line_IDs.
      *
-     * @param int
-     *
+     * @param int $lineId
      * @return $this
      */
-    public function addLineId($lineId)
+    public function addLineId(int $lineId) : self
     {
         $this->lineIds[] = $lineId;
         return $this;
@@ -132,10 +133,10 @@ class OrderItemListBackOrder extends Request
     /**
      * Add OrderItem model.
      *
-     * @param \MerchantAPI\Model\OrderItem
+     * @param \MerchantAPI\Model\OrderItem $orderItem
      * @return $this
      */
-    public function addOrderItem(OrderItem $orderItem)
+    public function addOrderItem(OrderItem $orderItem) : self
     {
         if ($orderItem->getLineId()) {
             $this->lineIds[] = $orderItem->getLineId();
@@ -147,7 +148,7 @@ class OrderItemListBackOrder extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -167,7 +168,7 @@ class OrderItemListBackOrder extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\OrderItemListBackOrder($this, $httpResponse, $data);
     }

@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class PrintQueueJobInsert extends Response
 {
-    /** @var \MerchantAPI\Model\PrintQueueJob */
-    protected $printQueueJob;
+    /** @var ?\MerchantAPI\Model\PrintQueueJob */
+    protected ?PrintQueueJob $printQueueJob = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class PrintQueueJobInsert extends Response
      *
      * @return \MerchantAPI\Model\PrintQueueJob|null
      */
-    public function getPrintQueueJob()
+    public function getPrintQueueJob() : ?PrintQueueJob
     {
         return $this->printQueueJob;
     }

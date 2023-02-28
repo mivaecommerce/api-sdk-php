@@ -20,59 +20,59 @@ class Note extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get cust_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
-        return (int) $this->getField('cust_id', 0);
+        return $this->getField('cust_id');
     }
 
     /**
      * Get account_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getAccountId()
+    public function getAccountId() : ?int
     {
-        return (int) $this->getField('account_id', 0);
+        return $this->getField('account_id');
     }
 
     /**
      * Get order_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getOrderId()
+    public function getOrderId() : ?int
     {
-        return (int) $this->getField('order_id', 0);
+        return $this->getField('order_id');
     }
 
     /**
      * Get user_id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getUserId()
+    public function getUserId() : ?int
     {
-        return (int) $this->getField('user_id', 0);
+        return $this->getField('user_id');
     }
 
     /**
      * Get notetext.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNoteText()
+    public function getNoteText() : ?string
     {
         return $this->getField('notetext');
     }
@@ -80,19 +80,19 @@ class Note extends \MerchantAPI\Model
     /**
      * Get dtstamp.
      *
-     * @return int
+     * @return ?int
      */
-    public function getDateTimeStamp()
+    public function getDateTimeStamp() : ?int
     {
-        return (int) $this->getField('dtstamp', 0);
+        return $this->getTimestampField('dtstamp');
     }
 
     /**
      * Get cust_login.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->getField('cust_login');
     }
@@ -100,9 +100,9 @@ class Note extends \MerchantAPI\Model
     /**
      * Get business_title.
      *
-     * @return string
+     * @return ?string
      */
-    public function getBusinessTitle()
+    public function getBusinessTitle() : ?string
     {
         return $this->getField('business_title');
     }
@@ -110,9 +110,9 @@ class Note extends \MerchantAPI\Model
     /**
      * Get admin_user.
      *
-     * @return string
+     * @return ?string
      */
-    public function getAdminUser()
+    public function getAdminUser() : ?string
     {
         return $this->getField('admin_user');
     }

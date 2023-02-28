@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryResponse;
 use MerchantAPI\Model\RelatedProduct;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for RelatedProductList_Load_Query.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class RelatedProductListLoadQuery extends ListQueryResponse
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\RelatedProduct[] */
-    protected $relatedProducts = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $relatedProducts;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class RelatedProductListLoadQuery extends ListQueryResponse
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->relatedProducts = new \MerchantAPI\Collection();
+        $this->relatedProducts = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class RelatedProductListLoadQuery extends ListQueryResponse
     /**
      * Get relatedProducts.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\RelatedProduct[]
+     * @return \MerchantAPI\Collection
      */
-    public function getRelatedProducts()
+    public function getRelatedProducts() : Collection
     {
         return $this->relatedProducts;
     }

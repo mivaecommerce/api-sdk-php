@@ -17,18 +17,18 @@ namespace MerchantAPI\SSHAgent;
  */
 class SSHAgentKey
 {
-    /** @var buffer */
-    protected $keyBlob;
+    /** @var string */
+    protected string $keyBlob;
 
     /** @var string */
-    protected $comment;
+    protected string $comment;
 
     /**
      * SSHAgentKey constructor.
-     * @param $keyBlob
-     * @param $comment
+     * @param string $keyBlob
+     * @param string $comment
      */
-	public function __construct($keyBlob, $comment)
+	public function __construct(string $keyBlob, string $comment)
 	{
 		$this->keyBlob = $keyBlob;
 		$this->comment = $comment;

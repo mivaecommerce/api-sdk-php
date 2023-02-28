@@ -20,19 +20,19 @@ class ProductAttributeListTemplate extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -40,9 +40,9 @@ class ProductAttributeListTemplate extends \MerchantAPI\Model
     /**
      * Get prompt.
      *
-     * @return string
+     * @return ?string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->getField('prompt');
     }
@@ -50,10 +50,10 @@ class ProductAttributeListTemplate extends \MerchantAPI\Model
     /**
      * Get refcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getReferenceCount()
+    public function getReferenceCount() : ?int
     {
-        return (int) $this->getField('refcount', 0);
+        return $this->getField('refcount');
     }
 }

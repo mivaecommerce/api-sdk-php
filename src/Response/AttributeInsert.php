@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class AttributeInsert extends Response
 {
-    /** @var \MerchantAPI\Model\ProductAttribute */
-    protected $productAttribute;
+    /** @var ?\MerchantAPI\Model\ProductAttribute */
+    protected ?ProductAttribute $productAttribute = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class AttributeInsert extends Response
      *
      * @return \MerchantAPI\Model\ProductAttribute|null
      */
-    public function getProductAttribute()
+    public function getProductAttribute() : ?ProductAttribute
     {
         return $this->productAttribute;
     }

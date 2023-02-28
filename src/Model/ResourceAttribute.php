@@ -20,9 +20,9 @@ class ResourceAttribute extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -30,9 +30,9 @@ class ResourceAttribute extends \MerchantAPI\Model
     /**
      * Get value.
      *
-     * @return string
+     * @return ?string
      */
-    public function getValue()
+    public function getValue() : ?string
     {
         return $this->getField('value');
     }
@@ -40,10 +40,10 @@ class ResourceAttribute extends \MerchantAPI\Model
     /**
      * Set name.
      *
-     * @param string
+     * @param ?string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name) : self
     {
         return $this->setField('name', $name);
     }
@@ -51,10 +51,10 @@ class ResourceAttribute extends \MerchantAPI\Model
     /**
      * Set value.
      *
-     * @param string
+     * @param ?string $value
      * @return $this
      */
-    public function setValue($value)
+    public function setValue(?string $value) : self
     {
         return $this->setField('value', $value);
     }

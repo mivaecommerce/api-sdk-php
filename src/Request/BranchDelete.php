@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request Branch_Delete.
@@ -26,23 +27,24 @@ use MerchantAPI\BaseClient;
 class BranchDelete extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'Branch_Delete';
+    protected string $function = 'Branch_Delete';
 
-    /** @var int */
-    protected $branchId;
+    /** @var ?int */
+    protected ?int $branchId = null;
 
-    /** @var string */
-    protected $branchName;
+    /** @var ?string */
+    protected ?string $branchName = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\Branch
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(BaseClient $client = null, Branch $branch = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
         if ($branch) {
@@ -59,7 +61,7 @@ class BranchDelete extends Request
      *
      * @return int
      */
-    public function getBranchId()
+    public function getBranchId() : ?int
     {
         return $this->branchId;
     }
@@ -69,7 +71,7 @@ class BranchDelete extends Request
      *
      * @return string
      */
-    public function getBranchName()
+    public function getBranchName() : ?string
     {
         return $this->branchName;
     }
@@ -77,10 +79,10 @@ class BranchDelete extends Request
     /**
      * Set Branch_ID.
      *
-     * @param int
+     * @param ?int $branchId
      * @return $this
      */
-    public function setBranchId($branchId)
+    public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
 
@@ -90,10 +92,10 @@ class BranchDelete extends Request
     /**
      * Set Branch_Name.
      *
-     * @param string
+     * @param ?string $branchName
      * @return $this
      */
-    public function setBranchName($branchName)
+    public function setBranchName(?string $branchName) : self
     {
         $this->branchName = $branchName;
 
@@ -103,7 +105,7 @@ class BranchDelete extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -123,7 +125,7 @@ class BranchDelete extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BranchDelete($this, $httpResponse, $data);
     }

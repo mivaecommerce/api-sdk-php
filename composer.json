@@ -4,7 +4,7 @@
   "homepage" : "https://www.miva.com",
   "type": "library",
   "license": "proprietary",
-  "version" : "2.2.1",
+  "version" : "2.3.0",
   "minimum-stability": "stable",
   "keywords" : [
     "miva",
@@ -13,14 +13,14 @@
     "sdk"
   ],
   "require": {
-    "php": ">=5.6",
+    "php": ">=7.4",
     "ext-curl": "*",
     "ext-json": "*"
   },
   "suggest": {
     "ext-sockets:*" : "For SSH Agent Authentication",
     "ext-openssl:*" : "For SSH Private Key Authentication",
-    "phpunit/phpunit:7.*@stable": "For Unit Tests"
+    "phpunit/phpunit:9.*@stable": "For Unit Tests"
   },
   "autoload" : {
     "psr-4" : {

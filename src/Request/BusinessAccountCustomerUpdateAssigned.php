@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\BusinessAccount;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request BusinessAccountCustomer_Update_Assigned.
@@ -26,38 +27,39 @@ use MerchantAPI\BaseClient;
 class BusinessAccountCustomerUpdateAssigned extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'BusinessAccountCustomer_Update_Assigned';
+    protected string $function = 'BusinessAccountCustomer_Update_Assigned';
 
-    /** @var int */
-    protected $customerId;
+    /** @var ?int */
+    protected ?int $customerId = null;
 
-    /** @var string */
-    protected $editCustomer;
+    /** @var ?string */
+    protected ?string $editCustomer = null;
 
-    /** @var string */
-    protected $customerLogin;
+    /** @var ?string */
+    protected ?string $customerLogin = null;
 
-    /** @var int */
-    protected $businessAccountId;
+    /** @var ?int */
+    protected ?int $businessAccountId = null;
 
-    /** @var string */
-    protected $editBusinessAccount;
+    /** @var ?string */
+    protected ?string $editBusinessAccount = null;
 
-    /** @var string */
-    protected $businessAccountTitle;
+    /** @var ?string */
+    protected ?string $businessAccountTitle = null;
 
-    /** @var bool */
-    protected $assigned;
+    /** @var ?bool */
+    protected ?bool $assigned = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\BusinessAccount
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\BusinessAccount $businessAccount
      */
-    public function __construct(BaseClient $client = null, BusinessAccount $businessAccount = null)
+    public function __construct(?BaseClient $client = null, ?BusinessAccount $businessAccount = null)
     {
         parent::__construct($client);
         if ($businessAccount) {
@@ -72,7 +74,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getCustomerId()
+    public function getCustomerId() : ?int
     {
         return $this->customerId;
     }
@@ -82,7 +84,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditCustomer()
+    public function getEditCustomer() : ?string
     {
         return $this->editCustomer;
     }
@@ -92,7 +94,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getCustomerLogin()
+    public function getCustomerLogin() : ?string
     {
         return $this->customerLogin;
     }
@@ -102,7 +104,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return int
      */
-    public function getBusinessAccountId()
+    public function getBusinessAccountId() : ?int
     {
         return $this->businessAccountId;
     }
@@ -112,7 +114,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getEditBusinessAccount()
+    public function getEditBusinessAccount() : ?string
     {
         return $this->editBusinessAccount;
     }
@@ -122,7 +124,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return string
      */
-    public function getBusinessAccountTitle()
+    public function getBusinessAccountTitle() : ?string
     {
         return $this->businessAccountTitle;
     }
@@ -132,7 +134,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
      *
      * @return bool
      */
-    public function getAssigned()
+    public function getAssigned() : ?bool
     {
         return $this->assigned;
     }
@@ -140,10 +142,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set Customer_ID.
      *
-     * @param int
+     * @param ?int $customerId
      * @return $this
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId(?int $customerId) : self
     {
         $this->customerId = $customerId;
 
@@ -153,10 +155,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set Edit_Customer.
      *
-     * @param string
+     * @param ?string $editCustomer
      * @return $this
      */
-    public function setEditCustomer($editCustomer)
+    public function setEditCustomer(?string $editCustomer) : self
     {
         $this->editCustomer = $editCustomer;
 
@@ -166,10 +168,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set Customer_Login.
      *
-     * @param string
+     * @param ?string $customerLogin
      * @return $this
      */
-    public function setCustomerLogin($customerLogin)
+    public function setCustomerLogin(?string $customerLogin) : self
     {
         $this->customerLogin = $customerLogin;
 
@@ -179,10 +181,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set BusinessAccount_ID.
      *
-     * @param int
+     * @param ?int $businessAccountId
      * @return $this
      */
-    public function setBusinessAccountId($businessAccountId)
+    public function setBusinessAccountId(?int $businessAccountId) : self
     {
         $this->businessAccountId = $businessAccountId;
 
@@ -192,10 +194,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set Edit_BusinessAccount.
      *
-     * @param string
+     * @param ?string $editBusinessAccount
      * @return $this
      */
-    public function setEditBusinessAccount($editBusinessAccount)
+    public function setEditBusinessAccount(?string $editBusinessAccount) : self
     {
         $this->editBusinessAccount = $editBusinessAccount;
 
@@ -205,10 +207,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set BusinessAccount_Title.
      *
-     * @param string
+     * @param ?string $businessAccountTitle
      * @return $this
      */
-    public function setBusinessAccountTitle($businessAccountTitle)
+    public function setBusinessAccountTitle(?string $businessAccountTitle) : self
     {
         $this->businessAccountTitle = $businessAccountTitle;
 
@@ -218,10 +220,10 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * Set Assigned.
      *
-     * @param bool
+     * @param ?bool $assigned
      * @return $this
      */
-    public function setAssigned($assigned)
+    public function setAssigned(?bool $assigned) : self
     {
         $this->assigned = $assigned;
 
@@ -231,7 +233,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -265,7 +267,7 @@ class BusinessAccountCustomerUpdateAssigned extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\BusinessAccountCustomerUpdateAssigned($this, $httpResponse, $data);
     }

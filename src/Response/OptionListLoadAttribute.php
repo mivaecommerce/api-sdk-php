@@ -14,6 +14,7 @@ use MerchantAPI\Response;
 use MerchantAPI\Model\ProductOption;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
+use MerchantAPI\Collection;
 
 /**
  * API Response for OptionList_Load_Attribute.
@@ -23,8 +24,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class OptionListLoadAttribute extends Response
 {
-    /** @var \MerchantAPI\Collection|\MerchantAPI\Model\ProductOption[] */
-    protected $productOptions = [];
+    /** @var \MerchantAPI\Collection */
+    protected Collection $productOptions;
 
     /**
      * @inheritDoc
@@ -32,7 +33,7 @@ class OptionListLoadAttribute extends Response
     public function __construct(RequestInterface $request, HttpResponse $response, array $data)
     {
         parent::__construct($request, $response, $data);
-        $this->productOptions = new \MerchantAPI\Collection();
+        $this->productOptions = new Collection();
 
         if (!$this->isSuccess()) {
             return;
@@ -48,9 +49,9 @@ class OptionListLoadAttribute extends Response
     /**
      * Get productOptions.
      *
-     * @return \MerchantAPI\Collection|\MerchantAPI\Model\ProductOption[]
+     * @return \MerchantAPI\Collection
      */
-    public function getProductOptions()
+    public function getProductOptions() : Collection
     {
         return $this->productOptions;
     }

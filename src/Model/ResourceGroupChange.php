@@ -20,19 +20,19 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Get ResourceGroup_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getResourceGroupId()
+    public function getResourceGroupId() : ?int
     {
-        return (int) $this->getField('ResourceGroup_ID', 0);
+        return $this->getField('ResourceGroup_ID');
     }
 
     /**
      * Get ResourceGroup_Code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getResourceGroupCode()
+    public function getResourceGroupCode() : ?string
     {
         return $this->getField('ResourceGroup_Code');
     }
@@ -40,30 +40,30 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Get LinkedCSSResources.
      *
-     * @return array
+     * @return ?array
      */
-    public function getLinkedCSSResources()
+    public function getLinkedCSSResources() : ?array
     {
-        return $this->getField('LinkedCSSResources', []);
+        return $this->getField('LinkedCSSResources');
     }
 
     /**
      * Get LinkedJavaScriptResources.
      *
-     * @return array
+     * @return ?array
      */
-    public function getLinkedJavaScriptResources()
+    public function getLinkedJavaScriptResources() : ?array
     {
-        return $this->getField('LinkedJavaScriptResources', []);
+        return $this->getField('LinkedJavaScriptResources');
     }
 
     /**
      * Set ResourceGroup_ID.
      *
-     * @param int
+     * @param ?int $resourceGroupId
      * @return $this
      */
-    public function setResourceGroupId($resourceGroupId)
+    public function setResourceGroupId(?int $resourceGroupId) : self
     {
         return $this->setField('ResourceGroup_ID', $resourceGroupId);
     }
@@ -71,10 +71,10 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Set ResourceGroup_Code.
      *
-     * @param string
+     * @param ?string $resourceGroupCode
      * @return $this
      */
-    public function setResourceGroupCode($resourceGroupCode)
+    public function setResourceGroupCode(?string $resourceGroupCode) : self
     {
         return $this->setField('ResourceGroup_Code', $resourceGroupCode);
     }
@@ -82,10 +82,10 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Set LinkedCSSResources.
      *
-     * @param array
+     * @param ?array $linkedCSSResources
      * @return $this
      */
-    public function setLinkedCSSResources(array $linkedCSSResources)
+    public function setLinkedCSSResources(?array $linkedCSSResources) : self
     {
         return $this->setField('LinkedCSSResources', $linkedCSSResources);
     }
@@ -93,10 +93,10 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Set LinkedJavaScriptResources.
      *
-     * @param array
+     * @param ?array $linkedJavaScriptResources
      * @return $this
      */
-    public function setLinkedJavaScriptResources(array $linkedJavaScriptResources)
+    public function setLinkedJavaScriptResources(?array $linkedJavaScriptResources) : self
     {
         return $this->setField('LinkedJavaScriptResources', $linkedJavaScriptResources);
     }

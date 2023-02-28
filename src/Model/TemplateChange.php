@@ -53,19 +53,19 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Get Template_ID.
      *
-     * @return int
+     * @return ?int
      */
-    public function getTemplateId()
+    public function getTemplateId() : ?int
     {
-        return (int) $this->getField('Template_ID', 0);
+        return $this->getField('Template_ID');
     }
 
     /**
      * Get Template_Filename.
      *
-     * @return string
+     * @return ?string
      */
-    public function getTemplateFilename()
+    public function getTemplateFilename() : ?string
     {
         return $this->getField('Template_Filename');
     }
@@ -73,9 +73,9 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Get Source.
      *
-     * @return string
+     * @return ?string
      */
-    public function getSource()
+    public function getSource() : ?string
     {
         return $this->getField('Source');
     }
@@ -83,19 +83,19 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Get Settings.
      *
-     * @return \MerchantAPI\Model\VersionSettings|null
+     * @return ?\MerchantAPI\Model\VersionSettings
      */
-    public function getSettings()
+    public function getSettings() : ?VersionSettings
     {
-        return $this->getField('Settings', null);
+        return $this->getField('Settings');
     }
 
     /**
      * Get Notes.
      *
-     * @return string
+     * @return ?string
      */
-    public function getNotes()
+    public function getNotes() : ?string
     {
         return $this->getField('Notes');
     }
@@ -103,10 +103,10 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Set Template_ID.
      *
-     * @param int
+     * @param ?int $templateId
      * @return $this
      */
-    public function setTemplateId($templateId)
+    public function setTemplateId(?int $templateId) : self
     {
         return $this->setField('Template_ID', $templateId);
     }
@@ -114,10 +114,10 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Set Template_Filename.
      *
-     * @param string
+     * @param ?string $templateFilename
      * @return $this
      */
-    public function setTemplateFilename($templateFilename)
+    public function setTemplateFilename(?string $templateFilename) : self
     {
         return $this->setField('Template_Filename', $templateFilename);
     }
@@ -125,10 +125,10 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Set Source.
      *
-     * @param string
+     * @param ?string $source
      * @return $this
      */
-    public function setSource($source)
+    public function setSource(?string $source) : self
     {
         return $this->setField('Source', $source);
     }
@@ -136,11 +136,11 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Set Settings.
      *
-     * @param array|VersionSettings
+     * @param \MerchantAPI\Model\VersionSettings $settings
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setSettings($settings)
+    public function setSettings($settings) : self
     {
         if (is_array($settings)) {
             return $this->setField('Settings', new VersionSettings($settings));
@@ -155,10 +155,10 @@ class TemplateChange extends \MerchantAPI\Model
     /**
      * Set Notes.
      *
-     * @param string
+     * @param ?string $notes
      * @return $this
      */
-    public function setNotes($notes)
+    public function setNotes(?string $notes) : self
     {
         return $this->setField('Notes', $notes);
     }

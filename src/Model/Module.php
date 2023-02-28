@@ -20,19 +20,19 @@ class Module extends \MerchantAPI\Model
     /**
      * Get id.
      *
-     * @return int
+     * @return ?int
      */
-    public function getId()
+    public function getId() : ?int
     {
-        return (int) $this->getField('id', 0);
+        return $this->getField('id');
     }
 
     /**
      * Get code.
      *
-     * @return string
+     * @return ?string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->getField('code');
     }
@@ -40,9 +40,9 @@ class Module extends \MerchantAPI\Model
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName()
+    public function getName() : ?string
     {
         return $this->getField('name');
     }
@@ -50,9 +50,9 @@ class Module extends \MerchantAPI\Model
     /**
      * Get provider.
      *
-     * @return string
+     * @return ?string
      */
-    public function getProvider()
+    public function getProvider() : ?string
     {
         return $this->getField('provider');
     }
@@ -60,9 +60,9 @@ class Module extends \MerchantAPI\Model
     /**
      * Get api_ver.
      *
-     * @return string
+     * @return ?string
      */
-    public function getApiVersion()
+    public function getApiVersion() : ?string
     {
         return $this->getField('api_ver');
     }
@@ -70,9 +70,9 @@ class Module extends \MerchantAPI\Model
     /**
      * Get version.
      *
-     * @return string
+     * @return ?string
      */
-    public function getVersion()
+    public function getVersion() : ?string
     {
         return $this->getField('version');
     }
@@ -80,9 +80,9 @@ class Module extends \MerchantAPI\Model
     /**
      * Get module.
      *
-     * @return string
+     * @return ?string
      */
-    public function getModule()
+    public function getModule() : ?string
     {
         return $this->getField('module');
     }
@@ -90,20 +90,20 @@ class Module extends \MerchantAPI\Model
     /**
      * Get refcount.
      *
-     * @return int
+     * @return ?int
      */
-    public function getReferenceCount()
+    public function getReferenceCount() : ?int
     {
-        return (int) $this->getField('refcount', 0);
+        return $this->getField('refcount');
     }
 
     /**
      * Get active.
      *
-     * @return bool
+     * @return ?bool
      */
-    public function getActive()
+    public function getActive() : ?bool
     {
-        return (bool) $this->getField('active', false);
+        return $this->getField('active');
     }
 }

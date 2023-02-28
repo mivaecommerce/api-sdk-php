@@ -18,6 +18,6 @@ use MerchantAPI\Response;
  * @package MerchantAPI\Response
  * @see https://docs.miva.com/json-api/functions/productvariant_generate_delimiter
  */
-class ProductVariantGenerateDelimiter extends Response
+class ProductVariantGenerateDelimiter extends ProductVariantGenerate
 {
 }

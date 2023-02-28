@@ -14,6 +14,7 @@ use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request CategoryList_Load_Query.
@@ -32,13 +33,13 @@ class CategoryListLoadQuery extends ListQueryRequest
     const CATEGORY_SHOW_ACTIVE = 'Active';
 
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'CategoryList_Load_Query';
+    protected string $function = 'CategoryList_Load_Query';
 
     /** @var array Requests available search fields */
-    protected $availableSearchFields = [
+    protected array $availableSearchFields = [
         'id',
         'code',
         'name',
@@ -51,7 +52,7 @@ class CategoryListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available sort fields */
-    protected $availableSortFields = [
+    protected array $availableSortFields = [
         'id',
         'code',
         'name',
@@ -66,12 +67,12 @@ class CategoryListLoadQuery extends ListQueryRequest
     ];
 
     /** @var array Requests available on demand columns */
-    protected $availableOnDemandColumns = [
+    protected array $availableOnDemandColumns = [
         'uris',
     ];
 
     /** @var array Requests available on custom filters */
-    protected $availableCustomFilters = [
+    protected array $availableCustomFilters = [
         'Category_Show' => [
             self::CATEGORY_SHOW_ALL,
             self::CATEGORY_SHOW_ACTIVE,
@@ -81,7 +82,7 @@ class CategoryListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -91,7 +92,7 @@ class CategoryListLoadQuery extends ListQueryRequest
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\CategoryListLoadQuery($this, $httpResponse, $data);
     }

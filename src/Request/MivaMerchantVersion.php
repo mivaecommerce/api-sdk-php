@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\MerchantVersion;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request MivaMerchantVersion.
@@ -26,15 +27,15 @@ use MerchantAPI\BaseClient;
 class MivaMerchantVersion extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_DOMAIN;
+    protected string $scope = self::REQUEST_SCOPE_DOMAIN;
 
     /** @var string The API function name */
-    protected $function = 'MivaMerchantVersion';
+    protected string $function = 'MivaMerchantVersion';
 
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -44,7 +45,7 @@ class MivaMerchantVersion extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\MivaMerchantVersion($this, $httpResponse, $data);
     }

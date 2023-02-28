@@ -23,8 +23,8 @@ use MerchantAPI\Http\HttpResponse;
  */
 class MivaMerchantVersion extends Response
 {
-    /** @var \MerchantAPI\Model\MerchantVersion */
-    protected $merchantVersion;
+    /** @var ?\MerchantAPI\Model\MerchantVersion */
+    protected ?MerchantVersion $merchantVersion = null;
 
     /**
      * @inheritDoc
@@ -45,7 +45,7 @@ class MivaMerchantVersion extends Response
      *
      * @return \MerchantAPI\Model\MerchantVersion|null
      */
-    public function getMerchantVersion()
+    public function getMerchantVersion() : ?MerchantVersion
     {
         return $this->merchantVersion;
     }

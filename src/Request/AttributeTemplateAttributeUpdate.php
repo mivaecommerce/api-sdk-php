@@ -14,6 +14,7 @@ use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\AttributeTemplateAttribute;
 use MerchantAPI\BaseClient;
+use MerchantAPI\ResponseInterface;
 
 /**
  * Handles API Request AttributeTemplateAttribute_Update.
@@ -26,65 +27,66 @@ use MerchantAPI\BaseClient;
 class AttributeTemplateAttributeUpdate extends Request
 {
     /** @var string The request scope */
-    protected $scope = self::REQUEST_SCOPE_STORE;
+    protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected $function = 'AttributeTemplateAttribute_Update';
+    protected string $function = 'AttributeTemplateAttribute_Update';
 
-    /** @var int */
-    protected $attributeTemplateId;
+    /** @var ?int */
+    protected ?int $attributeTemplateId = null;
 
-    /** @var string */
-    protected $attributeTemplateCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplate;
+    /** @var ?string */
+    protected ?string $editAttributeTemplate = null;
 
-    /** @var int */
-    protected $attributeTemplateAttributeId;
+    /** @var ?int */
+    protected ?int $attributeTemplateAttributeId = null;
 
-    /** @var string */
-    protected $attributeTemplateAttributeCode;
+    /** @var ?string */
+    protected ?string $attributeTemplateAttributeCode = null;
 
-    /** @var string */
-    protected $editAttributeTemplateAttribute;
+    /** @var ?string */
+    protected ?string $editAttributeTemplateAttribute = null;
 
-    /** @var string */
-    protected $code;
+    /** @var ?string */
+    protected ?string $code = null;
 
-    /** @var string */
-    protected $prompt;
+    /** @var ?string */
+    protected ?string $prompt = null;
 
-    /** @var string */
-    protected $type;
+    /** @var ?string */
+    protected ?string $type = null;
 
-    /** @var string */
-    protected $image;
+    /** @var ?string */
+    protected ?string $image = null;
 
-    /** @var float */
-    protected $price;
+    /** @var ?float */
+    protected ?float $price = null;
 
-    /** @var float */
-    protected $cost;
+    /** @var ?float */
+    protected ?float $cost = null;
 
-    /** @var float */
-    protected $weight;
+    /** @var ?float */
+    protected ?float $weight = null;
 
-    /** @var bool */
-    protected $copy;
+    /** @var ?bool */
+    protected ?bool $copy = null;
 
-    /** @var bool */
-    protected $required;
+    /** @var ?bool */
+    protected ?bool $required = null;
 
-    /** @var bool */
-    protected $inventory;
+    /** @var ?bool */
+    protected ?bool $inventory = null;
 
     /**
      * Constructor.
      *
-     * @param \MerchantAPI\Model\AttributeTemplateAttribute
+     * @param ?\MerchantAPI\BaseClient $client
+     * @param ?\MerchantAPI\Model\AttributeTemplateAttribute $attributeTemplateAttribute
      */
-    public function __construct(BaseClient $client = null, AttributeTemplateAttribute $attributeTemplateAttribute = null)
+    public function __construct(?BaseClient $client = null, ?AttributeTemplateAttribute $attributeTemplateAttribute = null)
     {
         parent::__construct($client);
         if ($attributeTemplateAttribute) {
@@ -103,7 +105,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateId()
+    public function getAttributeTemplateId() : ?int
     {
         return $this->attributeTemplateId;
     }
@@ -113,7 +115,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateCode()
+    public function getAttributeTemplateCode() : ?string
     {
         return $this->attributeTemplateCode;
     }
@@ -123,7 +125,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplate()
+    public function getEditAttributeTemplate() : ?string
     {
         return $this->editAttributeTemplate;
     }
@@ -133,7 +135,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return int
      */
-    public function getAttributeTemplateAttributeId()
+    public function getAttributeTemplateAttributeId() : ?int
     {
         return $this->attributeTemplateAttributeId;
     }
@@ -143,7 +145,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getAttributeTemplateAttributeCode()
+    public function getAttributeTemplateAttributeCode() : ?string
     {
         return $this->attributeTemplateAttributeCode;
     }
@@ -153,7 +155,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getEditAttributeTemplateAttribute()
+    public function getEditAttributeTemplateAttribute() : ?string
     {
         return $this->editAttributeTemplateAttribute;
     }
@@ -163,7 +165,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getCode()
+    public function getCode() : ?string
     {
         return $this->code;
     }
@@ -173,7 +175,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getPrompt()
+    public function getPrompt() : ?string
     {
         return $this->prompt;
     }
@@ -183,7 +185,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getType()
+    public function getType() : ?string
     {
         return $this->type;
     }
@@ -193,7 +195,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return string
      */
-    public function getImage()
+    public function getImage() : ?string
     {
         return $this->image;
     }
@@ -203,7 +205,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice() : ?float
     {
         return $this->price;
     }
@@ -213,7 +215,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return float
      */
-    public function getCost()
+    public function getCost() : ?float
     {
         return $this->cost;
     }
@@ -223,7 +225,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return float
      */
-    public function getWeight()
+    public function getWeight() : ?float
     {
         return $this->weight;
     }
@@ -233,7 +235,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getCopy()
+    public function getCopy() : ?bool
     {
         return $this->copy;
     }
@@ -243,7 +245,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getRequired()
+    public function getRequired() : ?bool
     {
         return $this->required;
     }
@@ -253,7 +255,7 @@ class AttributeTemplateAttributeUpdate extends Request
      *
      * @return bool
      */
-    public function getInventory()
+    public function getInventory() : ?bool
     {
         return $this->inventory;
     }
@@ -261,10 +263,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set AttributeTemplate_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateId
      * @return $this
      */
-    public function setAttributeTemplateId($attributeTemplateId)
+    public function setAttributeTemplateId(?int $attributeTemplateId) : self
     {
         $this->attributeTemplateId = $attributeTemplateId;
 
@@ -274,10 +276,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set AttributeTemplate_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateCode
      * @return $this
      */
-    public function setAttributeTemplateCode($attributeTemplateCode)
+    public function setAttributeTemplateCode(?string $attributeTemplateCode) : self
     {
         $this->attributeTemplateCode = $attributeTemplateCode;
 
@@ -287,10 +289,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Edit_AttributeTemplate.
      *
-     * @param string
+     * @param ?string $editAttributeTemplate
      * @return $this
      */
-    public function setEditAttributeTemplate($editAttributeTemplate)
+    public function setEditAttributeTemplate(?string $editAttributeTemplate) : self
     {
         $this->editAttributeTemplate = $editAttributeTemplate;
 
@@ -300,10 +302,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set AttributeTemplateAttribute_ID.
      *
-     * @param int
+     * @param ?int $attributeTemplateAttributeId
      * @return $this
      */
-    public function setAttributeTemplateAttributeId($attributeTemplateAttributeId)
+    public function setAttributeTemplateAttributeId(?int $attributeTemplateAttributeId) : self
     {
         $this->attributeTemplateAttributeId = $attributeTemplateAttributeId;
 
@@ -313,10 +315,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set AttributeTemplateAttribute_Code.
      *
-     * @param string
+     * @param ?string $attributeTemplateAttributeCode
      * @return $this
      */
-    public function setAttributeTemplateAttributeCode($attributeTemplateAttributeCode)
+    public function setAttributeTemplateAttributeCode(?string $attributeTemplateAttributeCode) : self
     {
         $this->attributeTemplateAttributeCode = $attributeTemplateAttributeCode;
 
@@ -326,10 +328,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Edit_AttributeTemplateAttribute.
      *
-     * @param string
+     * @param ?string $editAttributeTemplateAttribute
      * @return $this
      */
-    public function setEditAttributeTemplateAttribute($editAttributeTemplateAttribute)
+    public function setEditAttributeTemplateAttribute(?string $editAttributeTemplateAttribute) : self
     {
         $this->editAttributeTemplateAttribute = $editAttributeTemplateAttribute;
 
@@ -339,10 +341,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Code.
      *
-     * @param string
+     * @param ?string $code
      * @return $this
      */
-    public function setCode($code)
+    public function setCode(?string $code) : self
     {
         $this->code = $code;
 
@@ -352,10 +354,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Prompt.
      *
-     * @param string
+     * @param ?string $prompt
      * @return $this
      */
-    public function setPrompt($prompt)
+    public function setPrompt(?string $prompt) : self
     {
         $this->prompt = $prompt;
 
@@ -365,10 +367,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Type.
      *
-     * @param string
+     * @param ?string $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(?string $type) : self
     {
         $this->type = $type;
 
@@ -378,10 +380,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Image.
      *
-     * @param string
+     * @param ?string $image
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(?string $image) : self
     {
         $this->image = $image;
 
@@ -391,10 +393,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Price.
      *
-     * @param float
+     * @param ?float $price
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice(?float $price) : self
     {
         $this->price = $price;
 
@@ -404,10 +406,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Cost.
      *
-     * @param float
+     * @param ?float $cost
      * @return $this
      */
-    public function setCost($cost)
+    public function setCost(?float $cost) : self
     {
         $this->cost = $cost;
 
@@ -417,10 +419,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Weight.
      *
-     * @param float
+     * @param ?float $weight
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight(?float $weight) : self
     {
         $this->weight = $weight;
 
@@ -430,10 +432,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Copy.
      *
-     * @param bool
+     * @param ?bool $copy
      * @return $this
      */
-    public function setCopy($copy)
+    public function setCopy(?bool $copy) : self
     {
         $this->copy = $copy;
 
@@ -443,10 +445,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Required.
      *
-     * @param bool
+     * @param ?bool $required
      * @return $this
      */
-    public function setRequired($required)
+    public function setRequired(?bool $required) : self
     {
         $this->required = $required;
 
@@ -456,10 +458,10 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * Set Inventory.
      *
-     * @param bool
+     * @param ?bool $inventory
      * @return $this
      */
-    public function setInventory($inventory)
+    public function setInventory(?bool $inventory) : self
     {
         $this->inventory = $inventory;
 
@@ -469,7 +471,7 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray() : array
     {
         $data = parent::toArray();
 
@@ -533,7 +535,7 @@ class AttributeTemplateAttributeUpdate extends Request
     /**
      * @inheritDoc
      */
-    public function createResponse(HttpResponse $httpResponse, array $data)
+    public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
         return new \MerchantAPI\Response\AttributeTemplateAttributeUpdate($this, $httpResponse, $data);
     }
