@@ -1,3 +1,30 @@
+v2.4.0
+	New Functions:
+		PageList_Load_Query [MMAPI-95]
+		CSSResource_List_Load_Query [MMAPI-96]
+		JavaScriptResource_List_Load_Query [MMAPI-97]
+		CopyPageRulesList_Load_Query [MMAPI-135]
+		CopyPageRules_Insert [MMAPI-135]
+		CopyPageRules_Update [MMAPI-135]
+		CopyPageRulesList_Delete [MMAPI-135]
+		CopyPageRulesSettingsList_Load_Query [MMAPI-135]
+		CopyPageRulesSettings_Update_Assigned [MMAPI-135]
+		Product_Copy [MMAPI-134]
+		CopyProductRules_Insert [MMAPI-136]
+		CopyProductRules_Update [MMAPI-136]
+		CopyProductRulesList_Delete [MMAPI-136]
+		CopyProductRulesList_Load_Query [MMAPI-136]
+		CopyProductRulesModuleList_Load_Query [MMAPI-136]
+		CopyProductRulesModule_Update_Assigned [MMAPI-136]
+		CopyProductRulesCustomFieldList_Load_Query [MMAPI-136]
+		CopyProductRulesCustomField_Update_Assigned [MMAPI-136]
+	MMAPI-98 - CSSResource_Insert and JavaScriptResource_Insert now return the created resource in the response object
+	MMAPI-167 – New ondemand columns on ProductList_Load_Query: subscriptionsettings and subscriptionterms. 
+						  New Model ProcuctSubscriptionSettings. 
+						  Product model updated with new field: subscriptionsettings
+	MMAPI-173 - FilterExpressionEntry right side is now a mixed type
+	MMAPI-174 – Corrected LoadAndEditProductExample.php not sending the request
+	MMAPI-176 - VersionSettings model no longer inherits Model and its internal data type is now mixed
 v2.3.0
 	MMAPI-77 - Support for PHP 5.6 has been dropped. Minimum required PHP version is now 7.4 with suggested 8.x
 	MMAPI-79 - Corrected invalid model fields:

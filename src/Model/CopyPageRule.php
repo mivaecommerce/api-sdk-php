@@ -101,7 +101,7 @@ class CopyPageRule extends \MerchantAPI\Model
      *
      * @return ?bool
      */
-    public function getJsres() : ?bool
+    public function getJavascriptResourceAssignments() : ?bool
     {
         return $this->getField('jsres');
     }
@@ -111,7 +111,7 @@ class CopyPageRule extends \MerchantAPI\Model
      *
      * @return ?bool
      */
-    public function getCSSres() : ?bool
+    public function getCSSResourceAssignments() : ?bool
     {
         return $this->getField('cssres');
     }
@@ -121,7 +121,7 @@ class CopyPageRule extends \MerchantAPI\Model
      *
      * @return ?bool
      */
-    public function getCacheset() : ?bool
+    public function getCacheSettings() : ?bool
     {
         return $this->getField('cacheset');
     }

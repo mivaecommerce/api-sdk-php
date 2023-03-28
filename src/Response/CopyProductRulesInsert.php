@@ -11,20 +11,20 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
-use MerchantAPI\Model\CSSResource;
+use MerchantAPI\Model\CopyProductRule;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
 
 /**
- * API Response for CSSResource_Insert.
+ * API Response for CopyProductRules_Insert.
  *
  * @package MerchantAPI\Response
- * @see https://docs.miva.com/json-api/functions/cssresource_insert
+ * @see https://docs.miva.com/json-api/functions/copyproductrules_insert
  */
-class CSSResourceInsert extends Response
+class CopyProductRulesInsert extends Response
 {
-    /** @var ?\MerchantAPI\Model\CSSResource */
-    protected ?CSSResource $CSSResource = null;
+    /** @var ?\MerchantAPI\Model\CopyProductRule */
+    protected ?CopyProductRule $copyProductRule = null;
 
     /**
      * @inheritDoc
@@ -37,16 +37,16 @@ class CSSResourceInsert extends Response
             return;
         }
 
-        $this->CSSResource = new CSSResource($this->data['data']);
+        $this->copyProductRule = new CopyProductRule($this->data['data']);
     }
 
     /**
-     * Get CSSResource.
+     * Get copyProductRule.
      *
-     * @return \MerchantAPI\Model\CSSResource|null
+     * @return \MerchantAPI\Model\CopyProductRule|null
      */
-    public function getCSSResource() : ?CSSResource
+    public function getCopyProductRule() : ?CopyProductRule
     {
-        return $this->CSSResource;
+        return $this->copyProductRule;
     }
 }

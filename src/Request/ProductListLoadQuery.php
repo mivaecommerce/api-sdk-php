@@ -100,6 +100,8 @@ class ProductListLoadQuery extends ListQueryRequest
         'relatedproducts',
         'uris',
         'url',
+        'subscriptionsettings',
+        'subscriptionterms',
     ];
 
     /** @var array Requests available on custom filters */

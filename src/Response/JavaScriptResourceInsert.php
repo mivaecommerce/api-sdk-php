@@ -11,6 +11,9 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\Response;
+use MerchantAPI\Model\JavaScriptResource;
+use MerchantAPI\RequestInterface;
+use MerchantAPI\Http\HttpResponse;
 
 /**
  * API Response for JavaScriptResource_Insert.
@@ -20,4 +23,30 @@ use MerchantAPI\Response;
  */
 class JavaScriptResourceInsert extends Response
 {
+    /** @var ?\MerchantAPI\Model\JavaScriptResource */
+    protected ?JavaScriptResource $javaScriptResource = null;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(RequestInterface $request, HttpResponse $response, array $data)
+    {
+        parent::__construct($request, $response, $data);
+
+        if (!$this->isSuccess()) {
+            return;
+        }
+
+        $this->javaScriptResource = new JavaScriptResource($this->data['data']);
+    }
+
+    /**
+     * Get javaScriptResource.
+     *
+     * @return \MerchantAPI\Model\JavaScriptResource|null
+     */
+    public function getJavaScriptResource() : ?JavaScriptResource
+    {
+        return $this->javaScriptResource;
+    }
 }

@@ -25,8 +25,8 @@ class FilterExpressionEntry
     /** @var string one of self::OPERATOR_ constants */
     protected string $operator;
 
-    /** @var string right side search value */
-    protected string $right;
+    /** @var mixed right side search value */
+    protected $right;
 
     /** @var int search type */
     protected int $search;
@@ -39,8 +39,12 @@ class FilterExpressionEntry
      * @param string $right
      * @param int $search
      */
-    public function __construct(string $left, string $operator, string $right, int $search = FilterExpression::FILTER_SEARCH)
+    public function __construct(string $left, string $operator, $right, int $search = FilterExpression::FILTER_SEARCH)
     {
+        if (!is_scalar($right) && !is_array($right)) {
+            throw new \InvalidArgumentException('Invalid type for right hand side of expression');
+        }
+
         $this->left     = $left;
         $this->operator = $operator;
         $this->right    = $right;
@@ -94,9 +98,9 @@ class FilterExpressionEntry
     /**
      * Get the right side of the expression.
      *
-     * @return string
+     * @return string|array
      */
-    public function getRight() : string
+    public function getRight()
     {
         return $this->right;
     }
@@ -104,11 +108,15 @@ class FilterExpressionEntry
     /**
      * Set the right side of the expression.
      *
-     * @param string $right
+     * @param mixed $right
      * @return FilterExpressionEntry
      */
-    public function setRight(string $right) : self
+    public function setRight($right) : self
     {
+        if (!is_scalar($right) && !is_array($right)) {
+            throw new \InvalidArgumentException('Invalid type for right hand side of expression');
+        }
+
         $this->right = $right;
         return $this;
     }

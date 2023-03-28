@@ -68,10 +68,10 @@ class PageListLoadQuery extends ListQueryRequest
     protected ?int $branchId = null;
 
     /** @var ?string */
-    protected ?string $editBranch = null;
+    protected ?string $branchName = null;
 
     /** @var ?string */
-    protected ?string $branchName = null;
+    protected ?string $editBranch = null;
 
     /**
      * Constructor.
@@ -83,12 +83,10 @@ class PageListLoadQuery extends ListQueryRequest
     {
         parent::__construct($client);
         if ($branch) {
-            if ($branch->get()) {
-                $this->setBranchId($branch->get());
-            } else if ($branch->get()) {
-                $this->setEditBranch($branch->get());
-            } else if ($branch->get()) {
-                $this->setBranchName($branch->get());
+            if ($branch->getId()) {
+                $this->setBranchId($branch->getId());
+            } else if ($branch->getName()) {
+                $this->setEditBranch($branch->getName());
             }
         }
     }
@@ -104,16 +102,6 @@ class PageListLoadQuery extends ListQueryRequest
     }
 
     /**
-     * Get Edit_Branch.
-     *
-     * @return string
-     */
-    public function getEditBranch() : ?string
-    {
-        return $this->editBranch;
-    }
-
-    /**
      * Get Branch_Name.
      *
      * @return string
@@ -121,6 +109,16 @@ class PageListLoadQuery extends ListQueryRequest
     public function getBranchName() : ?string
     {
         return $this->branchName;
+    }
+
+    /**
+     * Get Edit_Branch.
+     *
+     * @return string
+     */
+    public function getEditBranch() : ?string
+    {
+        return $this->editBranch;
     }
 
     /**
@@ -132,19 +130,6 @@ class PageListLoadQuery extends ListQueryRequest
     public function setBranchId(?int $branchId) : self
     {
         $this->branchId = $branchId;
-
-        return $this;
-    }
-
-    /**
-     * Set Edit_Branch.
-     *
-     * @param ?string $editBranch
-     * @return $this
-     */
-    public function setEditBranch(?string $editBranch) : self
-    {
-        $this->editBranch = $editBranch;
 
         return $this;
     }
@@ -163,6 +148,19 @@ class PageListLoadQuery extends ListQueryRequest
     }
 
     /**
+     * Set Edit_Branch.
+     *
+     * @param ?string $editBranch
+     * @return $this
+     */
+    public function setEditBranch(?string $editBranch) : self
+    {
+        $this->editBranch = $editBranch;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray() : array
@@ -171,10 +169,10 @@ class PageListLoadQuery extends ListQueryRequest
 
         if ($this->getBranchId()) {
             $data['Branch_ID'] = $this->getBranchId();
-        } else if ($this->getEditBranch()) {
-            $data['Edit_Branch'] = $this->getEditBranch();
         } else if ($this->getBranchName()) {
             $data['Branch_Name'] = $this->getBranchName();
+        } else if ($this->getEditBranch()) {
+            $data['Edit_Branch'] = $this->getEditBranch();
         }
 
         return $data;

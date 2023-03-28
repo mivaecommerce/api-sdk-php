@@ -15,8 +15,11 @@ namespace MerchantAPI\Model;
  *
  * @package MerchantAPI\Model
  */
-class VersionSettings extends \MerchantAPI\Model
+class VersionSettings
 {
+    /** @var mixed $data */
+    protected $data;
+
     /**
      * Constructor
      *
@@ -155,10 +158,24 @@ class VersionSettings extends \MerchantAPI\Model
     }
 
     /**
-     * @inheritDoc
+     * Get the underlying data
+     * 
+     * @return mixed
      */
-    public function getData() : array
+    public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Set the underlying data
+     * 
+     * @param mixed $data
+     * @return self
+     */
+    public function setData($data) : self
+    {
+        $this->data = $data;
+        return $this;
     }
 }

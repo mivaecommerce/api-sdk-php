@@ -47,7 +47,7 @@ $productListRequest->addOnDemandColumn('CustomField_Values:*');
 /* send the request for the response */
 try
 {
-    $productListResponse = $productListRequest; // MerchantAPI\Response\ProductListLoadQuery
+    $productListResponse = $productListRequest->send(); // MerchantAPI\Response\ProductListLoadQuery
     // Alternately: $productListResponse = $client->send($productListRequest); // MerchantAPI\Response\ProductListLoadQuery
 } catch(ClientException $e) {
     printf("Error Executing ProductListLoadQuery Request: %s\r\n", $e->getMessage());
@@ -96,7 +96,6 @@ $updateProductRequest->getCustomFieldValues()->addValue('MyField', 'MyValue');
  * to update a specific module field, specify the optional 3rd argument with the module code.
  */
 $updateProductRequest->getCustomFieldValues()->addValue('MyField', 'MyValue', 'MyModule');
-
 
 try {
     $updateProductResponse = $updateProductRequest->send(); // MerchantAPI\Response\ProductUpdate

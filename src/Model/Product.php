@@ -34,6 +34,7 @@ class Product extends \MerchantAPI\Model
         $this->setField('categories', new Collection());
         $this->setField('productimagedata', new Collection());
         $this->setField('attributes', new Collection());
+        $this->setField('subscriptionterms', new Collection());
 
         if (isset($data['productinventorysettings'])) {
             if ($data['productinventorysettings'] instanceof ProductInventorySettings) {
@@ -156,6 +157,35 @@ class Product extends \MerchantAPI\Model
             $this->setField('attributes', $attributes);
         }
 
+        if (isset($data['subscriptionsettings'])) {
+            if ($data['subscriptionsettings'] instanceof ProductSubscriptionSettings) {
+                $this->setField('subscriptionsettings', $data['subscriptionsettings']);
+            } else if (is_array($data['subscriptionsettings'])) {
+                $this->setField('subscriptionsettings', new ProductSubscriptionSettings($data['subscriptionsettings']));
+            } else {
+                throw new \InvalidArgumentException(sprintf('Expected ProductSubscriptionSettings or an array but got %s',
+                    is_object($data['subscriptionsettings']) ?
+                        get_class($data['subscriptionsettings']) : gettype($data['subscriptionsettings'])));
+            }
+        }
+
+        if (isset($data['subscriptionterms']) && is_array($data['subscriptionterms'])) {
+            $subscriptionterms = new Collection();
+
+            foreach($data['subscriptionterms'] as $e) {
+                if ($e instanceof ProductSubscriptionTerm) {
+                    $subscriptionterms[] = $e;
+                } else if (is_array($e)) {
+                    $subscriptionterms[] = new ProductSubscriptionTerm($e);
+                } else {
+                    throw new \InvalidArgumentException(sprintf('Expected array of ProductSubscriptionTerm or an array of arrays but got %s',
+                        is_object($e) ? get_class($e) : gettype($e)));
+                }
+            }
+
+            $this->setField('subscriptionterms', $subscriptionterms);
+        }
+
         $imageTypes = [];
         foreach($data as $k => $v) {
             if (stripos($k, 'imagetype:') !== false) {
@@ -245,6 +275,24 @@ class Product extends \MerchantAPI\Model
                 foreach($this->data['attributes'] as $i => $e) {
                     if ($e instanceof ProductAttribute) {
                         $this->data['attributes'][$i] = clone $this->data['attributes'][$i];
+                    }
+                }
+            }
+        }
+
+        if (isset($data['subscriptionsettings'])) {
+            if ($this->data['subscriptionsettings'] instanceof ProductSubscriptionSettings) {
+                $this->data['subscriptionsettings'] = clone $this->data['subscriptionsettings'];
+            }
+        }
+
+        if (isset($this->data['subscriptionterms']) && is_array($this->data['subscriptionterms'])) {
+            if ($this->data['subscriptionterms'] instanceof Collection) {
+                $this->data['subscriptionterms'] = clone $this->data['subscriptionterms'];
+            } else {
+                foreach($this->data['subscriptionterms'] as $i => $e) {
+                    if ($e instanceof ProductSubscriptionTerm) {
+                        $this->data['subscriptionterms'][$i] = clone $this->data['subscriptionterms'][$i];
                     }
                 }
             }
@@ -579,5 +627,25 @@ class Product extends \MerchantAPI\Model
     public function getDisplayOrder() : ?int
     {
         return $this->getField('disp_order');
+    }
+
+    /**
+     * Get subscriptionsettings.
+     *
+     * @return ?\MerchantAPI\Model\ProductSubscriptionSettings
+     */
+    public function getSubscriptionSettings() : ?ProductSubscriptionSettings
+    {
+        return $this->getField('subscriptionsettings');
+    }
+
+    /**
+     * Get subscriptionterms.
+     *
+     * @return \MerchantAPI\Collection
+     */
+    public function getSubscriptionTerms() : ?Collection
+    {
+        return $this->getField('subscriptionterms');
     }
 }
