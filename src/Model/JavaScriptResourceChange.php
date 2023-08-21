@@ -280,7 +280,7 @@ class JavaScriptResourceChange extends \MerchantAPI\Model
     /**
      * Set LinkedPages.
      *
-     * @param ?array $linkedPages
+     * @param array $linkedPages
      * @return $this
      */
     public function setLinkedPages(?array $linkedPages) : self
@@ -291,7 +291,7 @@ class JavaScriptResourceChange extends \MerchantAPI\Model
     /**
      * Set LinkedResources.
      *
-     * @param ?array $linkedResources
+     * @param array $linkedResources
      * @return $this
      */
     public function setLinkedResources(?array $linkedResources) : self

@@ -31,6 +31,6 @@ class ProductVariantListDelete extends Response
             return $this->data['processed'];
         }
 
-        return null;
+        return 0;
     }
 }

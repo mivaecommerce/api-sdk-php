@@ -41,49 +41,49 @@ class FilterExpression
     ];
 
     /** @var string Operator Equals */
-    const OPERATOR_EQ 		= 'EQ';
+    const OPERATOR_EQ       = 'EQ';
 
     /** @var string Operator Greater Than */
-    const OPERATOR_GT 		= 'GT';
+    const OPERATOR_GT       = 'GT';
 
     /** @var string Operator Greater Than or Equal */
-    const OPERATOR_GE 		= 'GE';
+    const OPERATOR_GE       = 'GE';
 
     /** @var string Operator Less Than */
-    const OPERATOR_LT 		= 'LT';
+    const OPERATOR_LT       = 'LT';
 
     /** @var string Operator Less Than or Equal */
-    const OPERATOR_LE 		= 'LE';
+    const OPERATOR_LE       = 'LE';
 
     /** @var string Operator Contains */
-    const OPERATOR_CO 		= 'CO';
+    const OPERATOR_CO       = 'CO';
 
     /** @var string Operator Does Not Contain */
-    const OPERATOR_NC 		= 'NC';
+    const OPERATOR_NC       = 'NC';
 
     /** @var string Operator Like */
-    const OPERATOR_LIKE 	= 'LIKE';
+    const OPERATOR_LIKE     = 'LIKE';
 
     /** @var string Operator Not Like */
-    const OPERATOR_NOTLIKE 	= 'NOTLIKE';
+    const OPERATOR_NOTLIKE  = 'NOTLIKE';
 
     /** @var string Operator Not Equal */
-    const OPERATOR_NE 		= 'NE';
+    const OPERATOR_NE       = 'NE';
 
     /** @var string Operator True */
-    const OPERATOR_TRUE 	= 'TRUE';
+    const OPERATOR_TRUE     = 'TRUE';
 
     /** @var string Operator False */
-    const OPERATOR_FALSE 	= 'FALSE';
+    const OPERATOR_FALSE    = 'FALSE';
 
     /** @var string Operator Is Null */
-    const OPERATOR_NULL 	= 'NULL';
+    const OPERATOR_NULL     = 'NULL';
 
     /** @var string Operator In Set (comma separated list) */
-    const OPERATOR_IN 		= 'IN';
+    const OPERATOR_IN       = 'IN';
 
     /** @var string Operator Not In Set (comma separated list) */
-    const OPERATOR_NOT_IN 	= 'NOT_IN';
+    const OPERATOR_NOT_IN   = 'NOT_IN';
 
     /** @var string Operator SUBWHERE */
     const OPERATOR_SUBWHERE = 'SUBWHERE';
@@ -230,11 +230,7 @@ class FilterExpression
      */
     public function andX(FilterExpression $expression) : self
     {
-        $expression->setParent($this);
-
-        $this->expressions[] = [ 'type' => static::FILTER_SEARCH_AND, 'entry' => $expression ];
-
-        return $this;
+        return $this->subX(static::FILTER_SEARCH_AND, $expression);
     }
 
     /**
@@ -245,9 +241,24 @@ class FilterExpression
      */
     public function orX(FilterExpression $expression) : self
     {
+        return $this->subX(static::FILTER_SEARCH_OR, $expression);
+    }
+
+    /**
+     * Add a nested expression.
+     *
+     * @param FilterExpression $expression
+     * @return $this
+     */
+    public function subX(string $searchType, FilterExpression $expression) : self
+    {
+        if ($expression === $this) {
+            throw new \InvalidArgumentException('Cannot add a subexpression with itself');
+        }
+
         $expression->setParent($this);
 
-        $this->expressions[] = [ 'type' => static::FILTER_SEARCH_OR, 'entry' => $expression ];
+        $this->expressions[] = [ 'type' => $searchType, 'entry' => $expression ];
 
         return $this;
     }
@@ -790,41 +801,50 @@ class FilterExpression
      */
     public function toArray() : array
     {
+        if ($this->isChild()) {
+            return $this->toArrayLowLevel();
+        }
+
+        return [
+            [
+                'name' => static::$searchFilters[static::FILTER_SEARCH],
+                'value' => $this->toArrayLowLevel()
+            ]
+        ];
+    }
+
+    protected function toArrayLowLevel() : array
+    {
         $return = [];
+        $lastType = null;
 
         foreach ($this->expressions as $e) {
             if ($e['entry'] instanceof FilterExpression) {
                 $entry = [
-                    'name'  => static::$searchFilters[$e['type']],
-                    'value' => $e['entry']->toArray(),
+                    'field'     => static::$searchFilters[$e['type']],
+                    'operator'  => static::OPERATOR_SUBWHERE,
+                    'value'     =>  $e['entry']->toArray()
+                ];
+            } elseif ($this->isChild() || ($lastType != null && $e['type'] != $lastType)) {
+                $entry = [
+                    'field'     => static::$searchFilters[$e['type']],
+                    'operator'  => static::OPERATOR_SUBWHERE,
+                    'value'     => [
+                        [
+                            'field'     => $e['entry']->getLeft(),
+                            'operator'  => $e['entry']->getOperator(),
+                            'value'     => is_array($e['entry']->getRight()) ? implode(',', $e['entry']->getRight()) : $e['entry']->getRight()
+                        ]
+                    ]
                 ];
             } else {
-                if ($this->isChild()) {
-                    $entry = [
-                        'field'     => static::$searchFilters[$e['type']],
-                        'operator'  => 'SUBWHERE',
-                        'value'     => [
-                            [
-                                'field' => $e['entry']->getLeft(),
-                                'operator' => $e['entry']->getOperator(),
-                                'value' => is_array($e['entry']->getRight()) ?
-                                            implode(',', $e['entry']->getRight()) : $e['entry']->getRight()
-                            ],
-                        ]
-                    ];
-                } else {
-                    $entry = [
-                        'name' => static::$searchFilters[$e['type']],
-                        'value' => [
-                            [
-                                'field'     => $e['entry']->getLeft(),
-                                'operator'  => $e['entry']->getOperator(),
-                                'value'     => is_array($e['entry']->getRight()) ?
-                                                implode(',', $e['entry']->getRight()) : $e['entry']->getRight()
-                            ]
-                        ]
-                    ];
-                }
+                $lastType = $e['type'];
+
+                $entry = [
+                    'field'     => $e['entry']->getLeft(),
+                    'operator'  => $e['entry']->getOperator(),
+                    'value'     =>  is_array($e['entry']->getRight()) ? implode(',', $e['entry']->getRight()) : $e['entry']->getRight()
+                ];
             }
 
             $return[] = $entry;

@@ -55,6 +55,12 @@ class CSSResourceUpdate extends Request
     /** @var \MerchantAPI\Collection */
     protected Collection $CSSResourceAttributes;
 
+    /** @var ?string */
+    protected ?string $CSSResourceModuleCode = null;
+
+    /** @var ?string */
+    protected ?string $CSSResourceModuleData = null;
+
     /**
      * Constructor.
      *
@@ -145,6 +151,26 @@ class CSSResourceUpdate extends Request
     public function getCSSResourceAttributes() : ?Collection
     {
         return $this->CSSResourceAttributes;
+    }
+
+    /**
+     * Get CSSResource_Module_Code.
+     *
+     * @return string
+     */
+    public function getCSSResourceModuleCode() : ?string
+    {
+        return $this->CSSResourceModuleCode;
+    }
+
+    /**
+     * Get CSSResource_Module_Data.
+     *
+     * @return string
+     */
+    public function getCSSResourceModuleData() : ?string
+    {
+        return $this->CSSResourceModuleData;
     }
 
     /**
@@ -254,6 +280,32 @@ class CSSResourceUpdate extends Request
     }
 
     /**
+     * Set CSSResource_Module_Code.
+     *
+     * @param ?string $CSSResourceModuleCode
+     * @return $this
+     */
+    public function setCSSResourceModuleCode(?string $CSSResourceModuleCode) : self
+    {
+        $this->CSSResourceModuleCode = $CSSResourceModuleCode;
+
+        return $this;
+    }
+
+    /**
+     * Set CSSResource_Module_Data.
+     *
+     * @param ?string $CSSResourceModuleData
+     * @return $this
+     */
+    public function setCSSResourceModuleData(?string $CSSResourceModuleData) : self
+    {
+        $this->CSSResourceModuleData = $CSSResourceModuleData;
+
+        return $this;
+    }
+
+    /**
      * Add CSSResource_Attributes.
      *
      * @param \MerchantAPI\Model\CSSResourceAttribute
@@ -325,6 +377,14 @@ class CSSResourceUpdate extends Request
                     $data['CSSResource_Attributes'][] = $CSSResourceAttribute->getData();
                 }
             }
+        }
+
+        if (!is_null($this->getCSSResourceModuleCode())) {
+            $data['CSSResource_Module_Code'] = $this->getCSSResourceModuleCode();
+        }
+
+        if (!is_null($this->getCSSResourceModuleData())) {
+            $data['CSSResource_Module_Data'] = $this->getCSSResourceModuleData();
         }
 
         return $data;

@@ -152,6 +152,7 @@ abstract class Request implements RequestInterface
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

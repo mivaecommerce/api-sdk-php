@@ -130,6 +130,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return int|null|string
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->container);
@@ -140,6 +141,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->container);
@@ -194,6 +196,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->container);
@@ -214,6 +217,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         return $this->first();
@@ -236,6 +240,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      * @param mixed $offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!is_null($offset) && isset($this->container[$offset])) {
@@ -252,6 +257,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      * @param mixed $value
      * @return $this
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value) : self
     {
         if (is_null($offset)) {
@@ -269,6 +275,7 @@ class Collection implements \ArrayAccess, \Iterator, \Countable
      * @param mixed $offset
      * @return $this
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset) : self
     {
         unset($this->container[$offset]);

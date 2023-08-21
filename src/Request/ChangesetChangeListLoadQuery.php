@@ -37,16 +37,23 @@ class ChangesetChangeListLoadQuery extends ListQueryRequest
     protected array $availableSearchFields = [
         'item_type',
         'item_id',
+        'item_user_id',
+        'item_user_name',
+        'item_user_icon',
         'item_version_id',
         'item_identifier',
+        'item_change_type',
     ];
 
     /** @var array Requests available sort fields */
     protected array $availableSortFields = [
         'item_type',
         'item_id',
+        'item_user_id',
+        'item_user_name',
         'item_version_id',
         'item_identifier',
+        'item_change_type',
     ];
 
     /** @var ?int */

@@ -58,6 +58,12 @@ class JavaScriptResourceUpdate extends Request
     /** @var \MerchantAPI\Collection */
     protected Collection $javaScriptResourceAttributes;
 
+    /** @var ?string */
+    protected ?string $javaScriptResourceModuleCode = null;
+
+    /** @var ?string */
+    protected ?string $javaScriptResourceModuleData = null;
+
     /**
      * Constructor.
      *
@@ -158,6 +164,26 @@ class JavaScriptResourceUpdate extends Request
     public function getJavaScriptResourceAttributes() : ?Collection
     {
         return $this->javaScriptResourceAttributes;
+    }
+
+    /**
+     * Get JavaScriptResource_Module_Code.
+     *
+     * @return string
+     */
+    public function getJavaScriptResourceModuleCode() : ?string
+    {
+        return $this->javaScriptResourceModuleCode;
+    }
+
+    /**
+     * Get JavaScriptResource_Module_Data.
+     *
+     * @return string
+     */
+    public function getJavaScriptResourceModuleData() : ?string
+    {
+        return $this->javaScriptResourceModuleData;
     }
 
     /**
@@ -280,6 +306,32 @@ class JavaScriptResourceUpdate extends Request
     }
 
     /**
+     * Set JavaScriptResource_Module_Code.
+     *
+     * @param ?string $javaScriptResourceModuleCode
+     * @return $this
+     */
+    public function setJavaScriptResourceModuleCode(?string $javaScriptResourceModuleCode) : self
+    {
+        $this->javaScriptResourceModuleCode = $javaScriptResourceModuleCode;
+
+        return $this;
+    }
+
+    /**
+     * Set JavaScriptResource_Module_Data.
+     *
+     * @param ?string $javaScriptResourceModuleData
+     * @return $this
+     */
+    public function setJavaScriptResourceModuleData(?string $javaScriptResourceModuleData) : self
+    {
+        $this->javaScriptResourceModuleData = $javaScriptResourceModuleData;
+
+        return $this;
+    }
+
+    /**
      * Add JavaScriptResource_Attributes.
      *
      * @param \MerchantAPI\Model\JavaScriptResourceAttribute
@@ -353,6 +405,14 @@ class JavaScriptResourceUpdate extends Request
                     $data['JavaScriptResource_Attributes'][] = $javaScriptResourceAttribute->getData();
                 }
             }
+        }
+
+        if (!is_null($this->getJavaScriptResourceModuleCode())) {
+            $data['JavaScriptResource_Module_Code'] = $this->getJavaScriptResourceModuleCode();
+        }
+
+        if (!is_null($this->getJavaScriptResourceModuleData())) {
+            $data['JavaScriptResource_Module_Data'] = $this->getJavaScriptResourceModuleData();
         }
 
         return $data;

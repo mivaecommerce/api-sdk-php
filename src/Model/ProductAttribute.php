@@ -160,7 +160,7 @@ class ProductAttribute extends \MerchantAPI\Model
         if ($this->hasField('disp_order')) {
             return (int) $this->getField('disp_order', 0);
         } else if ($this->hasField('disporder')) {
-            return (int) $this->getField('disporder');
+            return (int) $this->getField('disporder', 0);
         }
 
         return 0;

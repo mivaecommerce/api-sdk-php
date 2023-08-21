@@ -39,6 +39,8 @@ class JavaScriptResourceListLoadQuery extends ListQueryRequest
         'is_global',
         'active',
         'file',
+        'mod_code',
+        'mod_data',
     ];
 
     /** @var array Requests available sort fields */
@@ -49,6 +51,8 @@ class JavaScriptResourceListLoadQuery extends ListQueryRequest
         'is_global',
         'active',
         'file',
+        'mod_code',
+        'mod_data',
     ];
 
     /**

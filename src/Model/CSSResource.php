@@ -31,6 +31,15 @@ class CSSResource extends \MerchantAPI\Model
     /** @var string RESOURCE_TYPE_LOCAL */
     const RESOURCE_TYPE_LOCAL = 'L';
 
+    /** @var string RESOURCE_TYPE_MODULE */
+    const RESOURCE_TYPE_MODULE = 'M';
+
+    /** @var string RESOURCE_TYPE_MODULE_INLINE */
+    const RESOURCE_TYPE_MODULE_INLINE = 'Y';
+
+    /** @var string RESOURCE_TYPE_MODULE_MANAGED */
+    const RESOURCE_TYPE_MODULE_MANAGED = 'Z';
+
     /**
      * Constructor.
      *
@@ -159,5 +168,25 @@ class CSSResource extends \MerchantAPI\Model
     public function getAttributes() : ?Collection
     {
         return $this->getField('attributes');
+    }
+
+    /**
+     * Get mod_code.
+     *
+     * @return ?string
+     */
+    public function getModuleCode() : ?string
+    {
+        return $this->getField('mod_code');
+    }
+
+    /**
+     * Get mod_data.
+     *
+     * @return ?string
+     */
+    public function getModuleData() : ?string
+    {
+        return $this->getField('mod_data');
     }
 }

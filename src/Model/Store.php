@@ -432,4 +432,24 @@ class Store extends \MerchantAPI\Model
     {
         return $this->getField('redisex');
     }
+
+    /**
+     * Get boxpack_id.
+     *
+     * @return ?int
+     */
+    public function getBoxPackingId() : ?int
+    {
+        return $this->getField('boxpack_id');
+    }
+
+    /**
+     * Get addrval_id.
+     *
+     * @return ?int
+     */
+    public function getAddressValidationId() : ?int
+    {
+        return $this->getField('addrval_id');
+    }
 }

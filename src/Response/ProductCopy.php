@@ -37,7 +37,7 @@ class ProductCopy extends Response
             return;
         }
 
-        $this->product = isset($this->data['data']) ? new Product($this->data['data']) : null;
+        $this->product = new Product($this->data['data']);
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductCopy extends Response
             return $this->data['completed'];
         }
 
-        return null;
+        return false;
     }
 
     /**

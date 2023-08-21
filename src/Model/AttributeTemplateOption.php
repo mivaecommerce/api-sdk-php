@@ -57,7 +57,7 @@ class AttributeTemplateOption extends \MerchantAPI\Model
         if ($this->hasField('disporder')) {
             return (int) $this->getField('disporder', 0);
         } else if ($this->hasField('disp_order')) {
-            return (int) $this->getField('disp_order');
+            return (int) $this->getField('disp_order', 0);
         }
 
         return 0;

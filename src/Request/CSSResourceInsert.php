@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\CSSResourceAttribute;
+use MerchantAPI\Model\CSSResource;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 use MerchantAPI\Collection;
@@ -50,6 +51,12 @@ class CSSResourceInsert extends Request
 
     /** @var \MerchantAPI\Collection */
     protected Collection $CSSResourceAttributes;
+
+    /** @var ?string */
+    protected ?string $CSSResourceModuleCode = null;
+
+    /** @var ?string */
+    protected ?string $CSSResourceModuleData = null;
 
     /**
      * Constructor.
@@ -120,6 +127,26 @@ class CSSResourceInsert extends Request
     public function getCSSResourceAttributes() : ?Collection
     {
         return $this->CSSResourceAttributes;
+    }
+
+    /**
+     * Get CSSResource_Module_Code.
+     *
+     * @return string
+     */
+    public function getCSSResourceModuleCode() : ?string
+    {
+        return $this->CSSResourceModuleCode;
+    }
+
+    /**
+     * Get CSSResource_Module_Data.
+     *
+     * @return string
+     */
+    public function getCSSResourceModuleData() : ?string
+    {
+        return $this->CSSResourceModuleData;
     }
 
     /**
@@ -216,6 +243,32 @@ class CSSResourceInsert extends Request
     }
 
     /**
+     * Set CSSResource_Module_Code.
+     *
+     * @param ?string $CSSResourceModuleCode
+     * @return $this
+     */
+    public function setCSSResourceModuleCode(?string $CSSResourceModuleCode) : self
+    {
+        $this->CSSResourceModuleCode = $CSSResourceModuleCode;
+
+        return $this;
+    }
+
+    /**
+     * Set CSSResource_Module_Data.
+     *
+     * @param ?string $CSSResourceModuleData
+     * @return $this
+     */
+    public function setCSSResourceModuleData(?string $CSSResourceModuleData) : self
+    {
+        $this->CSSResourceModuleData = $CSSResourceModuleData;
+
+        return $this;
+    }
+
+    /**
      * Add CSSResource_Attributes.
      *
      * @param \MerchantAPI\Model\CSSResourceAttribute
@@ -279,6 +332,14 @@ class CSSResourceInsert extends Request
                     $data['CSSResource_Attributes'][] = $CSSResourceAttribute->getData();
                 }
             }
+        }
+
+        if (!is_null($this->getCSSResourceModuleCode())) {
+            $data['CSSResource_Module_Code'] = $this->getCSSResourceModuleCode();
+        }
+
+        if (!is_null($this->getCSSResourceModuleData())) {
+            $data['CSSResource_Module_Data'] = $this->getCSSResourceModuleData();
         }
 
         return $data;

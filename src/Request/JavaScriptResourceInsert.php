@@ -13,6 +13,7 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\JavaScriptResourceAttribute;
+use MerchantAPI\Model\JavaScriptResource;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 use MerchantAPI\Collection;
@@ -50,6 +51,12 @@ class JavaScriptResourceInsert extends Request
 
     /** @var \MerchantAPI\Collection */
     protected Collection $javaScriptResourceAttributes;
+
+    /** @var ?string */
+    protected ?string $javaScriptResourceModuleCode = null;
+
+    /** @var ?string */
+    protected ?string $javaScriptResourceModuleData = null;
 
     /**
      * Constructor.
@@ -120,6 +127,26 @@ class JavaScriptResourceInsert extends Request
     public function getJavaScriptResourceAttributes() : ?Collection
     {
         return $this->javaScriptResourceAttributes;
+    }
+
+    /**
+     * Get JavaScriptResource_Module_Code.
+     *
+     * @return string
+     */
+    public function getJavaScriptResourceModuleCode() : ?string
+    {
+        return $this->javaScriptResourceModuleCode;
+    }
+
+    /**
+     * Get JavaScriptResource_Module_Data.
+     *
+     * @return string
+     */
+    public function getJavaScriptResourceModuleData() : ?string
+    {
+        return $this->javaScriptResourceModuleData;
     }
 
     /**
@@ -216,6 +243,32 @@ class JavaScriptResourceInsert extends Request
     }
 
     /**
+     * Set JavaScriptResource_Module_Code.
+     *
+     * @param ?string $javaScriptResourceModuleCode
+     * @return $this
+     */
+    public function setJavaScriptResourceModuleCode(?string $javaScriptResourceModuleCode) : self
+    {
+        $this->javaScriptResourceModuleCode = $javaScriptResourceModuleCode;
+
+        return $this;
+    }
+
+    /**
+     * Set JavaScriptResource_Module_Data.
+     *
+     * @param ?string $javaScriptResourceModuleData
+     * @return $this
+     */
+    public function setJavaScriptResourceModuleData(?string $javaScriptResourceModuleData) : self
+    {
+        $this->javaScriptResourceModuleData = $javaScriptResourceModuleData;
+
+        return $this;
+    }
+
+    /**
      * Add JavaScriptResource_Attributes.
      *
      * @param \MerchantAPI\Model\JavaScriptResourceAttribute
@@ -279,6 +332,14 @@ class JavaScriptResourceInsert extends Request
                     $data['JavaScriptResource_Attributes'][] = $javaScriptResourceAttribute->getData();
                 }
             }
+        }
+
+        if (!is_null($this->getJavaScriptResourceModuleCode())) {
+            $data['JavaScriptResource_Module_Code'] = $this->getJavaScriptResourceModuleCode();
+        }
+
+        if (!is_null($this->getJavaScriptResourceModuleData())) {
+            $data['JavaScriptResource_Module_Data'] = $this->getJavaScriptResourceModuleData();
         }
 
         return $data;

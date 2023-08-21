@@ -17,6 +17,7 @@ use MerchantAPI\Model\ResourceGroupChange;
 use MerchantAPI\Model\CSSResourceChange;
 use MerchantAPI\Model\JavaScriptResourceChange;
 use MerchantAPI\Model\PropertyChange;
+use MerchantAPI\Model\ModuleChange;
 use MerchantAPI\Model\Branch;
 use MerchantAPI\Model\Changeset;
 use MerchantAPI\BaseClient;
@@ -69,6 +70,9 @@ class ChangesetCreate extends Request
     /** @var \MerchantAPI\Collection */
     protected Collection $propertyChanges;
 
+    /** @var \MerchantAPI\Collection */
+    protected Collection $moduleChanges;
+
     /**
      * Constructor.
      *
@@ -83,6 +87,7 @@ class ChangesetCreate extends Request
         $this->CSSResourceChanges = new Collection();
         $this->javaScriptResourceChanges = new Collection();
         $this->propertyChanges = new Collection();
+        $this->moduleChanges = new Collection();
 
         if ($branch) {
             if ($branch->getId()) {
@@ -191,6 +196,16 @@ class ChangesetCreate extends Request
     public function getPropertyChanges() : ?Collection
     {
         return $this->propertyChanges;
+    }
+
+    /**
+     * Get Module_Changes.
+     *
+     * @return \MerchantAPI\Collection
+     */
+    public function getModuleChanges() : ?Collection
+    {
+        return $this->moduleChanges;
     }
 
     /**
@@ -399,6 +414,34 @@ class ChangesetCreate extends Request
     }
 
     /**
+     * Set Module_Changes.
+     *
+     * @param \MerchantAPI\Collection|array $moduleChanges
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function setModuleChanges($moduleChanges) : self
+    {
+        if (!is_array($moduleChanges) && !$moduleChanges instanceof Collection) {
+            throw new \InvalidArgumentException(sprintf('Expected array or Collection but got %s',
+                    is_object($moduleChanges) ? get_class($moduleChanges) : gettype($moduleChanges)));
+        }
+
+        foreach ($moduleChanges as &$model) {
+            if (is_array($model)) {
+                $model = new ModuleChange($model);
+            } else if (!$model instanceof ModuleChange) {
+                throw new \InvalidArgumentException(sprintf('Expected array of ModuleChange or an array of arrays but got %s',
+                    is_object($model) ? get_class($model) : gettype($model)));
+            }
+        }
+
+        $this->moduleChanges = new Collection($moduleChanges);
+
+        return $this;
+    }
+
+    /**
      * Add Template_Changes.
      *
      * @param \MerchantAPI\Model\TemplateChange
@@ -574,6 +617,41 @@ class ChangesetCreate extends Request
     }
 
     /**
+     * Add Module_Changes.
+     *
+     * @param \MerchantAPI\Model\ModuleChange
+     * @return $this
+     */
+    public function addModuleChange(ModuleChange $model) : self
+    {
+        $this->moduleChanges[] = $model;
+        return $this;
+    }
+
+    /**
+     * Add many ModuleChange.
+     *
+     * @param (\MerchantAPI\Model\ModuleChange|array)[]
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function addModuleChanges(array $moduleChanges) : self
+    {
+        foreach ($moduleChanges as $e) {
+            if (is_array($e)) {
+                $this->moduleChanges[] = new ModuleChange($e);
+            } else if ($e instanceof ModuleChange) {
+                $this->moduleChanges[] = $e;
+            } else {
+                throw new \InvalidArgumentException(sprintf('Expected array of ModuleChange or an array of arrays but got %s',
+                    is_object($e) ? get_class($e) : gettype($e)));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray() : array
@@ -646,6 +724,16 @@ class ChangesetCreate extends Request
             foreach ($this->getPropertyChanges() as $i => $propertyChange) {
                 if ($propertyChange->hasData()) {
                     $data['Property_Changes'][] = $propertyChange->getData();
+                }
+            }
+        }
+
+        if (count($this->getModuleChanges())) {
+            $data['Module_Changes'] = [];
+
+            foreach ($this->getModuleChanges() as $i => $moduleChange) {
+                if ($moduleChange->hasData()) {
+                    $data['Module_Changes'][] = $moduleChange->getData();
                 }
             }
         }

@@ -28,10 +28,10 @@ class ModuleChange extends \MerchantAPI\Model
         parent::__construct($data);
 
         if (isset($data['Module_Data'])) {
-            if ($data['Module_Data'] instanceof VersionSettings) {
+            if ($data['Module_Data'] instanceof VariableValue) {
                 $this->setField('Module_Data', $data['Module_Data']);
             } else {
-                $this->setField('Module_Data', new VersionSettings($data['Module_Data']));
+                $this->setField('Module_Data', new VariableValue($data['Module_Data']));
             }
         }
     }
@@ -44,7 +44,7 @@ class ModuleChange extends \MerchantAPI\Model
     public function __clone()
     {
         if (isset($data['Module_Data'])) {
-            if ($this->data['Module_Data'] instanceof VersionSettings) {
+            if ($this->data['Module_Data'] instanceof VariableValue) {
                 $this->data['Module_Data'] = clone $this->data['Module_Data'];
             }
         }
@@ -73,9 +73,9 @@ class ModuleChange extends \MerchantAPI\Model
     /**
      * Get Module_Data.
      *
-     * @return ?\MerchantAPI\Model\VersionSettings
+     * @return ?\MerchantAPI\Model\VariableValue
      */
-    public function getModuleData() : ?VersionSettings
+    public function getModuleData() : ?VariableValue
     {
         return $this->getField('Module_Data');
     }
@@ -101,23 +101,18 @@ class ModuleChange extends \MerchantAPI\Model
     {
         return $this->setField('Module_Operation', $moduleOperation);
     }
-
     /**
      * Set Module_Data.
      *
-     * @param \MerchantAPI\Model\VersionSettings $moduleData
-     * @throws \InvalidArgumentException
+     * @param mixed $moduleData
      * @return $this
      */
     public function setModuleData($moduleData) : self
     {
-        if (is_array($moduleData)) {
-            return $this->setField('Module_Data', new VersionSettings($moduleData));
-        } else if ($moduleData instanceof VersionSettings || is_null($moduleData)) {
+        if ($moduleData instanceof VariableValue) {
             return $this->setField('Module_Data', $moduleData);
-        } else {
-            throw new \InvalidArgumentException(sprintf('Expected array, instance of VersionSettings, or null but got %s',
-                is_object($moduleData) ? get_class($moduleData) : gettype($moduleData)));
         }
+
+        return $this->setField('Module_Data', new VariableValue($moduleData));
     }
 }

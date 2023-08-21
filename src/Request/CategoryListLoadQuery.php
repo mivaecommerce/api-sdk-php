@@ -69,6 +69,7 @@ class CategoryListLoadQuery extends ListQueryRequest
     /** @var array Requests available on demand columns */
     protected array $availableOnDemandColumns = [
         'uris',
+        'url',
     ];
 
     /** @var array Requests available on custom filters */

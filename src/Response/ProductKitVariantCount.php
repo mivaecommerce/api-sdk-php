@@ -31,6 +31,6 @@ class ProductKitVariantCount extends Response
             return $this->data['data']['variants'];
         }
 
-        return null;
+        return 0;
     }
 }

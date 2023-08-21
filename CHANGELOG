@@ -1,3 +1,48 @@
+v2.5.0
+	New Functions:
+		OrderListArchive [MMAPI-249]
+	MMAPI-99  - New field on ChangesetCreate: ModuleChanges
+				New Model ModuleChange
+	MMAPI-188 - New fields on Store model:
+					boxpack_id
+					addrval_id
+	MMAPI-189 - Added support for new CSS and JS Resource types: Module and ModuleInline
+				New search and sort fields on CSSResourceListLoadQuery and JavaScriptResourceListLoadQuery
+					mod_code
+					mod_data
+				New fields on CSSResourceInsert and CSSResourceUpdate
+					CSSResourceModuleCode
+					CSSResourceModuleData
+				New fields on JavaScriptResourceInsert and JavaScriptResourceUpdate
+					JavaScriptResourceModuleCode
+					JavaScriptResourceModuleData
+				New resource type constants on CSSResource and JavaScriptResource models:
+					RESOURCE_TYPE_MODULE
+					RESOURCE_TYPE_INLINE_MODULE
+					RESOURCE_TYPE_MANAGED_MODULE
+	MMAPI-190 - New field on model OrderItem: group_id
+	MMAPI-191 - New ondemandcolumn url in CategoryListLoadQuery
+				New field url in Category model
+	MMAPI-187 - FilterExpression does not always create a valid array/object when flattened.
+				Expressions are now nested under one top level entry
+	MMAPI-217 - New search fields in ChangesetChangeListLoadQuery: 
+					item_user_id
+					item_user_name
+					item_user_icon
+					item_change_type
+				New sort fields in ChangesetChangeListLoadQuery
+					item_user_id
+					item_user_name
+					item_change_type
+				New fields in model ChangesetChange:
+					item_user_id
+					item_user_name
+					item_user_icon
+					item_change_type
+	MMAPI-230 - Added missing ondemandcolumn payment_data in OrderListLoadQuery
+	MMAPI-237 - Added missing field module to OrderPayment model
+	MMAPI-255 - Top level response fields now return a default instead of null when not present
+	MMAPI-257 - Added ReturnTypeWillChange attribute to implemented interface methods which had a change in return type in php 8.1
 v2.4.0
 	New Functions:
 		PageList_Load_Query [MMAPI-95]

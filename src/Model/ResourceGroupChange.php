@@ -82,7 +82,7 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Set LinkedCSSResources.
      *
-     * @param ?array $linkedCSSResources
+     * @param array $linkedCSSResources
      * @return $this
      */
     public function setLinkedCSSResources(?array $linkedCSSResources) : self
@@ -93,7 +93,7 @@ class ResourceGroupChange extends \MerchantAPI\Model
     /**
      * Set LinkedJavaScriptResources.
      *
-     * @param ?array $linkedJavaScriptResources
+     * @param array $linkedJavaScriptResources
      * @return $this
      */
     public function setLinkedJavaScriptResources(?array $linkedJavaScriptResources) : self

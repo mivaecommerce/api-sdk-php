@@ -13,12 +13,12 @@ namespace MerchantAPI\Response;
 use MerchantAPI\Response;
 
 /**
- * API Response for BranchList_Delete.
+ * API Response for OrderList_Archive.
  *
  * @package MerchantAPI\Response
- * @see https://docs.miva.com/json-api/functions/branchlist_delete
+ * @see https://docs.miva.com/json-api/functions/orderlist_archive
  */
-class BranchListDelete extends Response
+class OrderListArchive extends Response
 {
     /**
      * Get processed.

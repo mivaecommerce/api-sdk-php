@@ -11,55 +11,12 @@
 namespace MerchantAPI\Model;
 
 /**
- * Data model for VersionSettings.
+ * Data model for value which can be various types.
  *
  * @package MerchantAPI\Model
  */
-class VersionSettings
+class VersionSettings extends VariableValue
 {
-    /** @var mixed $data */
-    protected $data;
-
-    /**
-     * Constructor
-     *
-     * @param mixed $data
-     */
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * Check if the underlying data is an object
-     *
-     * @return bool
-     */
-    public function isObject() : bool
-    {
-        return is_array($this->data) && !isset($this->data[0]);
-    }
-
-    /**
-     * Check if the underlying data is an array
-     *
-     * @return bool
-     */
-    public function isArray() : bool
-    {
-        return is_array($this->data) && isset($this->data[0]);
-    }
-
-    /**
-     * Check if the underlying data is a scalar value
-     *
-     * @return bool
-     */
-    public function isScalar() : bool
-    {
-        return !$this->isArray() && !$this->isObject();
-    }
-
     /**
      * Get a defined item, if it exists
      *
@@ -154,28 +111,6 @@ class VersionSettings
             $this->data[$item][$property] = $value;
         }
 
-        return $this;
-    }
-
-    /**
-     * Get the underlying data
-     * 
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Set the underlying data
-     * 
-     * @param mixed $data
-     * @return self
-     */
-    public function setData($data) : self
-    {
-        $this->data = $data;
         return $this;
     }
 }

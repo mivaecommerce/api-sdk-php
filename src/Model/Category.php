@@ -238,6 +238,16 @@ class Category extends \MerchantAPI\Model
     }
 
     /**
+     * Get url.
+     *
+     * @return ?string
+     */
+    public function getUrl() : ?string
+    {
+        return $this->getField('url');
+    }
+
+    /**
      * Get CustomField_Values.
      *
      * @return ?\MerchantAPI\Model\CustomFieldValues

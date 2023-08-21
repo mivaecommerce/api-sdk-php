@@ -129,6 +129,7 @@ abstract class Model implements ModelInterface
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getData();

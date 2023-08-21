@@ -482,6 +482,16 @@ class OrderItem extends \MerchantAPI\Model
     }
 
     /**
+     * Get group_id.
+     *
+     * @return ?int
+     */
+    public function getGroupId() : ?int
+    {
+        return $this->getField('group_id');
+    }
+
+    /**
      * Set code.
      *
      * @param ?string $code

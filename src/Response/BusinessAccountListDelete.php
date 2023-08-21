@@ -31,6 +31,6 @@ class BusinessAccountListDelete extends Response
             return $this->data['processed'];
         }
 
-        return null;
+        return 0;
     }
 }
