@@ -106,4 +106,14 @@ class Module extends \MerchantAPI\Model
     {
         return $this->getField('active');
     }
+
+    /**
+     * Get priority.
+     *
+     * @return ?int
+     */
+    public function getPriority() : ?int
+    {
+        return $this->getField('priority');
+    }
 }

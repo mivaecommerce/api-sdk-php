@@ -520,6 +520,16 @@ class Product extends \MerchantAPI\Model
     }
 
     /**
+     * Get page_id.
+     *
+     * @return ?int
+     */
+    public function getPageId() : ?int
+    {
+        return $this->getField('page_id');
+    }
+
+    /**
      * Get page_code.
      *
      * @return ?string

@@ -275,4 +275,14 @@ class Page extends \MerchantAPI\Model
     {
         return $this->getField('CustomField_Values');
     }
+
+    /**
+     * Get version_id.
+     *
+     * @return ?int
+     */
+    public function getVersionId() : ?int
+    {
+        return $this->getField('version_id');
+    }
 }

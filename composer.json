@@ -4,7 +4,7 @@
   "homepage" : "https://www.miva.com",
   "type": "library",
   "license": "proprietary",
-  "version" : "2.5.0",
+  "version" : "2.6.0",
   "minimum-stability": "stable",
   "keywords" : [
     "miva",

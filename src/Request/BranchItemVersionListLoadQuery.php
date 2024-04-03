@@ -10,36 +10,51 @@
 
 namespace MerchantAPI\Request;
 
-use MerchantAPI\Request;
+use MerchantAPI\ListQuery\ListQueryRequest;
 use MerchantAPI\Http\HttpResponse;
-use MerchantAPI\Model\Page;
+use MerchantAPI\Model\Branch;
+use MerchantAPI\Model\BranchItemVersion;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 
 /**
- * Handles API Request Page_Delete.
+ * Handles API Request BranchItemVersionList_Load_Query.
  *
  * Scope: Store
  *
  * @package MerchantAPI\Request
- * @see https://docs.miva.com/json-api/functions/page_delete
+ * @see https://docs.miva.com/json-api/functions/branchitemversionlist_load_query
  */
-class PageDelete extends Request
+class BranchItemVersionListLoadQuery extends ListQueryRequest
 {
     /** @var string The request scope */
     protected string $scope = self::REQUEST_SCOPE_STORE;
 
     /** @var string The API function name */
-    protected string $function = 'Page_Delete';
+    protected string $function = 'BranchItemVersionList_Load_Query';
 
-    /** @var ?int */
-    protected ?int $pageId = null;
+    /** @var array Requests available search fields */
+    protected array $availableSearchFields = [
+        'id',
+        'item_id',
+        'user_id',
+        'user_name',
+        'code',
+        'module_code',
+        'module_name',
+    ];
 
-    /** @var ?string */
-    protected ?string $editPage = null;
-
-    /** @var ?string */
-    protected ?string $pageCode = null;
+    /** @var array Requests available sort fields */
+    protected array $availableSortFields = [
+        'id',
+        'item_id',
+        'user_id',
+        'user_name',
+        'code',
+        'module_id',
+        'module_code',
+        'module_name',
+    ];
 
     /** @var ?int */
     protected ?int $branchId = null;
@@ -50,54 +65,25 @@ class PageDelete extends Request
     /** @var ?string */
     protected ?string $branchName = null;
 
+    /** @var ?int */
+    protected ?int $changesetId = null;
+
     /**
      * Constructor.
      *
      * @param ?\MerchantAPI\BaseClient $client
-     * @param ?\MerchantAPI\Model\Page $page
+     * @param ?\MerchantAPI\Model\Branch $branch
      */
-    public function __construct(?BaseClient $client = null, ?Page $page = null)
+    public function __construct(?BaseClient $client = null, ?Branch $branch = null)
     {
         parent::__construct($client);
-        if ($page) {
-            if ($page->getId()) {
-                $this->setPageId($page->getId());
-            } else if ($page->getCode()) {
-                $this->setEditPage($page->getCode());
-            } else if ($page->getCode()) {
-                $this->setPageCode($page->getCode());
+        if ($branch) {
+            if ($branch->getId()) {
+                $this->setBranchId($branch->getId());
+            } else if ($branch->getName()) {
+                $this->setEditBranch($branch->getName());
             }
         }
-    }
-
-    /**
-     * Get Page_ID.
-     *
-     * @return int
-     */
-    public function getPageId() : ?int
-    {
-        return $this->pageId;
-    }
-
-    /**
-     * Get Edit_Page.
-     *
-     * @return string
-     */
-    public function getEditPage() : ?string
-    {
-        return $this->editPage;
-    }
-
-    /**
-     * Get Page_Code.
-     *
-     * @return string
-     */
-    public function getPageCode() : ?string
-    {
-        return $this->pageCode;
     }
 
     /**
@@ -131,42 +117,13 @@ class PageDelete extends Request
     }
 
     /**
-     * Set Page_ID.
+     * Get Changeset_ID.
      *
-     * @param ?int $pageId
-     * @return $this
+     * @return int
      */
-    public function setPageId(?int $pageId) : self
+    public function getChangesetId() : ?int
     {
-        $this->pageId = $pageId;
-
-        return $this;
-    }
-
-    /**
-     * Set Edit_Page.
-     *
-     * @param ?string $editPage
-     * @return $this
-     */
-    public function setEditPage(?string $editPage) : self
-    {
-        $this->editPage = $editPage;
-
-        return $this;
-    }
-
-    /**
-     * Set Page_Code.
-     *
-     * @param ?string $pageCode
-     * @return $this
-     */
-    public function setPageCode(?string $pageCode) : self
-    {
-        $this->pageCode = $pageCode;
-
-        return $this;
+        return $this->changesetId;
     }
 
     /**
@@ -209,19 +166,24 @@ class PageDelete extends Request
     }
 
     /**
+     * Set Changeset_ID.
+     *
+     * @param ?int $changesetId
+     * @return $this
+     */
+    public function setChangesetId(?int $changesetId) : self
+    {
+        $this->changesetId = $changesetId;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray() : array
     {
         $data = parent::toArray();
-
-        if ($this->getPageId()) {
-            $data['Page_ID'] = $this->getPageId();
-        } else if ($this->getEditPage()) {
-            $data['Edit_Page'] = $this->getEditPage();
-        } else if ($this->getPageCode()) {
-            $data['Page_Code'] = $this->getPageCode();
-        }
 
         if ($this->getBranchId()) {
             $data['Branch_ID'] = $this->getBranchId();
@@ -239,6 +201,6 @@ class PageDelete extends Request
      */
     public function createResponse(HttpResponse $httpResponse, array $data) : ResponseInterface
     {
-        return new \MerchantAPI\Response\PageDelete($this, $httpResponse, $data);
+        return new \MerchantAPI\Response\BranchItemVersionListLoadQuery($this, $httpResponse, $data);
     }
 }

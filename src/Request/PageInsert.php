@@ -63,6 +63,15 @@ class PageInsert extends Request
     /** @var \MerchantAPI\Model\CustomFieldValues|null */
     protected ?CustomFieldValues $customFieldValues = null;
 
+    /** @var ?int */
+    protected ?int $branchId = null;
+
+    /** @var ?string */
+    protected ?string $editBranch = null;
+
+    /** @var ?string */
+    protected ?string $branchName = null;
+
     /**
      * Constructor.
      *
@@ -172,6 +181,36 @@ class PageInsert extends Request
     public function getCustomFieldValues() : ?CustomFieldValues
     {
         return $this->customFieldValues;
+    }
+
+    /**
+     * Get Branch_ID.
+     *
+     * @return int
+     */
+    public function getBranchId() : ?int
+    {
+        return $this->branchId;
+    }
+
+    /**
+     * Get Edit_Branch.
+     *
+     * @return string
+     */
+    public function getEditBranch() : ?string
+    {
+        return $this->editBranch;
+    }
+
+    /**
+     * Get Branch_Name.
+     *
+     * @return string
+     */
+    public function getBranchName() : ?string
+    {
+        return $this->branchName;
     }
 
     /**
@@ -312,11 +351,58 @@ class PageInsert extends Request
     }
 
     /**
+     * Set Branch_ID.
+     *
+     * @param ?int $branchId
+     * @return $this
+     */
+    public function setBranchId(?int $branchId) : self
+    {
+        $this->branchId = $branchId;
+
+        return $this;
+    }
+
+    /**
+     * Set Edit_Branch.
+     *
+     * @param ?string $editBranch
+     * @return $this
+     */
+    public function setEditBranch(?string $editBranch) : self
+    {
+        $this->editBranch = $editBranch;
+
+        return $this;
+    }
+
+    /**
+     * Set Branch_Name.
+     *
+     * @param ?string $branchName
+     * @return $this
+     */
+    public function setBranchName(?string $branchName) : self
+    {
+        $this->branchName = $branchName;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray() : array
     {
         $data = parent::toArray();
+
+        if ($this->getBranchId()) {
+            $data['Branch_ID'] = $this->getBranchId();
+        } else if ($this->getEditBranch()) {
+            $data['Edit_Branch'] = $this->getEditBranch();
+        } else if ($this->getBranchName()) {
+            $data['Branch_Name'] = $this->getBranchName();
+        }
 
         $data['Page_Code'] = $this->getPageCode();
 

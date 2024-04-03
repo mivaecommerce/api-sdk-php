@@ -192,6 +192,16 @@ class Uri extends \MerchantAPI\Model
     }
 
     /**
+     * Get page_code.
+     *
+     * @return ?string
+     */
+    public function getPageCode() : ?string
+    {
+        return $this->getField('page_code');
+    }
+
+    /**
      * Get cat_id.
      *
      * @return ?int
