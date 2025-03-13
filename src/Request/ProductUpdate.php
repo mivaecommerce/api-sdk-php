@@ -16,6 +16,7 @@ use MerchantAPI\Model\CustomFieldValues;
 use MerchantAPI\Model\Product;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
+use MerchantAPI\DecimalHelper;
 
 /**
  * Handles API Request Product_Update.
@@ -66,14 +67,14 @@ class ProductUpdate extends Request
     /** @var ?string */
     protected ?string $productImage = null;
 
-    /** @var ?float */
-    protected ?float $productPrice = null;
+    /** @var ?(float|Decimal) */
+    protected $productPrice = null;
 
-    /** @var ?float */
-    protected ?float $productCost = null;
+    /** @var ?(float|Decimal) */
+    protected $productCost = null;
 
-    /** @var ?float */
-    protected ?float $productWeight = null;
+    /** @var ?(float|Decimal) */
+    protected $productWeight = null;
 
     /** @var ?int */
     protected ?int $productInventory = null;
@@ -240,9 +241,9 @@ class ProductUpdate extends Request
     /**
      * Get Product_Price.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getProductPrice() : ?float
+    public function getProductPrice() 
     {
         return $this->productPrice;
     }
@@ -250,9 +251,9 @@ class ProductUpdate extends Request
     /**
      * Get Product_Cost.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getProductCost() : ?float
+    public function getProductCost() 
     {
         return $this->productCost;
     }
@@ -260,9 +261,9 @@ class ProductUpdate extends Request
     /**
      * Get Product_Weight.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getProductWeight() : ?float
+    public function getProductWeight() 
     {
         return $this->productWeight;
     }
@@ -453,12 +454,12 @@ class ProductUpdate extends Request
     /**
      * Set Product_Price.
      *
-     * @param ?float $productPrice
+     * @param ?(float|string|int|Decimal) $productPrice
      * @return $this
      */
-    public function setProductPrice(?float $productPrice) : self
+    public function setProductPrice($productPrice) : self
     {
-        $this->productPrice = $productPrice;
+        $this->productPrice = DecimalHelper::create($productPrice, 16);
 
         return $this;
     }
@@ -466,12 +467,12 @@ class ProductUpdate extends Request
     /**
      * Set Product_Cost.
      *
-     * @param ?float $productCost
+     * @param ?(float|string|int|Decimal) $productCost
      * @return $this
      */
-    public function setProductCost(?float $productCost) : self
+    public function setProductCost($productCost) : self
     {
-        $this->productCost = $productCost;
+        $this->productCost = DecimalHelper::create($productCost, 16);
 
         return $this;
     }
@@ -479,12 +480,12 @@ class ProductUpdate extends Request
     /**
      * Set Product_Weight.
      *
-     * @param ?float $productWeight
+     * @param ?(float|string|int|Decimal) $productWeight
      * @return $this
      */
-    public function setProductWeight(?float $productWeight) : self
+    public function setProductWeight($productWeight) : self
     {
-        $this->productWeight = $productWeight;
+        $this->productWeight = DecimalHelper::create($productWeight, 16);
 
         return $this;
     }
@@ -598,15 +599,15 @@ class ProductUpdate extends Request
         }
 
         if (!is_null($this->getProductPrice())) {
-            $data['Product_Price'] = $this->getProductPrice();
+            $data['Product_Price'] = DecimalHelper::serialize($this->getProductPrice(), 8);
         }
 
         if (!is_null($this->getProductCost())) {
-            $data['Product_Cost'] = $this->getProductCost();
+            $data['Product_Cost'] = DecimalHelper::serialize($this->getProductCost(), 8);
         }
 
         if (!is_null($this->getProductWeight())) {
-            $data['Product_Weight'] = $this->getProductWeight();
+            $data['Product_Weight'] = DecimalHelper::serialize($this->getProductWeight(), 8);
         }
 
         if (!is_null($this->getProductInventory())) {

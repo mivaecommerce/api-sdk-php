@@ -37,7 +37,13 @@ class BranchCopy extends Request
     protected ?int $sourceBranchId = null;
 
     /** @var ?int */
+    protected ?int $sourceChangesetId = null;
+
+    /** @var ?int */
     protected ?int $destinationBranchId = null;
+
+    /** @var ?string */
+    protected ?string $branchCopySessionId = null;
 
     /** @var ?string */
     protected ?string $notes = null;
@@ -69,6 +75,16 @@ class BranchCopy extends Request
     }
 
     /**
+     * Get Source_Changeset_ID.
+     *
+     * @return int
+     */
+    public function getSourceChangesetId() : ?int
+    {
+        return $this->sourceChangesetId;
+    }
+
+    /**
      * Get Destination_Branch_ID.
      *
      * @return int
@@ -76,6 +92,16 @@ class BranchCopy extends Request
     public function getDestinationBranchId() : ?int
     {
         return $this->destinationBranchId;
+    }
+
+    /**
+     * Get Branch_Copy_Session_ID.
+     *
+     * @return string
+     */
+    public function getBranchCopySessionId() : ?string
+    {
+        return $this->branchCopySessionId;
     }
 
     /**
@@ -102,6 +128,19 @@ class BranchCopy extends Request
     }
 
     /**
+     * Set Source_Changeset_ID.
+     *
+     * @param ?int $sourceChangesetId
+     * @return $this
+     */
+    public function setSourceChangesetId(?int $sourceChangesetId) : self
+    {
+        $this->sourceChangesetId = $sourceChangesetId;
+
+        return $this;
+    }
+
+    /**
      * Set Destination_Branch_ID.
      *
      * @param ?int $destinationBranchId
@@ -110,6 +149,19 @@ class BranchCopy extends Request
     public function setDestinationBranchId(?int $destinationBranchId) : self
     {
         $this->destinationBranchId = $destinationBranchId;
+
+        return $this;
+    }
+
+    /**
+     * Set Branch_Copy_Session_ID.
+     *
+     * @param ?string $branchCopySessionId
+     * @return $this
+     */
+    public function setBranchCopySessionId(?string $branchCopySessionId) : self
+    {
+        $this->branchCopySessionId = $branchCopySessionId;
 
         return $this;
     }
@@ -140,6 +192,14 @@ class BranchCopy extends Request
 
         if ($this->getDestinationBranchId()) {
             $data['Destination_Branch_ID'] = $this->getDestinationBranchId();
+        }
+
+        if (!is_null($this->getSourceChangesetId())) {
+            $data['Source_Changeset_ID'] = $this->getSourceChangesetId();
+        }
+
+        if (!is_null($this->getBranchCopySessionId())) {
+            $data['Branch_Copy_Session_ID'] = $this->getBranchCopySessionId();
         }
 
         if (!is_null($this->getNotes())) {

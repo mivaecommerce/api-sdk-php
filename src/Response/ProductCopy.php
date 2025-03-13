@@ -37,7 +37,7 @@ class ProductCopy extends Response
             return;
         }
 
-        $this->product = new Product($this->data['data']);
+        $this->product = isset($this->data['data']) ? new Product($this->data['data']) : null;
     }
 
     /**

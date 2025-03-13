@@ -50,9 +50,9 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Get adjustment.
      *
-     * @return ?float
+     * @return ?int
      */
-    public function getAdjustment() : ?float
+    public function getAdjustment() : ?int
     {
         return $this->getField('adjustment');
     }
@@ -93,10 +93,10 @@ class ProductInventoryAdjustment extends \MerchantAPI\Model
     /**
      * Set adjustment.
      *
-     * @param ?float $adjustment
+     * @param ?int $adjustment
      * @return $this
      */
-    public function setAdjustment(?float $adjustment) : self
+    public function setAdjustment(?int $adjustment) : self
     {
         return $this->setField('adjustment', $adjustment);
     }

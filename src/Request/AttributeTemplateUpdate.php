@@ -159,7 +159,7 @@ class AttributeTemplateUpdate extends Request
     /**
      * Set Code.
      *
-     * @param ?string $code
+     * @param string $code
      * @return $this
      */
     public function setCode(?string $code) : self
@@ -172,7 +172,7 @@ class AttributeTemplateUpdate extends Request
     /**
      * Set Prompt.
      *
-     * @param ?string $prompt
+     * @param string $prompt
      * @return $this
      */
     public function setPrompt(?string $prompt) : self

@@ -11,6 +11,7 @@
 namespace MerchantAPI\Model;
 
 use MerchantAPI\Collection;
+use MerchantAPI\DecimalHelper;
 
 /**
  * Data model for OrderItem.
@@ -124,6 +125,22 @@ class OrderItem extends \MerchantAPI\Model
                     is_object($data['subscription']) ?
                         get_class($data['subscription']) : gettype($data['subscription'])));
             }
+        }
+
+        if (isset($data['retail'])) {
+            $this->setField('retail', DecimalHelper::create($data['retail'], 16));
+        }
+
+        if (isset($data['base_price'])) {
+            $this->setField('base_price', DecimalHelper::create($data['base_price'], 16));
+        }
+
+        if (isset($data['price'])) {
+            $this->setField('price', DecimalHelper::create($data['price'], 16));
+        }
+
+        if (isset($data['weight'])) {
+            $this->setField('weight', DecimalHelper::create($data['weight'], 16));
         }
     }
 
@@ -304,9 +321,9 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get retail.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getRetail() : ?float
+    public function getRetail() 
     {
         return $this->getField('retail');
     }
@@ -314,9 +331,9 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get base_price.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getBasePrice() : ?float
+    public function getBasePrice() 
     {
         return $this->getField('base_price');
     }
@@ -324,11 +341,31 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getPrice() : ?float
+    public function getPrice() 
     {
         return $this->getField('price');
+    }
+
+    /**
+     * Get total.
+     *
+     * @return ?float
+     */
+    public function getTotal() : ?float
+    {
+        return $this->getField('total');
+    }
+
+    /**
+     * Get formatted_total.
+     *
+     * @return ?string
+     */
+    public function getFormattedTotal() : ?string
+    {
+        return $this->getField('formatted_total');
     }
 
     /**
@@ -354,11 +391,21 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Get weight.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getWeight() : ?float
+    public function getWeight() 
     {
         return $this->getField('weight');
+    }
+
+    /**
+     * Get formatted_weight.
+     *
+     * @return ?string
+     */
+    public function getFormattedWeight() : ?string
+    {
+        return $this->getField('formatted_weight');
     }
 
     /**
@@ -419,16 +466,6 @@ class OrderItem extends \MerchantAPI\Model
     public function getOptions() : ?Collection
     {
         return $this->getField('options');
-    }
-
-    /**
-     * Get total.
-     *
-     * @return ?float
-     */
-    public function getTotal() : ?float
-    {
-        return $this->getField('total');
     }
 
     /**
@@ -527,12 +564,12 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set price.
      *
-     * @param ?float $price
+     * @param ?(float|string|int|Decimal) $price
      * @return $this
      */
     public function setPrice(?float $price) : self
     {
-        return $this->setField('price', $price);
+        return $this->setField('price', DecimalHelper::create($price, 16));
     }
 
     /**
@@ -549,12 +586,12 @@ class OrderItem extends \MerchantAPI\Model
     /**
      * Set weight.
      *
-     * @param ?float $weight
+     * @param ?(float|string|int|Decimal) $weight
      * @return $this
      */
     public function setWeight(?float $weight) : self
     {
-        return $this->setField('weight', $weight);
+        return $this->setField('weight', DecimalHelper::create($weight, 16));
     }
 
     /**
@@ -648,5 +685,28 @@ class OrderItem extends \MerchantAPI\Model
         $this->data['options'][] = $model;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData() : array
+    {
+        $data = parent::getData();
+
+        if (isset($data['retail'])) {
+            $data['retail'] = DecimalHelper::serialize($data['retail'], 8);
+        }
+        if (isset($data['base_price'])) {
+            $data['base_price'] = DecimalHelper::serialize($data['base_price'], 8);
+        }
+        if (isset($data['price'])) {
+            $data['price'] = DecimalHelper::serialize($data['price'], 8);
+        }
+        if (isset($data['weight'])) {
+            $data['weight'] = DecimalHelper::serialize($data['weight'], 8);
+        }
+
+        return $data;
     }
 }

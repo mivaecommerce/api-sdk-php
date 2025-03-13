@@ -49,6 +49,12 @@ class PageInsert extends Request
     protected ?bool $pageLayout = null;
 
     /** @var ?bool */
+    protected ?bool $pageFragment = null;
+
+    /** @var ?bool */
+    protected ?bool $pagePublic = null;
+
+    /** @var ?bool */
     protected ?bool $pageSecure = null;
 
     /** @var ?string */
@@ -131,6 +137,26 @@ class PageInsert extends Request
     public function getPageLayout() : ?bool
     {
         return $this->pageLayout;
+    }
+
+    /**
+     * Get Page_Fragment.
+     *
+     * @return bool
+     */
+    public function getPageFragment() : ?bool
+    {
+        return $this->pageFragment;
+    }
+
+    /**
+     * Get Page_Public.
+     *
+     * @return bool
+     */
+    public function getPagePublic() : ?bool
+    {
+        return $this->pagePublic;
     }
 
     /**
@@ -279,6 +305,32 @@ class PageInsert extends Request
     }
 
     /**
+     * Set Page_Fragment.
+     *
+     * @param ?bool $pageFragment
+     * @return $this
+     */
+    public function setPageFragment(?bool $pageFragment) : self
+    {
+        $this->pageFragment = $pageFragment;
+
+        return $this;
+    }
+
+    /**
+     * Set Page_Public.
+     *
+     * @param ?bool $pagePublic
+     * @return $this
+     */
+    public function setPagePublic(?bool $pagePublic) : self
+    {
+        $this->pagePublic = $pagePublic;
+
+        return $this;
+    }
+
+    /**
      * Set Page_Secure.
      *
      * @param ?bool $pageSecure
@@ -418,6 +470,14 @@ class PageInsert extends Request
 
         if (!is_null($this->getPageLayout())) {
             $data['Page_Layout'] = $this->getPageLayout();
+        }
+
+        if (!is_null($this->getPageFragment())) {
+            $data['Page_Fragment'] = $this->getPageFragment();
+        }
+
+        if (!is_null($this->getPagePublic())) {
+            $data['Page_Public'] = $this->getPagePublic();
         }
 
         if (!is_null($this->getPageSecure())) {

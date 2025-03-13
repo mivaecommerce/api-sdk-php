@@ -44,6 +44,7 @@ class CopyPageRulesListLoadQuery extends ListQueryRequest
         'jsres',
         'cssres',
         'cacheset',
+        'public',
     ];
 
     /** @var array Requests available sort fields */
@@ -58,6 +59,7 @@ class CopyPageRulesListLoadQuery extends ListQueryRequest
         'jsres',
         'cssres',
         'cacheset',
+        'public',
     ];
 
     /**

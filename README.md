@@ -65,6 +65,24 @@ See https://tools.ietf.org/html/rfc4253#section-6.6 for format.
 
 A quick way to get the correct format if you have the key associated with your local SSH agent is to run the command `ssh-add -L` and copying the corresponding key.
 
+# High Precision Pricing & Weight
+
+Miva Merchant 10.11 introduced high precision pricing and weight, allowing many price and weight fields to have up to 7 decimal places. If your store requires this, it is suggested that you install either the decimal or bcmath extension.
+
+## Decimal Extension
+
+This is the recommended extension if you require high precision. When installed, all high precision fields will be created as \Decimal\Decimal instances. You can perform arithmetic on these values as you would a native float type.
+
+For more information see https://github.com/php-decimal/ext-decimal
+
+## BCMath Extension
+
+If you prefer to use the bcmath extension then install or enable it in your php configuration and run all your arithmetic through bcmath functions.
+[
+](https://github.com/php-decimal/ext-decimal)For more information see https://www.php.net/manual/en/book.bc.php
+
+
+
 # License
 
 This library is licensed under the `Miva SDK License Agreement`.

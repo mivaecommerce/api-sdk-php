@@ -40,7 +40,13 @@ class ChangesetListMerge extends Request
     protected ?int $destinationBranchId = null;
 
     /** @var ?string */
+    protected ?string $changesetListMergeSessionId = null;
+
+    /** @var ?string */
     protected ?string $notes = null;
+
+    /** @var ?string */
+    protected ?string $tags = null;
 
     /**
      * Constructor.
@@ -79,6 +85,16 @@ class ChangesetListMerge extends Request
     }
 
     /**
+     * Get ChangesetList_Merge_Session_ID.
+     *
+     * @return string
+     */
+    public function getChangesetListMergeSessionId() : ?string
+    {
+        return $this->changesetListMergeSessionId;
+    }
+
+    /**
      * Get Notes.
      *
      * @return string
@@ -86,6 +102,16 @@ class ChangesetListMerge extends Request
     public function getNotes() : ?string
     {
         return $this->notes;
+    }
+
+    /**
+     * Get Tags.
+     *
+     * @return string
+     */
+    public function getTags() : ?string
+    {
+        return $this->tags;
     }
 
     /**
@@ -102,6 +128,19 @@ class ChangesetListMerge extends Request
     }
 
     /**
+     * Set ChangesetList_Merge_Session_ID.
+     *
+     * @param ?string $changesetListMergeSessionId
+     * @return $this
+     */
+    public function setChangesetListMergeSessionId(?string $changesetListMergeSessionId) : self
+    {
+        $this->changesetListMergeSessionId = $changesetListMergeSessionId;
+
+        return $this;
+    }
+
+    /**
      * Set Notes.
      *
      * @param ?string $notes
@@ -110,6 +149,19 @@ class ChangesetListMerge extends Request
     public function setNotes(?string $notes) : self
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Set Tags.
+     *
+     * @param ?string $tags
+     * @return $this
+     */
+    public function setTags(?string $tags) : self
+    {
+        $this->tags = $tags;
 
         return $this;
     }
@@ -154,8 +206,16 @@ class ChangesetListMerge extends Request
 
         $data['Source_Changeset_IDs'] = $this->getSourceChangesetIds();
 
+        if (!is_null($this->getChangesetListMergeSessionId())) {
+            $data['ChangesetList_Merge_Session_ID'] = $this->getChangesetListMergeSessionId();
+        }
+
         if (!is_null($this->getNotes())) {
             $data['Notes'] = $this->getNotes();
+        }
+
+        if (!is_null($this->getTags())) {
+            $data['Tags'] = $this->getTags();
         }
 
         return $data;

@@ -41,10 +41,6 @@ class FilterExpressionEntry
      */
     public function __construct(string $left, string $operator, $right, int $search = FilterExpression::FILTER_SEARCH)
     {
-        if (!is_scalar($right) && !is_array($right)) {
-            throw new \InvalidArgumentException('Invalid type for right hand side of expression');
-        }
-
         $this->left     = $left;
         $this->operator = $operator;
         $this->right    = $right;

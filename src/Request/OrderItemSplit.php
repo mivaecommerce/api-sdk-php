@@ -13,7 +13,6 @@ namespace MerchantAPI\Request;
 use MerchantAPI\Request;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\OrderItem;
-use MerchantAPI\Model\SplitOrderItem;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 

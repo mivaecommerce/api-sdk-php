@@ -42,6 +42,8 @@ class PageListLoadQuery extends ListQueryRequest
         'cache',
         'admin',
         'layout',
+        'public',
+        'fragment',
     ];
 
     /** @var array Requests available sort fields */
@@ -53,6 +55,8 @@ class PageListLoadQuery extends ListQueryRequest
         'cache',
         'admin',
         'layout',
+        'public',
+        'fragment',
     ];
 
     /** @var array Requests available on demand columns */

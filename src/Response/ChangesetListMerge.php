@@ -37,7 +37,9 @@ class ChangesetListMerge extends Response
             return;
         }
 
-        $this->changeset = new Changeset($this->data['data']);
+        if (isset($this->data['data'])) {
+            $this->changeset = new Changeset($this->data['data']);
+        }
     }
 
     /**
@@ -48,5 +50,32 @@ class ChangesetListMerge extends Response
     public function getChangeset() : ?Changeset
     {
         return $this->changeset;
+    }
+    /**
+     * Get completed.
+     *
+     * @return bool
+     */
+    public function getCompleted() : ?bool
+    {
+        if (isset($this->data['completed'])) {
+            return $this->data['completed'];
+        }
+
+        return false;
+    }
+
+    /**
+     * Get changesetlist_merge_session_id.
+     *
+     * @return string
+     */
+    public function getChangesetlistMergeSessionId() : ?string
+    {
+        if (isset($this->data['changesetlist_merge_session_id'])) {
+            return $this->data['changesetlist_merge_session_id'];
+        }
+
+        return null;
     }
 }

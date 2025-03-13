@@ -16,6 +16,7 @@ use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\Model\ProductOption;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
+use MerchantAPI\DecimalHelper;
 
 /**
  * Handles API Request Option_Insert.
@@ -60,14 +61,14 @@ class OptionInsert extends Request
     /** @var ?string */
     protected ?string $image = null;
 
-    /** @var ?float */
-    protected ?float $price = null;
+    /** @var ?(float|Decimal) */
+    protected $price = null;
 
-    /** @var ?float */
-    protected ?float $cost = null;
+    /** @var ?(float|Decimal) */
+    protected $cost = null;
 
-    /** @var ?float */
-    protected ?float $weight = null;
+    /** @var ?(float|Decimal) */
+    protected $weight = null;
 
     /** @var ?bool */
     protected ?bool $default = null;
@@ -189,9 +190,9 @@ class OptionInsert extends Request
     /**
      * Get Price.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getPrice() : ?float
+    public function getPrice() 
     {
         return $this->price;
     }
@@ -199,9 +200,9 @@ class OptionInsert extends Request
     /**
      * Get Cost.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getCost() : ?float
+    public function getCost() 
     {
         return $this->cost;
     }
@@ -209,9 +210,9 @@ class OptionInsert extends Request
     /**
      * Get Weight.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getWeight() : ?float
+    public function getWeight() 
     {
         return $this->weight;
     }
@@ -307,7 +308,7 @@ class OptionInsert extends Request
     /**
      * Set Code.
      *
-     * @param ?string $code
+     * @param string $code
      * @return $this
      */
     public function setCode(?string $code) : self
@@ -320,7 +321,7 @@ class OptionInsert extends Request
     /**
      * Set Prompt.
      *
-     * @param ?string $prompt
+     * @param string $prompt
      * @return $this
      */
     public function setPrompt(?string $prompt) : self
@@ -346,12 +347,12 @@ class OptionInsert extends Request
     /**
      * Set Price.
      *
-     * @param ?float $price
+     * @param ?(float|string|int|Decimal) $price
      * @return $this
      */
-    public function setPrice(?float $price) : self
+    public function setPrice($price) : self
     {
-        $this->price = $price;
+        $this->price = DecimalHelper::create($price, 16);
 
         return $this;
     }
@@ -359,12 +360,12 @@ class OptionInsert extends Request
     /**
      * Set Cost.
      *
-     * @param ?float $cost
+     * @param ?(float|string|int|Decimal) $cost
      * @return $this
      */
-    public function setCost(?float $cost) : self
+    public function setCost($cost) : self
     {
-        $this->cost = $cost;
+        $this->cost = DecimalHelper::create($cost, 16);
 
         return $this;
     }
@@ -372,12 +373,12 @@ class OptionInsert extends Request
     /**
      * Set Weight.
      *
-     * @param ?float $weight
+     * @param ?(float|string|int|Decimal) $weight
      * @return $this
      */
-    public function setWeight(?float $weight) : self
+    public function setWeight($weight) : self
     {
-        $this->weight = $weight;
+        $this->weight = DecimalHelper::create($weight, 16);
 
         return $this;
     }
@@ -427,15 +428,15 @@ class OptionInsert extends Request
         }
 
         if (!is_null($this->getPrice())) {
-            $data['Price'] = $this->getPrice();
+            $data['Price'] = DecimalHelper::serialize($this->getPrice(), 8);
         }
 
         if (!is_null($this->getCost())) {
-            $data['Cost'] = $this->getCost();
+            $data['Cost'] = DecimalHelper::serialize($this->getCost(), 8);
         }
 
         if (!is_null($this->getWeight())) {
-            $data['Weight'] = $this->getWeight();
+            $data['Weight'] = DecimalHelper::serialize($this->getWeight(), 8);
         }
 
         if (!is_null($this->getDefault())) {

@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\DecimalHelper;
+
 /**
  * Data model for OrderPart.
  *
@@ -17,6 +19,21 @@ namespace MerchantAPI\Model;
  */
 class OrderPart extends \MerchantAPI\Model
 {
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        if (isset($data['price'])) {
+            $this->setField('price', DecimalHelper::create($data['price'], 16));
+        }
+    }
+
     /**
      * Get code.
      *
@@ -70,10 +87,24 @@ class OrderPart extends \MerchantAPI\Model
     /**
      * Get price.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getPrice() : ?float
+    public function getPrice() 
     {
         return $this->getField('price');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData() : array
+    {
+        $data = parent::getData();
+
+        if (isset($data['price'])) {
+            $data['price'] = DecimalHelper::serialize($data['price'], 8);
+        }
+
+        return $data;
     }
 }

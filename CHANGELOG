@@ -1,3 +1,33 @@
+v2.7.0
+    MMAPI-361 - Fixed excepton throw when operator does not require a right hand side value
+    MMAPI-368 - ProductInventoryAdjustment adjustment field is now an int
+    MMAPI-375 - Added tax field to OrderProduct model
+    MMAPI-387 - Make optional fields optional in Attribute Template Attribute and Option Update Requests
+    MMAPI-324 - CustomerPaymentCardList_Load_Query response "lastused" column has changed to an integer
+    MMAPI-331 - Created Model ChildCategory
+    MMAPI-332 - Adjustments to Subscription and CustomerSubscription models
+    MMAPI-362 - High Precision Weight and Pricing
+    MMAPI-369 - API Requests now send a user agent with version information
+    MMAPI-333 - Add new formatted_XX fields in Attribute/Option models
+    MMAPI-334 - Add support for page fragments
+    MMAPI-335 - Add branch and changeset session id management features
+    MMAPI-406 - Fixed issue in HttpMessage setting null values to non-nullable members
+    MMAPI-401 - New fields on Store model:
+                    icon
+                    wtdispmix
+                    wtdisplow
+                    wtdispdig
+                    deferbask
+                    trackhits
+                    mnt_ips
+                    branch_id
+                    charset
+                    schtsk_adv
+                    schtsk_min
+                    cache_exp
+                    cache_ver
+                    cache_comp
+                    cacheset
 v2.6.0
 	New Functions:
 			BranchPageVersionList_Load_Query [MMAPI-265]

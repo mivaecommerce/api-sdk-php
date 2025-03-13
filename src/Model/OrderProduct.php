@@ -130,6 +130,16 @@ class OrderProduct extends \MerchantAPI\Model
     }
 
     /**
+     * Get tax.
+     *
+     * @return ?float
+     */
+    public function getTax() : ?float
+    {
+        return $this->getField('tax');
+    }
+
+    /**
      * Get attributes.
      *
      * @return \MerchantAPI\Collection
@@ -203,6 +213,17 @@ class OrderProduct extends \MerchantAPI\Model
     public function setQuantity(?int $quantity) : self
     {
         return $this->setField('quantity', $quantity);
+    }
+
+    /**
+     * Set tax.
+     *
+     * @param ?float $tax
+     * @return $this
+     */
+    public function setTax(?float $tax) : self
+    {
+        return $this->setField('tax', $tax);
     }
 
     /**

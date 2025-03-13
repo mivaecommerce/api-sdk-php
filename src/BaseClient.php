@@ -49,7 +49,7 @@ class BaseClient
         'require_timestamp'         => true,
         'default_store_code'        => null,
         'operation_timeout'         => self::DEFAULT_OPERATION_TIMEOUT,
-        'json_decode_flags'         => JSON_THROW_ON_ERROR,
+        'json_decode_flags'         => JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING,
         'curl_options'              => [
                 CURLOPT_USERAGENT       => 'MerchantAPI-' . Version::STRING . '/php',
                 CURLOPT_SSL_VERIFYPEER  => true,
@@ -288,14 +288,18 @@ class BaseClient
         if ($errorResponse) {
             $json = [];
         } else {
-            $encodeFlags = (int)$this->getOption('json_decode_flags');
+            $decodeFlags = (int)$this->getOption('json_decode_flags');
 
-            if (($encodeFlags & JSON_THROW_ON_ERROR) == 0) {
-                $encodeFlags |= JSON_THROW_ON_ERROR;
+            if (($decodeFlags & JSON_THROW_ON_ERROR) == 0) {
+                $decodeFlags |= JSON_THROW_ON_ERROR;
+            }
+
+            if (($decodeFlags & JSON_BIGINT_AS_STRING) == 0) {
+                $decodeFlags |= JSON_BIGINT_AS_STRING;
             }
 
             try {
-                $json = json_decode($httpResponse->getContent(), true, 512, $encodeFlags);
+                $json = json_decode($httpResponse->getContent(), true, 512, $decodeFlags);
             } catch(\Exception $e) {
                 throw new ClientException(sprintf('Error Decoding JSON: %s', $e->getMessage()), 0, $e, $httpResponse);
             }
@@ -333,9 +337,21 @@ class BaseClient
             throw new ClientException('Expected an array or an instance of HttpHeaders');
         }
 
-        if ($headers instanceof HttpHeaders)
-        {
+        if ($headers instanceof HttpHeaders) {
             $headers = $headers->all();
+        }
+
+        $ua = sprintf('MerchantAPI/%s php/%s %s', Version::STRING, PHP_VERSION, PHP_OS);
+
+        foreach($headers as $k => $v){
+            if (strcasecmp($k, 'User-Agent') == 0) {
+                if (strlen($headers[$k])) {
+                    $ua = $headers[$k];
+                }
+
+                unset($headers[$k]);
+                break;
+            }
         }
 
         $json = json_encode($data);
@@ -346,7 +362,8 @@ class BaseClient
 
         $headers = array_merge($headers, [
             'Content-Type'              => 'application/json',
-            'X-Miva-API-Authorization'  => $this->generateAuthHeader($json)
+            'X-Miva-API-Authorization'  => $this->generateAuthHeader($json),
+            'User-Agent'                => $ua
         ]);
 
         try {

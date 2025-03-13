@@ -74,6 +74,16 @@ class Store extends \MerchantAPI\Model
     }
 
     /**
+     * Get icon.
+     *
+     * @return ?string
+     */
+    public function getIcon() : ?string
+    {
+        return $this->getField('icon');
+    }
+
+    /**
      * Get owner.
      *
      * @return ?string
@@ -191,6 +201,36 @@ class Store extends \MerchantAPI\Model
     public function getWeightUnitCode() : ?string
     {
         return $this->getField('wtunitcode');
+    }
+
+    /**
+     * Get wtdispmix.
+     *
+     * @return ?bool
+     */
+    public function getDisplayMixedWeightUnits() : ?bool
+    {
+        return $this->getField('wtdispmix');
+    }
+
+    /**
+     * Get wtdisplow.
+     *
+     * @return ?bool
+     */
+    public function getDisplayWeightLessThan() : ?bool
+    {
+        return $this->getField('wtdisplow');
+    }
+
+    /**
+     * Get wtdispdig.
+     *
+     * @return ?int
+     */
+    public function getWeightDigits() : ?int
+    {
+        return $this->getField('wtdispdig');
     }
 
     /**
@@ -394,6 +434,46 @@ class Store extends \MerchantAPI\Model
     }
 
     /**
+     * Get cache_exp.
+     *
+     * @return ?int
+     */
+    public function getCacheExpiration() : ?int
+    {
+        return $this->getField('cache_exp');
+    }
+
+    /**
+     * Get cache_ver.
+     *
+     * @return ?int
+     */
+    public function getCacheVersion() : ?int
+    {
+        return $this->getField('cache_ver');
+    }
+
+    /**
+     * Get cache_comp.
+     *
+     * @return ?bool
+     */
+    public function getCacheCompression() : ?bool
+    {
+        return $this->getField('cache_comp');
+    }
+
+    /**
+     * Get cacheset.
+     *
+     * @return ?int
+     */
+    public function getCacheSet() : ?int
+    {
+        return $this->getField('cacheset');
+    }
+
+    /**
      * Get redishost.
      *
      * @return ?string
@@ -451,5 +531,75 @@ class Store extends \MerchantAPI\Model
     public function getAddressValidationId() : ?int
     {
         return $this->getField('addrval_id');
+    }
+
+    /**
+     * Get deferbask.
+     *
+     * @return ?bool
+     */
+    public function getDeferBaskets() : ?bool
+    {
+        return $this->getField('deferbask');
+    }
+
+    /**
+     * Get trackhits.
+     *
+     * @return ?bool
+     */
+    public function getTrackPageHits() : ?bool
+    {
+        return $this->getField('trackhits');
+    }
+
+    /**
+     * Get mnt_ips.
+     *
+     * @return ?string
+     */
+    public function getMaintenanceAllowedIps() : ?string
+    {
+        return $this->getField('mnt_ips');
+    }
+
+    /**
+     * Get branch_id.
+     *
+     * @return ?int
+     */
+    public function getBranchId() : ?int
+    {
+        return $this->getField('branch_id');
+    }
+
+    /**
+     * Get charset.
+     *
+     * @return ?string
+     */
+    public function getCharacterSet() : ?string
+    {
+        return $this->getField('charset');
+    }
+
+    /**
+     * Get schtsk_adv.
+     *
+     * @return ?int
+     */
+    public function getScheduledTaskAdvance() : ?int
+    {
+        return $this->getField('schtsk_adv');
+    }
+
+    /**
+     * Get schtsk_min.
+     *
+     * @return ?int
+     */
+    public function getScheduledTaskTimeout() : ?int
+    {
+        return $this->getField('schtsk_min');
     }
 }

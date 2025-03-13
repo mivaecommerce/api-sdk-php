@@ -299,6 +299,7 @@ class PropertyChange extends \MerchantAPI\Model
     {
         return $this->setField('Source', $source);
     }
+
     /**
      * Set Settings.
      *

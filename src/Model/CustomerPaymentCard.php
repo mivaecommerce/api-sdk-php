@@ -150,9 +150,9 @@ class CustomerPaymentCard extends \MerchantAPI\Model
     /**
      * Get lastused.
      *
-     * @return ?string
+     * @return ?int
      */
-    public function getLastUsed() : ?string
+    public function getLastUsed() : ?int
     {
         return $this->getField('lastused');
     }

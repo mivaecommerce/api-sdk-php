@@ -12,6 +12,7 @@ namespace MerchantAPI\Request;
 
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Model\Category;
+use MerchantAPI\Model\ChildCategory;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 

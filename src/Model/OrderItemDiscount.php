@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\DecimalHelper;
+
 /**
  * Data model for OrderItemDiscount.
  *
@@ -17,6 +19,21 @@ namespace MerchantAPI\Model;
  */
 class OrderItemDiscount extends \MerchantAPI\Model
 {
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        if (isset($data['discount'])) {
+            $this->setField('discount', DecimalHelper::create($data['discount'], 16));
+        }
+    }
+
     /**
      * Get order_id.
      *
@@ -70,10 +87,24 @@ class OrderItemDiscount extends \MerchantAPI\Model
     /**
      * Get discount.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getDiscount() : ?float
+    public function getDiscount() 
     {
         return $this->getField('discount');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData() : array
+    {
+        $data = parent::getData();
+
+        if (isset($data['discount'])) {
+            $data['discount'] = DecimalHelper::serialize($data['discount'], 8);
+        }
+
+        return $data;
     }
 }

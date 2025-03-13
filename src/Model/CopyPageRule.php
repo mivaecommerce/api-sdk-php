@@ -125,4 +125,14 @@ class CopyPageRule extends \MerchantAPI\Model
     {
         return $this->getField('cacheset');
     }
+
+    /**
+     * Get public.
+     *
+     * @return ?bool
+     */
+    public function getPublic() : ?bool
+    {
+        return $this->getField('public');
+    }
 }

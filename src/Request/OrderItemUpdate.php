@@ -18,6 +18,7 @@ use MerchantAPI\Model\OrderTotal;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
 use MerchantAPI\Collection;
+use MerchantAPI\DecimalHelper;
 
 /**
  * Handles API Request OrderItem_Update.
@@ -53,11 +54,11 @@ class OrderItemUpdate extends Request
     /** @var ?int */
     protected ?int $quantity = null;
 
-    /** @var ?float */
-    protected ?float $price = null;
+    /** @var ?(float|Decimal) */
+    protected $price = null;
 
-    /** @var ?float */
-    protected ?float $weight = null;
+    /** @var ?(float|Decimal) */
+    protected $weight = null;
 
     /** @var ?bool */
     protected ?bool $taxable = null;
@@ -156,9 +157,9 @@ class OrderItemUpdate extends Request
     /**
      * Get Price.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getPrice() : ?float
+    public function getPrice() 
     {
         return $this->price;
     }
@@ -166,9 +167,9 @@ class OrderItemUpdate extends Request
     /**
      * Get Weight.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getWeight() : ?float
+    public function getWeight() 
     {
         return $this->weight;
     }
@@ -196,7 +197,7 @@ class OrderItemUpdate extends Request
     /**
      * Set Order_ID.
      *
-     * @param ?int $orderId
+     * @param int $orderId
      * @return $this
      */
     public function setOrderId(?int $orderId) : self
@@ -209,7 +210,7 @@ class OrderItemUpdate extends Request
     /**
      * Set Line_ID.
      *
-     * @param ?int $lineId
+     * @param int $lineId
      * @return $this
      */
     public function setLineId(?int $lineId) : self
@@ -274,12 +275,12 @@ class OrderItemUpdate extends Request
     /**
      * Set Price.
      *
-     * @param ?float $price
+     * @param ?(float|string|int|Decimal) $price
      * @return $this
      */
-    public function setPrice(?float $price) : self
+    public function setPrice($price) : self
     {
-        $this->price = $price;
+        $this->price = DecimalHelper::create($price, 16);
 
         return $this;
     }
@@ -287,12 +288,12 @@ class OrderItemUpdate extends Request
     /**
      * Set Weight.
      *
-     * @param ?float $weight
+     * @param ?(float|string|int|Decimal) $weight
      * @return $this
      */
-    public function setWeight(?float $weight) : self
+    public function setWeight($weight) : self
     {
-        $this->weight = $weight;
+        $this->weight = DecimalHelper::create($weight, 16);
 
         return $this;
     }
@@ -401,11 +402,11 @@ class OrderItemUpdate extends Request
         }
 
         if (!is_null($this->getPrice())) {
-            $data['Price'] = $this->getPrice();
+            $data['Price'] = DecimalHelper::serialize($this->getPrice(), 8);
         }
 
         if (!is_null($this->getWeight())) {
-            $data['Weight'] = $this->getWeight();
+            $data['Weight'] = DecimalHelper::serialize($this->getWeight(), 8);
         }
 
         if (!is_null($this->getTaxable())) {

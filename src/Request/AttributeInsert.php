@@ -16,6 +16,7 @@ use MerchantAPI\Model\Product;
 use MerchantAPI\Model\ProductAttribute;
 use MerchantAPI\BaseClient;
 use MerchantAPI\ResponseInterface;
+use MerchantAPI\DecimalHelper;
 
 /**
  * Handles API Request Attribute_Insert.
@@ -54,14 +55,14 @@ class AttributeInsert extends Request
     /** @var ?string */
     protected ?string $image = null;
 
-    /** @var ?float */
-    protected ?float $price = null;
+    /** @var ?(float|Decimal) */
+    protected $price = null;
 
-    /** @var ?float */
-    protected ?float $cost = null;
+    /** @var ?(float|Decimal) */
+    protected $cost = null;
 
-    /** @var ?float */
-    protected ?float $weight = null;
+    /** @var ?(float|Decimal) */
+    protected $weight = null;
 
     /** @var ?bool */
     protected ?bool $copy = null;
@@ -165,9 +166,9 @@ class AttributeInsert extends Request
     /**
      * Get Price.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getPrice() : ?float
+    public function getPrice() 
     {
         return $this->price;
     }
@@ -175,9 +176,9 @@ class AttributeInsert extends Request
     /**
      * Get Cost.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getCost() : ?float
+    public function getCost() 
     {
         return $this->cost;
     }
@@ -185,9 +186,9 @@ class AttributeInsert extends Request
     /**
      * Get Weight.
      *
-     * @return float
+     * @return float|Decimal
      */
-    public function getWeight() : ?float
+    public function getWeight() 
     {
         return $this->weight;
     }
@@ -264,7 +265,7 @@ class AttributeInsert extends Request
     /**
      * Set Code.
      *
-     * @param ?string $code
+     * @param string $code
      * @return $this
      */
     public function setCode(?string $code) : self
@@ -290,7 +291,7 @@ class AttributeInsert extends Request
     /**
      * Set Type.
      *
-     * @param ?string $type
+     * @param string $type
      * @return $this
      */
     public function setType(?string $type) : self
@@ -316,12 +317,12 @@ class AttributeInsert extends Request
     /**
      * Set Price.
      *
-     * @param ?float $price
+     * @param ?(float|string|int|Decimal) $price
      * @return $this
      */
-    public function setPrice(?float $price) : self
+    public function setPrice($price) : self
     {
-        $this->price = $price;
+        $this->price = DecimalHelper::create($price, 16);
 
         return $this;
     }
@@ -329,12 +330,12 @@ class AttributeInsert extends Request
     /**
      * Set Cost.
      *
-     * @param ?float $cost
+     * @param ?(float|string|int|Decimal) $cost
      * @return $this
      */
-    public function setCost(?float $cost) : self
+    public function setCost($cost) : self
     {
-        $this->cost = $cost;
+        $this->cost = DecimalHelper::create($cost, 16);
 
         return $this;
     }
@@ -342,12 +343,12 @@ class AttributeInsert extends Request
     /**
      * Set Weight.
      *
-     * @param ?float $weight
+     * @param ?(float|string|int|Decimal) $weight
      * @return $this
      */
-    public function setWeight(?float $weight) : self
+    public function setWeight($weight) : self
     {
-        $this->weight = $weight;
+        $this->weight = DecimalHelper::create($weight, 16);
 
         return $this;
     }
@@ -421,15 +422,15 @@ class AttributeInsert extends Request
         }
 
         if (!is_null($this->getPrice())) {
-            $data['Price'] = $this->getPrice();
+            $data['Price'] = DecimalHelper::serialize($this->getPrice(), 8);
         }
 
         if (!is_null($this->getCost())) {
-            $data['Cost'] = $this->getCost();
+            $data['Cost'] = DecimalHelper::serialize($this->getCost(), 8);
         }
 
         if (!is_null($this->getWeight())) {
-            $data['Weight'] = $this->getWeight();
+            $data['Weight'] = DecimalHelper::serialize($this->getWeight(), 8);
         }
 
         if (!is_null($this->getCopy())) {

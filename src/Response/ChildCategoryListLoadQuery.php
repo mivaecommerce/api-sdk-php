@@ -11,7 +11,7 @@
 namespace MerchantAPI\Response;
 
 use MerchantAPI\ListQuery\ListQueryResponse;
-use MerchantAPI\Model\Category;
+use MerchantAPI\Model\ChildCategory;
 use MerchantAPI\RequestInterface;
 use MerchantAPI\Http\HttpResponse;
 use MerchantAPI\Collection;
@@ -41,7 +41,7 @@ class ChildCategoryListLoadQuery extends ListQueryResponse
 
         if (isset($data['data']['data'])) {
             foreach ($data['data']['data'] as $result) {
-              $this->categories[] = new Category($result);
+              $this->categories[] = new ChildCategory($result);
             }
         }
     }

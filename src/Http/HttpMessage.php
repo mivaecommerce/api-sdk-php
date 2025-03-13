@@ -410,10 +410,10 @@ abstract class HttpMessage
             }
         }
 
-        $this->host     = $urlinfo['host'] ?? null;
+        $this->host     = $urlinfo['host'] ?? '';
         $this->port     = $urlinfo['port'] ?? 0;
         $this->scheme   = isset($urlinfo['scheme']) ? strtolower($urlinfo['scheme']) : 'http';
-        $this->uri      = $urlinfo['path'] ?? null;
+        $this->uri      = $urlinfo['path'] ?? '';
 
         if (!in_array($this->scheme, ['http','https'])) {
             throw new \InvalidArgumentException('Invalid URL Scheme. Only HTTP(s) is supported.');

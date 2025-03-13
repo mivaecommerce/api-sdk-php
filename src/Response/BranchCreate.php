@@ -37,7 +37,9 @@ class BranchCreate extends Response
             return;
         }
 
-        $this->branch = new Branch($this->data['data']);
+        if (isset($this->data['data'])) {
+            $this->branch = new Branch($this->data['data']);
+        }
     }
 
     /**
@@ -48,5 +50,32 @@ class BranchCreate extends Response
     public function getBranch() : ?Branch
     {
         return $this->branch;
+    }
+    /**
+     * Get completed.
+     *
+     * @return bool
+     */
+    public function getCompleted() : ?bool
+    {
+        if (isset($this->data['completed'])) {
+            return $this->data['completed'];
+        }
+
+        return false;
+    }
+
+    /**
+     * Get branch_create_session_id.
+     *
+     * @return string
+     */
+    public function getBranchCreateSessionId() : ?string
+    {
+        if (isset($this->data['branch_create_session_id'])) {
+            return $this->data['branch_create_session_id'];
+        }
+
+        return null;
     }
 }

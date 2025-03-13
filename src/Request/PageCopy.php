@@ -68,6 +68,9 @@ class PageCopy extends Request
     /** @var ?bool */
     protected ?bool $destinationPageLayout = null;
 
+    /** @var ?bool */
+    protected ?bool $destinationPageFragment = null;
+
     /**
      * Constructor.
      *
@@ -206,6 +209,16 @@ class PageCopy extends Request
     public function getDestinationPageLayout() : ?bool
     {
         return $this->destinationPageLayout;
+    }
+
+    /**
+     * Get destination_page_fragment.
+     *
+     * @return bool
+     */
+    public function getDestinationPageFragment() : ?bool
+    {
+        return $this->destinationPageFragment;
     }
 
     /**
@@ -352,6 +365,19 @@ class PageCopy extends Request
     }
 
     /**
+     * Set destination_page_fragment.
+     *
+     * @param ?bool $destinationPageFragment
+     * @return $this
+     */
+    public function setDestinationPageFragment(?bool $destinationPageFragment) : self
+    {
+        $this->destinationPageFragment = $destinationPageFragment;
+
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function toArray() : array
@@ -392,6 +418,10 @@ class PageCopy extends Request
 
         if (!is_null($this->getDestinationPageLayout())) {
             $data['Dest_Page_Layout'] = $this->getDestinationPageLayout();
+        }
+
+        if (!is_null($this->getDestinationPageFragment())) {
+            $data['Dest_Page_Fragment'] = $this->getDestinationPageFragment();
         }
 
         return $data;

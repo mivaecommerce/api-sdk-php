@@ -53,6 +53,9 @@ class CopyPageRulesUpdate extends Request
     /** @var ?bool */
     protected ?bool $items = null;
 
+    /** @var ?bool */
+    protected ?bool $public = null;
+
     /** @var ?string */
     protected ?string $settings = null;
 
@@ -151,6 +154,16 @@ class CopyPageRulesUpdate extends Request
     public function getItems() : ?bool
     {
         return $this->items;
+    }
+
+    /**
+     * Get Public.
+     *
+     * @return bool
+     */
+    public function getPublic() : ?bool
+    {
+        return $this->public;
     }
 
     /**
@@ -285,6 +298,19 @@ class CopyPageRulesUpdate extends Request
     }
 
     /**
+     * Set Public.
+     *
+     * @param ?bool $public
+     * @return $this
+     */
+    public function setPublic(?bool $public) : self
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
+    /**
      * Set Settings.
      *
      * @param ?string $settings
@@ -367,6 +393,10 @@ class CopyPageRulesUpdate extends Request
 
         if (!is_null($this->getItems())) {
             $data['Items'] = $this->getItems();
+        }
+
+        if (!is_null($this->getPublic())) {
+            $data['Public'] = $this->getPublic();
         }
 
         if (!is_null($this->getSettings())) {

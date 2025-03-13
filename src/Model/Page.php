@@ -207,6 +207,26 @@ class Page extends \MerchantAPI\Model
     }
 
     /**
+     * Get fragment.
+     *
+     * @return ?bool
+     */
+    public function getFragment() : ?bool
+    {
+        return $this->getField('fragment');
+    }
+
+    /**
+     * Get public.
+     *
+     * @return ?bool
+     */
+    public function getPublic() : ?bool
+    {
+        return $this->getField('public');
+    }
+
+    /**
      * Get notes.
      *
      * @return ?string

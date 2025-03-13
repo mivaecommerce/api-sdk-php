@@ -4,7 +4,7 @@
   "homepage" : "https://www.miva.com",
   "type": "library",
   "license": "proprietary",
-  "version" : "2.6.0",
+  "version" : "2.7.0",
   "minimum-stability": "stable",
   "keywords" : [
     "miva",
@@ -20,6 +20,8 @@
   "suggest": {
     "ext-sockets:*" : "For SSH Agent Authentication",
     "ext-openssl:*" : "For SSH Private Key Authentication",
+    "ext-decimal:*" : "For High Precision Price and Weight",
+    "ext-bcmath:*" : "For High Precision Price and Weight",
     "phpunit/phpunit:9.*@stable": "For Unit Tests"
   },
   "autoload" : {

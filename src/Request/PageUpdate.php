@@ -51,6 +51,9 @@ class PageUpdate extends Request
     /** @var ?bool */
     protected ?bool $pageSecure = null;
 
+    /** @var ?bool */
+    protected ?bool $pagePublic = null;
+
     /** @var ?string */
     protected ?string $pageCache = null;
 
@@ -156,6 +159,16 @@ class PageUpdate extends Request
     public function getPageSecure() : ?bool
     {
         return $this->pageSecure;
+    }
+
+    /**
+     * Get Page_Public.
+     *
+     * @return bool
+     */
+    public function getPagePublic() : ?bool
+    {
+        return $this->pagePublic;
     }
 
     /**
@@ -307,6 +320,19 @@ class PageUpdate extends Request
     }
 
     /**
+     * Set Page_Public.
+     *
+     * @param ?bool $pagePublic
+     * @return $this
+     */
+    public function setPagePublic(?bool $pagePublic) : self
+    {
+        $this->pagePublic = $pagePublic;
+
+        return $this;
+    }
+
+    /**
      * Set Page_Cache.
      *
      * @param ?string $pageCache
@@ -439,6 +465,10 @@ class PageUpdate extends Request
 
         if (!is_null($this->getPageSecure())) {
             $data['Page_Secure'] = $this->getPageSecure();
+        }
+
+        if (!is_null($this->getPagePublic())) {
+            $data['Page_Public'] = $this->getPagePublic();
         }
 
         $data['Page_Cache'] = $this->getPageCache();

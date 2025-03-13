@@ -10,6 +10,8 @@
 
 namespace MerchantAPI\Model;
 
+use MerchantAPI\DecimalHelper;
+
 /**
  * Data model for OrderCoupon.
  *
@@ -17,6 +19,21 @@ namespace MerchantAPI\Model;
  */
 class OrderCoupon extends \MerchantAPI\Model
 {
+    /**
+     * Constructor.
+     *
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        if (isset($data['total'])) {
+            $this->setField('total', DecimalHelper::create($data['total'], 16));
+        }
+    }
+
     /**
      * Get order_id.
      *
@@ -60,9 +77,9 @@ class OrderCoupon extends \MerchantAPI\Model
     /**
      * Get total.
      *
-     * @return ?float
+     * @return ?(float|string|int|Decimal)
      */
-    public function getTotal() : ?float
+    public function getTotal() 
     {
         return $this->getField('total');
     }
@@ -75,5 +92,19 @@ class OrderCoupon extends \MerchantAPI\Model
     public function getAssigned() : ?bool
     {
         return $this->getField('assigned');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData() : array
+    {
+        $data = parent::getData();
+
+        if (isset($data['total'])) {
+            $data['total'] = DecimalHelper::serialize($data['total'], 8);
+        }
+
+        return $data;
     }
 }

@@ -36,6 +36,9 @@ class BranchCreate extends Request
     protected ?int $parentBranchId = null;
 
     /** @var ?string */
+    protected ?string $branchCreateSessionId = null;
+
+    /** @var ?string */
     protected ?string $name = null;
 
     /** @var ?string */
@@ -71,6 +74,16 @@ class BranchCreate extends Request
     public function getParentBranchId() : ?int
     {
         return $this->parentBranchId;
+    }
+
+    /**
+     * Get Branch_Create_Session_ID.
+     *
+     * @return string
+     */
+    public function getBranchCreateSessionId() : ?string
+    {
+        return $this->branchCreateSessionId;
     }
 
     /**
@@ -122,6 +135,19 @@ class BranchCreate extends Request
     public function setParentBranchId(?int $parentBranchId) : self
     {
         $this->parentBranchId = $parentBranchId;
+
+        return $this;
+    }
+
+    /**
+     * Set Branch_Create_Session_ID.
+     *
+     * @param ?string $branchCreateSessionId
+     * @return $this
+     */
+    public function setBranchCreateSessionId(?string $branchCreateSessionId) : self
+    {
+        $this->branchCreateSessionId = $branchCreateSessionId;
 
         return $this;
     }
@@ -187,6 +213,10 @@ class BranchCreate extends Request
 
         if ($this->getParentBranchId()) {
             $data['Parent_Branch_ID'] = $this->getParentBranchId();
+        }
+
+        if (!is_null($this->getBranchCreateSessionId())) {
+            $data['Branch_Create_Session_ID'] = $this->getBranchCreateSessionId();
         }
 
         if (!is_null($this->getName())) {

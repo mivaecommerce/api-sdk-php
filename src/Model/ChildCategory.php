@@ -11,10 +11,19 @@
 namespace MerchantAPI\Model;
 
 /**
- * Data model for CustomerSubscription.
+ * Data model for ChildCategory.
  *
  * @package MerchantAPI\Model
  */
-class CustomerSubscription extends Subscription
+class ChildCategory extends Category
 {
+    /**
+     * Get assigned.
+     *
+     * @return ?bool
+     */
+    public function getAssigned() : ?bool
+    {
+        return $this->getField('assigned');
+    }
 }
